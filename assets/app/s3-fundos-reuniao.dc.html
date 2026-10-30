@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script><script>new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(!n.querySelectorAll)return;var a=n.tagName==="IMG"?[n]:[];a=a.concat([].slice.call(n.querySelectorAll("img[loading=lazy]")));a.forEach(function(i){if(!/\{\{/.test(i.getAttribute("src")||""))i.loading="eager";});});});}).observe(document.documentElement,{subtree:true,childList:true});</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<style>body{margin:0;background:#141414}a{color:#FBF99D}a:hover{color:#15E888}</style>
+</helmet>
+<div style="font-family:'Bricolage Grotesque',sans-serif;color:#F5F4EC;padding:{{ pad }};display:flex;flex-direction:column;gap:40px">
+<sc-if value="{{ gal }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:12px;max-width:1000px"><div style="font-size:14px;font-weight:600;letter-spacing:.18em;color:#15E888">BRAZIL CONFERENCE 2027 · FUNDOS DE REUNIÃO</div><div style="font-size:56px;font-weight:800;letter-spacing:-.02em;line-height:1">Zoom, Meet e Teams</div><div style="font-size:17px;line-height:1.55;color:#C9C8BE;text-wrap:pretty">1920 × 1080 com as ilustrações das regiões. O centro fica livre para o rosto; logo e nome ficam nos cantos de cima. Troque nome, área e região no painel de ajustes e baixe pelo Exportar.</div><div style="display:flex;gap:12px;flex-wrap:wrap;font-size:15px;font-weight:600"><a href="../../index.html#/variacoes" target="_top" style="padding:8px 16px;border:1px solid #333;border-radius:99px;text-decoration:none;white-space:nowrap">← Sistema Visual 3</a><a href="../../index.html#/exportar" target="_top" style="padding:8px 16px;border:1px solid #15E888;border-radius:99px;text-decoration:none;white-space:nowrap">Exportar ↗</a><a href="../../index.html#/ilustracoes" target="_top" style="padding:8px 16px;border:1px solid #FBF99D;border-radius:99px;text-decoration:none;white-space:nowrap">Gerador de ilustrações ↗</a></div></div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+<sc-for list="{{ itens }}" as="z" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ gal }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:8px;align-items:center"><span style="background:#FBF99D;color:#0B5E37;font-weight:800;font-size:13px;padding:3px 9px;border-radius:99px">{{ z.id }}</span><span style="font-size:13px;color:#9A9990;white-space:nowrap">{{ z.t }}</span></div></sc-if>
+<div style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:4px"><div style="position:absolute;left:0;top:0;width:1920px;height:1080px;transform:scale({{ k }});transform-origin:0 0;overflow:hidden;background:{{ z.bg }}">
+<sc-if value="{{ z.ill }}" hint-placeholder-val="{{ true }}"><img loading="lazy" src="{{ z.ill }}" style="position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover"></sc-if>
+<sc-if value="{{ z.lateral }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;top:0;bottom:0;width:300px;background:#15E888;-webkit-mask:url(../img/f2/cobogo.svg) 0 0/150px 150px repeat;mask:url(../img/f2/cobogo.svg) 0 0/150px 150px repeat;opacity:.5"></div><div style="position:absolute;right:-120px;bottom:-120px;width:620px;height:620px;border-radius:50%;background:#0A7BE5"></div><img src="../img/st/mapa-contorno.png" style="position:absolute;right:90px;bottom:80px;width:300px"><div style="position:absolute;left:300px;right:0;bottom:0;height:16px;background:#FBF99D"></div></sc-if>
+<sc-if value="{{ z.casa }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;right:0;top:0;bottom:0;width:640px;background:{{ casa.c3 }}"></div><img loading="lazy" src="{{ casa.full }}" style="position:absolute;right:110px;top:150px;height:820px"><div style="position:absolute;left:0;right:640px;bottom:0;height:18px;background:{{ casa.c2 }}"></div></sc-if>
+<div style="position:absolute;left:80px;top:70px;display:flex;align-items:center;gap:16px"><img loading="lazy" src="{{ z.wm }}" style="width:300px"><span style="font-size:30px;font-weight:800;color:{{ z.ac }}">2027</span></div>
+<sc-if value="{{ nomeOn }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;right:80px;top:62px;display:flex;flex-direction:column;align-items:flex-end;gap:10px"><span style="background:{{ z.pill }};color:{{ z.pillInk }};font-size:34px;font-weight:800;padding:12px 28px;border-radius:99px;white-space:nowrap">{{ nome }}</span><span style="font-size:22px;font-weight:700;letter-spacing:.14em;color:{{ z.ink }};white-space:nowrap">{{ area }} · TIME BC27</span></div></sc-if>
+</div></div>
+</div>
+</sc-for>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;item&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;todos&quot;,&quot;z1&quot;,&quot;z2&quot;,&quot;z3&quot;,&quot;z4&quot;,&quot;z5&quot;,&quot;z6&quot;,&quot;z7&quot;,&quot;z8&quot;],&quot;default&quot;:&quot;todos&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;regiao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nordeste&quot;,&quot;norte&quot;,&quot;sul&quot;,&quot;sudeste&quot;,&quot;centro-oeste&quot;,&quot;natureza&quot;,&quot;boston&quot;],&quot;default&quot;:&quot;nordeste&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;casa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mata&quot;,&quot;chama&quot;,&quot;correnteza&quot;,&quot;vendaval&quot;],&quot;default&quot;:&quot;mata&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;nome&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Fernanda Torres&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pessoa&quot;},&quot;area&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Comunicação&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pessoa&quot;},&quot;mostrarNome&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Pessoa&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:480,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Peça&quot;}}">
+const G = '#0B5E37', Y = '#FBF99D', V = '#15E888', N = '#0D3A85', W = '#FFFFFF';
+const REG = { nordeste:'../img/reg/nordeste.svg', norte:'../img/reg/norte.svg', sul:'../img/reg/sul.svg', sudeste:'../img/reg/sudeste.svg', 'centro-oeste':'../img/reg/centro-oeste.svg', natureza:'../img/reg/natureza.svg', boston:'../img/reg/boston.svg' };
+const CASAS = { mata:{ c2:'#15E888', c3:'#F5F4EC', full:'../img/times/mata-full.png' }, chama:{ c2:'#F2A516', c3:'#FFF4E0', full:'../img/times/chama-full.png' }, correnteza:{ c2:'#C79A4B', c3:'#F5F0E4', full:'../img/times/correnteza-full.png' }, vendaval:{ c2:'#1E3F8F', c3:'#FFFFFF', full:'../img/times/vendaval-full.png' } };
+const dark = { wm:'../img/wm-branco.png', ac:V, pill:Y, pillInk:G, ink:W };
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props, item = p.item ?? 'todos', gal = item === 'todos';
+    const reg = p.regiao ?? 'nordeste';
+    const all = [
+      { id:'z1', t:'Panorama · verde', bg:G, ill:'../img/reg/panorama.svg', ...dark },
+      { id:'z2', t:'Panorama · noite', bg:N, ill:'../img/reg/panorama-noite.svg', ...dark, wm:'../img/wm-amarelo.png' },
+      { id:'z3', t:'Panorama · claro', bg:'#F5F4EC', ill:'../img/reg/panorama-claro.svg', wm:'../img/wm-verde.png', ac:'#0A7BE5', pill:G, pillInk:Y, ink:G },
+      { id:'z4', t:'Panorama · amanhecer', bg:G, ill:'../img/reg/panorama-amanhecer.svg', ...dark },
+      { id:'z5', t:'Boston ↔ Brasil', bg:G, ill:'../img/reg/boston-brasil-amanhecer.svg', ...dark },
+      { id:'z6', t:'Região · ' + reg, bg:G, ill:REG[reg] || REG.nordeste, ...dark },
+      { id:'z7', t:'Liso · baixa distração', bg:G, ill:false, lateral:true, ...dark },
+      { id:'z8', t:'Casa do time', bg:G, ill:false, casa:true, ...dark },
+    ];
+    const lw = p.largura ?? 480, dw = gal ? 560 : lw;
+    return { gal, pad: gal ? '56px 64px 140px' : '0', itens: gal ? all : all.filter(z => z.id === item), dw, dh: Math.round(dw * 1080 / 1920), k: dw / 1920,
+      nome: p.nome ?? 'Fernanda Torres', area: (p.area ?? 'Comunicação').toUpperCase(), nomeOn: p.mostrarNome ?? true, casa: CASAS[p.casa ?? 'mata'] || CASAS.mata };
+  }
+}
+</script>
+</body>
+</html>

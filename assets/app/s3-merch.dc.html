@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="../js/image-slot.js"></script>
+</helmet>
+<div style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px;background:{{ cena }}">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;font-family:'Bricolage Grotesque',sans-serif">
+
+<sc-if value="{{ tCracha }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:440px;top:-20px;width:120px;height:250px;background:{{ pal.block }};display:flex;justify-content:center;overflow:hidden"><span style="writing-mode:vertical-rl;font-weight:800;font-size:44px;letter-spacing:.1em;color:{{ pal.title }};white-space:nowrap">BC27 · BC27 · BC27</span></div>
+<div style="position:absolute;left:460px;top:200px;width:80px;height:70px;border:12px solid #B9B6A8;border-radius:14px;box-sizing:border-box"></div>
+<div style="position:absolute;left:180px;top:250px;width:640px;height:960px;background:{{ crBg }};border-radius:28px;overflow:hidden;box-shadow:0 30px 50px rgba(0,0,0,.25)">
+<div style="position:absolute;left:280px;top:28px;width:80px;height:22px;border-radius:11px;background:{{ cena }}"></div>
+<sc-if value="{{ frente }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:0;top:0;width:100%;height:240px;background:{{ pal.bg }};overflow:hidden"><sc-if value="{{ eMask }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:{{ pal.pat }};opacity:.6;mask:url({{ eUrl }}) 0 0/90px auto repeat"></div></sc-if><img src="../img/wm-{{ pal.wm }}.png" style="position:absolute;left:170px;top:120px;width:300px"></div>
+<div style="position:absolute;left:180px;top:170px;width:280px;height:280px;border-radius:50%;background:#FFFFFF;padding:10px;box-sizing:border-box"><div style="position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden"><image-slot id="{{ slotId }}" shape="circle" src="../img/fotos/fernanda.jpg" placeholder="Foto"></image-slot></div></div>
+<div style="position:absolute;left:30px;right:30px;top:480px;text-align:center;font-weight:800;font-stretch:{{ larg }}%;font-size:{{ nfs }}px;line-height:.92;letter-spacing:-.03em;color:#0B5E37;white-space:pre-line">{{ nome }}</div>
+<div style="position:absolute;left:30px;right:30px;top:680px;text-align:center;font-weight:600;font-size:26px;color:#0D3A85">{{ cargo }}</div>
+<div style="position:absolute;left:0;right:0;top:740px;display:flex;justify-content:center"><div style="background:{{ cat.bg }};padding:10px 26px;font-weight:800;font-size:26px;letter-spacing:.14em;color:{{ cat.fg }}">{{ cat.t }}</div></div>
+<div style="position:absolute;left:0;bottom:0;width:100%;height:110px;background:{{ cat.bg }};overflow:hidden"><div style="position:absolute;inset:0;background:{{ cat.fg }};opacity:.25;mask:url(../img/f2/cobogo.svg) 0 0/60px auto repeat"></div></div>
+</sc-if>
+<sc-if value="{{ verso }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:{{ pal.bg }}"><sc-if value="{{ eMask }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:{{ pal.pat }};opacity:.6;mask:url({{ eUrl }}) 0 0/120px auto repeat"></div></sc-if></div>
+<div style="position:absolute;left:70px;top:330px;width:500px;height:300px;background:{{ pal.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px"><span style="font-weight:800;font-size:72px;line-height:.9;text-align:center;letter-spacing:-.03em;color:{{ pal.ink }}">O BRASIL EM<br>PRIMEIRA<br>PESSOA</span></div>
+<div style="position:absolute;left:0;right:0;bottom:70px;text-align:center;font-weight:600;font-size:22px;letter-spacing:.14em;color:{{ pal.ink }}">WI-FI · BC27 · SENHA: BRASILCOMS</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ tEcobag }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:330px;top:90px;width:340px;height:320px;border:34px solid {{ peca }};border-bottom:none;border-radius:170px 170px 0 0;box-sizing:border-box;filter:brightness(.92)"></div>
+<div style="position:absolute;left:180px;top:330px;width:640px;height:640px;background:{{ peca }};box-shadow:0 30px 50px rgba(0,0,0,.22)"></div>
+</sc-if>
+<sc-if value="{{ tCaderno }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:210px;top:90px;width:600px;height:820px;background:{{ peca }};border-radius:6px 28px 28px 6px;box-shadow:0 30px 50px rgba(0,0,0,.25),inset 14px 0 0 rgba(0,0,0,.12)"></div>
+</sc-if>
+<sc-if value="{{ tCamiseta }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:100px;top:80px;width:800px;height:860px;background:{{ peca }};clip-path:polygon(32% 0,40% 5%,60% 5%,68% 0,100% 14%,92% 34%,80% 30%,80% 100%,20% 100%,20% 30%,8% 34%,0 14%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.2))"></div>
+<div style="position:absolute;left:356px;top:80px;width:288px;height:46px;border-radius:0 0 144px 144px;background:rgba(0,0,0,.12)"></div>
+</sc-if>
+<sc-if value="{{ tBackdrop }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:{{ pal.bg }}"></div>
+<sc-if value="{{ bdRepeat }}" hint-placeholder-val="{{ true }}"><sc-for list="{{ grid }}" as="g" hint-placeholder-count="0"><div style="position:absolute;left:{{ g.x }}px;top:{{ g.y }}px;width:{{ g.w }}px;height:{{ g.h }}px;display:flex;align-items:center;justify-content:center"><sc-if value="{{ g.ico }}" hint-placeholder-val="{{ false }}"><div style="position:relative;width:229px;height:70px"><div style="position:absolute;left:0;top:0;width:572px;height:174px;transform:scale(.4);transform-origin:0 0"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:{{ pal.i1 }}"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:{{ pal.i2 }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:{{ pal.i3 }}"></div></div></div></sc-if><sc-if value="{{ g.wm }}" hint-placeholder-val="{{ false }}"><img src="../img/wm-{{ pal.wm }}.png" style="width:300px"></sc-if></div></sc-for></sc-if>
+<sc-if value="{{ bdPadrao }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ pal.pat }};mask:url({{ eUrl }}) 0 0/200px auto repeat"></div><div style="position:absolute;left:560px;top:290px;width:800px;height:500px;background:{{ pal.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px"><span style="font-weight:800;font-size:120px;line-height:.88;text-align:center;letter-spacing:-.04em;color:{{ pal.ink }}">O BRASIL EM<br>PRIMEIRA PESSOA</span><img src="../img/wm-{{ pal.wm }}.png" style="width:420px"></div></sc-if>
+</sc-if>
+
+<sc-if value="{{ hasPrint }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ px }}px;top:{{ py }}px;width:{{ pw }}px;height:{{ ph }}px;overflow:hidden">
+<sc-if value="{{ eLogo }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:{{ pg }}px"><div style="position:relative;width:{{ icW }}px;height:{{ icH }}px"><div style="position:absolute;left:0;top:0;width:572px;height:174px;transform:scale({{ icS }});transform-origin:0 0"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:{{ ink.i1 }}"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:{{ ink.i2 }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:{{ ink.i3 }}"></div></div></div><img src="../img/wm-{{ ink.wm }}.png" style="width:{{ wmW }}px"></div></sc-if>
+<sc-if value="{{ eTema }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:{{ pg }}px"><span style="font-weight:800;font-stretch:{{ larg }}%;font-size:{{ tfs }}px;line-height:.86;letter-spacing:-.04em;color:{{ ink.t }};white-space:pre-line">{{ temaTxt }}</span><img src="../img/wm-{{ ink.wm }}.png" style="width:{{ wmW }}px"></div></sc-if>
+<sc-if value="{{ ePadrao }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ ink.t }};mask:url({{ eUrl }}) 0 0/{{ eT }}px auto repeat"></div></sc-if>
+<sc-if value="{{ eAdesivos }}" hint-placeholder-val="{{ false }}"><img src="../img/s/cristo-adesivo.png" style="position:absolute;left:4%;top:4%;width:44%;transform:rotate(-8deg)"><img src="../img/s/zakim-adesivo.png" style="position:absolute;right:2%;top:10%;width:48%;transform:rotate(6deg)"><img src="../img/s/mapa-adesivo.png" style="position:absolute;left:8%;bottom:4%;width:40%;transform:rotate(8deg)"><img src="../img/s/pao-adesivo.png" style="position:absolute;right:4%;bottom:6%;width:46%;transform:rotate(-5deg)"></sc-if>
+<sc-if value="{{ eRegiao }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:-40%;top:0;width:180%;height:100%;background:{{ ink.t }};mask:url({{ rgUrl }}) center/100% auto no-repeat"></div></sc-if>
+</div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:300},&quot;tipo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cracha&quot;,&quot;ecobag&quot;,&quot;caderno&quot;,&quot;camiseta&quot;,&quot;backdrop&quot;],&quot;default&quot;:&quot;cracha&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;lado&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;frente&quot;,&quot;verso&quot;],&quot;default&quot;:&quot;frente&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;categoria&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;participante&quot;,&quot;organizacao&quot;,&quot;palestrante&quot;,&quot;imprensa&quot;,&quot;staff&quot;,&quot;sponsor&quot;],&quot;default&quot;:&quot;organizacao&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;estampa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;logo&quot;,&quot;tema&quot;,&quot;padrao&quot;,&quot;adesivos&quot;,&quot;regiao&quot;],&quot;default&quot;:&quot;logo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;backdrop&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;repeticao&quot;,&quot;padrao&quot;],&quot;default&quot;:&quot;repeticao&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Peça&quot;},&quot;corPeca&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cru&quot;,&quot;branco&quot;,&quot;verde&quot;,&quot;noite&quot;,&quot;amarelo&quot;,&quot;preto&quot;],&quot;default&quot;:&quot;cru&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cores&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verde&quot;,&quot;noite&quot;,&quot;amarelo&quot;,&quot;branco&quot;,&quot;azul&quot;],&quot;default&quot;:&quot;verde&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cores&quot;},&quot;elemento&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cobogo&quot;,&quot;azulejo&quot;,&quot;calcadao&quot;,&quot;fuxico&quot;,&quot;hachura&quot;,&quot;ondas&quot;,&quot;estrelas&quot;,&quot;alvorada&quot;],&quot;default&quot;:&quot;cobogo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cores&quot;},&quot;regiao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nordeste&quot;,&quot;norte&quot;,&quot;sul&quot;,&quot;centro-oeste&quot;],&quot;default&quot;:&quot;nordeste&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cores&quot;},&quot;nome&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lana Del Rey&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;cargo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Organizadora da BC27&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;texto&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;O BRASIL\nEM PRIMEIRA\nPESSOA&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;fundo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;claro&quot;,&quot;escuro&quot;],&quot;default&quot;:&quot;claro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;slotId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;mc3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:300,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;}}">
+const PAL = {
+  verde:   { bg:'#0B5E37', pat:'#1A8A52', block:'#15E888', title:'#0B5E37', ink:'#FBF99D', wm:'amarelo', i1:'#15E888', i2:'#FBF99D', i3:'#0A7BE5' },
+  noite:   { bg:'#0D3A85', pat:'#1A4A9E', block:'#FBF99D', title:'#0D3A85', ink:'#FBF99D', wm:'amarelo', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  amarelo: { bg:'#FBF99D', pat:'#EDE77E', block:'#0B5E37', title:'#FBF99D', ink:'#0B5E37', wm:'verde', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  branco:  { bg:'#FFFFFF', pat:'#EEF0F2', block:'#0D3A85', title:'#FFFFFF', ink:'#0B5E37', wm:'verde', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  azul:    { bg:'#0A7BE5', pat:'#3A93EA', block:'#FBF99D', title:'#0D3A85', ink:'#FFFFFF', wm:'branco', i1:'#0B5E37', i2:'#FBF99D', i3:'#0D3A85' },
+};
+const PECA = { cru:'#ECE5D2', branco:'#FAFAF7', verde:'#0B5E37', noite:'#0D3A85', amarelo:'#FBF99D', preto:'#1B1B1B' };
+const INK = { claro:{ t:'#0B5E37', wm:'verde', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' }, escuro:{ t:'#FBF99D', wm:'amarelo', i1:'#15E888', i2:'#FBF99D', i3:'#0A7BE5' } };
+const CAT = { participante:['PARTICIPANTE','#15E888','#0D3A85'], organizacao:['ORGANIZAÇÃO','#0B5E37','#FBF99D'], palestrante:['PALESTRANTE','#0A7BE5','#FFFFFF'], imprensa:['IMPRENSA','#FBF99D','#0D3A85'], staff:['STAFF','#0D3A85','#FBF99D'], sponsor:['SPONSOR','#1B1B1B','#FBF99D'] };
+const EL = { cobogo:['../img/f2/cobogo.svg',.16], azulejo:['../img/f2/azulejo.svg',.18], calcadao:['../img/f2/calcadao.svg',.34], fuxico:['../img/f2/fuxico.svg',.15], hachura:['../img/f2/hachura.svg',.1], ondas:['../img/f/onda-linha.svg',.24], estrelas:['../img/f/estrela8.svg',.13], alvorada:['../img/f2/alvorada.svg',.16] };
+const REG = { nordeste:'../img/r/nordeste.svg', norte:'../img/r/norte.svg', sul:'../img/r/sul.svg', 'centro-oeste':'../img/r/centro-oeste.svg' };
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const t = p.tipo ?? 'cracha';
+    const [W, H] = t === 'backdrop' ? [1920, 1080] : [1000, 1000];
+    const dw = p.largura ?? 300, esc = dw / W, dh = Math.round(H * esc);
+    const pal = PAL[p.paleta] || PAL.verde;
+    const pc = p.corPeca ?? (t === 'caderno' ? 'verde' : 'cru');
+    const peca = t === 'caderno' ? (PECA[pc] || pal.bg) : (PECA[pc] || PECA.cru);
+    const dark = ['verde', 'noite', 'preto'].includes(pc);
+    const ink = INK[dark ? 'escuro' : 'claro'];
+    const E = EL[p.elemento ?? 'cobogo'];
+    const est = p.estampa ?? 'logo';
+    const nome = (p.nome ?? 'Lana Del Rey').toUpperCase();
+    const cat = CAT[p.categoria] || CAT.organizacao;
+    const larg = p.larguraFonte ?? 100;
+    const v = { W, H, dw, dh, esc, pal, peca, ink, cena: p.fundo === 'escuro' ? '#2A2A28' : '#E6E3D6', larg,
+      tCracha: t === 'cracha', tEcobag: t === 'ecobag', tCaderno: t === 'caderno', tCamiseta: t === 'camiseta', tBackdrop: t === 'backdrop',
+      frente: (p.lado ?? 'frente') === 'frente', verso: p.lado === 'verso', crBg: '#F5F4EC', slotId: p.slotId ?? 'mc3',
+      nome: nome.replace(' ', '\n'), nfs: Math.round(Math.min(96, 560 / (Math.max(...nome.split(' ').map(s => s.length)) * .62))), cargo: p.cargo ?? 'Organizadora da BC27',
+      cat: { t: cat[0], bg: cat[1], fg: cat[2] },
+      eMask: !!E, eUrl: E ? E[0] : '../img/f2/cobogo.svg',
+      bdRepeat: (p.backdrop ?? 'repeticao') === 'repeticao', bdPadrao: p.backdrop === 'padrao',
+      hasPrint: ['ecobag', 'caderno', 'camiseta'].includes(t),
+      eLogo: est === 'logo', eTema: est === 'tema', ePadrao: est === 'padrao', eAdesivos: est === 'adesivos', eRegiao: est === 'regiao', rgUrl: REG[p.regiao] || REG.nordeste,
+      temaTxt: p.texto ?? 'O BRASIL\nEM PRIMEIRA\nPESSOA' };
+    const box = { ecobag:[250,410,500,480], caderno:[270,170,500,620], camiseta:[340,300,320,330] }[t] || [0,0,0,0];
+    [v.px, v.py, v.pw, v.ph] = box;
+    if (t === 'caderno' && est === 'padrao') { v.px = 224; v.py = 90; v.pw = 586; v.ph = 820; }
+    v.eT = E ? Math.round(v.pw * E[1] * 1.4) : 80;
+    v.icW = Math.round(v.pw * .7); v.icS = v.icW / 572; v.icH = Math.round(174 * v.icS); v.wmW = Math.round(v.pw * .8); v.pg = Math.round(v.ph * .07);
+    v.tfs = Math.round(v.pw / (11 * .62 * (0.78 + 0.22 * (larg - 75) / 25)));
+    if (t === 'caderno') { v.ink = INK[['amarelo','branco','cru'].includes(pc) ? 'claro' : 'escuro']; }
+    if (t === 'backdrop') { const cw = 480, ch = 270; v.grid = []; for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) v.grid.push({ x: x * cw, y: y * ch, w: cw, h: ch, ico: (x + y) % 2 === 0, wm: (x + y) % 2 === 1 }); }
+    return v;
+  }
+}
+</script>
+</body>
+</html>

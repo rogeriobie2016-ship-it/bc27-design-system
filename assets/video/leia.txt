@@ -1,0 +1,1 @@
+Pasta reservada para MP4 finais das vinhetas, se forem exportados. Hoje o site gera o MP4 na hora.

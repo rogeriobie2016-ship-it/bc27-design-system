@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="../js/vendor/mp4-muxer.min.js"></script>
+<script src="../js/vendor/jszip.min.js"></script>
+<script src="../js/bc27-export.js"></script>
+<style>body{margin:0;background:#121211}a{color:#FBF99D}a:hover{color:#15E888}</style>
+</helmet>
+<div style="font-family:'Bricolage Grotesque',sans-serif;color:#F5F4EC;padding:40px 48px 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;gap:16px;align-items:baseline;flex-wrap:wrap"><span style="font-weight:800;font-size:48px;letter-spacing:-.02em">Exportar</span><a href="../../index.html#/variacoes" target="_top" style="font-size:16px;white-space:nowrap">← Sistema Visual 3</a><a href="../../index.html#/criar" target="_top" style="font-size:16px;white-space:nowrap">Criar do zero ↗</a></div>
+<div style="font-size:16px;color:#8C8B82;max-width:820px;text-wrap:pretty">Tudo do sistema em um lugar: vídeos, peças estáticas e figurinhas. Escolha, ajuste e baixe em resolução cheia, direto no navegador (Chrome ou Edge).</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ cats }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.on }}" style="font-family:inherit;font-size:18px;font-weight:800;padding:12px 22px;border-radius:14px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.c }};cursor:pointer;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left"><span>{{ c.l }}</span><span style="font-size:12px;font-weight:500;opacity:.75">{{ c.sub }}</span></button></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:20px">
+<sc-for list="{{ grupos }}" as="g" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#8C8B82">{{ g.t }}</span>
+<sc-if value="{{ g.chips }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ g.ops }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.on }}" style="font-family:inherit;font-size:14px;font-weight:700;padding:8px 14px;border-radius:99px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.c }};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px"><sc-if value="{{ o.sw }}" hint-placeholder-val="{{ false }}"><span style="width:14px;height:14px;border-radius:50%;background:{{ o.sw }};box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)"></span></sc-if>{{ o.l }}</button></sc-for></div></sc-if>
+<sc-if value="{{ g.text }}" hint-placeholder-val="{{ false }}"><input value="{{ g.v }}" onChange="{{ g.set }}" style="font-family:inherit;font-size:15px;font-weight:600;padding:10px 14px;border-radius:10px;border:1px solid #444;background:#1C1C1A;color:#F5F4EC;max-width:520px"></sc-if>
+</div>
+</sc-for>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #333;padding-top:20px">
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<button onClick="{{ exportar }}" style="font-family:inherit;font-size:17px;font-weight:800;padding:15px 26px;border-radius:99px;border:none;background:{{ btnBg }};color:#0B5E37;cursor:pointer;white-space:nowrap">{{ btnLabel }}</button>
+<sc-if value="{{ link }}" hint-placeholder-val="{{ false }}"><a href="{{ link }}" download="{{ linkName }}" style="font-size:15px;font-weight:700">Não baixou? Clique aqui ↓</a></sc-if>
+</div>
+<div style="height:6px;background:#2A2A28;border-radius:3px;overflow:hidden"><div ref="{{ barRef }}" style="width:0%;height:100%;background:#15E888"></div></div>
+<sc-if value="{{ busy }}" hint-placeholder-val="{{ false }}"><span ref="{{ msgRef }}" style="font-size:13px;color:#15E888">Preparando…</span></sc-if><sc-if value="{{ idle }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:{{ msgC }};text-wrap:pretty">{{ msg }}</span></sc-if>
+<div style="font-size:13px;line-height:1.6;color:#8C8B82;text-wrap:pretty">{{ dica }}</div>
+</div>
+</div>
+<div ref="{{ colRef }}" style="display:flex;flex-direction:column;gap:10px;align-items:center;position:sticky;top:24px;min-width:0">
+<div ref="{{ stageRef }}" style="display:flex;line-height:0;max-width:100%;max-height:82vh;overflow:auto;border-radius:8px;background:{{ stageBg }}">
+<sc-if value="{{ v.logo }}" hint-placeholder-val="{{ true }}"><dc-import name="s3-logo" animacao="{{ m.lAnim }}" versao="{{ m.lVer }}" paleta="{{ m.lPal }}" fundo="{{ m.fundo }}" formato="{{ m.formato }}" velocidade="{{ m.vel }}" largura="{{ pw }}" hint-size="480px,270px"></dc-import></sc-if>
+<sc-if value="{{ v.sting }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-sting" tipo="{{ m.sTipo }}" cores="{{ m.sCores }}" centro="{{ m.sCentro }}" formato="{{ m.formato }}" fundo="{{ m.fundo }}" velocidade="{{ m.vel }}" dica="{{ false }}" largura="{{ pw }}" hint-size="480px,270px"></dc-import></sc-if>
+<sc-if value="{{ v.vinheta }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-vinheta" elemento="{{ m.vEl }}" paleta="{{ m.vPal }}" entrada="{{ m.vEnt }}" titulo="{{ m.vTit }}" formato="{{ m.formato }}" velocidade="{{ m.vel }}" largura="{{ pw }}" hint-size="270px,480px"></dc-import></sc-if>
+<sc-if value="{{ v.post }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-post" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
+<sc-if value="{{ v.palestrante }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-palestrante" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
+<sc-if value="{{ v.sponsor }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-sponsor" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
+<sc-if value="{{ v.redes }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-redes" dc-props="{{ dprops }}" hint-size="480px,160px"></dc-import></sc-if>
+<sc-if value="{{ v.time }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-time" dc-props="{{ dprops }}" hint-size="400px,400px"></dc-import></sc-if>
+<sc-if value="{{ v.destaque }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-destaque" dc-props="{{ dprops }}" hint-size="300px,300px"></dc-import></sc-if>
+<sc-if value="{{ v.adesivo }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-adesivo" dc-props="{{ dprops }}" hint-size="400px,400px"></dc-import></sc-if>
+<sc-if value="{{ v.padrao }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-padrao" dc-props="{{ dprops }}" hint-size="400px,400px"></dc-import></sc-if>
+<sc-if value="{{ v.slide }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-slide" dc-props="{{ dprops }}" hint-size="480px,270px"></dc-import></sc-if>
+<sc-if value="{{ v.merch }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-merch" dc-props="{{ dprops }}" hint-size="400px,400px"></dc-import></sc-if>
+<sc-if value="{{ v.fundos }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-fundos-reuniao" dc-props="{{ dprops }}" hint-size="480px,270px"></dc-import></sc-if>
+<sc-if value="{{ v.paineis }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-paineis" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
+<sc-if value="{{ v.linkedin }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-linkedin-time" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
+<sc-if value="{{ v.colecao }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-colecao" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
+<sc-if value="{{ v.gc }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-gc" dc-props="{{ dprops }}" hint-size="480px,270px"></dc-import></sc-if>
+<sc-if value="{{ v.fig }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-figurinhas-whatsapp" modo="exportar" tamanho="{{ 128 }}" filtro="{{ f.set }}" palhinha="{{ f.palha }}" hint-size="480px,400px"></dc-import></sc-if>
+</div>
+<span style="font-size:12px;color:#8C8B82;text-align:center">{{ resumo }}</span>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const KEYS = { magenta:'#FF00FF', verde:'#00B140', azul:'#0047BB', vermelho:'#FF0000', preto:'#000000' };
+const SEQ = { bandeira:['#15E888','#FBF99D','#0A7BE5','#0D3A85','#0B5E37','#FFFFFF'], mata:['#0B5E37','#15E888','#1A8A52','#FBF99D'], ceu:['#0D3A85','#0A7BE5','#FFFFFF','#FBF99D'], sol:['#FBF99D','#FFFFFF','#15E888','#0B5E37','#0A7BE5'], festa:['#FBF99D','#0A7BE5','#FFFFFF','#15E888','#0D3A85','#0B5E37'] };
+const hsv = (h) => { const n = parseInt(h.slice(1), 16), r = (n >> 16) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let H = 0; if (d) H = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return { h: (H * 60 + 360) % 360, s: mx ? d / mx : 0, l: .2126 * r + .7152 * g + .0722 * b }; };
+const score = (nome, used) => { const U = used.map(hsv); if (nome === 'preto') return Math.min(...U.map(u => u.l)) * 160; const k = hsv(KEYS[nome]); return Math.min(...U.filter(u => u.s > .2).map(u => { const d = Math.abs(u.h - k.h); return Math.min(d, 360 - d); })) / 1.2; };
+const FMT = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
+const BRAND = ['#0B5E37','#15E888','#FBF99D','#0A7BE5','#0D3A85','#FFFFFF'];
+const DESIGNS = [['post','s3-post','Post'],['palestrante','s3-palestrante','Palestrante'],['sponsor','s3-sponsor','Sponsor'],['redes','s3-redes','Redes'],['time','s3-time','Time'],['destaque','s3-destaque','Destaque'],['adesivo','s3-adesivo','Adesivo'],['padrao','s3-padrao','Padrão'],['slide','s3-slide','Slide'],['merch','s3-merch','Merch'],['gc','s3-gc','GC (quadro)'],['fundos','s3-fundos-reuniao','Fundos de reunião'],['paineis','s3-paineis','Painéis (posts e slides)'],['linkedin','s3-linkedin-time','LinkedIn do time'],['colecao','s3-colecao','Coleção (crachás, merch, camisas…)']];
+const SKIP = new Set(['largura','slotId','guia','dica','animar','pausar']);
+const FIGSETS = [['todas','Todas (66)'],['operacional','Operacional'],['beijos','Beijos das áreas'],['beijos-regioes','Beijos das regiões'],['humor','Humor'],['sotaques','Sotaques'],['institucional','Institucional']];
+const slug = (s) => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+class Component extends DCLogic {
+  state = { cat: 'movimento', peca: 'logo', lAnim: 'bandeira', lVer: 'bc', lPal: 'classico', sTipo: 'ondas', sCores: 'bandeira', sCentro: 'icone', vEl: 'frevo', vPal: 'azul', vEnt: 'letras', vTit: 'O Brasil em/primeira/pessoa', formato: '16:9', fundo: 'transparente', saida: 'png', fps: 30, vel: '1',
+    design: 'post', dv: {}, escala: 1, img: 'png', figSet: 'todas', figOut: 'webp', figPalha: true, busy: false, msg: '', err: false, link: null, linkName: '' };
+  sch = {};
+  stageRef = React.createRef(); colRef = React.createRef(); barRef = React.createRef(); msgRef = React.createRef();
+  componentDidMount() { const c = this.colRef.current; if (c) { this.ro = new ResizeObserver(([e]) => { const w = Math.floor(e.contentRect.width); if (w && w !== this.state.cw) this.setState({ cw: w }); }); this.ro.observe(c); } DESIGNS.forEach(d => this.loadSchema(d[1])); }
+  componentWillUnmount() { this.ro?.disconnect(); }
+  async loadSchema(name) {
+    if (this.sch[name]) return;
+    try { const t = await (await fetch(encodeURI(name + '.dc.html'))).text(); const m = t.match(/data-props="([^"]*)"/); if (!m) return; const ta = document.createElement('textarea'); ta.innerHTML = m[1]; this.sch[name] = JSON.parse(ta.value); this.forceUpdate(); } catch (e) { console.warn('schema', name, e); }
+  }
+  findRoot() { const st = this.stageRef.current; if (!st) return null; return [...st.querySelectorAll('div')].find(d => d.style.transform.startsWith('scale(') && /^\d+px$/.test(d.style.width)); }
+  prog(i, n, t) { if (this.barRef.current) this.barRef.current.style.width = (i / n * 100).toFixed(1) + '%'; if (this.msgRef.current) this.msgRef.current.textContent = t; }
+  async exportar() {
+    const s = this.state;
+    if (s.busy) return;
+    if (!window.BC27Export) return this.setState({ msg: 'Exportador ainda carregando. Tente de novo em 2 segundos.', err: true });
+    this.setState({ busy: true, msg: '', err: false, link: null }); if (this.barRef.current) this.barRef.current.style.width = '0%';
+    await new Promise(r => setTimeout(r, 120));
+    try {
+      let out, info = '';
+      if (s.cat === 'figurinhas') {
+        const els = [...this.stageRef.current.querySelectorAll('[data-set]')];
+        if (!els.length) throw new Error('As figurinhas ainda estão carregando.');
+        const items = els.map(el => ({ root: el, W: 512, H: 512, die: 12, name: 'BC27_fig_' + slug(el.parentElement?.nextElementSibling?.textContent || el.getAttribute('data-set')) }));
+        const formats = s.figOut === 'ambos' ? ['webp', 'png'] : [s.figOut];
+        out = await window.BC27Export.stills({ items, formats, k: 1, zipName: 'BC27_figurinhas_' + s.figSet, onProgress: (i, n, t) => this.prog(i, n, t) });
+        info = `${items.length} figurinhas, 512×512`;
+      } else if (s.cat === 'design') {
+        const root = this.findRoot(); if (!root) throw new Error('Não achei a peça na prévia. Recarregue a página.');
+        const W = parseInt(root.style.width), H = parseInt(root.style.height);
+        const d = DESIGNS.find(x => x[0] === s.design), vals = this.designVals();
+        const name = ['BC27', s.design, vals.layout || vals.tipo || vals.forma || vals.estilo || vals.icone || vals.elemento, vals.formato].filter(Boolean).map(slug).join('_');
+        out = await window.BC27Export.stills({ items: [{ root, W, H, name }], formats: [s.img], k: s.escala, bg: '#FFFFFF', onProgress: (i, n, t) => this.prog(i, n, t) });
+        info = `${W * s.escala}×${H * s.escala}`;
+      } else {
+        const root = this.findRoot(); if (!root) throw new Error('Não achei a peça na prévia. Recarregue a página.');
+        const W = parseInt(root.style.width), H = parseInt(root.style.height);
+        const base = { logo: 4, sting: 3, vinheta: 8 }[s.peca], dur = base / (parseFloat(s.vel) || 1);
+        const nome = `BC27_${s.peca}_${s.peca === 'logo' ? s.lAnim : s.peca === 'sting' ? s.sTipo : s.vEl}_${s.formato.replace(':', 'x')}_${s.fundo}`;
+        out = await window.BC27Export.render({ root, W, H, fps: s.fps, dur, mode: s.saida, name: nome, matte: s.saida === 'mp4' && s.fundo === 'transparente' ? '#000000' : null, onProgress: (i, n, t) => this.prog(i, n, t) });
+        info = `${W}×${H}, ${s.fps} fps, ${dur.toFixed(2)}s`;
+      }
+      this.setState({ busy: false, link: out.url, linkName: out.file, msg: `Pronto: ${out.file} (${(out.blob.size / 1048576).toFixed(2)} MB, ${info}).`, err: false });
+    } catch (e) { console.error(e); this.setState({ busy: false, msg: 'Erro: ' + (e.message || e), err: true }); }
+  }
+  designVals() {
+    const s = this.state, d = DESIGNS.find(x => x[0] === s.design), sc = this.sch[d[1]] || {}, o = {};
+    Object.entries(sc).forEach(([k, v]) => { if (k[0] !== '$' && v && v.default !== undefined) o[k] = v.default; });
+    const r = { ...o, ...(s.dv[s.design] || {}) }; if (s.design === 'colecao' && (!r.item || r.item === 'todos')) r.item = 'c1'; if (s.design === 'linkedin' && (!r.item || r.item === 'todos')) r.item = 'l1'; if (s.design === 'fundos' && (!r.item || r.item === 'todos')) r.item = 'z1'; if (s.design === 'paineis' && (!r.peca || r.peca === 'galeria')) { r.peca = 'post'; if (r.trilha === 'todas') r.trilha = 'politica'; } return r;
+  }
+  renderVals() {
+    const s = this.state, set = (o) => () => !s.busy && this.setState({ ...o, link: null, msg: '' });
+    const chip = (on, l, fn, sw) => ({ l, sw, on: fn, bg: on ? '#F5F4EC' : 'transparent', c: on ? '#121211' : '#F5F4EC', bd: on ? '#F5F4EC' : '#444' });
+    const op = (k, l, val, sw) => chip(s[k] === val, l, set({ [k]: val }), sw);
+    const ops = (k, arr) => arr.map(x => Array.isArray(x) ? op(k, x[1], x[0]) : op(k, x, x));
+    const G = (t, o) => ({ t, chips: true, text: false, ops: o });
+    const cats = [['movimento', 'Movimento', 'Logo, sting, vinheta · MP4 ou PNG'], ['design', 'Peças', 'Posts, slides, redes, merch · PNG ou JPG'], ['figurinhas', 'Figurinhas', 'WhatsApp · WebP 512 ou PNG']].map(([k, l, sub]) => ({ ...chip(s.cat === k, l, set({ cat: k })), sub }));
+    const grupos = []; let dica = '', resumo = '', btnLabel = 'Baixar', pw = 360, dprops = {}, warn = '', stageBg = 'transparent';
+    const v = { logo: false, sting: false, vinheta: false, fig: false }; DESIGNS.forEach(d => v[d[0]] = false);
+    const m = { lAnim: s.lAnim, lVer: s.lVer, lPal: s.lPal, sTipo: s.sTipo, sCores: s.sCores, sCentro: s.sCentro, vEl: s.vEl, vPal: s.vPal, vEnt: s.vEnt, vTit: s.vTit, formato: s.formato, vel: s.vel, fundo: s.fundo };
+    if (s.cat === 'movimento') {
+      const isLogo = s.peca === 'logo', isSting = s.peca === 'sting', isVinheta = s.peca === 'vinheta';
+      v[s.peca] = true;
+      const used = isSting ? [...SEQ[s.sCores], ...BRAND] : BRAND;
+      const keyOpts = isLogo ? ['magenta'] : isSting ? Object.keys(KEYS) : [];
+      const ranked = keyOpts.map(n => ({ n, sc: score(n, used) })).sort((a, b) => b.sc - a.sc);
+      const best = s.saida === 'png' ? 'transparente' : (ranked[0]?.n || null);
+      const star = (n) => (n === best ? '★ ' : '');
+      const fundoOps = [];
+      if (!isVinheta) {
+        fundoOps.push(op('fundo', star('transparente') + 'transparente', 'transparente'));
+        ranked.forEach(r => fundoOps.push(op('fundo', star(r.n) + r.n + (r.sc < 20 ? ' · evitar' : ''), r.n, KEYS[r.n])));
+        if (isLogo) ['branco', 'papel', 'verde', 'noite', 'preto'].forEach(n => fundoOps.push(op('fundo', n, n)));
+        if (isSting) fundoOps.push(op('fundo', 'cena (teste)', 'cena'));
+      }
+      grupos.push(G('PEÇA', [['logo', 'Logo'], ['sting', 'Sting'], ['vinheta', 'Vinheta']].map(([k, l], i) => chip(s.peca === k, l, set({ peca: k, fundo: i === 2 ? 'cena' : 'transparente' })))));
+      if (isLogo) grupos.push(G('ANIMAÇÃO', ops('lAnim', ['montagem','bandeira','explosao','rolagem','quique','giro','deslize','mascara','orbita','eco','padrao','maquina','pulso','zoom','losangos','bolinhas','faixas','mosaico','recorte'])), G('VERSÃO', ops('lVer', [['icone', 'ícone'], ['bc', 'ícone + BC'], ['completa', 'completa']])), G('PALETA', ops('lPal', ['classico','verde','vivo','amarelo','branco'])));
+      if (isSting) grupos.push(G('STING', ops('sTipo', ['ondas','fitas','casario','frevo','iris','mosaico','bandeira','adesivos'])), G('CORES', ops('sCores', Object.keys(SEQ))), G('CENTRO', ops('sCentro', ['icone','assinatura','texto','nada'])));
+      if (isVinheta) grupos.push(G('ELEMENTO', ops('vEl', ['frevo','bandeirinhas','fitas','cobogo','azulejo','calcadao','fuxico','alvorada','cordel','athos','ondas','bandeira','estrelas','adesivos','panorama','boston','monumentos','concreta','confete','asteriscos','listras','floreio'])), G('PALETA', ops('vPal', ['verde','vivo','amarelo','azul','noite','branco','papel','mata','ceu'])), G('ENTRADA', ops('vEnt', ['letras','linhas','escala','maquina','desfoque','queda'])));
+      grupos.push(G('FORMATO', ops('formato', Object.keys(FMT))));
+      grupos.push(G('ARQUIVO', [op('saida', (isVinheta ? '' : '★ ') + 'PNG transparente (sequência)', 'png'), op('saida', 'MP4 com fundo', 'mp4')]));
+      if (fundoOps.length) grupos.push(G(s.saida === 'png' ? 'FUNDO · ★ transparente dispensa chroma' : 'FUNDO CHROMA · ★ = cor que não aparece na arte', fundoOps));
+      grupos.push(G('QUADROS', [op('fps', '30 fps', 30), op('fps', '60 fps', 60)]), G('VELOCIDADE', ops('vel', [['0.75', '0.75×'], ['1', '1×'], ['1.25', '1.25×'], ['1.5', '1.5×']])));
+      m.fundo = isSting && s.fundo === 'cena' ? 'cena' : s.fundo;
+      pw = Math.max(200, Math.min(s.formato === '16:9' ? 720 : s.formato === '9:16' ? 360 : 480, s.cw || 360));
+      warn = s.saida === 'mp4' && s.fundo === 'transparente' ? 'MP4 não guarda transparência: vai sair com fundo preto. Use PNG transparente ou um fundo chroma.' : s.saida === 'mp4' && ranked.length && s.fundo !== best && keyOpts.includes(s.fundo) && score(s.fundo, used) < 20 ? `Atenção: ${s.fundo} aparece na arte e o recorte vai comer partes. Prefira ★ ${best}.` : '';
+      dica = s.saida === 'png' ? 'No Premiere: descompacte o ZIP → Arquivo › Importar → selecione o primeiro PNG → marque “Sequência de imagens”. Entra como um clipe com transparência, pronto para pôr acima do vídeo.' : 'No Premiere: importe o MP4 numa trilha acima do vídeo → Efeitos › Ultra Key → conta-gotas no fundo. Use “Agressivo” se sobrar borda.';
+      const [W, H] = FMT[s.formato]; resumo = `${W}×${H} · ${s.peca} · ${s.saida.toUpperCase()} · fundo ${s.fundo}`;
+      btnLabel = s.saida === 'png' ? 'Baixar PNG (ZIP)' : 'Baixar MP4';
+    } else if (s.cat === 'design') {
+      v[s.design] = true;
+      const d = DESIGNS.find(x => x[0] === s.design), sc = this.sch[d[1]], vals = this.designVals();
+      grupos.push(G('PEÇA', DESIGNS.map(([k, , l]) => chip(s.design === k, l, set({ design: k })))));
+      const upd = (k, val) => this.setState(st => ({ dv: { ...st.dv, [st.design]: { ...(st.dv[st.design] || {}), [k]: val } }, link: null, msg: '' }));
+      if (!sc) grupos.push({ t: 'CARREGANDO OPÇÕES…', chips: true, text: false, ops: [] });
+      else Object.entries(sc).forEach(([k, p]) => {
+        if (k[0] === '$' || SKIP.has(k) || !p || !p.editor) return;
+        const t = (p.section && p.section.toLowerCase() !== k.toLowerCase() ? p.section.toUpperCase() + ' · ' : '') + k.replace(/([A-Z])/g, ' $1').toUpperCase();
+        if (p.editor === 'enum' && p.options) grupos.push(G(t, p.options.filter(o => !((s.design === 'colecao' || s.design === 'linkedin' || s.design === 'fundos') && o === 'todos') && !(s.design === 'paineis' && (o === 'galeria' || o === 'todas'))).map(o => chip(vals[k] === o, String(o), () => upd(k, o)))));
+        else if (p.editor === 'boolean') grupos.push(G(t, [chip(vals[k] === true, 'sim', () => upd(k, true)), chip(vals[k] === false, 'não', () => upd(k, false))]));
+        else if (p.editor === 'text') grupos.push({ t, chips: false, text: true, v: vals[k] ?? '', set: (e) => upd(k, e.target.value) });
+      });
+      grupos.push(G('ESCALA', ops('escala', [[1, '1× (tamanho nativo)'], [2, '2× (impressão / retina)']])), G('ARQUIVO', ops('img', [['png', 'PNG (mantém transparência)'], ['jpg', 'JPG (mais leve)']])));
+      const tall = vals.formato === '9:16', wide = ['redes', 'slide', 'gc'].includes(s.design) || (s.design === 'paineis' && (vals.peca === 'slide' || vals.peca === 'divisor')) || s.design === 'fundos';
+      pw = Math.max(200, Math.min(wide ? 720 : tall ? 340 : 520, s.cw || 360));
+      dprops = { ...vals, largura: pw };
+      dica = 'O arquivo sai no tamanho real da peça (ex.: post 1080 px). Fotos arrastadas para os espaços de imagem entram na exportação. Use PNG quando houver fundo transparente.';
+      resumo = `${d[2]} · ${s.img.toUpperCase()} · ${s.escala}×`;
+      btnLabel = `Baixar ${s.img.toUpperCase()}`;
+    } else {
+      v.fig = true; stageBg = '#1C1C1A';
+      grupos.push(G('CONJUNTO', FIGSETS.map(([k, l]) => chip(s.figSet === k, l, set({ figSet: k })))));
+      grupos.push(G('ARQUIVO', ops('figOut', [['webp', '★ WebP 512 (WhatsApp)'], ['png', 'PNG 512 transparente'], ['ambos', 'WebP + PNG']])));
+      grupos.push(G('PALHINHA', [chip(s.figPalha, 'com textura', set({ figPalha: true })), chip(!s.figPalha, 'sem textura', set({ figPalha: false }))]));
+      dica = 'Para virar pacote no WhatsApp: instale um app de figurinhas (ex.: Sticker Maker), crie um pacote e importe os WebP. Cada pacote aceita de 3 a 30 figurinhas; o WebP já sai em 512×512, com fundo transparente e abaixo de 100 KB.';
+      resumo = `512×512 · ${s.figOut.toUpperCase()} · fundo transparente`;
+      btnLabel = 'Baixar figurinhas (ZIP)';
+    }
+    return { cats, grupos, v, m, f: { set: s.figSet, palha: s.figPalha }, dprops, pw, stageBg, stageRef: this.stageRef, colRef: this.colRef, barRef: this.barRef, msgRef: this.msgRef,
+      exportar: () => this.exportar(), btnLabel: s.busy ? 'Gerando…' : btnLabel, btnBg: s.busy ? '#8C8B82' : '#15E888',
+      link: s.link, linkName: s.linkName, msg: s.msg || warn || 'Clique em baixar. Não troque de aba enquanto gera.', msgC: s.err || warn ? '#FF8A8A' : '#C9C8BE',
+      busy: s.busy, idle: !s.busy, dica, resumo };
+  }
+}
+</script>
+</body>
+</html>

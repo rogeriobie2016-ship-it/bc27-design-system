@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<style>
+@keyframes v3Pat{0%{clip-path:inset(100% 0 0 0)}11%,87%{clip-path:inset(0 0 0 0)}97%,100%{clip-path:inset(0 0 100% 0)}}
+@keyframes v3Drift{from{transform:translateX(0)}to{transform:translateX(-8%)}}
+@keyframes v3Band{0%,10%{transform:scaleX(0)}20%,86%{transform:scaleX(1)}95%,100%{transform:scaleX(0)}}
+@keyframes v3Box{0%,10%{transform:scale(.4) rotate(-8deg);opacity:0}19%{transform:scale(1.05) rotate(1deg);opacity:1}22%,86%{transform:scale(1) rotate(0);opacity:1}94%,100%{transform:scale(.4) rotate(8deg);opacity:0}}
+@keyframes v3Up{0%,17%{transform:translateY(115%) rotate(10deg);opacity:0}23%{transform:translateY(-5%) rotate(0);opacity:1}26%,84%{transform:translateY(0);opacity:1}90%,100%{transform:translateY(115%);opacity:0}}
+@keyframes v3Scale{0%,17%{transform:scale(0);opacity:0}23%{transform:scale(1.25);opacity:1}26%,84%{transform:scale(1);opacity:1}90%,100%{transform:scale(0);opacity:0}}
+@keyframes v3Type{0%,18%{opacity:0}18.5%,86%{opacity:1}86.5%,100%{opacity:0}}
+@keyframes v3Blur{0%,16%{opacity:0;filter:blur(30px);transform:translateX(-30px)}26%,84%{opacity:1;filter:blur(0);transform:none}92%,100%{opacity:0;filter:blur(30px);transform:translateX(30px)}}
+@keyframes v3Kick{0%,26%{opacity:0;transform:translateY(24px)}32%,85%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
+@keyframes v3Ico{0%,24%{transform:scale(0) rotate(-40deg)}30%{transform:scale(1.15) rotate(5deg)}33%,85%{transform:scale(1) rotate(0)}91%,100%{transform:scale(0)}}
+@keyframes v3Swing{0%{transform:rotate(-5deg)}100%{transform:rotate(5deg)}}
+@keyframes v3Sway{0%{transform:translateY(0)}100%{transform:translateY(14px)}}
+@keyframes v3Spin{to{transform:rotate(360deg)}}
+@keyframes v3Tile{0%,1%{transform:scale(0) rotate(-90deg)}12%,86%{transform:scale(1) rotate(0)}96%,100%{transform:scale(0) rotate(90deg)}}
+@keyframes v3Sky{0%,8%{transform:translateY(40%);opacity:0}18%,86%{transform:translateY(0);opacity:1}95%,100%{transform:translateY(40%);opacity:0}}
+@keyframes v3Pop{0%,22%{transform:scale(0) rotate(-25deg)}30%{transform:scale(1.12) rotate(4deg)}33%,84%{transform:scale(1) rotate(0)}90%,100%{transform:scale(0)}}
+@keyframes v3Grow{0%,4%{transform:scale(0)}16%,86%{transform:scale(1)}95%,100%{transform:scale(0)}}
+@keyframes v3Tw{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes v3Fall{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+@keyframes v3Drop{0%,17%{transform:translateY(-115%) rotate(-10deg);opacity:0}23%{transform:translateY(5%) rotate(0);opacity:1}26%,84%{transform:translateY(0);opacity:1}90%,100%{transform:translateY(-115%);opacity:0}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;background:{{ bg }};font-family:'Bricolage Grotesque',sans-serif">
+<div style="position:absolute;inset:0;animation:v3Pat {{ dur }} cubic-bezier(.7,0,.3,1) infinite both">
+<sc-if value="{{ isMask }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;top:0;width:120%;height:100%;background:{{ pal.pat }};opacity:{{ patOp }};mask:url({{ maskUrl }}) 0 0/{{ tile }}px auto repeat;animation:v3Drift {{ dur }} linear infinite"></div></sc-if>
+<sc-if value="{{ isOndas }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ ondas }}" as="o" hint-placeholder-count="0"><div style="position:absolute;left:0;top:{{ o.y }}px;width:130%;height:{{ o.h }}px;background:{{ o.c }};mask:url(../img/f/onda-linha.svg) 0 0/{{ o.w }}px {{ o.h }}px repeat-x;animation:v3Drift {{ o.t }} linear infinite"></div></sc-for></sc-if>
+<sc-if value="{{ isAlv }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;bottom:0;width:120%;height:{{ alvH }}px;background:{{ pal.pat }};mask:url(../img/f2/alvorada.svg) 0 0/{{ alvW }}px {{ alvH }}px repeat-x;animation:v3Drift {{ dur }} linear infinite"></div><div style="position:absolute;left:0;top:0;width:120%;height:{{ alvH }}px;background:{{ pal.pat }};transform:scaleY(-1);mask:url(../img/f2/alvorada.svg) 0 0/{{ alvW }}px {{ alvH }}px repeat-x"></div></sc-if>
+<sc-if value="{{ isCordel }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ pal.pat }};opacity:.22;mask:url(../img/f2/hachura.svg) 0 0/{{ tile }}px auto repeat"></div><div style="position:absolute;left:0;top:0;width:100%;height:{{ serH }}px;background:{{ pal.pat }};mask:url(../img/f2/serrilha.svg) 0 0/{{ serW }}px {{ serH }}px repeat-x"></div><div style="position:absolute;left:0;bottom:0;width:100%;height:{{ serH }}px;background:{{ pal.pat }};transform:scaleY(-1);mask:url(../img/f2/serrilha.svg) 0 0/{{ serW }}px {{ serH }}px repeat-x"></div></sc-if>
+<sc-if value="{{ isBand }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ bandRows }}" as="r" hint-placeholder-count="0"><div style="position:absolute;left:-2%;width:104%;top:{{ r.top }}px;transform:rotate({{ r.rot }}deg)"><div style="display:flex;gap:{{ r.gap }}px;border-top:4px solid {{ pal.pat }};padding:0 {{ r.gap }}px;animation:v3Sway 1.6s {{ r.d }} ease-in-out infinite alternate"><sc-for list="{{ r.flags }}" as="f" hint-placeholder-count="0"><div style="flex:none;width:{{ r.fw }}px;height:{{ r.fh }}px;background:{{ f }};clip-path:polygon(0 0,100% 0,100% 100%,50% 72%,0 100%)"></div></sc-for></div></div></sc-for></sc-if>
+<sc-if value="{{ isFitas }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ fitas }}" as="f" hint-placeholder-count="0"><div style="position:absolute;top:-20px;left:{{ f.x }}px;width:{{ f.w }}px;height:{{ f.h }}px;background:{{ f.c }};transform-origin:top center;animation:v3Swing {{ f.t }} {{ f.d }} ease-in-out infinite alternate;clip-path:polygon(0 0,100% 0,100% 100%,50% 96%,0 100%);display:flex;justify-content:center;padding-top:60px;box-sizing:border-box"><span style="writing-mode:vertical-rl;font-weight:700;font-size:{{ f.fs }}px;letter-spacing:.14em;color:{{ f.tc }};white-space:nowrap">{{ fitaTxt }}</span></div></sc-for></sc-if>
+<sc-if value="{{ isFrevo }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ frevos }}" as="u" hint-placeholder-count="0"><div style="position:absolute;left:{{ u.x }}px;top:{{ u.y }}px;width:{{ u.s }}px;height:{{ u.s }}px;border-radius:50%;background:conic-gradient(#FBF99D 0 12.5%,#0A7BE5 0 25%,#FFFFFF 0 37.5%,#15E888 0 50%,#FBF99D 0 62.5%,#0A7BE5 0 75%,#FFFFFF 0 87.5%,#15E888 0);box-shadow:0 0 0 {{ u.b }}px {{ bg }},0 0 0 {{ u.b2 }}px {{ pal.pat }};animation:v3Spin {{ u.t }} linear infinite"></div></sc-for></sc-if>
+<sc-if value="{{ isAthos }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ tiles }}" as="t" hint-placeholder-count="0"><div style="position:absolute;left:{{ t.x }}px;top:{{ t.y }}px;width:{{ t.s }}px;height:{{ t.s }}px;animation:v3Tile {{ dur }} {{ t.d }} cubic-bezier(.5,0,.3,1) infinite both"><div style="position:absolute;inset:0;transform:rotate({{ t.r }}deg);background:radial-gradient(circle at 0 0,{{ t.fg }} 0 62%,transparent 62.5%),radial-gradient(circle at 100% 100%,{{ t.fg2 }} 0 22%,transparent 22.5%)"></div></div></sc-for></sc-if>
+<sc-if value="{{ isRegiao }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ rgX }}px;top:{{ rgY }}px;width:{{ rgW }}px;height:{{ rgH }}px;background:{{ pal.pat }};mask:url({{ rgUrl }}) center/100% 100% no-repeat;animation:v3Sky {{ dur }} cubic-bezier(.3,.7,.3,1) infinite both"></div></sc-if>
+<sc-if value="{{ isPan }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;top:0;width:100%;height:100%;animation:v3Sky {{ dur }} cubic-bezier(.3,.7,.3,1) infinite both"><img src="{{ panUrl }}" style="position:absolute;left:{{ rgX }}px;top:{{ rgY }}px;width:{{ rgW }}px"><div style="position:absolute;left:0;top:{{ gTop }}px;width:100%;height:{{ gH }}px;background:{{ ground }};overflow:hidden"><div style="position:absolute;left:0;top:{{ gWave }}px;width:130%;height:80px;background:#15E888;mask:url(../img/f/onda-linha.svg) 0 0/240px 80px repeat-x;animation:v3Drift 3s linear infinite"></div></div></div></sc-if>
+<sc-if value="{{ isBandeira }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ dX }}px;top:{{ dY }}px;width:{{ dW }}px;height:{{ dH }}px;background:{{ pal.pat }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%);animation:v3Grow {{ dur }} cubic-bezier(.3,.8,.3,1) infinite both"></div><div style="position:absolute;left:{{ cX }}px;top:{{ cY }}px;width:{{ cS }}px;height:{{ cS }}px;border-radius:50%;background:{{ pal.i3 }};animation:v3Grow {{ dur }} .15s cubic-bezier(.3,.8,.3,1) infinite both"></div></sc-if>
+<sc-if value="{{ isEstrelas }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;animation:v3Tw 1.8s ease-in-out infinite"><sc-for list="{{ stars }}" as="s" hint-placeholder-count="0"><div style="position:absolute;left:{{ s.x }}px;top:{{ s.y }}px;width:{{ s.s }}px;height:{{ s.s }}px;background:{{ pal.pat }};mask:url(../img/f/estrela5.svg) center/contain no-repeat"></div></sc-for></div></sc-if>
+<sc-if value="{{ isAdesivos }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ stk }}" as="s" hint-placeholder-count="0"><div style="position:absolute;left:{{ s.x }}px;top:{{ s.y }}px;width:{{ s.w }}px;transform:rotate({{ s.r }}deg)"><img src="{{ s.src }}" style="width:100%;display:block;filter:drop-shadow(0 12px 14px rgba(0,0,0,.3));animation:v3Pop {{ dur }} {{ s.d }} infinite both"></div></sc-for></sc-if>
+<sc-if value="{{ isConcreta }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ conc }}" as="t" hint-placeholder-count="0"><div style="position:absolute;left:{{ t.x }}px;top:{{ t.y }}px;width:{{ t.s }}px;height:{{ t.s }}px;animation:v3Tile {{ dur }} {{ t.d }} cubic-bezier(.5,0,.3,1) infinite both"><div style="position:absolute;inset:{{ t.in }}px;background:{{ t.c }};clip-path:{{ t.clip }};border-radius:{{ t.br }};transform:rotate({{ t.r }}deg)"></div></div></sc-for></sc-if>
+<sc-if value="{{ isConfete }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ conf }}" as="k" hint-placeholder-count="0"><div style="position:absolute;left:{{ k.x }}px;top:0;width:{{ k.s }}px;height:{{ H2 }}px;animation:v3Fall {{ k.t }} {{ k.d }} linear infinite"><sc-for list="{{ k.p }}" as="q" hint-placeholder-count="0"><div style="position:absolute;left:0;top:{{ q.y }}px;width:{{ q.w }}px;height:{{ q.h }}px;border-radius:{{ q.br }};background:{{ q.c }};transform:rotate({{ q.r }}deg)"></div></sc-for></div></sc-for></sc-if>
+<sc-if value="{{ isAster }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ ast }}" as="a" hint-placeholder-count="0"><div style="position:absolute;left:{{ a.x }}px;top:{{ a.y }}px;width:{{ a.s }}px;height:{{ a.s }}px;animation:v3Grow {{ dur }} {{ a.d }} cubic-bezier(.3,.8,.3,1) infinite both"><div style="width:100%;height:100%;background:{{ a.c }};mask:url({{ a.src }}) center/contain no-repeat;animation:{{ a.spin }}"></div></div></sc-for></sc-if>
+<sc-if value="{{ isListras }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:-50%;top:-50%;width:200%;height:200%;transform:rotate(-24deg)"><div style="position:absolute;left:0;top:0;width:120%;height:100%;background:{{ lisBg }};animation:v3Drift {{ dur }} linear infinite"></div></div></sc-if>
+</div>
+<sc-if value="{{ isFaixa }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:0;top:{{ bandTop }}px;width:100%;height:{{ bandH }}px;background:{{ pal.block }};transform-origin:{{ origin }};animation:v3Band {{ dur }} cubic-bezier(.75,0,.2,1) infinite both"></div></sc-if>
+<sc-if value="{{ isSelo }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ boxX }}px;top:{{ bandTop }}px;width:{{ boxW }}px;height:{{ bandH }}px;animation:v3Box {{ dur }} cubic-bezier(.3,.8,.3,1) infinite both"><div style="position:absolute;inset:0;background:radial-gradient(circle at {{ perf }}px {{ perf }}px,transparent {{ perfR }}px,#FFFFFF {{ perfR2 }}px) -{{ perf }}px -{{ perf }}px/{{ perf2 }}px {{ perf2 }}px;filter:drop-shadow(0 16px 20px rgba(0,0,0,.25))"></div><div style="position:absolute;inset:{{ perfIn }}px;background:{{ pal.block }}"></div></div></sc-if>
+<sc-if value="{{ isContorno }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ boxX }}px;top:{{ bandTop }}px;width:{{ boxW }}px;height:{{ bandH }}px;border:{{ bw }}px solid {{ pal.block }};box-sizing:border-box;animation:v3Box {{ dur }} cubic-bezier(.3,.8,.3,1) infinite both"></div></sc-if>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ kTop }}px;display:flex;justify-content:{{ just }};align-items:center;gap:{{ kGap }}px">
+<sc-if value="{{ icone }}" hint-placeholder-val="{{ true }}"><div style="position:relative;flex:none;width:{{ icoW }}px;height:{{ icoH }}px;animation:v3Ico {{ dur }} infinite both"><div style="position:absolute;left:0;top:0;width:572px;height:174px;transform:scale({{ icoS }});transform-origin:0 0"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:{{ pal.i1 }}"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:{{ pal.i2 }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:{{ pal.i3 }}"></div></div></div></sc-if>
+<div style="font-weight:700;font-size:{{ kfs }}px;letter-spacing:.2em;color:{{ kcol }};white-space:nowrap;animation:v3Kick {{ dur }} infinite both">{{ kicker }}</div>
+</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ tTop }}px;display:flex;flex-direction:column;align-items:{{ align }}">
+<sc-for list="{{ lines }}" as="ln" hint-placeholder-count="1"><div style="display:flex;overflow:hidden;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ fs }}px;line-height:{{ lh }}px;height:{{ lh }}px;letter-spacing:{{ trk }}em;color:{{ tcol }};animation:{{ lineAnim }}"><sc-for list="{{ ln.chars }}" as="ch" hint-placeholder-count="0"><span style="display:inline-block;white-space:pre;animation:{{ ch.a }}">{{ ch.c }}</span></sc-for></div></sc-for>
+</div>
+<sc-if value="{{ hasSub }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ sTop }}px;text-align:{{ talign }};font-weight:600;font-stretch:{{ larg }}%;font-size:{{ sfs }}px;line-height:1.25;color:{{ kcol }};text-wrap:balance;animation:v3Kick {{ dur }} .2s infinite both">{{ sub }}</div></sc-if>
+<sc-if value="{{ assinatura }}" hint-placeholder-val="{{ true }}"><img src="../img/wm-{{ wm }}.png" style="position:absolute;left:{{ wmX }}px;top:{{ wmY }}px;width:{{ wmW }}px;animation:v3Kick {{ dur }} .35s infinite both"></sc-if>
+<div style="position:absolute;inset:0;background:url(../img/papel.png) 0 0/700px,url(../img/grao.png) 0 0/300px;opacity:{{ tx }};pointer-events:none"></div><sc-if value="{{ gr2.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ gr2.bg }};mix-blend-mode:{{ gr2.bl }};opacity:{{ gr2.o }};pointer-events:none"></div></sc-if><sc-if value="{{ tx2.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ tx2.bg }};mix-blend-mode:{{ tx2.bl }};opacity:{{ tx2.o }};pointer-events:none"></div></sc-if>
+<sc-if value="{{ guia }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ gL }}px;right:{{ gL }}px;top:{{ gT }}px;bottom:{{ gB }}px;border:4px dashed #FF00FF;pointer-events:none"></div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:324,&quot;height&quot;:576},&quot;titulo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;GIRO GC&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;kicker&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;UM QUADRO BC27&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;sub&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;textoFita&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LEMBRANÇA DA BC27&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;caixa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;alta&quot;,&quot;como digitado&quot;,&quot;baixa&quot;],&quot;default&quot;:&quot;alta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;peso&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:800,&quot;step&quot;:100,&quot;default&quot;:800,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;tracking&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:-8,&quot;max&quot;:12,&quot;step&quot;:1,&quot;default&quot;:-2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;escala&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.6,&quot;max&quot;:1.3,&quot;step&quot;:0.05,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;alinhamento&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;centro&quot;,&quot;esquerda&quot;],&quot;default&quot;:&quot;centro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;elemento&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;frevo&quot;,&quot;bandeirinhas&quot;,&quot;fitas&quot;,&quot;cobogo&quot;,&quot;azulejo&quot;,&quot;calcadao&quot;,&quot;fuxico&quot;,&quot;alvorada&quot;,&quot;cordel&quot;,&quot;athos&quot;,&quot;ondas&quot;,&quot;bandeira&quot;,&quot;estrelas&quot;,&quot;adesivos&quot;,&quot;monumentos&quot;,&quot;concreta&quot;,&quot;confete&quot;,&quot;asteriscos&quot;,&quot;listras&quot;,&quot;floreio&quot;,&quot;panorama&quot;,&quot;boston&quot;,&quot;sudeste&quot;,&quot;nordeste&quot;,&quot;norte&quot;,&quot;sul&quot;,&quot;centro-oeste&quot;],&quot;default&quot;:&quot;frevo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;escalaPadrao&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.5,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verde&quot;,&quot;vivo&quot;,&quot;amarelo&quot;,&quot;azul&quot;,&quot;noite&quot;,&quot;branco&quot;,&quot;papel&quot;,&quot;mata&quot;,&quot;ceu&quot;],&quot;default&quot;:&quot;azul&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;estrutura&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;faixa&quot;,&quot;selo&quot;,&quot;contorno&quot;,&quot;nada&quot;],&quot;default&quot;:&quot;faixa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;icone&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;assinatura&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;textura&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;sutil&quot;,&quot;media&quot;,&quot;forte&quot;],&quot;default&quot;:&quot;media&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;entrada&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;letras&quot;,&quot;linhas&quot;,&quot;escala&quot;,&quot;maquina&quot;,&quot;desfoque&quot;,&quot;queda&quot;],&quot;default&quot;:&quot;letras&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;velocidade&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;0.75&quot;,&quot;1&quot;,&quot;1.25&quot;,&quot;1.5&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;pausar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;tempo&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:8,&quot;step&quot;:0.1,&quot;default&quot;:4,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;formato&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;9:16&quot;,&quot;16:9&quot;,&quot;1:1&quot;,&quot;4:5&quot;],&quot;default&quot;:&quot;9:16&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;fundo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cor&quot;,&quot;magenta&quot;],&quot;default&quot;:&quot;cor&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;guia&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:324,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;texturaExtra&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;ruído&quot;,&quot;ruído forte&quot;,&quot;papel&quot;,&quot;papel + ruído&quot;,&quot;meio-tom&quot;,&quot;linho&quot;,&quot;linhas de tv&quot;],&quot;default&quot;:&quot;nenhuma&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;texturaForca&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:45,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;gradiente&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhum&quot;,&quot;luz suave&quot;,&quot;profundidade&quot;,&quot;brilho dourado&quot;,&quot;mata para céu&quot;,&quot;aurora&quot;,&quot;noite&quot;,&quot;vinheta&quot;],&quot;default&quot;:&quot;nenhum&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;gradienteForca&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;}}">
+const PAL = {
+  verde:   { bg:'#0B5E37', pat:'#1A8A52', block:'#15E888', title:'#0B5E37', kick:'#15E888', wm:'amarelo', i1:'#15E888', i2:'#FBF99D', i3:'#0A7BE5' },
+  vivo:    { bg:'#15E888', pat:'#0B5E37', block:'#0B5E37', title:'#FBF99D', kick:'#0B5E37', wm:'verde', i1:'#0B5E37', i2:'#FBF99D', i3:'#0A7BE5' },
+  amarelo: { bg:'#FBF99D', pat:'#0D3A85', block:'#0D3A85', title:'#FBF99D', kick:'#0D3A85', wm:'navy', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  azul:    { bg:'#0A7BE5', pat:'#FBF99D', block:'#FBF99D', title:'#0D3A85', kick:'#FFFFFF', wm:'branco', i1:'#0B5E37', i2:'#15E888', i3:'#0D3A85' },
+  noite:   { bg:'#0D3A85', pat:'#FFFFFF', block:'#FBF99D', title:'#0D3A85', kick:'#FBF99D', wm:'amarelo', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  branco:  { bg:'#FFFFFF', pat:'#0A7BE5', block:'#0D3A85', title:'#FFFFFF', kick:'#0D3A85', wm:'navy', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  papel:   { bg:'#F5F4EC', pat:'#0B5E37', block:'#0B5E37', title:'#F5F4EC', kick:'#0B5E37', wm:'verde', i1:'#0B5E37', i2:'#15E888', i3:'#0A7BE5' },
+  mata:    { bg:'#0B5E37', pat:'#FBF99D', block:'#FBF99D', title:'#0B5E37', kick:'#FBF99D', wm:'amarelo', i1:'#15E888', i2:'#FFFFFF', i3:'#0A7BE5' },
+  ceu:     { bg:'#0D3A85', pat:'#0A7BE5', block:'#15E888', title:'#0D3A85', kick:'#15E888', wm:'branco', i1:'#0B5E37', i2:'#FBF99D', i3:'#FFFFFF' },
+};
+const FMT = { '9:16':[1080,1920], '16:9':[1920,1080], '1:1':[1080,1080], '4:5':[1080,1350] };
+const MASKS = { cobogo:['../img/f2/cobogo.svg',.15,1], azulejo:['../img/f2/azulejo.svg',.17,1], calcadao:['../img/f2/calcadao.svg',.34,1], fuxico:['../img/f2/fuxico.svg',.13,.9], floreio:['../img/f/floreio.svg',.22,1] };
+const COLS = ['#FBF99D','#0A7BE5','#FFFFFF','#15E888','#0D3A85','#0B5E37'];
+const REG = { nordeste:'../img/r/nordeste.svg', norte:'../img/r/norte.svg', sul:'../img/r/sul.svg', 'centro-oeste':'../img/r/centro-oeste.svg' };
+const PAN = { panorama:'../img/panorama.png', boston:'../img/boston.png', sudeste:'../img/sudeste.png' };
+const STK = ['pao','cristo','congresso','zakim','mapa','copan','ponte','capitolio'];
+const STK2 = ['masp','lapa','teatro','farol','igreja','veleiro','mao','cristo2'];
+const SHP = [['polygon(0 0,100% 0,0 100%)','0'],['polygon(100% 0,100% 100%,0 100%)','0'],['none','50%'],['none','100% 0 0 0'],['polygon(50% 0,100% 100%,0 100%)','0'],['none','0'],['polygon(50% 0,100% 50%,50% 100%,0 50%)','0']];
+const TEXS = { ruído:['url(../img/grao.png) 0 0/420px 420px repeat','overlay'], 'ruído forte':['url(../img/grao.png) 0 0/220px 220px repeat','multiply'], papel:['url(../img/papel.png) center/cover','multiply'], 'meio-tom':['radial-gradient(rgba(0,0,0,.55) 1.3px, transparent 1.8px) 0 0/11px 11px','soft-light'], linho:['repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 1px, transparent 1px 4px)','overlay'], 'linhas de tv':['repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 2px, transparent 2px 6px)','multiply'], 'papel + ruído':['url(../img/grao.png) 0 0/320px 320px repeat, url(../img/papel.png) center/cover','multiply'] };
+const GRADS = { 'luz suave':['radial-gradient(120% 80% at 15% 0%, rgba(255,255,255,.45), transparent 62%)','soft-light'], profundidade:['linear-gradient(180deg, transparent 35%, rgba(0,0,0,.5))','multiply'], 'brilho dourado':['radial-gradient(90% 70% at 85% 8%, rgba(251,249,157,.6), transparent 65%)','screen'], 'mata para céu':['linear-gradient(160deg, rgba(21,232,136,.5), rgba(10,123,229,.5))','overlay'], aurora:['radial-gradient(60% 50% at 18% 82%, rgba(21,232,136,.55), transparent 70%), radial-gradient(60% 50% at 82% 18%, rgba(10,123,229,.55), transparent 70%)','screen'], noite:['linear-gradient(180deg, rgba(13,58,133,0) 20%, rgba(13,58,133,.75))','multiply'], vinheta:['radial-gradient(110% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.45))','multiply'] };
+const mkTx = (p) => { const t = TEXS[p.texturaExtra ?? p.textura ?? 'nenhuma']; return t ? { on: true, bg: t[0], bl: t[1], o: (p.texturaForca ?? 45) / 100 } : { on: false }; };
+const mkGr = (p) => { const g = GRADS[p.gradiente ?? 'nenhum']; return g ? { on: true, bg: g[0], bl: g[1], o: (p.gradienteForca ?? 100) / 100 } : { on: false }; };
+class Component extends DCLogic {
+  renderVals() { const r = this.__rvBase(); return r && typeof r === 'object' ? { ...r, tx2: mkTx(this.props), gr2: mkGr(this.props) } : r; }
+  rootRef = React.createRef();
+  componentDidMount() { this.sync(); }
+  componentDidUpdate() { this.sync(); }
+  sync() {
+    const el = this.rootRef.current; if (!el || !el.getAnimations) return;
+    const v = parseFloat(this.props.velocidade ?? '1') || 1;
+    const an = el.getAnimations({ subtree: true });
+    if (this.props.pausar) an.forEach(a => { a.pause(); a.currentTime = (this.props.tempo ?? 4) * 1000 / v; });
+    else an.forEach(a => { if (a.playState === 'paused') a.play(); });
+  }
+  __rvBase() {
+    const p = this.props;
+    const fmt = FMT[p.formato] ? p.formato : '9:16';
+    const [W, H] = FMT[fmt];
+    const dw = p.largura ?? 324, esc = dw / W, dh = Math.round(H * esc);
+    const pal = PAL[p.paleta] || PAL.verde;
+    const el = p.elemento ?? 'frevo';
+    const vel = parseFloat(p.velocidade ?? '1') || 1;
+    const dur = (8 / vel).toFixed(2) + 's';
+    const m = Math.min(W, H);
+    const peso = p.peso ?? 800, larg = p.larguraFonte ?? 100, trk = ((p.tracking ?? -2) / 100);
+    const caixa = p.caixa ?? 'alta';
+    let txt = p.titulo ?? 'GIRO GC';
+    if (caixa === 'alta') txt = txt.toUpperCase(); else if (caixa === 'baixa') txt = txt.toLowerCase();
+    const raw = txt.split('/').map(s => s.trim()).filter(Boolean);
+    const maxLen = Math.max(1, ...raw.map(s => s.length));
+    const wf = (0.78 + 0.22 * (larg - 75) / 25) * (0.82 + 0.18 * (peso - 300) / 500) * (1 + trk * 1.4);
+    const capH = fmt === '9:16' ? 0.115 : fmt === '16:9' ? 0.2 : fmt === '4:5' ? 0.13 : 0.15;
+    const esq = (p.alinhamento ?? 'centro') === 'esquerda';
+    const padX = Math.round(esq ? W * 0.08 : W * 0.04);
+    const fs = Math.round(Math.min((W - padX * 2) * 0.94 / (maxLen * 0.64 * wf), H * capH) * (p.escala ?? 1));
+    const lh = Math.round(fs * 0.98);
+    const ent = p.entrada ?? 'letras';
+    const ease = 'cubic-bezier(.2,.8,.2,1)';
+    let idx = 0;
+    const lines = raw.map((l, li) => ({ chars: [...l].map(c => {
+      const i = idx++;
+      let a;
+      if (ent === 'letras') a = `v3Up ${dur} ${((i * .035 + .05) / vel).toFixed(3)}s ${ease} infinite both`;
+      else if (ent === 'escala') a = `v3Scale ${dur} ${((i * .03) / vel).toFixed(3)}s ${ease} infinite both`;
+      else if (ent === 'maquina') a = `v3Type ${dur} ${((i * .06) / vel).toFixed(3)}s steps(1) infinite both`;
+      else if (ent === 'linhas') a = `v3Up ${dur} ${((li * .14) / vel).toFixed(3)}s ${ease} infinite both`;
+      else if (ent === 'queda') a = `v3Drop ${dur} ${((i * .035 + .05) / vel).toFixed(3)}s ${ease} infinite both`;
+      else a = `v3Blur ${dur} ${((li * .12) / vel).toFixed(3)}s ease-out infinite both`;
+      return {  c, a };
+    }) }));
+    const est = p.estrutura ?? 'faixa';
+    const titleH = lh * lines.length;
+    const bandH = Math.round(titleH + fs * 0.55);
+    const bandTop = Math.round((H - bandH) / 2 - (fmt === '9:16' ? H * 0.02 : 0));
+    const tTop = Math.round(bandTop + (bandH - titleH) / 2 + fs * 0.03);
+    const titleW = Math.min(W - padX * 2, maxLen * fs * 0.64 * wf);
+    const boxW = Math.round(Math.min(W * 0.94, titleW + fs * 1.1));
+    const boxX = Math.round(esq ? padX - fs * 0.5 : (W - boxW) / 2);
+    const onBlock = est === 'faixa' || est === 'selo';
+    const kfs = Math.round(m * 0.03);
+    const icoW = Math.round(kfs * 3.4), icoS = icoW / 572, icoH = Math.round(174 * icoS);
+    const kTop = Math.round(bandTop - icoH - kfs * 1.4);
+    const sub = p.sub ?? '';
+    const wmW = Math.round(m * 0.34), wmH = wmW * 0.115;
+    const fundo = p.fundo ?? 'cor';
+    const bg = fundo === 'magenta' ? '#FF00FF' : pal.bg;
+    const perf = Math.round(m * 0.013), perfR = Math.round(perf * .62);
+    const v = { rootRef: this.rootRef, W, H, dw, dh, esc, pal, bg, dur, fs, lh, lines, peso, larg, trk, bandTop, bandH, tTop, boxW, boxX,
+      perf, perf2: perf * 2, perfR, perfR2: perfR + 1, perfIn: Math.round(perf * 1.8), bw: Math.round(m * 0.012),
+      isFaixa: est === 'faixa', isSelo: est === 'selo', isContorno: est === 'contorno', origin: esq ? 'left center' : 'center center',
+      tcol: onBlock ? pal.title : pal.block, kcol: pal.kick, padX, just: esq ? 'flex-start' : 'center', align: esq ? 'flex-start' : 'center', talign: esq ? 'left' : 'center',
+      lineAnim: 'none', kfs, kGap: Math.round(kfs * .7), icoW, icoH, icoS, kTop, kicker: p.kicker ?? 'UM QUADRO BC27', sub, hasSub: !!sub,
+      sfs: Math.round(m * 0.036), sTop: Math.round(bandTop + bandH + kfs * 1.3), wmW, wm: pal.wm,
+      wmX: Math.round(esq ? padX : (W - wmW) / 2), wmY: Math.round(H - m * 0.075 - wmH),
+      icone: p.icone ?? true, assinatura: p.assinatura ?? true, fitaTxt: p.textoFita ?? 'LEMBRANÇA DA BC27',
+      tx: { nenhuma: 0, sutil: .3, media: .6, forte: .95 }[p.textura ?? 'media'] ?? .6,
+      guia: !!p.guia && fmt === '9:16', gL: 60, gT: 220, gB: 380,
+      isMask: !!MASKS[el], isAlv: el === 'alvorada', isCordel: el === 'cordel', isBand: el === 'bandeirinhas', isFitas: el === 'fitas', isFrevo: el === 'frevo', isAthos: el === 'athos', isRegiao: !!REG[el], isPan: !!PAN[el], isBandeira: el === 'bandeira', isOndas: el === 'ondas', isEstrelas: el === 'estrelas', isAdesivos: el === 'adesivos' || el === 'monumentos', isConcreta: el === 'concreta', isConfete: el === 'confete', isAster: el === 'asteriscos', isListras: el === 'listras', H2: H * 2 };
+    if (MASKS[el]) { v.maskUrl = MASKS[el][0]; v.tile = Math.round(m * MASKS[el][1] * (p.escalaPadrao ?? 1)); v.patOp = MASKS[el][2]; }
+    v.alvW = Math.round(m * .16 * (p.escalaPadrao ?? 1)); v.alvH = Math.round(v.alvW * 200 / 120);
+    v.tile = v.tile || Math.round(m * .1); v.serW = Math.round(m * .06); v.serH = Math.round(v.serW * .75);
+    const others = COLS.filter(c => c.toLowerCase() !== pal.bg.toLowerCase());
+    const sp = p.escalaPadrao ?? 1;
+    if (el === 'bandeirinhas') {
+      const fw = Math.round(m * .075 * sp), gap = Math.round(fw * .28), n = Math.ceil(W * 1.06 / (fw + gap)) + 1;
+      const below = H - bandTop - bandH;
+      v.bandRows = [bandTop * .12, bandTop * .48, bandTop + bandH + below * .22, bandTop + bandH + below * .58].map((t, ri) => ({ top: Math.round(t), rot: [-2, 1.5, -1.5, 2][ri], gap, fw, fh: Math.round(fw * 1.25), d: (ri * .3) + 's', flags: Array.from({ length: n }, (_, i) => others[(i + ri) % others.length]) }));
+    }
+    if (el === 'fitas') {
+      const w = Math.round(m * .07 * sp), step = Math.round(w * 1.35), n = Math.ceil(W / step) + 1;
+      v.fitas = Array.from({ length: n }, (_, i) => { const c = others[i % others.length]; return { x: i * step - w / 2, w, h: Math.round((kTop - 30) * (.55 + ((i * 37) % 45) / 100)), c, tc: (c === '#FFFFFF' || c === '#FBF99D' || c === '#15E888') ? '#0D3A85' : '#FFFFFF', fs: Math.round(w * .38), t: (1.6 + (i % 3) * .4) + 's', d: (-(i * .37) % 2).toFixed(2) + 's' }; });
+    }
+    if (el === 'frevo') {
+      const pts = fmt === '16:9' ? [[.08,.18,.26],[.9,.2,.22],[.06,.86,.2],[.92,.82,.28],[.3,.1,.12],[.7,.92,.14]] : [[.16,.11,.3],[.86,.17,.24],[.12,.88,.26],[.84,.86,.32],[.52,.05,.14],[.5,.96,.16]];
+      v.frevos = pts.map(([x, y, s], i) => { const S = Math.round(m * s * sp); return { x: Math.round(W * x - S / 2), y: Math.round(H * y - S / 2), s: S, b: Math.round(S * .03), b2: Math.round(S * .055), t: (2.4 + i * .5) + 's' }; });
+    }
+    if (el === 'athos') {
+      const s = Math.round(m * .125 * sp), cols = Math.ceil(W / s), rows = Math.ceil(H / s);
+      const cA = pal.pat, cB = others.find(c => c !== pal.pat) || '#FFFFFF';
+      v.tiles = [];
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) { const k = (x * 7 + y * 13 + x * y) % 4; v.tiles.push({ x: x * s, y: y * s, s, r: k * 90, fg: (x + y) % 3 === 0 ? cB : cA, fg2: (x + y) % 3 === 0 ? cA : cB, d: (((x + y) * 0.035) / vel).toFixed(3) + 's' }); }
+    }
+    if (el === 'ondas') {
+      const h = Math.round(m * .07 * sp), w = Math.round(h * 3), n = Math.ceil(H / (h * 1.6));
+      v.ondas = Array.from({ length: n }, (_, i) => ({ y: Math.round(i * h * 1.6), h, w, c: [pal.pat, others[1], others[3]][i % 3], t: (3 + (i % 3)) + 's' }));
+    }
+    if (el === 'estrelas') {
+      const pts = [[.08,.06,.02],[.22,.14,.012],[.38,.05,.016],[.62,.1,.012],[.12,.3,.012],[.9,.36,.016],[.06,.62,.016],[.9,.7,.012],[.3,.86,.014],[.7,.9,.016],[.78,.06,.04],[.77,.2,.05],[.7,.13,.032],[.86,.12,.03],[.81,.16,.018]];
+      v.stars = pts.map(([x, y, s]) => ({ x: Math.round(W * x), y: Math.round(H * y), s: Math.round(m * s * 1.4) }));
+    }
+    if (el === 'concreta') {
+      const s = Math.round(m * .18 * sp), cols = Math.ceil(W / s), rows = Math.ceil(H / s), cs = [pal.pat, ...others];
+      v.conc = [];
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) { const k = (x * 5 + y * 3 + x * y) % SHP.length; v.conc.push({ x: x * s, y: y * s, s, in: Math.round(s * .06), clip: SHP[k][0], br: SHP[k][1], r: ((x + y) % 4) * 90, c: cs[(x * 2 + y) % cs.length], d: (((x + y) * 0.04) / vel).toFixed(3) + 's' }); }
+    }
+    if (el === 'confete') {
+      const n = Math.round(16 * Math.max(1, W / H)), s = Math.round(m * .03 * sp), cs = [pal.pat, ...others];
+      v.conf = Array.from({ length: n }, (_, i) => { const p = []; for (let j = 0; j < 4; j++) { const y = Math.round(((j * 0.25) + ((i * 37 + j * 13) % 20) / 100) * H), sq = (i + j) % 3, q = { y, w: sq === 0 ? s : Math.round(s * .55), h: sq === 0 ? s : Math.round(s * 1.6), br: sq === 0 ? '50%' : '2px', c: cs[(i + j * 2) % cs.length], r: (i * 47 + j * 31) % 180 }; p.push(q, { ...q, y: y + H }); } return { x: Math.round(W * (i + .5) / n + ((i * 29) % 40 - 20) * m / 1000), s, t: ((5 + (i % 4)) / vel).toFixed(2) + 's', d: (-(i * .73) % 5).toFixed(2) + 's', p }; });
+    }
+    if (el === 'asteriscos') {
+      const srcs = ['../img/f/asterisco.svg','../img/f/estrela8.svg','../img/f/estrela4.svg','../img/f/burst.svg'];
+      const pts = fmt === '16:9' ? [[.08,.2,.2],[.9,.18,.16],[.05,.84,.16],[.92,.84,.22],[.28,.1,.08],[.72,.9,.1],[.2,.6,.06],[.8,.5,.07]] : [[.14,.1,.26],[.86,.15,.2],[.1,.88,.22],[.86,.86,.28],[.5,.05,.1],[.5,.95,.12],[.08,.5,.08],[.92,.55,.09]];
+      v.ast = pts.map(([x, y, s], i) => { const S = Math.round(m * s * sp); return { x: Math.round(W * x - S / 2), y: Math.round(H * y - S / 2), s: S, c: i % 3 === 0 ? pal.pat : others[i % others.length], src: srcs[i % 4], d: ((i * .06) / vel).toFixed(2) + 's', spin: `v3Spin ${(6 + i) / vel}s linear infinite${i % 2 ? ' reverse' : ''}` }; });
+    }
+    if (el === 'listras') {
+      const w = Math.round(m * .07 * sp), cs = [pal.pat, bg, others[1] === bg ? others[2] : others[1], bg];
+      v.lisBg = 'repeating-linear-gradient(90deg,' + cs.map((c, i) => `${c} ${i * w}px ${(i + 1) * w}px`).join(',') + ')';
+    }
+    if (el === 'adesivos' || el === 'monumentos') {
+      const pts = fmt === '16:9' ? [[.04,.06,.2,-8],[.78,.04,.2,6],[.02,.66,.18,6],[.8,.62,.18,-6],[.36,.04,.1,4],[.58,.8,.12,-4]] : [[.04,.04,.42,-8],[.56,.06,.38,6],[.02,.72,.4,6],[.58,.74,.36,-6],[.4,.16,.18,4],[.36,.86,.24,-4]];
+      v.stk = pts.map(([x, y, w, r], i) => ({ x: Math.round(W * x), y: Math.round(H * y), w: Math.round(W * w), r, src: `../img/s/${(el === 'monumentos' ? STK2 : STK)[i % 8]}-adesivo.png`, d: ((i * .08) / vel).toFixed(2) + 's' }));
+    }
+    if (REG[el] || PAN[el]) {
+      v.rgUrl = REG[el]; v.panUrl = PAN[el];
+      v.rgW = Math.round(fmt === '16:9' ? W : W * 1.9 * sp); v.rgH = Math.round(v.rgW * 1080 / 1920); v.rgX = Math.round((W - v.rgW) / 2);
+      const hz = H - m * .2; v.rgY = Math.round(hz - v.rgH * 0.648);
+      v.ground = pal.bg === '#0B5E37' ? '#1A8A52' : '#0B5E37';
+      if (PAN[el]) v.wm = 'amarelo';
+      v.gTop = Math.round(hz - 4); v.gH = Math.round(H - hz + 10); v.gWave = Math.round(m * .03);
+    }
+    if (el === 'bandeira') {
+      v.dW = Math.round(W * .92); v.dH = Math.round(v.dW * .64); v.dX = Math.round((W - v.dW) / 2); v.dY = Math.round(bandTop + bandH / 2 - v.dH / 2);
+      v.cS = Math.round(v.dH * .62); v.cX = Math.round((W - v.cS) / 2); v.cY = Math.round(bandTop + bandH / 2 - v.cS / 2);
+    }
+    return v;
+  }
+}
+</script>
+</body>
+</html>

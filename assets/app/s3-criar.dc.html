@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script><script>new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(!n.querySelectorAll)return;var a=n.tagName==="IMG"?[n]:[];a=a.concat([].slice.call(n.querySelectorAll("img[loading=lazy]")));a.forEach(function(i){if(!/\{\{/.test(i.getAttribute("src")||""))i.loading="eager";});});});}).observe(document.documentElement,{subtree:true,childList:true});</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="../js/vendor/jszip.min.js"></script>
+<script src="../js/bc27-export.js"></script>
+<style>body{margin:0;background:#121211}a{color:#FBF99D}a:hover{color:#15E888}input[type=range]{accent-color:#15E888;width:100%}</style>
+</helmet>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="bcdie2" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"></feGaussianBlur><feComponentTransfer in="b" result="m"><feFuncA type="linear" slope="250" intercept="-2"></feFuncA></feComponentTransfer><feFlood flood-color="#FFFFFF" result="w"></feFlood><feComposite in="w" in2="m" operator="in" result="o"></feComposite><feMerge><feMergeNode in="o"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs></svg>
+<div style="font-family:'Bricolage Grotesque',sans-serif;color:#F5F4EC;padding:40px 48px 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;gap:16px;align-items:baseline;flex-wrap:wrap"><span style="font-weight:800;font-size:48px;letter-spacing:-.02em">Criar</span><a href="../../index.html#/variacoes" target="_top" style="font-size:16px;white-space:nowrap">← Sistema Visual 3</a><a href="../../index.html#/exportar" target="_top" style="font-size:16px;white-space:nowrap">Exportar ↗</a></div>
+<div style="font-size:16px;color:#8C8B82;max-width:820px;text-wrap:pretty">Página em branco com as regras do sistema: só cores, fonte e elementos da BC. Escolha o formato, escreva, posicione e baixe.</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:18px">
+<sc-for list="{{ topo }}" as="g" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#8C8B82">{{ g.t }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ g.ops }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.on }}" style="font-family:inherit;font-size:14px;font-weight:700;padding:7px 13px;border-radius:99px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.c }};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px"><sc-if value="{{ o.sw }}" hint-placeholder-val="{{ false }}"><span style="width:14px;height:14px;border-radius:50%;background:{{ o.sw }};box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)"></span></sc-if>{{ o.l }}</button></sc-for></div></div>
+</sc-for>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px 18px"><sc-for list="{{ bgS }}" as="r" hint-placeholder-count="0"><label style="display:flex;flex-direction:column;gap:2px;font-size:12px;font-weight:700;color:#8C8B82"><span style="display:flex;justify-content:space-between"><span>{{ r.l }}</span><span style="color:#F5F4EC">{{ r.v }}</span></span><input type="range" min="{{ r.min }}" max="{{ r.max }}" step="{{ r.step }}" value="{{ r.v }}" onChange="{{ r.set }}"></label></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#1C1C1A;border:1px solid #2E2E2B;border-radius:12px;padding:18px">
+<span style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#8C8B82">CAMADAS</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ tabs }}" as="o" hint-placeholder-count="5"><button onClick="{{ o.on }}" style="font-family:inherit;font-size:14px;font-weight:700;padding:7px 13px;border-radius:8px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.c }};cursor:pointer;white-space:nowrap;opacity:{{ o.op }}">{{ o.l }}</button></sc-for></div>
+<sc-if value="{{ isText }}" hint-placeholder-val="{{ true }}"><textarea value="{{ cur.text }}" onChange="{{ setText }}" rows="3" style="font-family:inherit;font-size:16px;font-weight:600;padding:10px 12px;border-radius:10px;border:1px solid #444;background:#121211;color:#F5F4EC;resize:vertical"></textarea></sc-if>
+<sc-for list="{{ painel }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:7px"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#8C8B82">{{ g.t }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ g.ops }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.on }}" style="font-family:inherit;font-size:13px;font-weight:700;padding:6px 12px;border-radius:99px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.c }};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px"><sc-if value="{{ o.sw }}" hint-placeholder-val="{{ false }}"><span style="width:13px;height:13px;border-radius:50%;background:{{ o.sw }};box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)"></span></sc-if>{{ o.l }}</button></sc-for></div></div>
+</sc-for>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px 18px">
+<sc-for list="{{ sliders }}" as="r" hint-placeholder-count="4"><label style="display:flex;flex-direction:column;gap:2px;font-size:12px;font-weight:700;color:#8C8B82"><span style="display:flex;justify-content:space-between"><span>{{ r.l }}</span><span style="color:#F5F4EC">{{ r.v }}</span></span><input type="range" min="{{ r.min }}" max="{{ r.max }}" step="{{ r.step }}" value="{{ r.v }}" onChange="{{ r.set }}"></label></sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #333;padding-top:18px">
+<sc-for list="{{ saida }}" as="g" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#8C8B82">{{ g.t }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ g.ops }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.on }}" style="font-family:inherit;font-size:14px;font-weight:700;padding:7px 13px;border-radius:99px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.c }};cursor:pointer;white-space:nowrap">{{ o.l }}</button></sc-for></div></div>
+</sc-for>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button onClick="{{ baixar }}" style="font-family:inherit;font-size:17px;font-weight:800;padding:15px 26px;border-radius:99px;border:none;background:{{ btnBg }};color:#0B5E37;cursor:pointer;white-space:nowrap">{{ btnLabel }}</button><button onClick="{{ reset }}" style="font-family:inherit;font-size:14px;font-weight:700;padding:12px 18px;border-radius:99px;border:1px solid #444;background:transparent;color:#F5F4EC;cursor:pointer;white-space:nowrap">Recomeçar</button><sc-if value="{{ link }}" hint-placeholder-val="{{ false }}"><a href="{{ link }}" download="{{ linkName }}" style="font-size:15px;font-weight:700">Não baixou? Clique aqui ↓</a></sc-if></div>
+<span style="font-size:13px;color:{{ msgC }}">{{ msg }}</span>
+</div>
+</div>
+<div ref="{{ colRef }}" style="display:flex;flex-direction:column;gap:10px;align-items:center;position:sticky;top:24px;min-width:0">
+<div ref="{{ stageRef }}" style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:4px;background:repeating-conic-gradient(#2A2A28 0% 25%,#1F1F1D 0% 50%) 0 0/20px 20px">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ k }});transform-origin:0 0;overflow:hidden;font-family:'Bricolage Grotesque',sans-serif;background:{{ bgC }}">
+<sc-if value="{{ pat }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:url({{ pat }}) 0 0/{{ patS }}px {{ patS }}px repeat;opacity:{{ patOp }}"></div></sc-if>
+<div style="position:absolute;inset:0;filter:{{ die }}">
+<sc-for list="{{ els }}" as="e" hint-placeholder-count="0"><div style="position:absolute;left:{{ e.x }}%;top:{{ e.y }}%;width:{{ e.s }}px;height:{{ e.h }};transform:translate(-50%,-50%) rotate({{ e.rot }}deg)"><sc-if value="{{ e.img }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ e.img }}" style="width:100%;display:block"></sc-if><sc-if value="{{ e.shape }}" hint-placeholder-val="{{ false }}"><div style="width:100%;height:100%;background:{{ e.c }};border-radius:{{ e.rad }};clip-path:{{ e.clip }};mask:{{ e.mask }};-webkit-mask:{{ e.mask }}"></div></sc-if></div></sc-for>
+<sc-for list="{{ txts }}" as="t" hint-placeholder-count="2"><div style="position:absolute;left:{{ t.x }}%;top:{{ t.y }}%;transform:translate(-50%,-50%) rotate({{ t.rot }}deg);max-width:{{ t.mw }}px;background:{{ t.pbg }};border-radius:{{ t.prad }};padding:{{ t.pad }};font-weight:{{ t.wt }};font-stretch:{{ t.wd }}%;font-size:{{ t.fs }}px;line-height:{{ t.lh }};letter-spacing:{{ t.ls }}em;color:{{ t.c }};text-align:{{ t.al }};text-transform:{{ t.tt }};white-space:pre-line;text-wrap:balance">{{ t.text }}</div></sc-for>
+</div>
+</div>
+</div>
+<span style="font-size:12px;color:#8C8B82">{{ resumo }}</span>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const COR = { verde:'#0B5E37', vivo:'#15E888', amarelo:'#FBF99D', azul:'#0A7BE5', noite:'#0D3A85', branco:'#FFFFFF', papel:'#F5F4EC', transparente:'transparent' };
+const TXT = { branco:'#FFFFFF', amarelo:'#FBF99D', vivo:'#15E888', verde:'#0B5E37', noite:'#0D3A85', azul:'#0A7BE5' };
+const FMT = { 'post 4:5':[1080,1350], 'quadrado 1:1':[1080,1080], 'story 9:16':[1080,1920], 'slide 16:9':[1920,1080], 'figurinha 512':[512,512], 'linkedin capa':[1584,396] };
+const PAT = { nenhum:'', cobogo:'../img/f2/cobogo.svg', azulejo:'../img/f2/azulejo.svg', calcadao:'../img/f2/calcadao.svg', fuxico:'../img/f2/fuxico.svg', hachura:'../img/f2/hachura.svg', palhinha:'../img/st/palhinha.png' };
+const EL = { nenhum:null, 'ícone BC':'../img/st/icone-verde.png', 'ícone vivo':'../img/st/icone-verde-vivo.png', 'logo BC':'../img/st/logo-verde.png', 'logo branco':'../img/wm-branco.png', 'logo amarelo':'../img/wm-amarelo.png', 'mapa ondas':'../img/mapa-ondas.png', cristo:'../img/s/cristo.png', congresso:'../img/s/congresso.png', teatro:'../img/s/teatro.png', zakim:'../img/s/zakim.png', masp:'../img/s/masp.png', copan:'../img/s/copan.png', veleiro:'../img/s/veleiro.png', igreja:'../img/s/igreja.png', farol:'../img/s/farol.png', estrela:'#shape', círculo:'#shape', losango:'#shape', pílula:'#shape', onda:'#shape' };
+const T0 = (o) => ({ on: true, text: '', fs: 120, wt: 800, wd: 100, color: 'branco', align: 'center', upper: true, x: 50, y: 50, rot: 0, mw: 90, plate: 'nenhuma', plateC: 'verde', ...o });
+const E0 = (o) => ({ on: false, kind: 'nenhum', color: 'amarelo', x: 50, y: 30, s: 300, rot: 0, ...o });
+const INIT = () => ({ fmt: 'post 4:5', bg: 'verde', pat: 'cobogo', patOp: 15, patS: 160, die: false, sel: 0, out: 'png', esc: 1,
+  L: [T0({ text: 'O Brasil em\nprimeira pessoa', y: 46, fs: 140 }), T0({ text: 'BRAZIL CONFERENCE 2027', fs: 40, wt: 600, color: 'amarelo', y: 16, mw: 80 }), T0({ on: false, text: 'Harvard & MIT · Boston', fs: 48, wt: 600, y: 84, color: 'vivo' }), E0({ on: true, kind: 'ícone vivo', x: 50, y: 88, s: 220 }), E0({ kind: 'estrela', x: 80, y: 20, s: 260, color: 'vivo' })] });
+class Component extends DCLogic {
+  state = (() => { try { const s = JSON.parse(localStorage.getItem('bc27-criar') || 'null'); if (s && s.L) return { ...INIT(), ...s, busy: false, link: null, msg: '' }; } catch (e) {} return { ...INIT(), busy: false, link: null, msg: '' }; })();
+  stageRef = React.createRef(); colRef = React.createRef();
+  componentDidMount() { const c = this.colRef.current; if (c) { this.ro = new ResizeObserver(([e]) => { const w = Math.floor(e.contentRect.width); if (w && w !== this.state.cw) this.setState({ cw: w }); }); this.ro.observe(c); } }
+  componentWillUnmount() { this.ro?.disconnect(); }
+  componentDidUpdate() { const { busy, link, msg, cw, ...keep } = this.state; try { localStorage.setItem('bc27-criar', JSON.stringify(keep)); } catch (e) {} }
+  upL(patch) { this.setState(s => ({ L: s.L.map((l, i) => i === s.sel ? { ...l, ...patch } : l), link: null, msg: '' })); }
+  async baixar() {
+    const s = this.state; if (s.busy) return;
+    if (!window.BC27Export) return this.setState({ msg: 'Exportador carregando. Tente de novo.' });
+    const root = [...this.stageRef.current.children][0]; const [W, H] = FMT[s.fmt];
+    this.setState({ busy: true, msg: 'Gerando…' });
+    try {
+      const nome = 'BC27_criar_' + (s.L[0].text || 'peca').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').slice(0, 30);
+      const out = await window.BC27Export.stills({ items: [{ root, W, H, name: nome, die: s.die ? 12 : 0 }], formats: [s.out], k: s.esc, bg: COR[s.bg] === 'transparent' ? '#FFFFFF' : COR[s.bg] });
+      this.setState({ busy: false, link: out.url, linkName: out.file, msg: `Pronto: ${out.file} · ${W * s.esc}×${H * s.esc}` });
+    } catch (e) { console.error(e); this.setState({ busy: false, msg: 'Erro: ' + (e.message || e) }); }
+  }
+  renderVals() {
+    const s = this.state, set = (o) => () => this.setState({ ...o, link: null, msg: '' });
+    const chip = (on, l, fn, sw) => ({ l, sw, on: fn, bg: on ? '#F5F4EC' : 'transparent', c: on ? '#121211' : '#F5F4EC', bd: on ? '#F5F4EC' : '#444' });
+    const [W, H] = FMT[s.fmt];
+    const maxW = Math.max(240, Math.min(s.cw || 480, 720)), k = Math.min(maxW / W, 640 / H);
+    const topo = [
+      { t: 'FORMATO', ops: Object.keys(FMT).map(f => chip(s.fmt === f, f, set({ fmt: f, die: f === 'figurinha 512' ? true : s.die, bg: f === 'figurinha 512' ? 'transparente' : s.bg }))) },
+      { t: 'FUNDO', ops: Object.keys(COR).map(c => chip(s.bg === c, c, set({ bg: c }), c === 'transparente' ? null : COR[c])) },
+      { t: 'PADRÃO DE FUNDO', ops: Object.keys(PAT).map(p => chip(s.pat === p, p, set({ pat: p }))) },
+      { t: 'CONTORNO DE ADESIVO', ops: [chip(s.die, 'com contorno branco', set({ die: true })), chip(!s.die, 'sem', set({ die: false }))] },
+    ];
+    const tabs = s.L.map((l, i) => ({ ...chip(s.sel === i, (i < 3 ? 'Texto ' + (i + 1) : 'Elemento ' + (i - 2)), set({ sel: i })), op: l.on ? 1 : .55 }));
+    const cur = s.L[s.sel], isText = s.sel < 3;
+    const painel = [{ t: 'VISÍVEL', ops: [chip(cur.on, 'sim', () => this.upL({ on: true })), chip(!cur.on, 'não', () => this.upL({ on: false }))] }];
+    let sliders;
+    if (isText) {
+      painel.push({ t: 'COR DO TEXTO', ops: Object.keys(TXT).map(c => chip(cur.color === c, c, () => this.upL({ color: c }), TXT[c])) },
+        { t: 'ALINHAMENTO', ops: [['left', 'esquerda'], ['center', 'centro'], ['right', 'direita']].map(([v, l]) => chip(cur.align === v, l, () => this.upL({ align: v }))) },
+        { t: 'CAIXA', ops: [chip(cur.upper, 'ALTA', () => this.upL({ upper: true })), chip(!cur.upper, 'como digitado', () => this.upL({ upper: false }))] },
+        { t: 'FAIXA ATRÁS DO TEXTO', ops: ['nenhuma', 'retângulo', 'pílula'].map(p => chip(cur.plate === p, p, () => this.upL({ plate: p }))) });
+      if (cur.plate !== 'nenhuma') painel.push({ t: 'COR DA FAIXA', ops: Object.keys(COR).filter(c => c !== 'transparente').map(c => chip(cur.plateC === c, c, () => this.upL({ plateC: c }), COR[c])) });
+      sliders = [['tamanho', 'fs', 16, 400, 2], ['peso', 'wt', 300, 800, 100], ['largura da letra', 'wd', 75, 100, 5], ['largura máx. %', 'mw', 20, 100, 1], ['posição x %', 'x', 0, 100, 1], ['posição y %', 'y', 0, 100, 1], ['rotação', 'rot', -30, 30, 1]];
+    } else {
+      painel.push({ t: 'ELEMENTO', ops: Object.keys(EL).map(e => chip(cur.kind === e, e, () => this.upL({ kind: e, on: e !== 'nenhum' }))) });
+      if (EL[cur.kind] === '#shape') painel.push({ t: 'COR DA FORMA', ops: Object.keys(COR).filter(c => c !== 'transparente').map(c => chip(cur.color === c, c, () => this.upL({ color: c }), COR[c])) });
+      sliders = [['tamanho', 's', 40, Math.max(W, H), 10], ['posição x %', 'x', -10, 110, 1], ['posição y %', 'y', -10, 110, 1], ['rotação', 'rot', -180, 180, 1]];
+    }
+    sliders = sliders.map(([l, key, min, max, step]) => ({ l, min, max, step, v: cur[key], set: (e) => this.upL({ [key]: +e.target.value }) }));
+    const bgSliders = s.pat !== 'nenhum' ? [{ l: 'padrão · opacidade %', min: 0, max: 100, step: 1, v: s.patOp, set: (e) => this.setState({ patOp: +e.target.value }) }, { l: 'padrão · escala', min: 40, max: 600, step: 10, v: s.patS, set: (e) => this.setState({ patS: +e.target.value }) }] : [];
+    const txts = s.L.slice(0, 3).filter(l => l.on && l.text).map(l => { const pl = l.plate !== 'nenhuma'; return { text: l.text, x: l.x, y: l.y, rot: l.rot, mw: Math.round(W * l.mw / 100), wt: l.wt, wd: l.wd, fs: l.fs, lh: l.fs > 80 ? .88 : 1.15, ls: l.fs > 80 ? -.02 : .06, c: TXT[l.color], al: l.align, tt: l.upper ? 'uppercase' : 'none', pbg: pl ? COR[l.plateC] : 'transparent', prad: l.plate === 'pílula' ? '999px' : '0', pad: pl ? `${Math.round(l.fs * .3)}px ${Math.round(l.fs * .5)}px` : '0' }; });
+    const els = s.L.slice(3).filter(e => e.on && EL[e.kind]).map(e => { const sh = EL[e.kind] === '#shape'; const mk = e.kind === 'estrela' ? 'url(../img/f/burst.svg) center/contain no-repeat' : e.kind === 'onda' ? 'url(../img/f/onda-faixa.svg) center/contain no-repeat' : 'none'; return { x: e.x, y: e.y, s: e.s, rot: e.rot, img: sh ? false : EL[e.kind], shape: sh, h: sh ? (e.kind === 'pílula' ? Math.round(e.s * .4) + 'px' : e.kind === 'onda' ? Math.round(e.s * .3) + 'px' : e.s + 'px') : 'auto', c: COR[e.color], rad: e.kind === 'círculo' || e.kind === 'pílula' ? '999px' : '0', clip: e.kind === 'losango' ? 'polygon(50% 0,100% 50%,50% 100%,0 50%)' : 'none', mask: mk }; });
+    const saida = [{ t: 'ARQUIVO', ops: [['png', 'PNG'], ['jpg', 'JPG'], ['webp', 'WebP (figurinha)']].map(([v, l]) => chip(s.out === v, l, set({ out: v }))) }, { t: 'ESCALA', ops: [1, 2].map(n => chip(s.esc === n, n + '×', set({ esc: n }))) }];
+    return { topo, tabs, cur, isText, painel, sliders: isText ? sliders : sliders, bgS: bgSliders, setText: (e) => this.upL({ text: e.target.value }), saida,
+      W, H, k, dw: Math.round(W * k), dh: Math.round(H * k), bgC: COR[s.bg], pat: PAT[s.pat] || false, patOp: s.patOp / 100, patS: s.patS, die: s.die ? 'url(#bcdie2)' : 'none', txts, els,
+      stageRef: this.stageRef, colRef: this.colRef, baixar: () => this.baixar(), reset: () => this.setState({ ...INIT(), link: null, msg: '' }),
+      btnLabel: s.busy ? 'Gerando…' : `Baixar ${s.out.toUpperCase()}`, btnBg: s.busy ? '#8C8B82' : '#15E888', link: s.link, linkName: s.linkName, msg: s.msg || 'Suas mudanças ficam salvas neste navegador.', msgC: '#8C8B82',
+      resumo: `${W}×${H} · ${s.fmt}` };
+  }
+}
+</script>
+</body>
+</html>

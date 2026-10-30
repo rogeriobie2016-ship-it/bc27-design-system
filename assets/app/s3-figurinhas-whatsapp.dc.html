@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script><script>new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(!n.querySelectorAll)return;var a=n.tagName==="IMG"?[n]:[];a=a.concat([].slice.call(n.querySelectorAll("img[loading=lazy]")));a.forEach(function(i){if(!/\{\{/.test(i.getAttribute("src")||""))i.loading="eager";});});});}).observe(document.documentElement,{subtree:true,childList:true});</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="bcdie" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"></feGaussianBlur><feComponentTransfer in="b" result="m"><feFuncA type="linear" slope="250" intercept="-2"></feFuncA></feComponentTransfer><feFlood flood-color="#FFFFFF" result="w"></feFlood><feComposite in="w" in2="m" operator="in" result="o"></feComposite><feMerge><feMergeNode in="o"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs></svg>
+<sc-if value="{{ showHead }}" hint-placeholder-val="{{ true }}"><div style="position:fixed;inset:0;background:#F7F6F0;z-index:-1"></div><div style="font-family:'Bricolage Grotesque',sans-serif;color:#03633B;padding:40px 40px 8px;display:flex;flex-direction:column;gap:6px">
+<span style="font-weight:600;font-size:13px;letter-spacing:.14em">BRAZIL CONFERENCE AT HARVARD &amp; MIT · FIGURINHAS WHATSAPP</span>
+<span style="font-weight:800;font-size:44px;line-height:1;letter-spacing:-.02em">Figurinhas BC27</span>
+<span style="font-size:14px;max-width:760px;text-wrap:pretty">Artboard 512 × 512, fundo transparente, margem 16 px, contorno die-cut branco de 12 px. Mesmo set sobre chat claro e escuro.</span>
+</div></sc-if>
+<sc-for list="{{ boards }}" as="b" hint-placeholder-count="2">
+<section style="margin:24px 40px;padding:36px;border-radius:20px;background:{{ b.bg }};font-family:'Bricolage Grotesque',sans-serif;display:flex;flex-direction:column;gap:28px">
+<span style="font-weight:800;font-size:22px;color:{{ b.ink }}">{{ b.name }}</span>
+
+<sc-if value="{{ showOp }}" hint-placeholder-val="{{ true }}"><span style="font-weight:600;font-size:12px;letter-spacing:.16em;color:{{ b.sub }}">OPERACIONAL · POSTS</span>
+<div style="display:flex;flex-wrap:wrap;gap:28px">
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="01 POST NO AR!"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:44px;top:36px;width:210px;height:210px;border-radius:50%;background:#FBF99D;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="150" height="150" style="transform:rotate(-14deg)"><path d="M14 40 h16 l38 -20 v60 l-38 -20 h-16 z" fill="#03633B"></path><rect x="24" y="58" width="12" height="22" rx="4" fill="#03633B"></rect><path d="M78 34 l12 -8 M80 50 h14 M78 66 l12 8" stroke="#007EE5" stroke-width="7" stroke-linecap="round" fill="none"></path></svg></div>
+<div style="position:absolute;left:300px;top:66px;width:44px;height:44px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:392px;top:146px;width:28px;height:28px;border-radius:50%;background:#15E888"></div>
+<div style="position:absolute;left:44px;top:222px;width:424px;height:236px;background:#03633B;clip-path:polygon(2% 6%,100% 0,97% 94%,0 100%);transform:rotate(-6deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><span style="position:relative;font-size:100px;color:#FFFFFF">POST NO</span><span style="position:relative;font-size:130px;color:#FBF99D">AR!</span></div>
+<div style="position:absolute;left:340px;top:40px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(6deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">01 · POST NO AR!</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="02 BORA COMENTAR"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:42px;top:50px;width:428px;height:290px;transform:rotate(4deg)"><div style="position:absolute;left:64px;bottom:-74px;width:120px;height:100px;background:#03633B;clip-path:polygon(0 0,100% 0,8% 100%)"></div><div style="position:absolute;inset:0;border-radius:72px;background:#03633B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><span style="font-size:118px;color:#FBF99D">BORA</span><span style="font-size:92px;color:#FFFFFF">COMENTAR</span></div></div>
+<div style="position:absolute;left:318px;top:340px;width:140px;height:104px;transform:rotate(-8deg)"><div style="position:absolute;right:18px;bottom:-30px;width:46px;height:44px;background:#15E888;clip-path:polygon(0 0,100% 0,100% 100%)"></div><div style="position:absolute;inset:0;border-radius:40px;background:#15E888;display:flex;align-items:center;justify-content:center;gap:12px"><span style="width:20px;height:20px;border-radius:50%;background:#03633B"></span><span style="width:20px;height:20px;border-radius:50%;background:#03633B"></span><span style="width:20px;height:20px;border-radius:50%;background:#007EE5"></span></div></div>
+<div style="position:absolute;left:190px;top:410px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-5deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">02 · BORA COMENTAR</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="03 AINDA DÁ PRA SUBIR"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" width="230" height="290" style="position:absolute;left:236px;top:30px;transform:rotate(14deg)"><path d="M50 2 L96 46 H68 V98 H32 V46 H4 Z" fill="#15E888"></path><path d="M42 60 H58 M42 74 H58 M42 88 H58" stroke="#03633B" stroke-width="5" fill="none"></path></svg>
+<div style="position:absolute;left:70px;top:90px;width:40px;height:40px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:150px;top:170px;width:26px;height:26px;border-radius:50%;background:#FBF99D"></div>
+<div style="position:absolute;left:36px;top:262px;width:432px;height:190px;background:#03633B;clip-path:polygon(0 4%,98% 0,100% 100%,3% 95%);transform:rotate(-8deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><span style="position:relative;font-size:90px;color:#FBF99D">AINDA DÁ</span><span style="position:relative;font-size:90px;color:#FFFFFF">PRA SUBIR</span></div>
+<div style="position:absolute;left:40px;top:28px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-6deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">03 · AINDA DÁ PRA SUBIR</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="04 COMPARTILHA AÍ"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<img src="../img/mapa-ondas.png" style="position:absolute;left:44px;top:34px;width:290px;display:block">
+<svg viewBox="0 0 240 140" width="240" height="140" style="position:absolute;left:96px;top:120px"><path d="M6 130 C 60 120, 90 40, 200 30" stroke="#007EE5" stroke-width="8" stroke-dasharray="16 14" stroke-linecap="round" fill="none"></path></svg>
+<svg viewBox="0 0 100 100" width="190" height="190" style="position:absolute;left:278px;top:36px;transform:rotate(-8deg)"><path d="M4 48 L96 6 L46 60 Z" fill="#FBF99D"></path><path d="M96 6 L46 60 L66 94 Z" fill="#15E888"></path><path d="M46 60 L42 90 L58 74 Z" fill="#03633B"></path></svg>
+<div style="position:absolute;left:30px;top:284px;width:452px;height:134px;background:#03633B;clip-path:polygon(0 0,100% 6%,98% 100%,2% 94%);transform:rotate(-7deg);display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.015em;white-space:nowrap"><span style="font-size:88px;color:#FFFFFF">COMPARTILHA</span></div>
+<div style="position:absolute;left:330px;top:376px;width:130px;height:96px;background:#FBF99D;transform:rotate(6deg);display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:75%;line-height:.86;white-space:nowrap"><span style="font-size:96px;color:#03633B">AÍ</span></div>
+<div style="position:absolute;left:50px;top:430px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(4deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">04 · COMPARTILHA AÍ</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="05 SALVA ESSE"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:91px;top:46px;width:330px;height:420px;background:#03633B;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);transform:rotate(5deg);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:56px;box-sizing:border-box;gap:8px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><div style="position:relative;width:64px;height:64px;background:#15E888;mask:url(../img/f/estrela4.svg) center/contain no-repeat;-webkit-mask:url(../img/f/estrela4.svg) center/contain no-repeat"></div><span style="position:relative;font-size:112px;color:#FBF99D">SALVA</span><span style="position:relative;font-size:112px;color:#FFFFFF">ESSE</span></div>
+<div style="position:absolute;left:48px;top:372px;width:46px;height:46px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:428px;top:76px;width:34px;height:34px;border-radius:50%;background:#FBF99D"></div>
+<div style="position:absolute;left:350px;top:418px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-6deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">05 · SALVA ESSE</span></div>
+</div>
+
+<span style="font-weight:600;font-size:12px;letter-spacing:.16em;color:{{ b.sub }}">OPERACIONAL · REUNIÕES</span>
+<div style="display:flex;flex-wrap:wrap;gap:28px">
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="06 REUNIÃO MARCADA"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<svg viewBox="0 0 100 100" width="210" height="210" style="position:absolute;left:44px;top:34px;transform:rotate(-10deg)"><rect x="6" y="16" width="88" height="80" rx="9" fill="#FBF99D"></rect><path d="M6 25 a9 9 0 0 1 9 -9 h70 a9 9 0 0 1 9 9 v15 h-88 z" fill="#03633B"></path><rect x="24" y="4" width="10" height="22" rx="5" fill="#007EE5"></rect><rect x="66" y="4" width="10" height="22" rx="5" fill="#007EE5"></rect><g fill="#03633B"><rect x="18" y="50" width="12" height="10" rx="2"></rect><rect x="38" y="50" width="12" height="10" rx="2"></rect><rect x="58" y="50" width="12" height="10" rx="2"></rect><rect x="18" y="72" width="12" height="10" rx="2"></rect><rect x="38" y="72" width="12" height="10" rx="2"></rect></g><circle cx="69" cy="77" r="13" fill="#15E888"></circle><path d="M63 77 l4 4 l8 -8" stroke="#03633B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div style="position:absolute;left:330px;top:84px;width:44px;height:44px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:410px;top:170px;width:28px;height:28px;border-radius:50%;background:#15E888"></div>
+<div style="position:absolute;left:34px;top:240px;width:444px;height:206px;background:#03633B;clip-path:polygon(0 0,100% 5%,98% 100%,1% 96%);transform:rotate(5deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><span style="font-size:98px;color:#FFFFFF">REUNIÃO</span><span style="font-size:98px;color:#FBF99D">MARCADA</span></div>
+<div style="position:absolute;left:350px;top:30px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(6deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">06 · REUNIÃO MARCADA</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="07 LEMBRETE REUNIÃO HOJE"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:46px;top:44px;width:410px;height:330px;background:#03633B;clip-path:polygon(1% 3%,100% 0,98% 100%,0 97%);transform:rotate(-5deg);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-left:34px;box-sizing:border-box;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><span style="position:relative;font-size:84px;color:#FBF99D">LEMBRETE:</span><span style="position:relative;font-size:94px;color:#FFFFFF">REUNIÃO</span><span style="position:relative;font-size:132px;color:#15E888">HOJE</span></div>
+<svg viewBox="0 0 100 100" width="140" height="140" style="position:absolute;left:330px;top:332px;transform:rotate(12deg)"><circle cx="22" cy="20" r="13" fill="#03633B"></circle><circle cx="78" cy="20" r="13" fill="#03633B"></circle><path d="M26 86 l-8 10 M74 86 l8 10" stroke="#03633B" stroke-width="7" stroke-linecap="round"></path><circle cx="50" cy="55" r="38" fill="#FBF99D" stroke="#03633B" stroke-width="8"></circle><path d="M50 55 V32 M50 55 L66 65" stroke="#03633B" stroke-width="8" stroke-linecap="round" fill="none"></path><circle cx="50" cy="55" r="6" fill="#007EE5"></circle></svg>
+<div style="position:absolute;left:50px;top:410px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-4deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">07 · LEMBRETE: REUNIÃO HOJE</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="08 TÔ ENTRANDO"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<svg viewBox="0 0 100 100" width="240" height="240" style="position:absolute;left:56px;top:16px;transform:rotate(-8deg)"><rect x="4" y="26" width="64" height="52" rx="11" fill="#15E888"></rect><path d="M68 44 L96 28 V76 L68 60 Z" fill="#03633B"></path><circle cx="30" cy="52" r="14" fill="#03633B"></circle><circle cx="30" cy="52" r="7" fill="#007EE5"></circle><circle cx="56" cy="37" r="5" fill="#03633B"></circle></svg>
+<div style="position:absolute;left:380px;top:70px;width:46px;height:46px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:330px;top:170px;width:28px;height:28px;border-radius:50%;background:#FBF99D"></div>
+<div style="position:absolute;left:38px;top:236px;width:436px;height:216px;background:#03633B;clip-path:polygon(0 5%,100% 0,97% 100%,2% 95%);transform:rotate(-4deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><span style="font-size:124px;color:#FBF99D">TÔ</span><span style="font-size:92px;color:#FFFFFF">ENTRANDO</span></div>
+<div style="position:absolute;left:360px;top:140px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(6deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">08 · TÔ ENTRANDO</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="09 CONFIRMADO"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<svg viewBox="0 0 100 80" width="390" height="290" style="position:absolute;left:62px;top:32px;transform:rotate(-6deg)"><path d="M10 42 L36 68 L90 12" stroke="#03633B" stroke-width="28" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 42 L36 68 L90 12" stroke="#15E888" stroke-width="17" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div style="position:absolute;left:48px;top:62px;width:42px;height:42px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:28px;top:318px;width:456px;height:136px;background:#03633B;clip-path:polygon(0 0,100% 6%,99% 100%,1% 94%);transform:rotate(-6deg);display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.02em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><span style="position:relative;font-size:88px;color:#FFFFFF">CONFIRMADO</span></div>
+<div style="position:absolute;left:330px;top:430px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-5deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">09 · CONFIRMADO</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="10 TUDO CERTO"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:52px;top:48px;width:290px;height:200px;background:#03633B;transform:rotate(-8deg)"><div style="position:absolute;left:24px;right:24px;top:24px;bottom:24px;background:#FBF99D;clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:100px;top:55px;width:90px;height:90px;border-radius:50%;background:#007EE5"></div></div>
+<svg viewBox="0 0 100 100" width="230" height="230" style="position:absolute;left:236px;top:30px;transform:rotate(10deg)"><rect x="6" y="44" width="24" height="52" rx="5" fill="#03633B"></rect><path d="M34 46 L50 12 c8 -3 15 3 13 12 l-4 16 h24 c8 0 13 7 11 14 l-8 30 c-2 6 -6 9 -12 9 H34 Z" fill="#FBF99D" stroke="#03633B" stroke-width="6" stroke-linejoin="round"></path><path d="M60 58 h22 M58 72 h20" stroke="#03633B" stroke-width="5" stroke-linecap="round"></path></svg>
+<div style="position:absolute;left:40px;top:268px;width:432px;height:190px;background:#03633B;clip-path:polygon(2% 0,100% 4%,98% 100%,0 95%);transform:rotate(4deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><span style="font-size:96px;color:#FBF99D">TUDO</span><span style="font-size:96px;color:#FFFFFF">CERTO</span></div>
+<div style="position:absolute;left:50px;top:436px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-4deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">10 · TUDO CERTO</span></div>
+</div>
+
+<span style="font-weight:600;font-size:12px;letter-spacing:.16em;color:{{ b.sub }}">OPERACIONAL · STATUS DE TAREFA</span>
+<div style="display:flex;flex-wrap:wrap;gap:28px">
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="11 FEITO"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:62px;top:62px;width:388px;height:388px;background:#FBF99D;mask:url(../img/f/burst.svg) center/contain no-repeat;-webkit-mask:url(../img/f/burst.svg) center/contain no-repeat;transform:rotate(10deg)"></div>
+<div style="position:absolute;left:44px;top:146px;width:424px;height:220px;border-radius:26px;background:#03633B;transform:rotate(-10deg);overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><div style="position:absolute;inset:16px;border:7px solid #FFFFFF;border-radius:14px"></div><span style="position:relative;font-size:150px;color:#FFFFFF">FEITO</span></div>
+<div style="position:absolute;left:356px;top:56px;width:108px;height:108px;border-radius:50%;background:#15E888;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="64" height="64"><path d="M16 52 L40 76 L86 26" stroke="#03633B" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div style="position:absolute;left:60px;top:410px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(5deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">11 · FEITO</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="12 NÃO DEU"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:52px;top:112px;width:408px;height:288px;border-radius:26px;background:#FBF99D;transform:rotate(8deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><div style="position:absolute;inset:16px;border:7px solid #03633B;border-radius:14px"></div><span style="position:relative;font-size:124px;color:#03633B">NÃO</span><span style="position:relative;font-size:124px;color:#03633B">DEU</span></div>
+<div style="position:absolute;left:44px;top:56px;width:104px;height:104px;border-radius:50%;background:#03633B;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 100 100" width="56" height="56"><path d="M22 22 L78 78 M78 22 L22 78" stroke="#FBF99D" stroke-width="16" stroke-linecap="round"></path></svg></div>
+<div style="position:absolute;left:408px;top:420px;width:40px;height:40px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:340px;top:40px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(6deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">12 · NÃO DEU</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="13 PRECISO DE AJUDA"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:36px;top:236px;width:440px;height:216px;background:#03633B;clip-path:polygon(0 3%,100% 0,98% 100%,2% 96%);transform:rotate(-5deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><sc-if value="{{ palha }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><span style="position:relative;font-size:94px;color:#FFFFFF">PRECISO</span><span style="position:relative;font-size:94px;color:#FBF99D">DE AJUDA</span></div>
+<svg viewBox="0 0 100 100" width="228" height="228" style="position:absolute;left:142px;top:22px;transform:rotate(15deg)"><circle cx="50" cy="50" r="35" fill="none" stroke="#FBF99D" stroke-width="24"></circle><circle cx="50" cy="50" r="35" fill="none" stroke="#03633B" stroke-width="24" stroke-dasharray="27.49 27.49"></circle><circle cx="50" cy="50" r="47" fill="none" stroke="#03633B" stroke-width="3"></circle><circle cx="50" cy="50" r="23" fill="none" stroke="#03633B" stroke-width="3"></circle></svg>
+<div style="position:absolute;left:56px;top:96px;width:44px;height:44px;border-radius:50%;background:#007EE5"></div>
+<div style="position:absolute;left:410px;top:120px;width:30px;height:30px;border-radius:50%;background:#15E888"></div>
+<div style="position:absolute;left:350px;top:176px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(-5deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">13 · PRECISO DE AJUDA</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="14 PRA REVISÃO"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<img src="../img/mapa-ondas.png" style="position:absolute;left:38px;top:30px;width:280px;display:block">
+<svg viewBox="0 0 100 100" width="236" height="236" style="position:absolute;left:216px;top:44px"><circle cx="40" cy="40" r="28" fill="#FBF99D" stroke="#03633B" stroke-width="10"></circle><path d="M24 34 a17 17 0 0 1 12 -12" stroke="#15E888" stroke-width="6" fill="none" stroke-linecap="round"></path><path d="M61 61 L90 90" stroke="#03633B" stroke-width="16" stroke-linecap="round"></path></svg>
+<div style="position:absolute;left:34px;top:284px;width:444px;height:176px;background:#03633B;clip-path:polygon(0 0,99% 5%,100% 100%,2% 95%);transform:rotate(-6deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><span style="font-size:84px;color:#FBF99D">PRA</span><span style="font-size:98px;color:#FFFFFF">REVISÃO</span></div>
+<div style="position:absolute;left:360px;top:18px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate(5deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">14 · PRA REVISÃO</span></div>
+
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="operacional" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="15 APROVADO"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<div style="position:absolute;left:40px;top:40px;width:432px;height:432px;transform:rotate(-8deg)">
+<div style="position:absolute;inset:0;border-radius:50%;background:#FFFFFF;border:16px solid #03633B;box-sizing:border-box"></div>
+<div style="position:absolute;inset:34px;border-radius:50%;border:6px solid #03633B"></div>
+<img src="../img/st/icone-verde.png" style="position:absolute;left:86px;top:96px;width:260px;display:block">
+<div style="position:absolute;left:-10px;right:-10px;top:262px;height:118px;background:#03633B;clip-path:polygon(0 6%,100% 0,99% 100%,1% 94%);display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap"><span style="font-size:100px;color:#FBF99D">APROVADO</span></div>
+</div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">15 · APROVADO</span></div>
+</div>
+
+</sc-if>
+<sc-for list="{{ sets }}" as="set" hint-placeholder-count="5">
+<span style="font-weight:600;font-size:12px;letter-spacing:.16em;color:{{ b.sub }}">{{ set.name }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:28px">
+<sc-for list="{{ set.items }}" as="s" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;gap:10px"><div style="position:relative;width:{{ sz }}px;height:{{ sz }}px"><div data-set="{{ set.key }}" style="position:absolute;left:0;top:0;width:512px;height:512px;transform:scale({{ esc }});transform-origin:0 0" data-nome="{{ s.num }} {{ s.label }}"><sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;outline:2px solid {{ b.guide }}"></div><div style="position:absolute;inset:16px;outline:2px dashed {{ b.guide }}"></div></sc-if><div style="position:absolute;inset:0;filter:url(#bcdie)">
+<sc-if value="{{ s.back }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ s.back.x }}px;top:{{ s.back.y }}px;width:{{ s.back.s }}px;height:{{ s.back.s }}px;background:{{ s.back.c }};border-radius:{{ s.back.rad }};transform:rotate({{ s.back.r }}deg);overflow:hidden"><sc-if value="{{ s.back.pat }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:url({{ s.back.pat }}) 0 0/96px 96px repeat;opacity:.3"></div></sc-if></div></sc-if>
+<sc-if value="{{ s.burst }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ s.burst.src }}" style="position:absolute;left:{{ s.burst.x }}px;top:{{ s.burst.y }}px;width:{{ s.burst.s }}px;transform:rotate({{ s.burst.r }}deg);display:block"></sc-if>
+<sc-for list="{{ s.under }}" as="im" hint-placeholder-count="1"><img loading="lazy" src="{{ im.src }}" style="position:absolute;left:{{ im.x }}px;top:{{ im.y }}px;width:{{ im.w }}px;transform:rotate({{ im.r }}deg);display:block"></sc-for>
+<div style="position:absolute;left:{{ s.p.x }}px;top:{{ s.p.y }}px;width:{{ s.p.w }}px;height:{{ s.p.h }}px;transform:rotate({{ s.p.r }}deg)"><sc-if value="{{ s.p.tail }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ s.p.tail.x }}px;bottom:-66px;width:104px;height:86px;background:{{ s.p.bg }};clip-path:{{ s.p.tail.clip }}"></div></sc-if><div style="position:absolute;inset:0;background:{{ s.p.bg }};clip-path:{{ s.p.clip }};border-radius:{{ s.p.rad }}px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:800;font-stretch:75%;line-height:.86;letter-spacing:-.01em;white-space:nowrap;text-align:center"><sc-if value="{{ s.p.palha }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:url(../img/st/palhinha.png) 0 0/80px 80px;opacity:.13"></div></sc-if><sc-if value="{{ s.p.bc }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:16px;border:7px solid {{ s.p.bc }};border-radius:14px"></div></sc-if><sc-for list="{{ s.p.lines }}" as="l" hint-placeholder-count="2"><span style="position:relative;font-size:{{ l.fs }}px;color:{{ l.c }}">{{ l.t }}</span></sc-for></div></div>
+<sc-if value="{{ s.badge }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ s.badge.x }}px;top:{{ s.badge.y }}px;width:{{ s.badge.s }}px;height:{{ s.badge.s }}px;border-radius:50%;background:{{ s.badge.c }};display:flex;align-items:center;justify-content:center;transform:rotate({{ s.badge.r }}deg)"><img loading="lazy" src="{{ s.badge.src }}" style="width:{{ s.badge.is }}px;display:block"></div></sc-if>
+<sc-for list="{{ s.over }}" as="im" hint-placeholder-count="0"><img loading="lazy" src="{{ im.src }}" style="position:absolute;left:{{ im.x }}px;top:{{ im.y }}px;width:{{ im.w }}px;transform:rotate({{ im.r }}deg);display:block"></sc-for>
+<sc-for list="{{ s.dots }}" as="d" hint-placeholder-count="2"><div style="position:absolute;left:{{ d.x }}px;top:{{ d.y }}px;width:{{ d.s }}px;height:{{ d.s }}px;border-radius:50%;background:{{ d.c }}"></div></sc-for>
+<div style="position:absolute;left:{{ s.tag.x }}px;top:{{ s.tag.y }}px;padding:9px 14px;background:#FFFFFF;border-radius:999px;transform:rotate({{ s.tag.r }}deg);display:flex"><img src="../img/st/icone-verde.png" style="width:112px;display:block"></div>
+</div></div></div><span style="font-weight:600;font-size:13px;line-height:1.3;max-width:{{ sz }}px;color:{{ b.sub }}">{{ s.num }} · {{ s.label }}</span></div>
+</sc-for>
+</div>
+</sc-for>
+</section>
+</sc-for>
+<div style="height:32px"></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;modo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;comparar&quot;,&quot;exportar&quot;],&quot;default&quot;:&quot;comparar&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visualização&quot;},&quot;tamanho&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[128,192,256,320,512],&quot;default&quot;:256,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Visualização&quot;},&quot;guias&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Visualização&quot;},&quot;palhinha&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Figurinhas&quot;},&quot;filtro&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;}}">
+const G='#03633B',Y='#FBF99D',V='#15E888',B='#007EE5',W='#FFFFFF';
+const svg=(vb,b)=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'">'+b+'</svg>');
+const HEART='M50 90 C20 68 4 50 4 31 C4 15 16 5 30 5 C40 5 47 11 50 19 C53 11 60 5 70 5 C84 5 96 15 96 31 C96 50 80 68 50 90Z';
+const STAR4='M50 0 C54 34 66 46 100 50 C66 54 54 66 50 100 C46 66 34 54 0 50 C34 46 46 34 50 0Z';
+const IC={
+  lips:c=>svg('0 0 120 74','<path d="M2 36 C14 22 30 6 46 8 C53 9 57 14 60 17 C63 14 67 9 74 8 C90 6 106 22 118 36 C92 33 76 39 60 37 C44 39 28 33 2 36Z" fill="'+c+'"/><path d="M2 39 C28 39 44 45 60 43 C76 45 92 39 118 39 C106 59 86 73 60 73 C34 73 14 59 2 39Z" fill="'+c+'"/><path d="M40 56 C48 60 56 61 64 60" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="4" fill="none" stroke-linecap="round"/>'),
+  heart:c=>svg('0 0 100 96','<path d="'+HEART+'" fill="'+c+'" stroke="'+G+'" stroke-width="6"/>'),
+  hearts:svg('0 0 140 110','<path d="'+HEART+'" fill="'+Y+'" stroke="'+G+'" stroke-width="6" transform="translate(4 14) rotate(-12 50 50)"/><path d="'+HEART+'" fill="'+V+'" stroke="'+G+'" stroke-width="7" transform="translate(70 0) scale(.62)"/><path d="'+HEART+'" fill="'+B+'" transform="translate(96 66) scale(.38)"/>'),
+  bolt:svg('0 0 100 100','<path d="M60 3 L16 58 H46 L36 97 L84 38 H54Z" fill="'+V+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/>'),
+  thumb:svg('0 0 100 100','<rect x="6" y="44" width="24" height="52" rx="5" fill="'+G+'"/><path d="M34 46 L50 12 c8 -3 15 3 13 12 l-4 16 h24 c8 0 13 7 11 14 l-8 30 c-2 6 -6 9 -12 9 H34 Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><path d="M60 58 h22 M58 72 h20" stroke="'+G+'" stroke-width="5" stroke-linecap="round"/>'),
+  hand:svg('0 0 110 110','<path d="M14 30 C8 22 6 14 10 8 M98 30 C104 22 106 14 102 8" stroke="'+B+'" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"><path d="M30 60 V24 a7 7 0 0 1 14 0 V52 V14 a7 7 0 0 1 14 0 V52 V18 a7 7 0 0 1 14 0 V54 V32 a7 7 0 0 1 14 0 V70 C86 92 74 104 56 104 C40 104 30 96 22 84 L8 62 a7 7 0 0 1 12 -8 Z"/></g>'),
+  crown:svg('0 0 100 100','<path d="M8 74 L12 26 L32 48 L50 14 L68 48 L88 26 L92 74Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><rect x="8" y="74" width="84" height="14" rx="3" fill="'+G+'"/><circle cx="50" cy="56" r="7" fill="'+B+'"/><circle cx="28" cy="62" r="5" fill="'+V+'"/><circle cx="72" cy="62" r="5" fill="'+V+'"/>'),
+  checks:svg('0 0 130 110','<path d="M10 14 h96 a14 14 0 0 1 14 14 v44 a14 14 0 0 1 -14 14 H44 l-22 18 v-18 H10 a4 4 0 0 1 -4 -4 V28 a14 14 0 0 1 4 -14Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><path d="M34 50 L48 64 L74 36 M64 58 L70 64 L96 36" stroke="'+B+'" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'),
+  sneaker:svg('-34 0 134 100','<path d="M-30 46 H-6 M-26 60 H-4 M-30 74 H-8" stroke="'+B+'" stroke-width="7" stroke-linecap="round"/><path d="M6 72 C6 54 14 38 26 38 L40 46 C48 50 56 50 62 44 L70 38 C80 50 94 56 94 72 V80 H6Z" fill="'+V+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><rect x="4" y="76" width="92" height="12" rx="5" fill="'+G+'"/><path d="M36 56 h12 M44 64 h12" stroke="'+G+'" stroke-width="4" stroke-linecap="round"/>'),
+  plane:svg('0 0 100 100','<path d="M50 4 C55 4 57 12 57 20 V40 L95 60 V69 L57 58 V80 L69 89 V95 L50 90 L31 95 V89 L43 80 V58 L5 69 V60 L43 40 V20 C43 12 45 4 50 4Z" fill="'+B+'" stroke="'+G+'" stroke-width="4" stroke-linejoin="round"/>'),
+  phone:svg('0 0 100 100','<rect x="24" y="4" width="52" height="92" rx="11" fill="'+G+'"/><rect x="30" y="14" width="40" height="66" rx="4" fill="'+Y+'"/><path d="M36 30 h24 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-14 l-8 6 v-6 h-2 a4 4 0 0 1 -4 -4 v-12 a4 4 0 0 1 4 -4Z" fill="'+V+'"/><circle cx="50" cy="88" r="3.5" fill="'+V+'"/><path d="M84 18 C92 24 92 36 84 42 M90 10 C102 20 102 40 90 50" stroke="'+B+'" stroke-width="5" fill="none" stroke-linecap="round"/>'),
+  cup:svg('0 0 100 100','<path d="M30 24 C24 16 36 12 30 4 M48 24 C42 16 54 12 48 4" stroke="'+B+'" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M74 42 C92 42 92 68 72 68" stroke="'+G+'" stroke-width="8" fill="none"/><path d="M12 32 H76 V58 C76 76 62 88 44 88 C26 88 12 76 12 58Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><rect x="4" y="88" width="80" height="8" rx="4" fill="'+G+'"/><path d="M24 46 H64" stroke="'+V+'" stroke-width="6" stroke-linecap="round"/>'),
+  stars:svg('0 0 120 110','<path d="'+STAR4+'" fill="'+V+'" stroke="'+G+'" stroke-width="5" transform="translate(4 14) scale(.9)"/><path d="'+STAR4+'" fill="'+Y+'" stroke="'+G+'" stroke-width="8" transform="translate(76 0) scale(.42)"/><path d="'+STAR4+'" fill="'+B+'" transform="translate(88 68) scale(.3)"/>'),
+  cactus:svg('0 0 100 110','<g fill="'+V+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"><path d="M40 106 V18 a10 10 0 0 1 20 0 V106Z"/><path d="M40 66 H28 a10 10 0 0 1 -10 -10 V34 a8 8 0 0 1 16 0 V50 H40"/><path d="M60 54 H70 V28 a8 8 0 0 1 16 0 V48 a10 10 0 0 1 -10 10 H60"/></g><path d="M50 26 V96" stroke="'+G+'" stroke-width="4"/><circle cx="50" cy="8" r="7" fill="'+Y+'" stroke="'+G+'" stroke-width="4"/>'),
+  cuia:svg('0 0 100 100','<path d="M58 40 L80 4" stroke="'+B+'" stroke-width="7" stroke-linecap="round"/><rect x="74" y="0" width="14" height="8" rx="3" fill="'+B+'" transform="rotate(30 81 4)"/><path d="M22 40 C18 70 32 96 50 96 C68 96 82 70 78 40Z" fill="'+G+'"/><path d="M21 56 H79" stroke="'+Y+'" stroke-width="8"/><ellipse cx="50" cy="40" rx="29" ry="9" fill="'+V+'" stroke="'+G+'" stroke-width="5"/>'),
+  paes:svg('0 0 120 90','<g stroke="'+G+'" stroke-width="6"><circle cx="34" cy="56" r="28" fill="'+Y+'"/><circle cx="84" cy="58" r="26" fill="'+Y+'"/><circle cx="60" cy="30" r="24" fill="'+Y+'"/></g><g fill="'+V+'"><circle cx="26" cy="50" r="4"/><circle cx="40" cy="64" r="3"/><circle cx="88" cy="52" r="4"/><circle cx="56" cy="24" r="4"/><circle cx="66" cy="36" r="3"/></g>'),
+  env:svg('-30 0 130 100','<path d="M-26 40 H-6 M-22 56 H-4 M-26 72 H-8" stroke="'+B+'" stroke-width="7" stroke-linecap="round"/><rect x="6" y="20" width="88" height="62" rx="8" fill="'+Y+'" stroke="'+G+'" stroke-width="6"/><path d="M10 26 L50 56 L90 26" stroke="'+G+'" stroke-width="6" fill="none" stroke-linejoin="round"/>'),
+  eye:svg('0 0 100 100','<path d="M4 50 C24 18 76 18 96 50 C76 82 24 82 4 50Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6"/><circle cx="50" cy="50" r="17" fill="'+G+'"/><circle cx="56" cy="44" r="5" fill="'+V+'"/>'),
+  fwd:svg('0 0 100 100','<path d="M8 40 H56 V18 L94 50 L56 82 V60 H8Z" fill="'+V+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/>'),
+  inbox:svg('0 0 100 100','<path d="M8 56 L22 20 H78 L92 56 V88 H8Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><path d="M8 56 H32 L38 68 H62 L68 56 H92" stroke="'+G+'" stroke-width="6" fill="none" stroke-linejoin="round"/>'),
+  check:svg('0 0 100 100','<path d="M16 52 L40 76 L86 26" stroke="'+G+'" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'),
+  gear:svg('0 0 100 100','<circle cx="50" cy="50" r="36" fill="none" stroke="'+G+'" stroke-width="16" stroke-dasharray="11.3 7.55"/><circle cx="50" cy="50" r="28" fill="'+Y+'" stroke="'+G+'" stroke-width="6"/><circle cx="50" cy="50" r="10" fill="'+B+'"/>'),
+  glass:svg('0 0 100 100','<path d="M20 6 H80 M20 94 H80" stroke="'+G+'" stroke-width="8" stroke-linecap="round"/><path d="M28 10 C28 36 46 42 46 50 C46 58 28 64 28 90 H72 C72 64 54 58 54 50 C54 42 72 36 72 10Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/><path d="M36 84 C40 72 60 72 64 84Z M38 22 H62 C58 32 42 32 38 22Z" fill="'+V+'"/>'),
+  clip:svg('0 0 100 100','<rect x="14" y="12" width="72" height="84" rx="8" fill="'+Y+'" stroke="'+G+'" stroke-width="6"/><rect x="34" y="4" width="32" height="16" rx="5" fill="'+G+'"/><rect x="26" y="34" width="12" height="12" rx="2" fill="'+V+'"/><rect x="26" y="56" width="12" height="12" rx="2" fill="'+V+'"/><rect x="26" y="78" width="12" height="10" rx="2" fill="'+B+'"/><path d="M46 40 H74 M46 62 H74 M46 83 H66" stroke="'+G+'" stroke-width="6" stroke-linecap="round"/>'),
+  folder:svg('0 0 100 100','<rect x="26" y="10" width="50" height="56" rx="4" fill="'+V+'" stroke="'+G+'" stroke-width="5" transform="rotate(8 51 38)"/><path d="M6 32 a6 6 0 0 1 6 -6 h24 l8 10 h44 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 H12 a6 6 0 0 1 -6 -6Z" fill="'+Y+'" stroke="'+G+'" stroke-width="6" stroke-linejoin="round"/>'),
+  rings:svg('0 0 110 80','<circle cx="38" cy="40" r="28" fill="none" stroke="'+G+'" stroke-width="13"/><circle cx="72" cy="40" r="28" fill="none" stroke="'+V+'" stroke-width="13"/><path d="M58 18 A28 28 0 0 1 66 13" stroke="'+G+'" stroke-width="13" fill="none"/>'),
+};
+const BURST=(c,n,ri)=>{let d='';for(let k=0;k<n*2;k++){const a=Math.PI*k/n,rr=k%2?ri:50;d+=(k?'L':'M')+(50+rr*Math.sin(a)).toFixed(1)+' '+(50-rr*Math.cos(a)).toFixed(1);}return svg('0 0 100 100','<path d="'+d+'Z" fill="'+c+'"/>');};
+const TH={ g:{bg:G,fg:[Y,W,V],dot:Y}, y:{bg:Y,fg:[G,G,G],dot:V}, v:{bg:V,fg:[G,G,G],dot:Y}, b:{bg:B,fg:[W,Y,W],dot:Y} };
+const CLIPS=['polygon(2% 6%,100% 0,97% 94%,0 100%)','polygon(0 4%,98% 0,100% 100%,3% 95%)','polygon(0 0,100% 6%,98% 100%,2% 94%)','polygon(1% 3%,100% 0,98% 100%,0 97%)'];
+const PAT={azulejo:'../img/f2/azulejo.svg',cobogo:'../img/f2/cobogo.svg',fuxico:'../img/f2/fuxico.svg',calcadao:'../img/f2/calcadao.svg',hachura:'../img/f2/hachura.svg'};
+function build(o,i,num){
+  const sg=o.flip?-1:(i%2?-1:1), th=TH[o.theme||'g'], lay=o.layout||'top';
+  const lines=o.lines.map((ln,k)=>{const a=Array.isArray(ln)?ln:[ln];const t=a[0];const want=a[1]||(t.length<=3?150:t.length<=5?124:t.length<=8?104:92);return {t,fs:Math.max(80,Math.min(want,Math.floor(410/(t.length*.47)))),c:a[2]||th.fg[k%th.fg.length]};});
+  const tw=Math.max(...lines.map(l=>l.t.length*l.fs*.47));
+  const w=Math.round(Math.min(452,Math.max(lay==='stamp'?360:300,tw+90)));
+  const h=Math.round(lines.reduce((a,l)=>a+l.fs*.86,0)+6*(lines.length-1)+(lay==='stamp'?84:60));
+  const r=sg*(o.rot??(4+(i*3)%5)); const ev=w*Math.abs(r)*.0087+6;
+  const px=Math.round(256-w/2); let py, under=[], over=[], dots=[], tag, back=null, badge=null, tail=null;
+  const icS=o.icS||220, icH=icS*(o.icA||1), icX=sg>0?40:472-icS;
+  let burst=null;
+  const mkBack=(x,y,s)=>{const b=o.back;if(!b)return null;if(b.k==='burst'||b.k==='star'){burst={src:BURST(b.c,b.k==='burst'?16:8,b.k==='burst'?40:28),x:Math.round(x),y:Math.round(y),s:Math.round(s),r:-sg*8};return null;}return {x:Math.round(x),y:Math.round(y),s:Math.round(s),c:b.c,rad:b.k==='circle'?'50%':'22px',r:-sg*8,pat:b.pat?PAT[b.pat]:false};};
+  if(lay==='top'){
+    py=Math.round(484-ev-h); const iy=Math.max(28,py+(o.ov??34)-icH);
+    under.push({src:o.ic,x:icX,y:Math.round(iy),w:icS,r:-sg*(o.icR??8)});
+    back=mkBack(icX+icS/2-icS*.6,iy+icH/2-icS*.6,icS*1.2);
+    tag={x:sg>0?344:40,y:36,r:sg*6};
+    dots=[{x:sg>0?378:96,y:116,s:40,c:B},{x:sg>0?318:178,y:150,s:24,c:th.dot}];
+  } else {
+    py=Math.round(28+ev); const iy=Math.min(484-icH,py+h-(o.ov??34));
+    under.push({src:o.ic,x:icX,y:Math.round(iy),w:icS,r:sg*(o.icR??8)});
+    back=mkBack(icX+icS/2-icS*.6,iy+icH/2-icS*.6,icS*1.2);
+    tag={x:sg>0?344:40,y:430,r:-sg*5};
+    dots=[{x:sg>0?380:94,y:py+h+40,s:38,c:B},{x:sg>0?310:180,y:py+h+90,s:22,c:th.dot}];
+    if(lay==='balloon'){tail=sg>0?{x:w-170,clip:'polygon(0 0,100% 0,92% 100%)'}:{x:66,clip:'polygon(0 0,100% 0,8% 100%)'};tag={x:sg>0?344:40,y:440,r:-sg*5};dots=[{x:sg>0?300:190,y:py+h+96,s:26,c:B}];}
+    if(lay==='stamp'){
+      py=Math.round(256-h/2+(o.ic?26:0)); under=[];
+      if(o.ic) badge={x:sg>0?32:340,y:Math.max(28,py-96),s:140,c:o.badgeC||V,r:-sg*8,src:o.ic,is:Math.round((o.badgeIs||72)*1.2)};
+      back=o.back?mkBack(256-200,256-200+(o.ic?16:0),400):null;
+      tag={x:sg>0?340:44,y:Math.min(438,py+h+ev-6),r:sg*5};
+      dots=[{x:sg>0?400:80,y:Math.max(30,py-64),s:34,c:B}];
+    }
+  }
+  if(o.extra) o.extra.forEach(e=>(e.over?over:under).push({src:e.src,x:sg>0?e.x:472-e.x-e.w+40,y:e.y,w:e.w,r:sg*(e.r||0)}));
+  if(o.noDots) dots=[];
+  return {burst,num:String(num).padStart(2,'0'),label:o.label||o.lines.map(l=>Array.isArray(l)?l[0]:l).join(' '),back,under,over,dots,tag,badge,
+    p:{x:px,y:py,w,h,r,bg:th.bg,clip:(lay==='top'||lay==='bottom')?CLIPS[i%4]:'none',rad:lay==='balloon'?64:lay==='stamp'?26:0,tail,bc:lay==='stamp'?(o.theme==='y'||o.theme==='v'?G:W):false,palha:!!o.palha,lines}};
+}
+const AREA={cgg:B,is:V,cont:Y,fund:B,log:Y};
+const BEIJOS=[
+ ['cgg',['BEIJOS DA','COMUNICAÇÃO','E GG']],['is',['BEIJOS DO','IMPACTO','SOCIAL']],['cont',['BEIJOS','DO CONTEÚDO']],['fund',['BEIJOS DO','FUNDRAISING']],['log',['BEIJOS DA','LOGÍSTICA']],
+ ['cgg',['BEIJOS','DO SMG']],['cgg',['BEIJOS','DA PRESS']],['cgg',['BEIJOS DO','TEAM XP']],['cgg',['BEIJOS DO','TECH & DATA']],['cgg',['BEIJOS DO','BC ACOLHE']],
+ ['cgg',['BEIJOS DO','MARKETING &','ESTRATÉGIA']],['is',['BEIJOS DOS','EMBAIXADORES']],['is',['BEIJOS DO','AI4GOOD']],['is',['BEIJOS DOS','PESQUISADORES']],['is',['BEIJOS DO','CULTURA','EM AÇÃO']],
+ ['is',['BEIJOS DO','SERVINDO','O BRASIL']],['cont',['BEIJOS DE','CULTURA &','SOCIEDADE']],['cont',['BEIJOS DE','ECONOMIA &','NEGÓCIOS']],['cont',['BEIJOS DE','POLÍTICA &','GOVERNO']],['cont',['BEIJOS DE','CIÊNCIA &','TECH']],
+];
+function sets(palha){
+  let n=16; const S=(name,list)=>({name,key:name.split(' ')[0].toLowerCase().normalize('NFD').replace(/[^a-z]/g,'')+(name.includes('REGI')?'-regioes':''),items:list.map((o,i)=>{if(o.palha)o.palha=palha;return build(o,i,n++);})});
+  return [
+   S('BEIJOS DAS ÁREAS E SUBÁREAS',BEIJOS.map(([a,l],i)=>({lines:l,ic:IC.lips(AREA[a]),icS:210,icA:.62,icR:10,ov:6,layout:['top','balloon','top','bottom'][i%4],theme:i%5===3?'y':'g',palha:i%3===0,
+     extra:[{src:IC.lips(a==='cont'||a==='log'?V:Y),x:220,y:i%4===0||i%4===2?60:380,w:90,r:-14}]}))),
+   S('BEIJOS DAS REGIÕES',[
+    {lines:['BEIJO',['NORDESTINO',92]],ic:IC.cactus,icS:180,icA:1.1,icR:4,back:{k:'patch',c:Y,pat:'azulejo'},palha:true,extra:[{src:IC.lips(Y),x:250,y:150,w:110,r:-10}]},
+    {lines:['BEIJO','NORTISTA'],ic:'../img/s/teatro.png',icS:230,icA:.8,icR:0,ov:12,back:{k:'circle',c:Y},extra:[{src:IC.lips(B),x:270,y:120,w:110,r:12}]},
+    {lines:['BEIJO DO','CERRADO'],ic:'../img/s/congresso.png',icS:250,icA:.6,icR:0,ov:10,back:{k:'patch',c:Y,pat:'cobogo'},extra:[{src:IC.lips(V),x:300,y:70,w:100,r:-8}]},
+    {lines:['BEIJO DO','SUDESTE'],ic:'../img/s/cristo.png',icS:210,icA:1,icR:0,ov:12,back:{k:'patch',c:Y,pat:'calcadao'},palha:true,extra:[{src:IC.lips(Y),x:270,y:130,w:110,r:10}]},
+    {lines:['BEIJO','SULISTA'],ic:IC.cuia,icS:190,icA:1,icR:6,back:{k:'circle',c:Y},extra:[{src:IC.lips(V),x:270,y:110,w:110,r:-10}]},
+   ]),
+   S('HUMOR',[
+    {lines:['EITA','MÔ!'],layout:'stamp',ic:IC.bolt,back:{k:'burst',c:Y},badgeC:G,badgeIs:84},
+    {lines:['TÁ CERTO','MÔ'],ic:IC.thumb,icS:210,palha:true},
+    {lines:['OI','MÔ'],layout:'balloon',ic:IC.hand,icS:180},
+    {lines:['AMO','QUE AMO'],ic:IC.hearts,icS:240,icA:.8,theme:'g'},
+    {lines:['ESSA BC','ARRASA!'],layout:'stamp',ic:IC.crown,back:{k:'star',c:V},badgeC:Y,badgeIs:84,theme:'g'},
+    {lines:['FIQUEI','NO VÁCUO'],layout:'bottom',ic:IC.checks,icS:220,icA:.85,theme:'y'},
+    {lines:['BORA','MEUS','AMORES'],ic:IC.heart(V),icS:150,palha:true},
+    {lines:['DEU','BOM'],layout:'bottom',ic:IC.stars,icS:220,icA:.9,theme:'v'},
+    {lines:['TÔ NO','CORRE'],ic:IC.sneaker,icS:240,icA:.75,icR:4},
+    {lines:['PARTIU','BOSTON'],ic:'../img/s/zakim.png',icS:260,icA:.7,icR:0,ov:10,extra:[{src:IC.plane,x:190,y:110,w:110,r:30,over:true}]},
+    {lines:['CHAMA','NO ZAP'],layout:'balloon',ic:IC.phone,icS:170,theme:'g'},
+    {lines:['CAFEZINHO?'],layout:'bottom',ic:IC.cup,icS:220,back:{k:'patch',c:Y,pat:'azulejo'}},
+   ]),
+   S('SOTAQUES',[
+    {lines:[['OXENTE',140]],layout:'stamp',ic:IC.cactus,badgeC:Y,badgeIs:70,back:{k:'burst',c:Y}},
+    {lines:[['UAI',190]],layout:'stamp',ic:IC.paes,badgeC:V,badgeIs:90,theme:'y'},
+    {lines:[['BAH',190]],layout:'stamp',ic:IC.cuia,badgeC:Y,badgeIs:76,palha:true},
+    {lines:[['ÉGUA',170]],layout:'stamp',ic:'../img/s/teatro.png',badgeC:Y,badgeIs:96,theme:'v'},
+    {lines:[['MERMÃO',140]],layout:'stamp',ic:'../img/s/cristo.png',badgeC:Y,badgeIs:96,back:{k:'star',c:Y}},
+    {lines:['Ô LOCO','MEU'],layout:'stamp',ic:'../img/s/copan.png',badgeC:Y,badgeIs:44,theme:'b'},
+   ]),
+   S('INSTITUCIONAL',[
+    {lines:['E-MAIL','ENVIADO'],layout:'stamp',ic:IC.env,badgeC:Y,badgeIs:92},
+    {lines:['VISTO E','ENCAMINHADO'],layout:'stamp',ic:IC.fwd,badgeC:Y,badgeIs:72,extra:[{src:IC.eye,x:330,y:34,w:110,over:true}]},
+    {lines:['RECEBIDO'],layout:'stamp',ic:IC.inbox,badgeC:V,badgeIs:76,theme:'y'},
+    {lines:['EM','ANDAMENTO'],layout:'stamp',ic:IC.gear,badgeC:Y,badgeIs:84,palha:true},
+    {lines:['PRAZO','É HOJE'],layout:'stamp',ic:IC.glass,badgeC:Y,badgeIs:74,theme:'g'},
+    {lines:['NA','PAUTA'],layout:'stamp',ic:IC.clip,badgeC:V,badgeIs:72,theme:'y'},
+    {lines:['ATA NO','DRIVE'],layout:'stamp',ic:IC.folder,badgeC:Y,badgeIs:80},
+    {lines:['VALEU PELA','PARCERIA'],layout:'stamp',ic:IC.rings,badgeC:Y,badgeIs:88,palha:true},
+   ]),
+  ];
+}
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const sz = p.tamanho ?? 256;
+    const g = p.guias ?? false;
+    const palha = p.palhinha ?? true;
+    return {
+      sz, esc: sz / 512, guias: g, palha, sets: sets(palha).filter(x => !p.filtro || p.filtro === 'todas' || x.key === p.filtro), showOp: !p.filtro || p.filtro === 'todas' || p.filtro === 'operacional',
+      showHead: (p.modo ?? 'comparar') === 'comparar',
+      boards: (p.modo ?? 'comparar') === 'exportar' ? [{ name: '', bg: 'transparent', ink: '#F5F4EC', sub: '#8C8B82', guide: 'rgba(255,255,255,.3)' }] : [
+        { name: 'Chat claro', bg: '#EFEAE2', ink: '#03633B', sub: '#3D5A4A', guide: 'rgba(3,99,59,.35)' },
+        { name: 'Chat escuro', bg: '#0B141A', ink: '#FBF99D', sub: '#A9B8AF', guide: 'rgba(251,249,157,.35)' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

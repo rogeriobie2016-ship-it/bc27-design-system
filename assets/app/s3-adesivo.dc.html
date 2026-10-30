@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+</helmet>
+<div style="position:relative;width:{{ dw }}px;height:{{ dw }}px;overflow:hidden;border-radius:6px;background:{{ cart }}">
+<div style="position:absolute;left:0;top:0;width:1000px;height:1000px;transform:scale({{ esc }});transform-origin:0 0;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif">
+<div style="transform:rotate({{ rot }}deg) scale({{ tam }});filter:{{ filt }}">
+
+<sc-if value="{{ fPilula }}" hint-placeholder-val="{{ true }}"><div style="background:{{ c.bg }};color:{{ c.fg }};border-radius:999px;padding:34px 80px;display:flex;align-items:center;gap:30px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:120px;line-height:1;letter-spacing:{{ trk }}em;white-space:nowrap"><span style="width:70px;height:70px;border-radius:50%;background:{{ c.ac }};flex:none"></span>{{ t1 }}</div></sc-if>
+<sc-if value="{{ fRet }}" hint-placeholder-val="{{ false }}"><div style="background:{{ c.bg }};padding:44px 70px 50px;display:flex;flex-direction:column;gap:6px"><span style="font-weight:600;font-size:52px;letter-spacing:.14em;color:{{ c.ac }}">{{ t2 }}</span><span style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:140px;line-height:.92;letter-spacing:{{ trk }}em;color:{{ c.fg }};white-space:nowrap">{{ t1 }}</span></div></sc-if>
+<sc-if value="{{ fEstrela }}" hint-placeholder-val="{{ false }}"><div style="position:relative;width:640px;height:640px"><div style="position:absolute;inset:0;background:{{ c.bg }};mask:url(../img/f/burst.svg) center/contain no-repeat"></div><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:130px;line-height:.9;letter-spacing:{{ trk }}em;color:{{ c.fg }}"><span>{{ t1 }}</span><span>{{ t2 }}</span></div></div></sc-if>
+<sc-if value="{{ fCirculo }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 200" width="680" height="680" style="display:block"><defs><path id="{{ pid }}" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"></path></defs><circle cx="100" cy="100" r="96" fill="{{ c.bg }}"></circle><text font-family="Bricolage Grotesque" font-weight="800" font-size="20" letter-spacing="2.2" fill="{{ c.fg }}"><textPath href="#{{ pid }}">{{ ring }}</textPath></text><circle cx="100" cy="100" r="44" fill="{{ c.fg }}"></circle><text x="100" y="114" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="40" fill="{{ c.bg }}">{{ t2 }}</text></svg></sc-if>
+<sc-if value="{{ fSelo }}" hint-placeholder-val="{{ false }}"><div style="position:relative;width:600px;height:744px"><div style="position:absolute;inset:0;background:radial-gradient(circle at 12px 12px,transparent 8px,#FFFFFF 8.5px) -12px -12px/24px 24px"></div><div style="position:absolute;inset:34px;background:{{ c.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;overflow:hidden"><span style="font-weight:600;font-size:46px;letter-spacing:.16em;color:{{ c.ac }}">{{ t2 }}</span><span style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:130px;line-height:.88;letter-spacing:{{ trk }}em;text-align:center;color:{{ c.fg }}">{{ t1 }}</span><div style="width:300px;height:44px;background:{{ c.ac }};mask:url(../img/f/onda-linha.svg) 0 0/132px 44px repeat-x"></div></div></div></sc-if>
+<sc-if value="{{ fFita }}" hint-placeholder-val="{{ false }}"><div style="background:{{ c.bg }};clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%);padding:50px 150px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:96px;letter-spacing:{{ trk }}em;color:{{ c.fg }};white-space:nowrap">{{ t1 }}</div></sc-if>
+<sc-if value="{{ fBalao }}" hint-placeholder-val="{{ false }}"><div style="position:relative;background:{{ c.bg }};color:{{ c.fg }};border-radius:80px;padding:60px 80px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:104px;line-height:1.02;letter-spacing:{{ trk }}em">{{ t1 }}<br>{{ t2 }}<div style="position:absolute;left:140px;bottom:-90px;width:130px;height:100px;background:{{ c.bg }};clip-path:polygon(0 0,100% 0,0 100%)"></div></div></sc-if>
+<sc-if value="{{ fCarimbo }}" hint-placeholder-val="{{ false }}"><div style="position:relative;width:640px;height:640px;color:{{ c.bg }}"><div style="position:absolute;inset:0;border-radius:50%;border:22px solid {{ c.bg }}"></div><div style="position:absolute;inset:66px;border-radius:50%;border:8px solid {{ c.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center"><span style="font-weight:800;font-size:58px;letter-spacing:.14em">{{ t2 }}</span><span style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:150px;line-height:.9;letter-spacing:{{ trk }}em">{{ t1 }}</span><span style="font-weight:700;font-size:42px;letter-spacing:.14em">HARVARD · MIT</span></div></div></sc-if>
+<sc-if value="{{ fMade }}" hint-placeholder-val="{{ false }}"><div style="background:{{ c.bg }};padding:80px 70px 34px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:150px;line-height:1;letter-spacing:{{ trk }}em;color:{{ c.fg }};white-space:nowrap">MADE IN BRA<span style="position:relative;display:inline-block">Z<span style="position:absolute;left:-14px;right:-14px;top:46%;height:18px;background:{{ c.ac }};transform:rotate(-16deg)"></span><span style="position:absolute;left:0;top:-118px;font-size:130px;color:{{ c.ac }};transform:rotate(-8deg)">S</span></span>IL</div></sc-if>
+<sc-if value="{{ fIlu }}" hint-placeholder-val="{{ false }}"><img src="{{ iluSrc }}" style="display:block;width:720px"></sc-if>
+<sc-if value="{{ fBandeira }}" hint-placeholder-val="{{ false }}"><div style="position:relative;width:640px;height:440px;background:#0B5E37;border:24px solid #FFFFFF;box-sizing:border-box"><div style="position:absolute;left:36px;right:36px;top:36px;bottom:36px;background:#FBF99D;clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:208px;top:96px;width:176px;height:176px;border-radius:50%;background:#0D3A85"></div></div></sc-if>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:300},&quot;forma&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;estrela&quot;,&quot;pilula&quot;,&quot;retangulo&quot;,&quot;circulo-texto&quot;,&quot;selo&quot;,&quot;fita&quot;,&quot;balao&quot;,&quot;carimbo&quot;,&quot;made-in&quot;,&quot;ilustracao&quot;,&quot;bandeira&quot;],&quot;default&quot;:&quot;estrela&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adesivo&quot;},&quot;texto&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Brasil&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adesivo&quot;},&quot;texto2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;com S&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adesivo&quot;},&quot;ilustracao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cristo&quot;,&quot;cristo2&quot;,&quot;pao&quot;,&quot;congresso&quot;,&quot;zakim&quot;,&quot;mapa&quot;,&quot;copan&quot;,&quot;ponte&quot;,&quot;capitolio&quot;,&quot;masp&quot;,&quot;mao&quot;,&quot;teatro&quot;,&quot;veleiro&quot;,&quot;farol&quot;,&quot;igreja&quot;,&quot;lapa&quot;],&quot;default&quot;:&quot;cristo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adesivo&quot;},&quot;cores&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;noite-amarelo&quot;,&quot;verde-vivo&quot;,&quot;amarelo-verde&quot;,&quot;azul-branco&quot;,&quot;vivo-noite&quot;,&quot;branco-verde&quot;],&quot;default&quot;:&quot;noite-amarelo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;caixa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;alta&quot;,&quot;como digitado&quot;,&quot;baixa&quot;],&quot;default&quot;:&quot;alta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;peso&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:800,&quot;step&quot;:100,&quot;default&quot;:800,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;tracking&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:-6,&quot;max&quot;:10,&quot;step&quot;:1,&quot;default&quot;:-2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;rotacao&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:-20,&quot;max&quot;:20,&quot;step&quot;:1,&quot;default&quot;:-6,&quot;unit&quot;:&quot;°&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;tamanho&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.5,&quot;max&quot;:1.4,&quot;step&quot;:0.05,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;contorno&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:20,&quot;step&quot;:1,&quot;default&quot;:10,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;sombra&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;cartela&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;noite&quot;,&quot;papel&quot;,&quot;verde&quot;,&quot;magenta&quot;,&quot;transparente&quot;],&quot;default&quot;:&quot;noite&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:300,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;}}">
+const CP = {
+  'verde-vivo': { bg:'#0B5E37', fg:'#15E888', ac:'#FBF99D' },
+  'amarelo-verde': { bg:'#FBF99D', fg:'#0B5E37', ac:'#0A7BE5' },
+  'azul-branco': { bg:'#0A7BE5', fg:'#FFFFFF', ac:'#FBF99D' },
+  'noite-amarelo': { bg:'#0D3A85', fg:'#FBF99D', ac:'#15E888' },
+  'vivo-noite': { bg:'#15E888', fg:'#0D3A85', ac:'#0B5E37' },
+  'branco-verde': { bg:'#FFFFFF', fg:'#0B5E37', ac:'#0A7BE5' },
+};
+const CART = { noite:'#0D3A85', papel:'#F5F4EC', verde:'#0B5E37', magenta:'#FF00FF', transparente:'transparent' };
+let uid = 0;
+class Component extends DCLogic {
+  pid = 'ring' + (++uid);
+  renderVals() {
+    const p = this.props;
+    const f = p.forma ?? 'estrela';
+    const c = CP[p.cores] || CP['noite-amarelo'];
+    const cx = p.caixa ?? 'alta';
+    const tr = (s) => cx === 'alta' ? s.toUpperCase() : cx === 'baixa' ? s.toLowerCase() : s;
+    const ct = p.contorno ?? 10;
+    const out = ct > 0 ? `drop-shadow(${ct}px 0 0 #fff) drop-shadow(-${ct}px 0 0 #fff) drop-shadow(0 ${ct}px 0 #fff) drop-shadow(0 -${ct}px 0 #fff)` : '';
+    const sh = (p.sombra ?? true) ? ' drop-shadow(0 18px 22px rgba(0,0,0,.35))' : '';
+    const dw = p.largura ?? 300;
+    const t1 = tr(p.texto ?? 'Brasil'), t2 = tr(p.texto2 ?? 'com S');
+    return { dw, esc: dw / 1000, cart: CART[p.cartela ?? 'noite'], c, rot: p.rotacao ?? -6, tam: p.tamanho ?? 1, filt: (out + sh) || 'none',
+      peso: p.peso ?? 800, larg: p.larguraFonte ?? 100, trk: (p.tracking ?? -2) / 100, t1, t2, pid: this.pid,
+      ring: `${t1} ★ ${t1} ★ `,
+      fPilula: f === 'pilula', fRet: f === 'retangulo', fEstrela: f === 'estrela', fCirculo: f === 'circulo-texto', fSelo: f === 'selo', fFita: f === 'fita', fBalao: f === 'balao', fCarimbo: f === 'carimbo', fMade: f === 'made-in', fIlu: f === 'ilustracao', fBandeira: f === 'bandeira',
+      iluSrc: `../img/s/${p.ilustracao ?? 'cristo'}-adesivo.png` };
+  }
+}
+</script>
+</body>
+</html>

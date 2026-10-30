@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="../js/image-slot.js"></script>
+<style>
+@keyframes g3Bar{0%,4%{transform:scaleX(0)}14%,84%{transform:scaleX(1)}94%,100%{transform:scaleX(0)}}
+@keyframes g3Fade{0%,8%{opacity:0;transform:translateY(30px)}18%,84%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(0)}}
+@keyframes g3Slap{0%,6%{opacity:0;transform:scale(1.6) rotate(-4deg)}12%{opacity:1;transform:scale(.96) rotate(0)}15%,86%{opacity:1;transform:scale(1)}93%,100%{opacity:0;transform:scale(.9)}}
+@keyframes g3Pop{0%,4%{transform:scale(0) rotate(-30deg)}12%{transform:scale(1.12) rotate(4deg)}15%,86%{transform:scale(1) rotate(0)}94%,100%{transform:scale(0)}}
+@keyframes g3Spin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px;background:#1E1E1C">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;font-family:'Bricolage Grotesque',sans-serif">
+<sc-if value="{{ foto }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0"><image-slot id="{{ slotId }}" shape="rect" src="../img/fotos/fernanda.jpg" placeholder="Frame do vídeo"></image-slot></div></sc-if>
+<sc-if value="{{ magenta }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:#FF00FF"></div></sc-if>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;bottom:{{ gb }}px;display:flex;justify-content:{{ just }};pointer-events:none">
+<div style="transform-origin:{{ origin }};animation:{{ mainAnim }}">
+
+<sc-if value="{{ sFaixa }}" hint-placeholder-val="{{ true }}"><div style="display:flex">
+<sc-if value="{{ hasLat }}" hint-placeholder-val="{{ true }}"><div style="position:relative;flex:none;width:{{ latS }}px;height:{{ latS }}px;overflow:hidden;background:{{ latBg }};animation:g3Pop 6s infinite both">
+<sc-if value="{{ lBandeira }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:8%;right:8%;top:24%;bottom:24%;background:#FBF99D;clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:33%;top:33%;width:34%;height:34%;border-radius:50%;background:#0D3A85"></div></sc-if>
+<sc-if value="{{ lMask }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ p.acc }};mask:url({{ latMask }}) 0 0/{{ latT }}px auto repeat"></div></sc-if>
+<sc-if value="{{ lFrevo }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:12%;border-radius:50%;background:conic-gradient(#FBF99D 0 12.5%,#0A7BE5 0 25%,#FFFFFF 0 37.5%,#15E888 0 50%,#FBF99D 0 62.5%,#0A7BE5 0 75%,#FFFFFF 0 87.5%,#15E888 0);animation:g3Spin 3s linear infinite"></div></sc-if>
+<sc-if value="{{ lIcone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:12%;top:{{ icT }}px;width:572px;height:174px;transform:scale({{ icS }});transform-origin:0 0"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:#0B5E37"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:#15E888;clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:#0A7BE5"></div></div></sc-if>
+</div></sc-if>
+<div style="display:flex;flex-direction:column;align-items:flex-start">
+<div style="background:{{ p.a }};height:{{ nH }}px;padding:0 {{ padN }}px;display:flex;align-items:center;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfs }}px;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}</div>
+<div style="background:{{ p.b }};height:{{ rH }}px;padding:0 {{ padN }}px;display:flex;align-items:center;font-weight:600;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;letter-spacing:{{ rtrk }}em;color:{{ p.bt }};white-space:nowrap">{{ cargo }}</div>
+</div></div></sc-if>
+
+<sc-if value="{{ sSelo }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center">
+<div style="position:relative;flex:none;width:{{ seloW }}px;height:{{ seloH }}px;transform:rotate(-5deg);z-index:2;animation:g3Pop 6s infinite both"><div style="position:absolute;inset:0;background:radial-gradient(circle at 12px 12px,transparent 7px,#FFFFFF 7.5px) -12px -12px/24px 24px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3))"></div><div style="position:absolute;inset:18px;background:{{ p.a }};overflow:hidden"><div style="position:absolute;inset:0;background:{{ p.acc }};mask:url(../img/f2/cobogo.svg) 0 0/60px auto repeat;opacity:.9"></div></div></div>
+<div style="position:relative;margin-left:-20px">
+<div style="background:{{ p.a }};padding:{{ selP }}px {{ padN }}px {{ selP2 }}px {{ padN2 }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfsL }}px;line-height:1;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}</div>
+<div style="position:absolute;left:{{ padN2 }}px;top:92%;transform:rotate(-2deg);background:{{ p.b }};border:5px solid #FFFFFF;padding:8px 24px;font-weight:700;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:{{ p.bt }};white-space:nowrap">{{ cargo }}</div>
+</div></div></sc-if>
+
+<sc-if value="{{ sAdesivo }}" hint-placeholder-val="{{ false }}"><div style="position:relative">
+<div style="position:absolute;left:-44px;top:-54px;width:{{ starS }}px;height:{{ starS }}px;transform:rotate(-14deg);z-index:2;filter:drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(0 8px 10px rgba(0,0,0,.35));animation:g3Pop 6s .3s infinite both"><div style="width:100%;height:100%;background:{{ p.acc }};mask:url(../img/f/estrela5.svg) center/contain no-repeat"></div></div>
+<div style="transform:rotate(-2deg);filter:drop-shadow(7px 0 0 #fff) drop-shadow(-7px 0 0 #fff) drop-shadow(0 7px 0 #fff) drop-shadow(0 -7px 0 #fff) drop-shadow(0 12px 14px rgba(0,0,0,.35))"><div style="background:{{ p.a }};padding:{{ selP }}px {{ padN }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfsL }}px;line-height:1;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}</div></div>
+<div style="margin:18px 0 0 {{ padN2 }}px;display:inline-block;transform:rotate(1.5deg);filter:drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(0 10px 12px rgba(0,0,0,.3))"><div style="background:{{ p.b }};padding:10px 26px;font-weight:700;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:{{ p.bt }};white-space:nowrap">{{ cargo }}</div></div>
+</div></sc-if>
+
+<sc-if value="{{ sEditorial }}" hint-placeholder-val="{{ false }}"><div style="display:flex">
+<div style="width:{{ strip }}px;display:flex;flex-direction:column"><div style="flex:1;background:#15E888"></div><div style="flex:1;background:#FBF99D"></div><div style="flex:1;background:#0A7BE5"></div></div>
+<div style="background:{{ p.a }};padding:{{ edP }}px {{ padN }}px {{ edP2 }}px {{ edP3 }}px;display:flex;flex-direction:column;gap:{{ edG }}px">
+<div style="font-weight:700;font-size:{{ lfs }}px;letter-spacing:.22em;color:{{ p.acc }};white-space:nowrap">{{ rotulo }}</div>
+<div style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfs }}px;line-height:1;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}</div>
+<div style="font-weight:500;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:{{ p.acc2 }};white-space:nowrap">{{ cargo }}</div>
+</div></div></sc-if>
+
+<sc-if value="{{ sFita }}" hint-placeholder-val="{{ false }}"><div>
+<div style="background:{{ p.a }};height:{{ nH }}px;padding:0 {{ fitaR }}px 0 {{ padN }}px;display:flex;align-items:center;gap:26px;clip-path:polygon(0 0,100% 0,calc(100% - {{ notch }}px) 50%,100% 100%,0 100%);font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfs }}px;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}<span style="font-weight:600;font-size:{{ lfs }}px;letter-spacing:.2em;color:{{ p.acc }}">{{ rotulo }}</span></div>
+<div style="margin-top:10px;margin-left:{{ padN2 }}px;display:inline-flex;background:{{ p.b }};height:{{ rH }}px;padding:0 {{ notch2 }}px 0 26px;align-items:center;clip-path:polygon(0 0,100% 0,calc(100% - {{ notchS }}px) 50%,100% 100%,0 100%);font-weight:600;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:{{ p.bt }};white-space:nowrap">{{ cargo }}</div>
+</div></sc-if>
+
+<sc-if value="{{ sCordel }}" hint-placeholder-val="{{ false }}"><div style="position:relative;background:{{ p.a }};padding:{{ cdP }}px {{ padN }}px {{ edP }}px;display:flex;flex-direction:column;gap:{{ edG }}px">
+<div style="position:absolute;left:0;top:0;width:100%;height:24px;background:{{ p.at }};mask:url(../img/f2/serrilha.svg) 0 0/32px 24px repeat-x"></div>
+<div style="font-weight:700;font-size:{{ lfs }}px;letter-spacing:.22em;color:{{ p.acc }};white-space:nowrap">{{ rotulo }}</div>
+<div style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfs }}px;line-height:1;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}</div>
+<div style="font-weight:500;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:{{ p.at }};white-space:nowrap">{{ cargo }}</div>
+</div></sc-if>
+
+<sc-if value="{{ sLetreiro }}" hint-placeholder-val="{{ false }}"><div style="position:relative;transform:rotate(-2deg)">
+<div style="position:absolute;inset:0;background:radial-gradient(circle at 12px 12px,transparent 7px,#FFFFFF 7.5px) -12px -12px/24px 24px;filter:drop-shadow(0 12px 14px rgba(0,0,0,.35))"></div>
+<div style="position:relative;margin:20px;background:{{ p.a }};padding:{{ edP }}px {{ padN }}px {{ edP2 }}px;display:flex;flex-direction:column;align-items:center;gap:4px"><span style="font-weight:600;font-size:{{ lfs }}px;letter-spacing:.24em;color:{{ p.acc }}">{{ rotulo }}</span><span style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfsL }}px;line-height:.98;letter-spacing:{{ trk }}em;color:{{ p.at }};white-space:nowrap">{{ nome }}</span></div>
+<div style="position:absolute;left:{{ padN2 }}px;top:calc(100% - 26px);transform:rotate(1.5deg);background:{{ p.b }};border:5px solid #FFFFFF;padding:8px 24px;font-weight:700;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:{{ p.bt }};white-space:nowrap">{{ cargo }}</div>
+</div></sc-if>
+
+<sc-if value="{{ sMinimal }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;align-items:{{ align }};gap:{{ edG }}px">
+<div style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfsL }}px;line-height:1;letter-spacing:{{ trk }}em;color:#FFFFFF;white-space:nowrap;text-shadow:0 4px 18px rgba(0,0,0,.35)">{{ nome }}</div>
+<div style="display:flex;align-items:center;gap:16px"><div style="width:{{ minLine }}px;height:{{ minLineH }}px;background:{{ p.acc }}"></div><span style="font-weight:600;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;letter-spacing:.06em;color:#FFFFFF;white-space:nowrap;text-shadow:0 3px 12px rgba(0,0,0,.4)">{{ cargo }}</span></div>
+</div></sc-if>
+
+</div>
+</div>
+<sc-if value="{{ guia }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ safeX }}px;right:{{ safeX }}px;top:{{ safeY }}px;bottom:{{ safeY }}px;border:4px dashed #FF00FF;pointer-events:none"></div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:576,&quot;height&quot;:324},&quot;nome&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Fernanda Torres&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;cargo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Organizadora da BC27&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;rotulo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PAINEL · IMPACTO SOCIAL&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;caixa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;alta&quot;,&quot;como digitado&quot;,&quot;baixa&quot;],&quot;default&quot;:&quot;alta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;peso&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:800,&quot;step&quot;:100,&quot;default&quot;:800,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;tracking&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:-6,&quot;max&quot;:10,&quot;step&quot;:1,&quot;default&quot;:-2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;tamanho&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.6,&quot;max&quot;:1.5,&quot;step&quot;:0.05,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;estilo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;faixa&quot;,&quot;selo&quot;,&quot;adesivo&quot;,&quot;editorial&quot;,&quot;fita&quot;,&quot;cordel&quot;,&quot;letreiro&quot;,&quot;minimal&quot;],&quot;default&quot;:&quot;faixa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verde&quot;,&quot;folha&quot;,&quot;vivo&quot;,&quot;azul&quot;,&quot;noite&quot;,&quot;amarelo&quot;,&quot;branco&quot;],&quot;default&quot;:&quot;verde&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;lateral&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;bandeira&quot;,&quot;cobogo&quot;,&quot;azulejo&quot;,&quot;calcadao&quot;,&quot;frevo&quot;,&quot;icone&quot;,&quot;nenhum&quot;],&quot;default&quot;:&quot;bandeira&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;posicao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;esquerda&quot;,&quot;centro&quot;,&quot;direita&quot;],&quot;default&quot;:&quot;esquerda&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;animacao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;barra&quot;,&quot;fade&quot;,&quot;slap&quot;],&quot;default&quot;:&quot;barra&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;pausar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;tempo&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:6,&quot;step&quot;:0.1,&quot;default&quot;:3,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;formato&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;16:9&quot;,&quot;9:16&quot;,&quot;1:1&quot;],&quot;default&quot;:&quot;16:9&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;fundo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;foto&quot;,&quot;magenta&quot;,&quot;transparente&quot;],&quot;default&quot;:&quot;foto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;guia&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;slotId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;gc3-foto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:576,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;}}">
+const FMT = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080] };
+const GP = {
+  verde:   { a:'#0B5E37', at:'#FFFFFF', b:'#FBF99D', bt:'#0D3A85', acc:'#15E888', acc2:'#FBF99D' },
+  folha:   { a:'#1A8A52', at:'#FFFFFF', b:'#FBF99D', bt:'#0A7BE5', acc:'#FBF99D', acc2:'#FBF99D' },
+  vivo:    { a:'#15E888', at:'#0B5E37', b:'#0B5E37', bt:'#FFFFFF', acc:'#0D3A85', acc2:'#0B5E37' },
+  azul:    { a:'#0A7BE5', at:'#FFFFFF', b:'#FFFFFF', bt:'#0A7BE5', acc:'#FBF99D', acc2:'#FBF99D' },
+  noite:   { a:'#0D3A85', at:'#FBF99D', b:'#15E888', bt:'#0D3A85', acc:'#15E888', acc2:'#FFFFFF' },
+  amarelo: { a:'#FBF99D', at:'#0D3A85', b:'#0D3A85', bt:'#FFFFFF', acc:'#0A7BE5', acc2:'#0B5E37' },
+  branco:  { a:'#FFFFFF', at:'#0B5E37', b:'#0B5E37', bt:'#FFFFFF', acc:'#0A7BE5', acc2:'#0D3A85' },
+};
+const LM = { cobogo:'../img/f2/cobogo.svg', azulejo:'../img/f2/azulejo.svg', calcadao:'../img/f2/calcadao.svg' };
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  componentDidMount() { this.sync(); }
+  componentDidUpdate() { this.sync(); }
+  sync() {
+    const el = this.rootRef.current; if (!el || !el.getAnimations) return;
+    const an = el.getAnimations({ subtree: true });
+    if (this.props.pausar) an.forEach(a => { a.pause(); a.currentTime = (this.props.tempo ?? 3) * 1000; });
+    else an.forEach(a => { if (a.playState === 'paused') a.play(); });
+  }
+  renderVals() {
+    const pr = this.props;
+    const fmt = FMT[pr.formato] ? pr.formato : '16:9';
+    const [W, H] = FMT[fmt];
+    const dw = pr.largura ?? 576, esc = dw / W, dh = Math.round(H * esc);
+    const p = GP[pr.paleta] || GP.verde;
+    const est = pr.estilo ?? 'faixa';
+    const k = (pr.tamanho ?? 1) * (fmt === '16:9' ? 1 : 1.1);
+    const cx = pr.caixa ?? 'alta';
+    const tr = (s) => cx === 'alta' ? s.toUpperCase() : cx === 'baixa' ? s.toLowerCase() : s;
+    const pos = pr.posicao ?? 'esquerda';
+    const lat = pr.lateral ?? 'bandeira';
+    const f = pr.fundo ?? 'foto';
+    const anim = pr.animacao ?? 'barra';
+    const nfs = Math.round(66 * k), rfs = Math.round(28 * k), nH = Math.round(112 * k), rH = Math.round(60 * k);
+    const mainAnim = anim === 'barra' ? 'g3Bar 6s cubic-bezier(.7,0,.2,1) infinite both' : anim === 'fade' ? 'g3Fade 6s cubic-bezier(.2,.8,.2,1) infinite both' : 'g3Slap 6s infinite both';
+    const latS = nH + rH;
+    return { rootRef: this.rootRef, W, H, dw, dh, esc, p, slotId: pr.slotId ?? 'gc3-foto', foto: f === 'foto', magenta: f === 'magenta',
+      padX: Math.round(W * .06), gb: Math.round(fmt === '9:16' ? H * .24 : H * .11), just: pos === 'centro' ? 'center' : pos === 'direita' ? 'flex-end' : 'flex-start',
+      origin: pos === 'direita' ? 'right center' : pos === 'centro' ? 'center center' : 'left center', align: pos === 'direita' ? 'flex-end' : pos === 'centro' ? 'center' : 'flex-start', mainAnim,
+      nome: tr(pr.nome ?? 'Fernanda Torres'), cargo: tr(pr.cargo ?? 'Organizadora da BC27'), rotulo: (pr.rotulo ?? 'PAINEL · IMPACTO SOCIAL').toUpperCase(),
+      peso: pr.peso ?? 800, larg: pr.larguraFonte ?? 100, trk: (pr.tracking ?? -2) / 100, rtrk: cx === 'alta' ? .06 : 0,
+      nfs, rfs, nH, rH, nfsL: Math.round(nfs * 1.35), lfs: Math.round(20 * k), padN: Math.round(48 * k), padN2: Math.round(70 * k),
+      sFaixa: est === 'faixa', sSelo: est === 'selo', sAdesivo: est === 'adesivo', sEditorial: est === 'editorial', sFita: est === 'fita', sCordel: est === 'cordel', sLetreiro: est === 'letreiro', sMinimal: est === 'minimal',
+      hasLat: lat !== 'nenhum', latS, latBg: lat === 'icone' ? '#FFFFFF' : lat === 'frevo' ? p.a : (lat === 'bandeira' ? '#0B5E37' : p.a),
+      lBandeira: lat === 'bandeira', lMask: !!LM[lat], lFrevo: lat === 'frevo', lIcone: lat === 'icone', latMask: LM[lat] || LM.cobogo, latT: Math.round(latS / 2),
+      icS: latS * .76 / 572, icT: Math.round((latS - 174 * latS * .76 / 572) / 2),
+      seloW: Math.round(190 * k), seloH: Math.round(214 * k), selP: Math.round(14 * k), selP2: Math.round(22 * k), starS: Math.round(110 * k),
+      strip: Math.round(18 * k), edP: Math.round(24 * k), edP2: Math.round(30 * k), edP3: Math.round(40 * k), edG: Math.round(8 * k), cdP: Math.round(46 * k),
+      fitaR: Math.round(110 * k), notch: Math.round(48 * k), notch2: Math.round(64 * k), notchS: Math.round(28 * k),
+      minLine: Math.round(80 * k), minLineH: Math.round(10 * k),
+      guia: !!pr.guia, safeX: Math.round(W * .05), safeY: Math.round(H * .05) };
+  }
+}
+</script>
+</body>
+</html>

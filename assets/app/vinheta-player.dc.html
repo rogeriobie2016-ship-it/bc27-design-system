@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="../js/vinhetas-data.js"></script>
+<script src="../js/vendor/mp4-muxer.min.js"></script>
+<script src="../js/vendor/jszip.min.js"></script>
+<script src="../js/bc27-export.js"></script>
+<link href="../css/fonts.css" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:#1A1A18;overflow:hidden}a{color:#FBF99D}a:hover{color:#15E888}</style>
+</helmet>
+<div style="position:fixed;inset:0;display:flex;align-items:{{ alignV }};justify-content:{{ alignH }};background:{{ bg }}">
+<div ref="{{ boxRef }}" style="line-height:0;flex:none;width:{{ w }}px;height:{{ h }}px;overflow:hidden">
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-vinheta" dc-props="{{ props }}" hint-size="100%,100%"></dc-import></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { id: null, vw: window.innerWidth, vh: window.innerHeight, poster: false };
+  boxRef = React.createRef();
+  t = 0; playing = true; loop = true; last = 0; extern = false;
+  componentDidMount() {
+    const q = new URLSearchParams(location.search);
+    this.setState({ id: q.get('v'), poster: q.get('poster') === '1' });
+    if (q.get('poster') === '1' || q.get('pausado') === '1') { this.playing = false; this.t = 4000; }
+    this.onR = () => this.setState({ vw: window.innerWidth, vh: window.innerHeight }); window.addEventListener('resize', this.onR);
+    this.onM = (e) => this.cmd(e.data || {}); window.addEventListener('message', this.onM);
+    window.bcSnap = async () => { const root = this.boxRef.current; this.step(performance.now()); const cv = await window.BC27Export.snap({ root, W: root.offsetWidth, H: root.offsetHeight, k: 1 }); let im = document.getElementById('bcsnap'); if (!im) { im = document.createElement('img'); im.id = 'bcsnap'; im.style.cssText = 'position:fixed;left:0;top:0;z-index:9;display:block'; document.body.appendChild(im); } im.style.width = root.offsetWidth + 'px'; im.src = cv.toDataURL('image/png'); return true; };
+    window.bcSet = (id, t) => { this.t = t ?? 4000; this.playing = false; this.setState({ id, poster: true }); };
+    this.last = performance.now(); const tick = (now) => { this.raf = requestAnimationFrame(tick); this.step(now); }; this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); window.removeEventListener('resize', this.onR); window.removeEventListener('message', this.onM); }
+  v() { const L = window.BC_VINHETAS || []; return L.find(x => x.slug === this.state.id) || L[0]; }
+  anims() { const r = this.boxRef.current; return r && r.getAnimations ? r.getAnimations({ subtree: true }) : []; }
+  step(now) {
+    const dt = now - this.last; this.last = now; if (this.extern) return; const V = this.v(); if (!V) return; const D = V.duracao * 1000;
+    if (this.playing) { this.t += dt; if (this.t >= D) { if (this.loop) this.t %= D; else { this.t = D - 1; this.playing = false; } } }
+    const as = this.anims(); as.forEach(a => { if (a.playState !== 'paused') a.pause(); a.currentTime = this.t; });
+    if (window.parent !== window && (now - (this.lastPost || 0) > 100)) { this.lastPost = now; window.parent.postMessage({ type: 'bcv-state', t: this.t, dur: D, playing: this.playing, loop: this.loop, ready: as.length > 0 }, '*'); }
+  }
+  post(o) { if (window.parent !== window) window.parent.postMessage(o, '*'); }
+  async cmd(d) {
+    if (!d || d.type !== 'bcv') return; const V = this.v(); if (!V) return;
+    if (d.cmd === 'play') this.playing = true; if (d.cmd === 'pause') this.playing = false; if (d.cmd === 'toggle') this.playing = !this.playing;
+    if (d.cmd === 'restart') { this.t = 0; this.playing = true; } if (d.cmd === 'seek') this.t = Math.max(0, Math.min(V.duracao * 1000 - 1, d.t));
+    if (d.cmd === 'loop') this.loop = !!d.on;
+    if (d.cmd === 'export') {
+      if (!window.BC27Export) return this.post({ type: 'bcv-export', status: 'erro', msg: 'O exportador ainda está carregando. Tente de novo.' });
+      const root = this.boxRef.current; this.extern = true; const wasPlaying = this.playing;
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        this.post({ type: 'bcv-export', status: 'inicio' });
+        await window.BC27Export.render({ root, W: root.offsetWidth, H: root.offsetHeight, k: V.w / root.offsetWidth, fps: 30, dur: V.duracao, mode: 'mp4', name: V.arquivo.replace(/\.mp4$/, ''), onProgress: (i, n) => this.post({ type: 'bcv-export', status: 'progresso', pct: Math.round(i / n * 100) }) });
+        this.post({ type: 'bcv-export', status: 'ok' });
+      } catch (e) { console.error(e); this.post({ type: 'bcv-export', status: 'erro', msg: e.message || 'Falha ao gerar o vídeo.' }); }
+      this.extern = false; this.playing = wasPlaying;
+    }
+  }
+  renderVals() {
+    const V = this.v(); const s = this.state;
+    if (!V) return { ready: false, w: 0, h: 0, bg: '#1A1A18', alignV: 'center', alignH: 'center', boxRef: this.boxRef, props: {} };
+    const ar = V.w / V.h; let w, h;
+    if (s.poster) { w = ar > 1 ? 640 : Math.round(480 * ar); h = Math.round(w / ar); }
+    else { w = Math.floor(Math.min(s.vw, s.vh * ar)); h = Math.floor(w / ar); }
+    return { ready: true, w, h, bg: s.poster ? '#FF00FF' : '#1A1A18', alignV: s.poster ? 'flex-start' : 'center', alignH: s.poster ? 'flex-start' : 'center', boxRef: this.boxRef, props: { ...V.props, largura: w, pausar: false } };
+  }
+}
+</script>
+</body>
+</html>

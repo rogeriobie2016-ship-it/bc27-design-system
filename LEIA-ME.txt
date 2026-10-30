@@ -1,0 +1,69 @@
+BC STUDIO (BRAZIL CONFERENCE STUDIO) — LEIA-ME
+============================
+
+O QUE É
+Site com o design system da Brazil Conference 2027: cores, tipografia, logo,
+padrões, vinhetas e as ferramentas (Estúdio, Criar peças, Exportar, Coleção,
+Painéis, LinkedIn do time, Fundos de reunião, Figurinhas, Ilustrações e Variações).
+
+Página inicial: index.html  (abre em  seu-endereco/#/inicio)
+Tudo funciona sem servidor especial e sem internet externa: fontes, bibliotecas
+e imagens estão dentro da pasta assets/.
+
+
+ESTRUTURA
+index.html            página única do site (navegação por #/endereço)
+assets/css/           estilos do site e das fontes
+assets/js/            código do site, vinhetas e bibliotecas (pasta vendor/)
+assets/fonts/         Bricolage Grotesque (.woff2 para o site, .ttf para baixar)
+assets/img/           imagens, logos, padrões e capas das vinhetas
+assets/app/           as ferramentas (abrem dentro do site)
+assets/video/         reservado para MP4 finais, se um dia existirem
+
+
+COMO PUBLICAR NO CLOUDFLARE PAGES
+1. Entre em dash.cloudflare.com e faça login.
+2. Menu "Workers e Pages" > "Criar" > aba "Pages" > "Fazer upload de ativos".
+3. Dê um nome ao projeto (ex.: bc27-design-system) e clique em "Criar projeto".
+4. Arraste a PASTA INTEIRA do site (a que tem o index.html dentro) e clique em
+   "Implantar site".
+5. Pronto: o link aparece na tela (ex.: https://bc27-design-system.pages.dev).
+
+Depois de publicar, troque no index.html a linha
+  <meta property="og:image" content="assets/img/og.jpg">
+pelo endereço completo, ex.:
+  <meta property="og:image" content="https://bc27-design-system.pages.dev/assets/img/og.jpg">
+Assim a imagem aparece quando o link é colado no WhatsApp e no Slack.
+
+
+COMO LIBERAR SÓ PARA UMA LISTA DE EMAILS (CLOUDFLARE ACCESS)
+1. No painel da Cloudflare, abra "Zero Trust" (é gratuito para até 50 pessoas).
+2. "Access" > "Aplicativos" > "Adicionar um aplicativo" > "Auto-hospedado".
+3. Nome: BC Studio. Domínio: o endereço do site
+   (ex.: bc27-design-system.pages.dev).
+4. Crie uma política: Ação "Permitir", Regra "Emails" e cole os emails
+   (ou use "Emails terminados em" para liberar um domínio inteiro).
+5. Salve. Quem abrir o site recebe um código por email para entrar.
+Dica: no projeto do Pages, em "Configurações" > "Gerais", ative
+"Habilitar política de acesso" para proteger também os links de prévia.
+
+
+COMO ATUALIZAR
+1. Gere a pasta do site de novo a partir do Claude Design.
+2. No Cloudflare Pages, abra o projeto > "Criar nova implantação".
+3. Suba a PASTA INTEIRA por cima. Nunca suba arquivos soltos: as páginas
+   dependem umas das outras e misturar versões quebra o site.
+
+
+ONDE MUDAR A VERSÃO
+Arquivo assets/js/site.js, linha do começo:
+  var SITE = { nome: 'BC Studio', versao: 'V.1 - October 2026' };
+Troque o texto de "versao". Ele aparece no rodapé do menu.
+
+
+BOM SABER
+- O que cada pessoa faz no Estúdio e no Criar fica salvo só no navegador dela.
+  O botão "Restaurar padrão" apaga isso e volta ao início.
+- As vinhetas são animações ao vivo. O botão "Baixar MP4" gera o vídeo na
+  hora, no navegador (Chrome ou Edge atualizados). Leva cerca de um minuto.
+- As ferramentas funcionam melhor no computador. No celular aparece um aviso.

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script><script>new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(!n.querySelectorAll)return;var a=n.tagName==="IMG"?[n]:[];a=a.concat([].slice.call(n.querySelectorAll("img[loading=lazy]")));a.forEach(function(i){if(!/\{\{/.test(i.getAttribute("src")||""))i.loading="eager";});});});}).observe(document.documentElement,{subtree:true,childList:true});</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="../js/gerador/skyline.js"></script>
+<script src="../js/gerador/motion.js"></script>
+<script src="../js/vendor/mp4-muxer.min.js"></script>
+<script src="../js/vendor/webm-muxer.min.js"></script>
+<script src="../js/vendor/jszip.min.js"></script>
+<style>html,body{margin:0;background:#06281a}a{color:#34D27F;text-decoration:none}a:hover{color:#EDE58A}</style>
+</helmet>
+<div style="min-height:100vh;background:#06281a;color:#E9F5EC;font-family:system-ui,-apple-system,sans-serif;display:flex;flex-direction:column;gap:14px;padding:24px;box-sizing:border-box">
+  <div style="display:flex;gap:16px;align-items:baseline;flex-wrap:wrap"><span style="font-size:26px;font-weight:800;line-height:1.2;white-space:nowrap">Ilustrações das regiões</span><a href="../../index.html#/variacoes" target="_top" style="white-space:nowrap">← Sistema Visual 3</a><a href="../../index.html#/fundos/ferramenta" target="_top" style="white-space:nowrap">Fundos de reunião ↗</a></div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4;width:96px">Região</span>
+    <sc-for list="{{ regions }}" as="r" hint-placeholder-count="9">
+      <button onClick="{{ r.pick }}" style="{{ r.style }}">{{ r.nome }}</button>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4;width:96px">Paleta</span>
+    <sc-for list="{{ palettes }}" as="s" hint-placeholder-count="8">
+      <button onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.nome }}</button>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4;width:96px">Composição</span>
+    <sc-for list="{{ comps }}" as="c" hint-placeholder-count="3">
+      <button onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.nome }}</button>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4;width:96px">Filtros</span>
+    <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="5">
+      <button onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.nome }}</button>
+    </sc-for>
+    <sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ clear }}" style="background:transparent;color:#EDE58A;border:1px dashed #EDE58A;padding:7px 12px;font-size:13px;cursor:pointer;border-radius:3px;white-space:nowrap">✕ Limpar filtros</button>
+    </sc-if>
+    <span style="font-size:12px;color:#8FC7A4">clique de novo para desmarcar</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4;width:96px">Formato</span>
+    <sc-for list="{{ formats }}" as="m" hint-placeholder-count="4">
+      <button onClick="{{ m.pick }}" style="{{ m.style }}">{{ m.nome }}</button>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #1E4A33;padding-top:14px">
+    <span style="font-size:13px;color:#8FC7A4;font-family:ui-monospace,monospace">{{ fileLabel }}</span>
+    <div style="flex:1"></div>
+    <button onClick="{{ replay }}" style="background:transparent;color:#E9F5EC;border:1px solid #2E6B4A;padding:8px 14px;font-size:13px;cursor:pointer;border-radius:3px;white-space:nowrap">Repetir animação</button>
+    <button onClick="{{ dlSvg }}" style="background:#34D27F;color:#06281a;border:1px solid #34D27F;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">Baixar SVG</button>
+    <button onClick="{{ dlPng }}" style="background:#34D27F;color:#06281a;border:1px solid #34D27F;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">Baixar PNG</button>
+    <button onClick="{{ dlAnim }}" style="background:#34D27F;color:#06281a;border:1px solid #34D27F;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">Baixar SVG animado</button>
+    <button onClick="{{ dlVideo }}" style="background:#34D27F;color:#06281a;border:1px solid #34D27F;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">Baixar vídeo</button>
+    <button onClick="{{ dlCombo }}" style="background:#EDE58A;color:#06281a;border:1px solid #EDE58A;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">ZIP desta combinação · todas regiões e formatos</button>
+    <button onClick="{{ dlRegion }}" style="background:transparent;color:#E9F5EC;border:1px solid #2E6B4A;padding:8px 14px;font-size:13px;cursor:pointer;border-radius:3px;white-space:nowrap">ZIP padrão da região</button>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+    <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4;width:96px">Tudo</span>
+    <button onClick="{{ dlAllRegion }}" style="background:#EDE58A;color:#06281a;border:1px solid #EDE58A;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">ZIP todas as combinações · esta região (SVG + animado)</button>
+    <button onClick="{{ dlAllEver }}" style="background:transparent;color:#EDE58A;border:1px solid #EDE58A;padding:8px 14px;font-size:13px;cursor:pointer;border-radius:3px;white-space:nowrap">ZIP todas as combinações · todas as regiões</button>
+    <span style="font-size:12px;color:#8FC7A4">8 paletas × 3 composições × 24 filtros × 4 formatos</span>
+  </div>
+  <sc-if value="{{ busy }}" hint-placeholder-val="{{ false }}">
+    <div style="font-size:13px;color:#EDE58A">{{ busy }}</div>
+  </sc-if>
+  <div style="display:flex;justify-content:center">
+    <div ref="{{ host }}" onClick="{{ replay }}" title="Clique para repetir" style="{{ stageStyle }}"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #1E4A33;padding-top:16px">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8FC7A4">Vinheta contínua · todas as regiões em sequência, com a combinação e o formato atuais</span>
+      <div style="flex:1"></div>
+      <button onClick="{{ playVin }}" style="background:transparent;color:#E9F5EC;border:1px solid #2E6B4A;padding:8px 14px;font-size:13px;cursor:pointer;border-radius:3px;white-space:nowrap">▶ Tocar vinheta</button>
+      <button onClick="{{ dlVinVideo }}" style="background:#EDE58A;color:#06281a;border:1px solid #EDE58A;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;border-radius:3px;white-space:nowrap">Baixar vinheta em vídeo</button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <span style="font-size:12px;color:#8FC7A4">Ordem:</span>
+      <sc-for list="{{ vinOrder }}" as="v" hint-placeholder-count="9">
+        <button onClick="{{ v.pick }}" title="Clique para incluir/excluir" style="{{ v.style }}">{{ v.nome }}</button>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div ref="{{ vinHost }}" onClick="{{ playVin }}" title="Clique para tocar" style="{{ stageStyle }}"></div>
+    </div>
+    <div style="display:flex;overflow-x:auto;padding-bottom:8px;background-color:#1d1d1d;background-image:repeating-conic-gradient(#2a2a2a 0 25%, #1d1d1d 0 50%);background-size:16px 16px">
+      <sc-for list="{{ strip }}" as="t" hint-placeholder-count="9">
+        <img loading="lazy" src="{{ t.src }}" onClick="{{ t.pick }}" title="{{ t.nome }}" style="height:180px;width:320px;flex:none;display:block;cursor:pointer"></img>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;animar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;velocidade&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.5,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { rid: 'a-brasil-panorama', pal: 'original', comp: 'padrao', fid: '16x9', m: {}, ready: !!window.Skyline, busy: '', off: {} };
+  host = React.createRef();
+  vinHost = React.createRef();
+  TOG = [['semFundo', 'Sem fundo (alpha)'], ['semReflexo', 'Sem reflexo'], ['semArco', 'Sem arco'], ['sol', 'Amanhecer'], ['converge', 'Convergência']];
+  componentDidMount() { const w = () => (window.Skyline && window.Motion) ? this.setState({ ready: true }, () => { this.inject(); this.mountVin(); }) : setTimeout(w, 50); w(); }
+  componentWillUnmount() { clearTimeout(this._raf); }
+  vinRids() { return Object.keys(window.Skyline.REGIONS).filter(r => !this.state.off[r]); }
+  mountVin() {
+    const h = this.vinHost.current; if (!h || !window.Motion) return;
+    clearTimeout(this._raf);
+    const Sk = window.Skyline, F = Sk.FORMATS[this.state.fid], rids = this.vinRids(); if (!rids.length) { h.innerHTML = ''; return; }
+    h.innerHTML = Motion.vinMarkup(rids.map(r => this.svg(r)), F.w, F.h);
+    const root = h.querySelector('svg'); root.setAttribute('width', '100%'); root.setAttribute('height', '100%'); root.style.display = 'block';
+    this._vin = { root, W: F.w, H: F.h, n: rids.length };
+    this.vinFrame(1e9);
+  }
+  vinSp() { return Motion.VIN.sp * (this.props.velocidade ?? 1); }
+  vinFrame(t) {
+    const v = this._vin; if (!v) return;
+    if (!v.items) { const plan = Motion.vinPlan(v.n, v.W); v.plan = plan; v.items = []; for (let i = 0; i < v.n; i++) v.items.push(...Motion.timeline(v.root, this.vinSp(), 'r' + i + '-', plan.starts[i])); }
+    const tt = Math.min(t, v.plan.total);
+    Motion.applyAt(v.items, tt);
+    v.root.setAttribute('viewBox', `${(t >= 1e9 ? 0 : v.plan.camX(tt)).toFixed(2)} 0 ${v.W} ${v.H}`);
+    return tt < v.plan.total;
+  }
+  playVin = () => {
+    if (!this._vin) this.mountVin(); const v = this._vin; if (!v) return;
+    clearTimeout(this._raf); v.items.forEach(it => it.last = -1);
+    const t0 = performance.now();
+    const loop = () => { if (this.vinFrame(performance.now() - t0)) this._raf = setTimeout(loop, 33); };
+    loop();
+  };
+  async runVideo(fn, label) {
+    if (!window.VideoEncoder) { alert('Seu navegador não suporta exportação de vídeo (use Chrome ou Edge atualizado).'); return; }
+    try {
+      const alpha = !!this.state.m.semFundo || this.state.pal === 'alpha';
+      const r = await fn({ alpha, onProgress: (i, n) => { if (i % 5 === 0 || i === n) this.setState({ busy: `${label}: quadro ${i} de ${n}…` }); } });
+      this.save(r.blob, this.name(label.startsWith('Vinheta') ? 'vinheta' : this.state.rid) + '.' + r.ext);
+      this.setState({ busy: alpha && !r.alpha ? 'Pronto — este navegador não gera vídeo com transparência; saiu MP4 com fundo preto.' : '' });
+    } catch (e) { console.error(e); this.setState({ busy: 'Erro ao gerar vídeo: ' + e.message }); }
+  }
+  componentDidUpdate(p) { if (p && p.velocidade !== this.props.velocidade) this.play(); }
+  mods() { return Object.assign({ comp: this.state.comp }, this.state.m); }
+  pick(o) { this.setState(o, () => { this.inject(); this.mountVin(); }); }
+  svg(rid = this.state.rid, fid = this.state.fid) { return window.Skyline.build(rid, this.state.pal, fid, this.mods()); }
+  name(rid = this.state.rid, fid = this.state.fid) { return window.Skyline.comboName(rid, this.state.pal, fid, this.mods()); }
+  inject() {
+    const h = this.host.current; if (!h || !window.Skyline) return;
+    h.innerHTML = this.svg();
+    const s = h.querySelector('svg'); s.setAttribute('width', '100%'); s.setAttribute('height', '100%'); s.style.display = 'block';
+    this.play();
+  }
+  draw(el, delay, dur) {
+    if (!el || !el.getTotalLength) return;
+    const len = el.getTotalLength(); if (!len) return;
+    el.animate([{ strokeDasharray: `${len} ${len}`, strokeDashoffset: len }, { strokeDasharray: `${len} ${len}`, strokeDashoffset: 0 }], { duration: dur, delay, fill: 'backwards', easing: 'cubic-bezier(.6,0,.3,1)' });
+  }
+  fade(el, delay, dur) { if (el) el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: dur, delay, fill: 'backwards', easing: 'ease-out' }); }
+  play = () => {
+    const root = this.host.current && this.host.current.querySelector('svg'); if (!root) return;
+    root.getAnimations({ subtree: true }).forEach(a => a.cancel());
+    if (!(this.props.animar ?? true)) return;
+    this.schedule(root, (el, a, b) => this.draw(el, a, b), (el, a, b) => this.fade(el, a, b));
+  };
+  animated(svgStr) {
+    const doc = new DOMParser().parseFromString(svgStr, 'image/svg+xml'); const root = doc.documentElement;
+    const add = (el, css) => el.setAttribute('style', ((el.getAttribute('style') || '') + ';' + css).replace(/^;/, ''));
+    const draw = (el, delay, dur) => { if (!el) return; el.setAttribute('pathLength', '1'); add(el, `stroke-dasharray:1 1;stroke-dashoffset:1;animation:bc-draw ${Math.round(dur)}ms cubic-bezier(.6,0,.3,1) ${Math.round(delay)}ms forwards`); };
+    const fade = (el, delay, dur) => { if (!el) return; const o = el.getAttribute('opacity'); add(el, `opacity:0;--o:${o || 1};animation:bc-fade ${Math.round(dur)}ms ease-out ${Math.round(delay)}ms forwards`); };
+    this.schedule(root, draw, fade);
+    const st = doc.createElementNS('http://www.w3.org/2000/svg', 'style');
+    st.textContent = '@keyframes bc-draw{to{stroke-dashoffset:0}}@keyframes bc-fade{to{opacity:var(--o,1)}}';
+    root.insertBefore(st, root.firstChild);
+    return new XMLSerializer().serializeToString(doc);
+  }
+  schedule(root, draw, fade) { Motion.schedule(root, draw, fade, this.props.velocidade ?? 1, ''); }
+  async zipAll(rids) {
+    const Sk = window.Skyline, z = new window.JSZip();
+    const tk = this.TOG.map(t => t[0]); const combos = [];
+    for (let b = 0; b < 1 << tk.length; b++) { const m = {}; tk.forEach((k, i) => { if (b & (1 << i)) m[k] = true; }); if (m.sol && m.converge) continue; combos.push(m); }
+    const comps = ['padrao', 'minimal', 'maximal'], fids = Object.keys(Sk.FORMATS);
+    const total = rids.length * Sk.PALETTES.length * comps.length * combos.length * fids.length; let n = 0;
+    for (const rid of rids) for (const pal of Sk.PALETTES) for (const comp of comps) for (const m0 of combos) for (const fid of fids) {
+      const m = Object.assign({ comp }, m0), svg = Sk.build(rid, pal, fid, m), nm = Sk.comboName(rid, pal, fid, m);
+      z.file(`${rid}/${fid}/estatico/${nm}.svg`, svg);
+      z.file(`${rid}/${fid}/animado/${nm}__animado.svg`, this.animated(svg));
+      if (++n % 40 === 0) { this.setState({ busy: `Gerando ${n} de ${total} combinações…` }); await new Promise(r => setTimeout(r, 0)); }
+    }
+    this.setState({ busy: 'Compactando… (pode levar alguns minutos)' });
+    const blob = await z.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } }, meta => this.setState({ busy: `Compactando… ${Math.round(meta.percent)}%` }));
+    this.save(blob, (rids.length > 1 ? 'todas-regioes' : rids[0]) + '__todas-combinacoes.zip');
+    this.setState({ busy: '' });
+  }
+  save(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+  png(svg, w, h) {
+    return new Promise((res, rej) => {
+      const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+      const img = new Image();
+      img.onload = () => { const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(img, 0, 0, w, h); URL.revokeObjectURL(url); c.toBlob(b => b ? res(b) : rej(new Error('png')), 'image/png'); };
+      img.onerror = rej; img.src = url;
+    });
+  }
+  async zipJobs(jobs, zipName) {
+    const z = new window.JSZip(); let n = 0;
+    for (const j of jobs) {
+      const F = window.Skyline.FORMATS[j.fid];
+      z.file(`${j.rid}/svg/${j.name}.svg`, j.svg);
+      z.file(`${j.rid}/png/${j.name}.png`, await this.png(j.svg, F.w, F.h));
+      this.setState({ busy: `Gerando ${++n} de ${jobs.length}…` });
+    }
+    this.setState({ busy: 'Compactando…' });
+    this.save(await z.generateAsync({ type: 'blob' }), zipName);
+    this.setState({ busy: '' });
+  }
+  renderVals() {
+    const Sk = window.Skyline; const { rid, pal, comp, fid, m } = this.state;
+    const btn = on => ({ background: on ? '#34D27F' : 'transparent', color: on ? '#06281a' : '#E9F5EC', border: `1px solid ${on ? '#34D27F' : '#2E6B4A'}`, padding: '7px 12px', fontSize: '13px', cursor: 'pointer', borderRadius: '3px', fontWeight: on ? 600 : 400, whiteSpace: 'nowrap' });
+    if (!Sk || !window.Motion) return { vinOrder: [], vinHost: this.vinHost, regions: [], palettes: [], comps: [], toggles: [], formats: [], strip: [], host: this.host, stageStyle: {}, busy: '', fileLabel: '' };
+    const F = Sk.FORMATS[fid];
+    const key = pal + JSON.stringify(this.mods());
+    if (this._stripKey !== key) { this._stripKey = key; this._strip = Object.keys(Sk.REGIONS).map(r => ({ r, src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(Sk.build(r, pal, '16x9', this.mods())) })); }
+    return {
+      host: this.host, busy: this.state.busy, fileLabel: this.name(),
+      regions: Object.entries(Sk.REGIONS).map(([k, r]) => ({ nome: r.nome, style: btn(k === rid), pick: () => this.pick({ rid: k }) })),
+      palettes: Sk.PALETTES.map(k => ({ nome: Sk.STYLES[k].nome, style: btn(k === pal), pick: () => this.pick({ pal: k }) })),
+      comps: [['padrao', 'Padrão'], ['minimal', 'Minimal'], ['maximal', 'Maximal']].map(([k, n]) => ({ nome: n, style: btn(k === comp), pick: () => this.pick({ comp: k }) })),
+      toggles: this.TOG.map(([k, n]) => ({ nome: (m[k] ? '✓ ' : '') + n, style: btn(!!m[k]), pick: () => this.pick({ m: Object.assign({}, m, { [k]: !m[k] }) }) })),
+      formats: Object.entries(Sk.FORMATS).map(([k, f]) => ({ nome: f.nome, style: btn(k === fid), pick: () => this.pick({ fid: k }) })),
+      stageStyle: { width: '100%', maxWidth: `min(1400px, calc(70vh * ${F.w / F.h}))`, aspectRatio: `${F.w} / ${F.h}`, cursor: 'pointer', backgroundColor: '#1d1d1d', backgroundImage: 'repeating-conic-gradient(#2a2a2a 0 25%, #1d1d1d 0 50%)', backgroundSize: '24px 24px' },
+      strip: this._strip.map(t => ({ src: t.src, nome: Sk.REGIONS[t.r].nome, pick: () => this.pick({ rid: t.r, fid: '16x9' }) })),
+      replay: this.play,
+      clear: () => this.pick({ m: {}, comp: 'padrao' }),
+      hasFilters: Object.values(m).some(Boolean) || comp !== 'padrao',
+      vinOrder: Object.entries(Sk.REGIONS).map(([k, r]) => ({ nome: (this.state.off[k] ? '' : '✓ ') + r.nome, style: btn(!this.state.off[k]), pick: () => this.pick({ off: Object.assign({}, this.state.off, { [k]: !this.state.off[k] }) }) })),
+      vinHost: this.vinHost,
+      playVin: this.playVin,
+      dlVideo: () => this.runVideo(o => Motion.pieceVideo(this.svg(), this.props.velocidade ?? 1, Object.assign({ w: F.w, h: F.h }, o)), 'Vídeo'),
+      dlVinVideo: () => { const rids = this.vinRids(); if (!rids.length) return; this.runVideo(o => Motion.vinVideo(rids.map(r => this.svg(r)), F.w, F.h, this.vinSp(), Object.assign({ w: F.w, h: F.h }, o)), 'Vinheta'); },
+      dlAnim: () => this.save(new Blob([this.animated(this.svg())], { type: 'image/svg+xml' }), this.name() + '__animado.svg'),
+      dlAllRegion: () => this.zipAll([rid]),
+      dlAllEver: () => { if (confirm('Isso gera todas as combinações de TODAS as 9 regiões (≈26 mil SVGs, estáticos + animados). Pode levar 10–20 min e um arquivo grande. Continuar?')) this.zipAll(Object.keys(Sk.REGIONS)); },
+      dlSvg: () => this.save(new Blob([this.svg()], { type: 'image/svg+xml' }), this.name() + '.svg'),
+      dlPng: async () => this.save(await this.png(this.svg(), F.w, F.h), this.name() + '.png'),
+      dlCombo: () => { const jobs = []; for (const r of Object.keys(Sk.REGIONS)) for (const f of Object.keys(Sk.FORMATS)) jobs.push({ rid: r, fid: f, svg: this.svg(r, f), name: this.name(r, f) }); this.zipJobs(jobs, this.name('todas', 'formatos') + '.zip'); },
+      dlRegion: () => this.zipJobs(Sk.STANDARD.map(([s, f]) => ({ rid, fid: f, svg: Sk.build(rid, s, f), name: Sk.fileName(rid, s, f).replace('.svg', '') })), rid + '.zip'),
+    };
+  }
+}
+</script>
+</body>
+</html>

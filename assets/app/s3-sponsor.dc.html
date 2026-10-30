@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="../js/image-slot.js"></script>
+<style>
+@keyframes sp3In{0%,4%{transform:translateY(120%)}14%,86%{transform:translateY(0)}96%,100%{transform:translateY(120%)}}
+</style>
+</helmet>
+<div style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px;background:#1E1E1C">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;background:{{ bgFill }};font-family:'Bricolage Grotesque',sans-serif">
+<sc-if value="{{ showPat }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:{{ pal.pat }};opacity:.5;mask:url({{ eUrl }}) 0 0/{{ eT }}px auto repeat"></div></sc-if>
+
+<sc-if value="{{ lAnuncio }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:{{ padX }}px;top:{{ kY }}px;font-weight:700;font-size:{{ kfs }}px;letter-spacing:.22em;color:{{ pal.kick }}">{{ kicker }}</div>
+<div style="position:absolute;left:{{ cardX }}px;top:{{ cardY }}px;width:{{ cardW }}px;height:{{ cardH }}px;background:#FFFFFF;padding:{{ cardP }}px;box-sizing:border-box;box-shadow:0 20px 40px rgba(0,0,0,.18)"><image-slot id="{{ slotId }}" shape="rect" fit="contain" placeholder="Logo do patrocinador"></image-slot></div>
+<div style="position:absolute;left:{{ tierX }}px;top:{{ tierY }}px;transform:rotate(-6deg);background:{{ tierBg }};color:{{ tierC }};border:{{ tierB }}px solid #FFFFFF;padding:{{ tierP }};font-weight:800;font-stretch:{{ larg }}%;font-size:{{ tierFs }}px;line-height:1;letter-spacing:.02em;white-space:nowrap;box-shadow:0 12px 16px rgba(0,0,0,.25)">{{ tierTxt }}</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ mR }}px;top:{{ mY }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ mfs }}px;line-height:.98;letter-spacing:{{ trk }}em;color:{{ pal.ink }};text-wrap:balance">{{ mensagem }}</div>
+</sc-if>
+
+<sc-if value="{{ lGrade }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:{{ padX }}px;top:{{ kY }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ gtfs }}px;line-height:.92;letter-spacing:{{ trk }}em;color:{{ pal.ink }}">{{ mensagem }}</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ gY }}px;display:flex;flex-direction:column;gap:{{ gGap }}px">
+<sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:{{ gGap2 }}px"><span style="font-weight:700;font-size:{{ kfs }}px;letter-spacing:.22em;color:{{ pal.kick }}">{{ t.nome }}</span><div style="display:grid;grid-template-columns:repeat({{ t.cols }},1fr);gap:{{ gGap2 }}px"><sc-for list="{{ t.slots }}" as="s" hint-placeholder-count="2"><div style="position:relative;height:{{ t.h }}px;background:#FFFFFF;padding:{{ t.p }}px;box-sizing:border-box"><image-slot id="{{ s }}" shape="rect" fit="contain" placeholder="Logo"></image-slot></div></sc-for></div></div></sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ lGc }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ foto }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0"><image-slot id="{{ slotId }}-bg" shape="rect" src="../img/fotos/solange.jpg" placeholder="Frame do vídeo"></image-slot></div></sc-if>
+<div style="position:absolute;right:{{ padX }}px;bottom:{{ gcB }}px;display:flex;align-items:stretch;overflow:hidden;pointer-events:none"><div style="display:flex;animation:sp3In 6s cubic-bezier(.7,0,.2,1) infinite both">
+<div style="background:{{ pal.block }};padding:0 30px;display:flex;align-items:center;font-weight:700;font-size:26px;letter-spacing:.2em;color:{{ pal.title }}">{{ tierTxt }}</div>
+<div style="position:relative;width:340px;height:130px;background:#FFFFFF;padding:20px 30px;box-sizing:border-box;pointer-events:auto"><image-slot id="{{ slotId }}" shape="rect" fit="contain" placeholder="Logo"></image-slot></div>
+</div></div>
+</sc-if>
+
+<sc-if value="{{ lPalco }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:{{ fr }}px;top:{{ fr }}px;right:{{ fr }}px;bottom:{{ fr }}px;background:{{ pal.bg }}"></div>
+<div style="position:absolute;left:0;right:0;top:{{ kY }}px;text-align:center;font-weight:700;font-size:{{ kfs }}px;letter-spacing:.3em;color:{{ pal.kick }}">{{ tierTxt }}</div>
+<div style="position:absolute;left:{{ cardX }}px;top:{{ cardY }}px;width:{{ cardW }}px;height:{{ cardH }}px;background:#FFFFFF;padding:{{ cardP }}px;box-sizing:border-box"><image-slot id="{{ slotId }}" shape="rect" fit="contain" placeholder="Logo do patrocinador"></image-slot></div>
+<div style="position:absolute;left:0;right:0;top:{{ mY }}px;text-align:center;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ mfs }}px;letter-spacing:{{ trk }}em;color:{{ pal.ink }}">{{ mensagem }}</div>
+</sc-if>
+
+<sc-if value="{{ assinatura }}" hint-placeholder-val="{{ true }}"><img src="../img/wm-{{ pal.wm }}.png" style="position:absolute;left:{{ wmX }}px;top:{{ wmY }}px;width:{{ wmW }}px"></sc-if>
+<sc-if value="{{ grain }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:url(../img/papel.png) 0 0/700px,url(../img/grao.png) 0 0/300px;opacity:{{ tx }};pointer-events:none"></div><sc-if value="{{ gr2.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ gr2.bg }};mix-blend-mode:{{ gr2.bl }};opacity:{{ gr2.o }};pointer-events:none"></div></sc-if><sc-if value="{{ tx2.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ tx2.bg }};mix-blend-mode:{{ tx2.bl }};opacity:{{ tx2.o }};pointer-events:none"></div></sc-if></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:288,&quot;height&quot;:360},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;anuncio&quot;,&quot;grade&quot;,&quot;gc&quot;,&quot;palco&quot;],&quot;default&quot;:&quot;anuncio&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;tier&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;master&quot;,&quot;ouro&quot;,&quot;prata&quot;,&quot;apoio&quot;,&quot;midia&quot;,&quot;oferecimento&quot;],&quot;default&quot;:&quot;ouro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;formato&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;4:5&quot;,&quot;1:1&quot;,&quot;9:16&quot;,&quot;linkedin&quot;],&quot;default&quot;:&quot;4:5&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verde&quot;,&quot;amarelo&quot;,&quot;noite&quot;,&quot;papel&quot;,&quot;azul&quot;],&quot;default&quot;:&quot;verde&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;elemento&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cobogo&quot;,&quot;azulejo&quot;,&quot;calcadao&quot;,&quot;fuxico&quot;,&quot;estrelas&quot;,&quot;nenhum&quot;],&quot;default&quot;:&quot;cobogo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;quantidade&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:3,&quot;max&quot;:12,&quot;step&quot;:1,&quot;default&quot;:6,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;empresa&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Empresa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;mensagem&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;kicker&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;BRAZIL CONFERENCE 2027&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;peso&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:800,&quot;step&quot;:100,&quot;default&quot;:800,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;tracking&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:-8,&quot;max&quot;:8,&quot;step&quot;:1,&quot;default&quot;:-3,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;assinatura&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;textura&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;sutil&quot;,&quot;media&quot;,&quot;forte&quot;],&quot;default&quot;:&quot;media&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;fundo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;foto&quot;,&quot;magenta&quot;,&quot;transparente&quot;],&quot;default&quot;:&quot;foto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;slotId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;sp3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:288,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;texturaExtra&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;ruído&quot;,&quot;ruído forte&quot;,&quot;papel&quot;,&quot;papel + ruído&quot;,&quot;meio-tom&quot;,&quot;linho&quot;,&quot;linhas de tv&quot;],&quot;default&quot;:&quot;nenhuma&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;texturaForca&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:45,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;gradiente&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhum&quot;,&quot;luz suave&quot;,&quot;profundidade&quot;,&quot;brilho dourado&quot;,&quot;mata para céu&quot;,&quot;aurora&quot;,&quot;noite&quot;,&quot;vinheta&quot;],&quot;default&quot;:&quot;nenhum&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;gradienteForca&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;}}">
+const PAL = {
+  verde:   { bg:'#0B5E37', pat:'#1A8A52', block:'#15E888', title:'#0B5E37', kick:'#15E888', ink:'#FFFFFF', wm:'amarelo' },
+  amarelo: { bg:'#FBF99D', pat:'#EDE77E', block:'#0D3A85', title:'#FBF99D', kick:'#0A7BE5', ink:'#0D3A85', wm:'navy' },
+  noite:   { bg:'#0D3A85', pat:'#0A7BE5', block:'#FBF99D', title:'#0D3A85', kick:'#15E888', ink:'#FFFFFF', wm:'amarelo' },
+  papel:   { bg:'#F5F4EC', pat:'#E4E2D6', block:'#0B5E37', title:'#F5F4EC', kick:'#0A7BE5', ink:'#0B5E37', wm:'verde' },
+  azul:    { bg:'#0A7BE5', pat:'#3A93EA', block:'#FBF99D', title:'#0D3A85', kick:'#FBF99D', ink:'#FFFFFF', wm:'branco' },
+};
+const FMT = { '4:5':[1080,1350], '1:1':[1080,1080], '9:16':[1080,1920], 'linkedin':[1200,627], '16:9':[1920,1080] };
+const EL = { cobogo:['../img/f2/cobogo.svg',.12], azulejo:['../img/f2/azulejo.svg',.13], calcadao:['../img/f2/calcadao.svg',.24], fuxico:['../img/f2/fuxico.svg',.11], estrelas:['../img/f/estrela8.svg',.08] };
+const TIER = { master:['PATROCÍNIO MASTER','#FBF99D','#0B5E37'], ouro:['PATROCÍNIO OURO','#FBF99D','#0D3A85'], prata:['PATROCÍNIO PRATA','#FFFFFF','#0D3A85'], apoio:['APOIO','#15E888','#0D3A85'], midia:['PARCEIRO DE MÍDIA','#0A7BE5','#FFFFFF'], oferecimento:['OFERECIMENTO','#15E888','#0B5E37'] };
+const TEXS = { ruído:['url(../img/grao.png) 0 0/420px 420px repeat','overlay'], 'ruído forte':['url(../img/grao.png) 0 0/220px 220px repeat','multiply'], papel:['url(../img/papel.png) center/cover','multiply'], 'meio-tom':['radial-gradient(rgba(0,0,0,.55) 1.3px, transparent 1.8px) 0 0/11px 11px','soft-light'], linho:['repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 1px, transparent 1px 4px)','overlay'], 'linhas de tv':['repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 2px, transparent 2px 6px)','multiply'], 'papel + ruído':['url(../img/grao.png) 0 0/320px 320px repeat, url(../img/papel.png) center/cover','multiply'] };
+const GRADS = { 'luz suave':['radial-gradient(120% 80% at 15% 0%, rgba(255,255,255,.45), transparent 62%)','soft-light'], profundidade:['linear-gradient(180deg, transparent 35%, rgba(0,0,0,.5))','multiply'], 'brilho dourado':['radial-gradient(90% 70% at 85% 8%, rgba(251,249,157,.6), transparent 65%)','screen'], 'mata para céu':['linear-gradient(160deg, rgba(21,232,136,.5), rgba(10,123,229,.5))','overlay'], aurora:['radial-gradient(60% 50% at 18% 82%, rgba(21,232,136,.55), transparent 70%), radial-gradient(60% 50% at 82% 18%, rgba(10,123,229,.55), transparent 70%)','screen'], noite:['linear-gradient(180deg, rgba(13,58,133,0) 20%, rgba(13,58,133,.75))','multiply'], vinheta:['radial-gradient(110% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.45))','multiply'] };
+const mkTx = (p) => { const t = TEXS[p.texturaExtra ?? p.textura ?? 'nenhuma']; return t ? { on: true, bg: t[0], bl: t[1], o: (p.texturaForca ?? 45) / 100 } : { on: false }; };
+const mkGr = (p) => { const g = GRADS[p.gradiente ?? 'nenhum']; return g ? { on: true, bg: g[0], bl: g[1], o: (p.gradienteForca ?? 100) / 100 } : { on: false }; };
+class Component extends DCLogic {
+  renderVals() { const r = this.__rvBase(); return r && typeof r === 'object' ? { ...r, tx2: mkTx(this.props), gr2: mkGr(this.props) } : r; }
+  __rvBase() {
+    const p = this.props;
+    const L = p.layout ?? 'anuncio';
+    let fmt = FMT[p.formato] ? p.formato : '4:5';
+    if (L === 'gc' || L === 'palco') fmt = '16:9';
+    const [W, H] = FMT[fmt];
+    const dw = p.largura ?? 288, esc = dw / W, dh = Math.round(H * esc);
+    const pal = PAL[p.paleta] || PAL.verde;
+    const E = EL[p.elemento ?? 'cobogo'];
+    const tier = TIER[p.tier] || TIER.ouro;
+    const peso = p.peso ?? 800, larg = p.larguraFonte ?? 100, trk = (p.tracking ?? -3) / 100;
+    const m = Math.min(W, H), wide = W / H > 1.5;
+    const padX = Math.round(W * .07);
+    const emp = p.empresa ?? 'Empresa';
+    const f = p.fundo ?? 'foto';
+    const sid = p.slotId ?? 'sp3';
+    const v = { W, H, dw, dh, esc, pal, peso, larg, trk, padX, slotId: sid,
+      bgFill: L === 'gc' ? (f === 'magenta' ? '#FF00FF' : 'transparent') : L === 'palco' ? pal.block : pal.bg,
+      showPat: !!E && L !== 'gc', eUrl: E ? E[0] : '', eT: E ? Math.round(m * E[1]) : 0,
+      lAnuncio: L === 'anuncio', lGrade: L === 'grade', lGc: L === 'gc', lPalco: L === 'palco', foto: f === 'foto',
+      kicker: (p.kicker ?? 'BRAZIL CONFERENCE 2027').toUpperCase(), tierTxt: tier[0], tierBg: tier[1], tierC: tier[2],
+      mensagem: p.mensagem ?? (L === 'grade' ? 'Quem faz a BC27 acontecer' : L === 'palco' ? 'Obrigado por acreditar no Brasil' : `A ${emp} acredita no Brasil em primeira pessoa.`),
+      kfs: Math.round(m * .028), assinatura: (p.assinatura ?? true) && L !== 'gc', grain: L !== 'gc',
+      tx: { nenhuma: 0, sutil: .3, media: .6, forte: .95 }[p.textura ?? 'media'] ?? .6 };
+    v.kY = Math.round(H * .07);
+    if (wide) { v.cardW = Math.round(W * .38); v.cardH = Math.round(v.cardW * .56); v.cardX = Math.round(W - padX - v.cardW); v.cardY = Math.round((H - v.cardH) / 2); v.mY = Math.round(H * .24); v.mfs = Math.round(m * .085); }
+    else { v.cardW = Math.round(W * .7); v.cardH = Math.round(v.cardW * .62); v.cardX = Math.round((W - v.cardW) / 2); v.cardY = Math.round(H * (fmt === '9:16' ? .2 : .16)); v.mY = Math.round(v.cardY + v.cardH + m * .12); v.mfs = Math.round(m * .085); }
+    if (fmt === '1:1' && !wide) { v.cardW = Math.round(W * .56); v.cardH = Math.round(v.cardW * .62); v.cardX = Math.round((W - v.cardW) / 2); v.cardY = Math.round(H * .13); v.mY = Math.round(v.cardY + v.cardH + m * .1); v.mfs = Math.round(m * .07); }
+    v.cardP = Math.round(v.cardW * .1);
+    v.tierFs = Math.round(m * .04); v.tierB = Math.round(m * .008); v.tierP = `${Math.round(m*.016)}px ${Math.round(m*.03)}px`;
+    v.tierX = wide ? v.cardX - Math.round(m * .04) : v.cardX - Math.round(m * .03); v.tierY = v.cardY + v.cardH - Math.round(m * .04);
+    v.mR = wide ? Math.round(W - v.cardX + padX * .6) : padX;
+    if (wide) v.mfs = Math.round(Math.min(v.mfs, (v.cardX - padX * 1.6) / 9));
+    v.gtfs = Math.round(m * (wide ? .07 : .1)); v.gY = Math.round(v.kY + v.gtfs * 2.1 + m * .02); v.gGap = Math.round(m * .04); v.gGap2 = Math.round(m * .018);
+    const n = p.quantidade ?? 6;
+    const tiersDef = [['MASTER', 1, Math.round(m * .2)], ['OURO', 2, Math.round(m * .13)], ['APOIO', wide ? 6 : 3, Math.round(m * .09)]];
+    let k = 0;
+    v.tiers = tiersDef.map(([nome, cols, h], ti) => { const cnt = ti === 0 ? 1 : ti === 1 ? Math.min(2, n) : Math.max(0, n - 3); const slots = Array.from({ length: cnt }, () => `${sid}-g${++k}`); return {  nome, cols, h, p: Math.round(h * .16), slots }; }).filter(t => t.slots.length);
+    v.gcB = Math.round(H * .08); v.fr = Math.round(m * .03);
+    if (L === 'palco') { v.cardW = Math.round(W * .36); v.cardH = Math.round(v.cardW * .5); v.cardX = Math.round((W - v.cardW) / 2); v.cardY = Math.round(H * .26); v.mY = Math.round(v.cardY + v.cardH + H * .08); v.mfs = Math.round(m * .06); v.kY = Math.round(H * .14); }
+    v.wmW = Math.round(m * .3); v.wmX = wide ? padX : Math.round((W - v.wmW) / 2); v.wmY = Math.round(H - m * .07 - v.wmW * .115);
+    if (L === 'anuncio' && !wide) { v.wmX = padX; }
+    if (L === 'palco') { v.wmX = Math.round((W - v.wmW) / 2); v.wmY = Math.round(H - m * .12); }
+    if (wide && L === 'anuncio') { v.mY = Math.round(H * .26); }
+    return v;
+  }
+}
+</script>
+</body>
+</html>

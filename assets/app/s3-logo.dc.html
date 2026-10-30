@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px;background:{{ bgOuter }}">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;background:{{ bg }}">
+<sc-if value="{{ isPadrao }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ tiles }}" as="t" hint-placeholder-count="0"><div style="position:absolute;left:{{ t.x }}px;top:{{ t.y }}px;width:{{ tw }}px;height:{{ th }}px;animation:{{ t.a }}"><div style="position:absolute;left:{{ tix }}px;top:{{ tiy }}px;width:572px;height:174px;transform:scale({{ tk }});transform-origin:0 0"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:{{ t.R }}"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:{{ t.D }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:{{ t.C }}"></div></div></div></sc-for></sc-if>
+<sc-if value="{{ isLogo }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:{{ gx }}px;top:{{ gy }}px;width:{{ bw }}px;height:{{ bh }}px;transform:scale({{ k }});transform-origin:0 0">
+<sc-for list="{{ ecos }}" as="e" hint-placeholder-count="0"><div style="position:absolute;left:0;top:0;width:572px;height:174px;animation:{{ e.a }}"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:{{ e.R }}"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:{{ e.D }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:{{ e.C }}"></div></div></sc-for>
+<div style="position:absolute;left:65px;top:0;width:308px;height:174px;transform-origin:{{ oR }};animation:{{ aR }}"><div style="width:100%;height:100%;background:{{ cR }}"></div></div>
+<div style="position:absolute;left:268px;top:0;width:304px;height:174px;transform-origin:{{ oD }};animation:{{ aD }}"><div style="width:100%;height:100%;background:{{ cD }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div></div>
+<div style="position:absolute;left:0;top:41px;width:92px;height:92px;transform-origin:{{ oC }};animation:{{ aC }}"><div style="width:100%;height:100%;border-radius:50%;background:{{ cC }}"></div></div>
+<sc-if value="{{ showB }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:638px;top:-4px;width:322px;height:178px;transform-origin:left center;animation:{{ aB }}"><div style="width:100%;height:100%;background:{{ cB }};mask:url(../img/bc-mask.png) 0 0/100% 100% no-repeat"></div></div></sc-if>
+<sc-if value="{{ showN }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;top:222px;width:960px;height:108px;transform-origin:left center;animation:{{ aN }}"><div style="width:100%;height:100%;background:{{ cB }};mask:url(../img/wm-branco.png) 0 0/100% 100% no-repeat"></div></div></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ isLosangos }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ lrows }}" as="r" hint-placeholder-count="0"><div style="position:absolute;left:{{ r.x }}px;top:{{ r.y }}px;height:{{ rh }}px;display:flex;animation:{{ r.a }}"><sc-for list="{{ r.it }}" as="d" hint-placeholder-count="0"><div style="flex:none;width:{{ ldw }}px;height:{{ rh }}px;background:{{ d.c }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div></sc-for></div></sc-for></sc-if>
+<sc-if value="{{ isBolinhas }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ dots }}" as="d" hint-placeholder-count="0"><div style="position:absolute;left:{{ d.x }}px;top:{{ d.y }}px;width:{{ ds }}px;height:{{ ds }}px;border-radius:50%;background:{{ d.c }};animation:{{ d.a }}"></div></sc-for></sc-if>
+<sc-if value="{{ isFaixas }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ bars }}" as="b" hint-placeholder-count="0"><div style="position:absolute;left:{{ b.x }}px;top:{{ b.y }}px;width:{{ b.w }}px;height:{{ fbh }}px;animation:{{ b.a }}"><div style="position:absolute;left:{{ fcr }}px;top:0;right:{{ fdr }}px;height:100%;background:{{ b.R }}"></div><div style="position:absolute;right:0;top:0;width:{{ fdw }}px;height:100%;background:{{ b.D }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:{{ fct }}px;width:{{ fcs }}px;height:{{ fcs }}px;border-radius:50%;background:{{ b.C }}"></div></div></sc-for></sc-if>
+<sc-if value="{{ isMosaico }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ mtiles }}" as="t" hint-placeholder-count="0"><div style="position:absolute;left:{{ t.x }}px;top:{{ t.y }}px;width:{{ ms }}px;height:{{ ms }}px;background:{{ t.bg }};animation:{{ t.a }}"><div style="position:absolute;left:{{ t.l }}px;top:{{ t.t }}px;width:{{ t.w }}px;height:{{ t.h }}px;background:{{ t.fg }};border-radius:{{ t.br }};clip-path:{{ t.clip }}"></div></div></sc-for></sc-if>
+<sc-if value="{{ isRecorte }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ rx }}px;top:{{ ry }}px;width:572px;height:174px;transform:scale({{ rk }});transform-origin:0 0"><div style="position:absolute;inset:0;animation:{{ aPan }}"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:{{ cR }}"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:{{ cD }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:{{ cC }}"></div></div></div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:480,&quot;height&quot;:270},&quot;animacao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;montagem&quot;,&quot;bandeira&quot;,&quot;explosao&quot;,&quot;rolagem&quot;,&quot;quique&quot;,&quot;giro&quot;,&quot;deslize&quot;,&quot;mascara&quot;,&quot;orbita&quot;,&quot;eco&quot;,&quot;padrao&quot;,&quot;maquina&quot;,&quot;pulso&quot;,&quot;zoom&quot;,&quot;losangos&quot;,&quot;bolinhas&quot;,&quot;faixas&quot;,&quot;mosaico&quot;,&quot;recorte&quot;],&quot;default&quot;:&quot;montagem&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Logo&quot;},&quot;versao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;icone&quot;,&quot;bc&quot;,&quot;completa&quot;],&quot;default&quot;:&quot;bc&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Logo&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;classico&quot;,&quot;verde&quot;,&quot;vivo&quot;,&quot;amarelo&quot;,&quot;branco&quot;],&quot;default&quot;:&quot;classico&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Logo&quot;},&quot;fundo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;branco&quot;,&quot;papel&quot;,&quot;verde&quot;,&quot;noite&quot;,&quot;preto&quot;,&quot;magenta&quot;,&quot;transparente&quot;],&quot;default&quot;:&quot;branco&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;formato&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;16:9&quot;,&quot;9:16&quot;,&quot;1:1&quot;,&quot;4:5&quot;],&quot;default&quot;:&quot;16:9&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;velocidade&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;0.75&quot;,&quot;1&quot;,&quot;1.25&quot;,&quot;1.5&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;pausar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;tempo&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:4,&quot;step&quot;:0.05,&quot;default&quot;:2,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:480,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;}}">
+const H0 = 'transform:none;opacity:1;clip-path:inset(0 0 0 0)';
+const OUT = [[86, H0], [94, 'transform:scale(.92);opacity:0;clip-path:inset(0 0 0 0)'], [100, 'transform:scale(.92);opacity:0;clip-path:inset(0 0 0 0)']];
+const IN = (from, s, e, over) => { const f = [[0, from], [s, from]]; if (over) f.push([Math.round(e - (e - s) * .3), over]); f.push([e, H0]); return f; };
+const FADE = (s, e) => IN('opacity:0;transform:translateY(24px)', s, e);
+const CLIP = (s, e) => IN('clip-path:inset(0 100% 0 0)', s, e);
+const drop = (s) => [[0, 'transform:translateY(-1100px)'], [s, 'transform:translateY(-1100px)'], [s + 10, 'transform:translateY(0)'], [s + 14, 'transform:translateY(-110px)'], [s + 18, 'transform:translateY(0)'], [s + 21, 'transform:translateY(-28px)'], [s + 24, H0]];
+const FX = { tx: 'transform:translateX(-201px) scale(.78)', cx: 'transform:translateX(173px) scale(1.1)' };
+const ANIMS = {
+  montagem: { C: IN('transform:scale(0)', 0, 12, 'transform:scale(1.25)'), R: IN('transform:scaleX(0)', 8, 24), D: IN('transform:translateX(-160px) rotate(-90deg);opacity:0', 18, 32), B: FADE(28, 40), N: FADE(34, 46) },
+  bandeira: { R: [[0, 'transform:scale(.6);opacity:0'], [6, H0]], D: [[0, 'transform:translateX(-201px) scale(0)'], [8, FX.tx], [24, FX.tx], [42, H0]], C: [[0, 'transform:translateX(173px) scale(0)'], [10, FX.cx], [24, FX.cx], [42, H0]], B: IN('opacity:0;transform:translateX(-40px)', 38, 50), N: FADE(44, 54), o: { R: 'center' } },
+  explosao: { C: IN('transform:translate(-520px,-320px) rotate(-180deg) scale(2);opacity:0', 4, 26, 'transform:translate(10px,4px) scale(.95)'), R: IN('transform:translate(-200px,420px) rotate(40deg);opacity:0', 0, 24), D: IN('transform:translate(520px,-360px) rotate(160deg);opacity:0', 6, 28), B: IN('transform:translate(400px,320px) rotate(-20deg);opacity:0', 10, 32), N: IN('transform:translateY(220px);opacity:0', 16, 36), o: { R: 'center' } },
+  rolagem: { C: IN('transform:translateX(-1400px)', 0, 18), R: IN('transform:scaleX(0)', 14, 28), D: IN('transform:translateX(-220px);opacity:0', 22, 34, 'transform:translateX(18px)'), B: CLIP(30, 42), N: CLIP(36, 50) },
+  quique: { C: drop(0), R: drop(6), D: drop(12), B: FADE(36, 46), N: FADE(40, 50), o: { R: 'center' } },
+  giro: { C: IN('transform:scale(0) rotate(-180deg)', 0, 16, 'transform:scale(1.25)'), R: IN('transform:perspective(900px) rotateY(90deg)', 6, 22), D: IN('transform:rotate(-540deg) scale(0)', 12, 34), B: IN('transform:perspective(900px) rotateX(90deg);opacity:0', 28, 40), N: FADE(34, 46) },
+  deslize: { C: IN('transform:translateX(-1500px)', 0, 22), R: IN('transform:translateY(-1100px)', 4, 24), D: IN('transform:translateX(1700px)', 8, 26), B: IN('transform:translateY(900px)', 12, 30), N: IN('transform:translateY(700px)', 16, 34) },
+  mascara: { C: CLIP(0, 12), R: CLIP(4, 22), D: CLIP(14, 28), B: CLIP(24, 38), N: CLIP(30, 46) },
+  orbita: { C: [[0, 'transform:rotate(-900deg) scale(0)'], [8, 'transform:rotate(-700deg) scale(1)'], [34, H0]], D: IN('transform:scale(0) rotate(45deg)', 0, 10, 'transform:scale(1.15)'), R: IN('transform:scaleX(0)', 30, 40), B: FADE(36, 46), N: FADE(40, 50), o: { C: '420px 46px', R: 'right center' } },
+  eco: { C: IN('opacity:0', 30, 31), R: IN('opacity:0', 30, 31), D: IN('opacity:0', 30, 31), B: CLIP(32, 42), N: CLIP(36, 48) },
+  padrao: { C: IN('transform:scale(0)', 30, 40, 'transform:scale(1.3)'), R: IN('transform:scaleX(0)', 32, 42), D: IN('transform:scale(0) rotate(-90deg)', 34, 44), B: FADE(40, 50), N: FADE(44, 54) },
+  maquina: { C: [[0, 'opacity:0'], [4, 'opacity:0'], [5, H0]], R: [[0, 'clip-path:inset(0 100% 0 0)'], [5, 'clip-path:inset(0 100% 0 0);animation-timing-function:steps(4)'], [15, H0]], D: [[0, 'clip-path:inset(0 100% 0 0)'], [15, 'clip-path:inset(0 100% 0 0);animation-timing-function:steps(3)'], [22, H0]], B: [[0, 'clip-path:inset(0 100% 0 0)'], [22, 'clip-path:inset(0 100% 0 0);animation-timing-function:steps(2)'], [30, H0]], N: [[0, 'clip-path:inset(0 100% 0 0)'], [30, 'clip-path:inset(0 100% 0 0);animation-timing-function:steps(17)'], [52, H0]] },
+  pulso: { C: [[0, 'transform:scale(0)'], [8, H0], [30, H0], [34, 'transform:scale(1.3)'], [38, H0], [42, 'transform:scale(1.18)'], [46, H0]], D: [[0, 'transform:scale(0)'], [10, H0], [50, H0], [55, 'transform:scale(1.12) rotate(8deg)'], [62, H0]], R: [[0, 'transform:scaleX(0)'], [8, H0], [64, H0], [68, 'transform:scaleY(1.1)'], [72, H0]], B: FADE(8, 16), N: FADE(10, 18) },
+  zoom: { C: [[0, 'transform:scale(0)'], [8, 'transform:scale(1.2)'], [12, H0], [45, H0], [74, 'transform:scale(70)'], [100, 'transform:scale(70)']], R: [[0, 'transform:scaleX(0)'], [6, 'transform:scaleX(0)'], [18, H0], [50, H0], [56, 'opacity:0'], [100, 'opacity:0']], D: [[0, 'transform:scale(0)'], [10, 'transform:scale(0)'], [22, H0], [50, H0], [56, 'opacity:0'], [100, 'opacity:0']], B: [[0, 'opacity:0'], [20, 'opacity:0'], [30, H0], [44, H0], [50, 'opacity:0'], [100, 'opacity:0']], N: [[0, 'opacity:0'], [24, 'opacity:0'], [34, H0], [44, H0], [50, 'opacity:0'], [100, 'opacity:0']] },
+};
+const ELEM = ['losangos', 'bolinhas', 'faixas', 'mosaico', 'recorte'];
+const PIECES = ['C', 'R', 'D', 'B', 'N'];
+const full = (fr) => fr[fr.length - 1][0] >= 100 ? fr : fr.concat(OUT);
+const kf = (n, fr) => `@keyframes ${n}{${fr.map(([p, c]) => `${p}%{${c}}`).join('')}}`;
+let CSS = '';
+for (const a in ANIMS) for (const p of PIECES) CSS += kf(`lg_${a}_${p}`, full(ANIMS[a][p] || FADE(0, 12)));
+[0, 1, 2].forEach(i => { const s = i * 9; CSS += kf(`lg_eco_${i}`, [[0, 'transform:translateX(-1600px);opacity:1'], [s, 'transform:translateX(-1600px);opacity:1'], [s + 9, 'transform:translateX(0);opacity:1'], [s + 13, 'transform:translateX(0);opacity:1'], [s + 14, 'opacity:0'], [100, 'opacity:0']]); });
+CSS += kf('lg_tile', [[0, 'transform:scale(0)'], [8, 'transform:scale(1.1)'], [11, 'transform:scale(1)'], [22, 'transform:scale(1);opacity:1'], [30, 'transform:scale(.6);opacity:0'], [100, 'opacity:0']]);
+CSS += '@keyframes lg_mL{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes lg_mR{from{transform:translateX(-50%)}to{transform:translateX(0)}}';
+CSS += kf('lg_popw', [[0, 'transform:scale(0)'], [14, 'transform:scale(1.15)'], [20, 'transform:scale(1)'], [78, 'transform:scale(1)'], [92, 'transform:scale(0)'], [100, 'transform:scale(0)']]);
+CSS += kf('lg_wipe', [[0, 'clip-path:inset(0 100% 0 0)'], [24, 'clip-path:inset(0 0 0 0)'], [76, 'clip-path:inset(0 0 0 0)'], [96, 'clip-path:inset(0 0 0 100%)'], [100, 'clip-path:inset(0 0 0 100%)']]);
+CSS += kf('lg_spin', [[0, 'transform:scale(0) rotate(-90deg)'], [20, 'transform:scale(1) rotate(0)'], [78, 'transform:scale(1) rotate(0)'], [95, 'transform:scale(0) rotate(90deg)'], [100, 'transform:scale(0) rotate(90deg)']]);
+CSS += kf('lg_pan', [[0, 'transform:translateX(0) rotate(0)'], [100, 'transform:translateX(-260px) rotate(-6deg)']]);
+(() => { let s = document.getElementById('lgKf'); if (!s) { s = document.createElement('style'); s.id = 'lgKf'; document.head.appendChild(s); } s.textContent = CSS; })();
+const FMT = { '16:9': [1920, 1080], '9:16': [1080, 1920], '1:1': [1080, 1080], '4:5': [1080, 1350] };
+const PAL = { classico: { R: '#0B5E37', D: '#FBF99D', C: '#0A7BE5', B: '#0B5E37' }, verde: { R: '#0B5E37', D: '#15E888', C: '#0A7BE5', B: '#0B5E37' }, vivo: { R: '#15E888', D: '#FBF99D', C: '#0A7BE5', B: '#15E888' }, amarelo: { R: '#0B5E37', D: '#15E888', C: '#FBF99D', B: '#FBF99D' }, branco: { R: '#FFFFFF', D: '#FBF99D', C: '#0A7BE5', B: '#FFFFFF' } };
+const BG = { branco: '#FFFFFF', papel: '#F5F4EC', verde: '#0B5E37', noite: '#0D3A85', preto: '#121211', magenta: '#FF00FF', transparente: 'transparent' };
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  componentDidMount() { this.sync(); }
+  componentDidUpdate() { this.sync(); }
+  sync() {
+    const el = this.rootRef.current; if (!el || !el.getAnimations) return;
+    const v = parseFloat(this.props.velocidade ?? '1') || 1;
+    const an = el.getAnimations({ subtree: true });
+    if (this.props.pausar) an.forEach(a => { a.pause(); a.currentTime = (this.props.tempo ?? 2) * 1000 / v; });
+    else an.forEach(a => { if (a.playState === 'paused') a.play(); });
+  }
+  renderVals() {
+    const p = this.props;
+    const fmt = FMT[p.formato] ? p.formato : '16:9', [W, H] = FMT[fmt], m = Math.min(W, H);
+    const dw = p.largura ?? 480, esc = dw / W, dh = Math.round(H * esc);
+    const vel = parseFloat(p.velocidade ?? '1') || 1, dur = (4 / vel).toFixed(2) + 's', ease = 'cubic-bezier(.55,0,.2,1)';
+    const anim = ANIMS[p.animacao] || ELEM.includes(p.animacao) ? p.animacao : 'montagem';
+    const pal = PAL[p.paleta] || PAL.classico, alt = Object.values(PAL);
+    const fundo = p.fundo ?? 'branco', bg = BG[fundo] ?? '#FFFFFF';
+    const ver = p.versao ?? 'bc';
+    const v = { rootRef: this.rootRef, W, H, dw, dh, esc, bg, bgOuter: fundo === 'transparente' ? 'repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0 0/16px 16px' : bg,
+      cR: pal.R, cD: pal.D, cC: pal.C, cB: pal.B, isLogo: !ELEM.includes(anim), isPadrao: anim === 'padrao',
+      isLosangos: anim === 'losangos', isBolinhas: anim === 'bolinhas', isFaixas: anim === 'faixas', isMosaico: anim === 'mosaico', isRecorte: anim === 'recorte',
+      showB: ver !== 'icone', showN: ver === 'completa', ecos: [], tiles: [] };
+    const dl = s => (s / vel).toFixed(3) + 's';
+    if (v.isLogo) {
+      const bw = ver === 'icone' ? 572 : 960, bh = ver === 'completa' ? 330 : 174;
+      const frac = (fmt === '16:9' ? .5 : .8) * (ver === 'icone' ? .8 : 1);
+      const k = Math.min(W * frac / bw, H * .45 / bh);
+      Object.assign(v, { bw, bh, k, gx: Math.round((W - bw * k) / 2), gy: Math.round((H - bh * k) / 2) });
+      const o = ANIMS[anim].o || {};
+      for (const pc of PIECES) v['a' + pc] = `lg_${anim}_${pc} ${dur} ${ease} infinite both`;
+      v.oR = o.R || 'left center'; v.oD = o.D || 'center'; v.oC = o.C || 'center';
+      if (anim === 'eco') v.ecos = [0, 1, 2].map(i => { const q = alt[(i + 1) % alt.length]; return { a: `lg_eco_${i} ${dur} ${ease} infinite both`, R: q.R, D: q.D, C: q.C }; });
+      if (anim === 'padrao') {
+        const tw = Math.round(m * (fmt === '16:9' ? .22 : .3)), th = Math.round(tw * .55), cols = Math.ceil(W / tw), rows = Math.ceil(H / th);
+        Object.assign(v, { tw, th, tk: tw * .78 / 572, tix: Math.round(tw * .11), tiy: Math.round((th - 174 * tw * .78 / 572) / 2) });
+        for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) { const q = alt[(x + y * 2) % alt.length]; v.tiles.push({ x: x * tw + (y % 2 ? -tw / 2 : 0), y: y * th, R: q.R, D: q.D, C: q.C, a: `lg_tile ${dur} ${dl((x + y) * .05)} ${ease} infinite both` }); }
+      }
+    }
+    const cs = [pal.R, pal.D, pal.C, alt[2].R, alt[3].C].filter(c => c !== bg);
+    if (anim === 'losangos') {
+      const n = fmt === '16:9' ? 5 : 8, rh = Math.round(H / n), ldw = Math.round(rh * 1.75), cnt = Math.ceil(W / ldw) + 2;
+      Object.assign(v, { rh, ldw });
+      v.lrows = Array.from({ length: n }, (_, r) => { const half = Array.from({ length: cnt }, (_, i) => ({ c: cs[(i + r) % cs.length] })); return { x: r % 2 ? -ldw / 2 : 0, y: r * rh, it: half.concat(half), a: `${r % 2 ? 'lg_mR' : 'lg_mL'} ${((cnt * 0.9) / vel).toFixed(1)}s linear infinite` }; });
+    }
+    if (anim === 'bolinhas') {
+      const ds = Math.round(m * .16), gap = Math.round(ds * .35), st = ds + gap, cols = Math.ceil(W / st) + 1, rows = Math.ceil(H / st) + 1;
+      v.ds = ds; v.dots = [];
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) v.dots.push({ x: x * st - gap, y: y * st - gap + (x % 2 ? st / 2 : 0), c: cs[(x + y) % cs.length], a: `lg_popw ${dur} ${dl((x + y) * .045)} ${ease} infinite both` });
+    }
+    if (anim === 'faixas') {
+      const n = fmt === '16:9' ? 5 : 8, fbh = Math.round(H / (n * 1.5)), sp = H / n;
+      Object.assign(v, { fbh, fcs: Math.round(fbh * .53), fct: Math.round(fbh * .235), fcr: Math.round(fbh * .37), fdw: Math.round(fbh * 1.75), fdr: Math.round(fbh * .9) });
+      v.bars = Array.from({ length: n }, (_, i) => { const q = alt[i % alt.length]; const w = Math.round(W * (.55 + ((i * 37) % 40) / 100)); return { x: i % 2 ? W - w - m * .05 : m * .05, y: Math.round(i * sp + (sp - fbh) / 2), w, R: q.R === bg ? '#15E888' : q.R, D: q.D, C: q.C, a: `lg_wipe ${dur} ${dl(i * .07)} ${ease} infinite both` }; });
+    }
+    if (anim === 'mosaico') {
+      const ms = Math.round(fmt === '16:9' ? W / 6 : W / 4), cols = Math.ceil(W / ms), rows = Math.ceil(H / ms), all = ['#0B5E37', '#15E888', '#FBF99D', '#0A7BE5', '#0D3A85', '#FFFFFF'];
+      v.ms = ms; v.mtiles = [];
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+        const k = x + y * cols, b = all[(k * 2 + y) % all.length], f = all[(k * 2 + y + 3) % all.length], sh = (x * 3 + y * 2) % 3;
+        const t = sh === 0 ? { l: ms * .22, t: ms * .22, w: ms * .56, h: ms * .56, br: '50%', clip: 'none' } : sh === 1 ? { l: ms * .08, t: ms * .21, w: ms * .84, h: ms * .58, br: '0', clip: 'polygon(0 50%,50% 0,100% 50%,50% 100%)' } : { l: 0, t: ms * .21, w: ms, h: ms * .58, br: '0', clip: 'none' };
+        v.mtiles.push({ x: x * ms, y: y * ms, bg: b, fg: f, ...t, a: `lg_spin ${dur} ${dl((x + y) * .06)} ${ease} infinite both` });
+      }
+    }
+    if (anim === 'recorte') {
+      const rk = H * 1.5 / 174;
+      Object.assign(v, { rk, rx: Math.round(W * .5 - 300 * rk), ry: Math.round((H - 174 * rk) / 2), aPan: `lg_pan ${(8 / vel).toFixed(1)}s ease-in-out infinite alternate` });
+    }
+    return v;
+  }
+}
+</script>
+</body>
+</html>

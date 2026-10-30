@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="../js/vendor/mp4-muxer.min.js"></script>
+<script src="../js/vendor/jszip.min.js"></script>
+<script src="../js/bc27-export.js"></script>
+<link href="../css/fonts.css" rel="stylesheet">
+<style>html,body{margin:0;height:100%;overflow:hidden;background:transparent}a{color:#FBF99D}a:hover{color:#15E888}</style>
+</helmet>
+<div style="position:fixed;inset:0;display:flex;align-items:{{ al }};justify-content:{{ al }};background:{{ bg }}">
+<div ref="{{ boxRef }}" style="line-height:0;flex:none">
+<sc-if value="{{ is.post }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-post" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.palestrante }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-palestrante" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.sponsor }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-sponsor" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.redes }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-redes" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.destaque }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-destaque" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.time }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-time" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.slide }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-slide" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.padrao }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-padrao" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.gc }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-gc" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.sting }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-sting" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.logo }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-logo" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.adesivo }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-adesivo" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+<sc-if value="{{ is.merch }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-merch" dc-props="{{ props }}" hint-size="100px,100px"></dc-import></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const IDS = ['post','palestrante','sponsor','redes','destaque','time','slide','padrao','gc','sting','logo','adesivo','merch'];
+class Component extends DCLogic {
+  state = { c: 'post', p: {}, vw: window.innerWidth, vh: window.innerHeight, ar: 1, poster: false };
+  boxRef = React.createRef();
+  componentDidMount() {
+    const q = new URLSearchParams(location.search); let p = {}; try { p = JSON.parse(q.get('p') || '{}'); } catch (e) {}
+    this.setState({ c: IDS.includes(q.get('c')) ? q.get('c') : 'post', p, poster: q.get('poster') === '1' });
+    this.onR = () => this.setState({ vw: window.innerWidth, vh: window.innerHeight }); window.addEventListener('resize', this.onR);
+    this.onM = (e) => this.cmd(e.data || {}); window.addEventListener('message', this.onM);
+    window.bcSetPeca = (c, p) => { document.getElementById('bcsnap')?.remove(); this.setState({ c, p: p || {}, poster: true }); };
+    window.bcSnap = async () => { const root = this.boxRef.current; const cv = await window.BC27Export.snap({ root, W: root.offsetWidth, H: root.offsetHeight, k: 1 }); let im = document.getElementById('bcsnap'); if (!im) { im = document.createElement('img'); im.id = 'bcsnap'; im.style.cssText = 'position:fixed;left:0;top:0;z-index:9;display:block'; document.body.appendChild(im); } im.style.width = root.offsetWidth + 'px'; im.src = cv.toDataURL('image/png'); return [root.offsetWidth, root.offsetHeight]; };
+    this.measure();
+  }
+  componentDidUpdate() { this.measure(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); window.removeEventListener('message', this.onM); }
+  measure() { const r = this.boxRef.current; if (!r || !r.offsetWidth || !r.offsetHeight) { clearTimeout(this.mt); this.mt = setTimeout(() => this.measure(), 120); return; } const ar = Math.round(r.offsetWidth / r.offsetHeight * 1000) / 1000; if (Math.abs(ar - this.state.ar) > .01) this.setState({ ar }); if (window.parent !== window && this.lastAr !== ar) { this.lastAr = ar; window.parent.postMessage({ type: 'bcp-ready', ar }, '*'); } }
+  post(o) { if (window.parent !== window) window.parent.postMessage(o, '*'); }
+  async cmd(d) {
+    if (!d || d.type !== 'bcp') return;
+    if (d.cmd === 'props') this.setState({ p: d.props || {} });
+    if (d.cmd === 'export') {
+      const root = this.boxRef.current; if (!window.BC27Export || !root) return this.post({ type: 'bcp-export', status: 'erro', msg: 'Exportador carregando. Tente de novo.' });
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; const W = root.offsetWidth, H = root.offsetHeight, ar = W / H; const outW = ar > 2.5 ? 1584 : ar >= 1.5 ? 1920 : 1080; const k = outW / W * (d.scale || 1);
+        this.post({ type: 'bcp-export', status: 'inicio' });
+        await window.BC27Export.stills({ k, items: [{ root, W, H, name: d.name || 'bc27-peca' }], formats: ['png'], bg: '#FFFFFF' });
+        this.post({ type: 'bcp-export', status: 'ok', w: Math.round(W * k), h: Math.round(H * k) });
+      } catch (e) { console.error(e); this.post({ type: 'bcp-export', status: 'erro', msg: e.message || 'Falha ao gerar a imagem.' }); }
+    }
+  }
+  renderVals() {
+    const s = this.state; const is = Object.fromEntries(IDS.map(i => [i, i === s.c]));
+    let w; if (s.poster) w = s.ar >= 1 ? 480 : Math.round(480 * s.ar); else w = Math.max(60, Math.floor(Math.min(s.vw, s.vh * s.ar)));
+    return { is, props: { ...s.p, largura: w, guia: false }, boxRef: this.boxRef, al: s.poster ? 'flex-start' : 'center', bg: s.poster ? '#FF00FF' : 'transparent' };
+  }
+}
+</script>
+</body>
+</html>

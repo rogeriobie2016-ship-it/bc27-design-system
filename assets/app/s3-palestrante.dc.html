@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<script src="../js/image-slot.js"></script>
+</helmet>
+<div style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;background:{{ pal.bg }};font-family:'Bricolage Grotesque',sans-serif">
+<sc-if value="{{ eMask }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:0;top:0;width:100%;height:{{ patH }}px;background:{{ pal.pat }};opacity:{{ patOp }};mask:url({{ eUrl }}) 0 0/{{ eT }}px auto repeat"></div></sc-if>
+
+<sc-if value="{{ lCapa }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:0;right:0;top:{{ kY }}px;text-align:center;font-weight:700;font-size:{{ kfs }}px;letter-spacing:.22em;color:{{ pal.kick }}">{{ kicker }}</div>
+<div style="position:absolute;left:{{ phX }}px;top:{{ phY }}px;width:{{ phW }}px;height:{{ phH }}px">
+<sc-if value="{{ mSelo }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:radial-gradient(circle at 12px 12px,transparent 8px,#FFFFFF 8.5px) -12px -12px/24px 24px;filter:drop-shadow(0 16px 20px rgba(0,0,0,.2))"></div></sc-if>
+<sc-if value="{{ mIcone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:-{{ icoOff }}px;top:{{ icoRectY }}px;width:{{ icoRectW }}px;height:{{ icoRectH }}px;background:{{ pal.block }}"></div><div style="position:absolute;right:-{{ icoOff }}px;top:{{ icoRectY }}px;width:{{ icoDW }}px;height:{{ icoRectH }}px;background:{{ pal.pat2 }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div></sc-if>
+<div style="position:absolute;inset:{{ phIn }}px;border-radius:{{ phR }};clip-path:{{ phClip }};overflow:hidden;background:#FFFFFF;box-shadow:0 0 0 {{ phB }}px {{ pal.block }}"><image-slot id="{{ slotId }}" shape="rect" src="../img/fotos/fernanda.jpg" placeholder="Foto do palestrante"></image-slot></div>
+</div>
+<div style="position:absolute;left:0;right:0;top:{{ nY }}px;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="background:{{ pal.block }};padding:10px 44px 18px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ nfs }}px;letter-spacing:{{ trk }}em;line-height:1;color:{{ pal.title }};white-space:nowrap">{{ nome }}</div>
+<div style="background:#FFFFFF;padding:12px 30px;font-weight:600;font-stretch:{{ larg }}%;font-size:{{ rfs }}px;color:#0D3A85;white-space:nowrap">{{ cargo }}</div>
+<div style="font-weight:600;font-size:{{ efs }}px;letter-spacing:.16em;color:{{ pal.ink }}">{{ empresa }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ lBio }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;right:{{ padX }}px;top:{{ kY }}px;font-weight:700;font-size:{{ kfs }}px;letter-spacing:.16em;color:{{ pal.kick }}">{{ pagina }}</div>
+<div style="position:absolute;left:{{ padX }}px;top:{{ hY }}px;display:flex;align-items:center;gap:{{ hGap }}px">
+<div style="position:relative;flex:none;width:{{ avS }}px;height:{{ avS }}px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 {{ phB }}px {{ pal.block }}"><image-slot id="{{ slotId }}" shape="circle" src="../img/fotos/lana.jpg" placeholder="Foto"></image-slot></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ bnfs }}px;line-height:.95;letter-spacing:{{ trk }}em;color:{{ pal.block }}">{{ nome }}</span><span style="font-weight:600;font-size:{{ rfs }}px;color:{{ pal.ink }}">{{ cargo }} · {{ empresa }}</span></div>
+</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ bY }}px;font-weight:500;font-stretch:{{ larg }}%;font-size:{{ bfs }}px;line-height:1.32;color:{{ pal.ink }};text-wrap:pretty">{{ bio }}</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;bottom:{{ pBot }}px;background:{{ pal.block }};padding:{{ pPad }}px;display:flex;flex-direction:column;gap:10px">
+<span style="font-weight:700;font-size:{{ kfs }}px;letter-spacing:.22em;color:{{ pal.title }};opacity:.85">PAINEL</span>
+<span style="font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ pfs }}px;line-height:1;letter-spacing:{{ trk }}em;color:{{ pal.title }}">{{ painel }}</span>
+<span style="font-weight:600;font-size:{{ rfs }}px;color:{{ pal.title }}">{{ quando }}</span>
+</div>
+</sc-if>
+
+<sc-if value="{{ lCitacao }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:{{ padX }}px;top:{{ qY }}px;font-weight:800;font-size:{{ qfs }}px;line-height:.7;color:{{ pal.pat2 }}">“</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ qtY }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ qtfs }}px;line-height:1.04;letter-spacing:{{ trk }}em;color:{{ pal.block }};text-wrap:pretty">{{ citacao }}</div>
+<div style="position:absolute;left:{{ padX }}px;bottom:{{ atB }}px;display:flex;align-items:center;gap:24px">
+<div style="position:relative;flex:none;width:{{ avS2 }}px;height:{{ avS2 }}px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px {{ pal.block }}"><image-slot id="{{ slotId }}" shape="circle" src="../img/fotos/solange.jpg" placeholder="Foto"></image-slot></div>
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:800;font-size:{{ bnfs2 }}px;color:{{ pal.block }}">{{ nome }}</span><span style="font-weight:600;font-size:{{ rfs }}px;color:{{ pal.ink }}">{{ cargo }}</span></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ lPainel }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:{{ padX }}px;top:{{ kY }}px;font-weight:700;font-size:{{ kfs }}px;letter-spacing:.22em;color:{{ pal.kick }}">{{ kicker }}</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ ptY }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ ptfs }}px;line-height:.92;letter-spacing:{{ trk }}em;color:{{ pal.block }};text-wrap:balance">{{ painel }}</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ rowY }}px;display:flex;justify-content:space-between">
+<sc-for list="{{ trio }}" as="t" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;align-items:center;gap:14px;width:{{ triW }}px"><div style="position:relative;width:{{ triW }}px;height:{{ triW }}px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px {{ t.c }}"><image-slot id="{{ t.id }}" shape="circle" src="../img/fotos/fernanda.jpg" placeholder="Foto"></image-slot></div><span style="font-weight:800;font-size:{{ trfs }}px;text-align:center;color:{{ pal.ink }}">{{ t.n }}</span></div></sc-for>
+</div>
+<div style="position:absolute;left:{{ padX }}px;bottom:{{ qdB }}px;background:{{ pal.block }};padding:14px 30px;font-weight:700;font-size:{{ rfs }}px;color:{{ pal.title }}">{{ quando }}</div>
+</sc-if>
+
+<sc-if value="{{ lLineup }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:{{ padX }}px;top:{{ kY }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ lufs }}px;line-height:.9;letter-spacing:{{ trk }}em;color:{{ pal.block }}">{{ kicker }}</div>
+<div style="position:absolute;left:{{ padX }}px;right:{{ padX }}px;top:{{ gY }}px;bottom:{{ gB }}px;display:grid;grid-template-columns:1fr 1fr;gap:{{ gGap }}px">
+<sc-for list="{{ quatro }}" as="q" hint-placeholder-count="4"><div style="position:relative;background:{{ q.c }};overflow:hidden"><image-slot id="{{ q.id }}" shape="rect" src="../img/fotos/lana.jpg" placeholder="Foto"></image-slot><div style="position:absolute;left:0;bottom:0;background:{{ q.c }};padding:8px 18px 12px;font-weight:800;font-size:{{ lnfs }}px;color:{{ q.tc }};white-space:nowrap;pointer-events:none">{{ q.n }}</div></div></sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ assinatura }}" hint-placeholder-val="{{ true }}"><img src="../img/wm-{{ pal.wm }}.png" style="position:absolute;left:{{ wmX }}px;top:{{ wmY }}px;width:{{ wmW }}px"></sc-if>
+<div style="position:absolute;inset:0;background:url(../img/papel.png) 0 0/700px,url(../img/grao.png) 0 0/300px;opacity:{{ tx }};pointer-events:none"></div><sc-if value="{{ gr2.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ gr2.bg }};mix-blend-mode:{{ gr2.bl }};opacity:{{ gr2.o }};pointer-events:none"></div></sc-if><sc-if value="{{ tx2.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ tx2.bg }};mix-blend-mode:{{ tx2.bl }};opacity:{{ tx2.o }};pointer-events:none"></div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:288,&quot;height&quot;:360},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;capa&quot;,&quot;bio&quot;,&quot;citacao&quot;,&quot;painel&quot;,&quot;lineup&quot;],&quot;default&quot;:&quot;capa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;moldura&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;arco&quot;,&quot;circulo&quot;,&quot;selo&quot;,&quot;retangulo&quot;,&quot;losango&quot;,&quot;icone&quot;],&quot;default&quot;:&quot;arco&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;formato&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;4:5&quot;,&quot;1:1&quot;,&quot;9:16&quot;],&quot;default&quot;:&quot;4:5&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verde&quot;,&quot;vivo&quot;,&quot;amarelo&quot;,&quot;azul&quot;,&quot;noite&quot;,&quot;branco&quot;,&quot;papel&quot;],&quot;default&quot;:&quot;verde&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;elemento&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cobogo&quot;,&quot;azulejo&quot;,&quot;calcadao&quot;,&quot;fuxico&quot;,&quot;hachura&quot;,&quot;ondas&quot;,&quot;estrelas&quot;,&quot;nenhum&quot;],&quot;default&quot;:&quot;cobogo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;nome&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lana Del Rey&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;cargo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Organizadora da BC27&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;empresa&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;EMPRESA&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;kicker&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PALESTRANTE CONFIRMADA&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Bianca lidera projetos de impacto social que conectam universidades, governo e comunidades.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;painel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Identidade que impulsiona o Brasil&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;quando&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sábado · 14h · Harvard Law School&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;citacao&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Quem conta a história do Brasil é quem vive o Brasil todos os dias.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;pagina&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2 / 3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texto&quot;},&quot;caixa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;alta&quot;,&quot;como digitado&quot;,&quot;baixa&quot;],&quot;default&quot;:&quot;alta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;peso&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:800,&quot;step&quot;:100,&quot;default&quot;:800,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;tracking&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:-8,&quot;max&quot;:8,&quot;step&quot;:1,&quot;default&quot;:-3,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;assinatura&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;textura&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;sutil&quot;,&quot;media&quot;,&quot;forte&quot;],&quot;default&quot;:&quot;media&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Visual&quot;},&quot;slotId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;pal3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:288,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;texturaExtra&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;ruído&quot;,&quot;ruído forte&quot;,&quot;papel&quot;,&quot;papel + ruído&quot;,&quot;meio-tom&quot;,&quot;linho&quot;,&quot;linhas de tv&quot;],&quot;default&quot;:&quot;nenhuma&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;texturaForca&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:45,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;gradiente&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhum&quot;,&quot;luz suave&quot;,&quot;profundidade&quot;,&quot;brilho dourado&quot;,&quot;mata para céu&quot;,&quot;aurora&quot;,&quot;noite&quot;,&quot;vinheta&quot;],&quot;default&quot;:&quot;nenhum&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;},&quot;gradienteForca&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Textura e gradiente&quot;}}">
+const PAL = {
+  verde:   { bg:'#0B5E37', pat:'#1A8A52', pat2:'#FBF99D', block:'#15E888', title:'#0B5E37', kick:'#15E888', ink:'#FFFFFF', wm:'amarelo' },
+  vivo:    { bg:'#15E888', pat:'#0B5E37', pat2:'#FBF99D', block:'#0B5E37', title:'#FBF99D', kick:'#0B5E37', ink:'#0B5E37', wm:'verde' },
+  amarelo: { bg:'#FBF99D', pat:'#0D3A85', pat2:'#0A7BE5', block:'#0D3A85', title:'#FBF99D', kick:'#0A7BE5', ink:'#0D3A85', wm:'navy' },
+  azul:    { bg:'#0A7BE5', pat:'#FBF99D', pat2:'#15E888', block:'#FBF99D', title:'#0D3A85', kick:'#FFFFFF', ink:'#FFFFFF', wm:'branco' },
+  noite:   { bg:'#0D3A85', pat:'#0A7BE5', pat2:'#15E888', block:'#FBF99D', title:'#0D3A85', kick:'#15E888', ink:'#FFFFFF', wm:'amarelo' },
+  branco:  { bg:'#FFFFFF', pat:'#0A7BE5', pat2:'#15E888', block:'#0D3A85', title:'#FFFFFF', kick:'#0A7BE5', ink:'#0D3A85', wm:'navy' },
+  papel:   { bg:'#F5F4EC', pat:'#0B5E37', pat2:'#0A7BE5', block:'#0B5E37', title:'#F5F4EC', kick:'#0A7BE5', ink:'#0B5E37', wm:'verde' },
+};
+const FMT = { '4:5':[1080,1350], '1:1':[1080,1080], '9:16':[1080,1920] };
+const EL = { cobogo:['../img/f2/cobogo.svg',.15], azulejo:['../img/f2/azulejo.svg',.16], calcadao:['../img/f2/calcadao.svg',.3], fuxico:['../img/f2/fuxico.svg',.14], hachura:['../img/f2/hachura.svg',.08], ondas:['../img/f/onda-linha.svg',.2], estrelas:['../img/f/estrela8.svg',.1] };
+const CO = ['#15E888','#FBF99D','#0A7BE5','#FFFFFF'];
+const TEXS = { ruído:['url(../img/grao.png) 0 0/420px 420px repeat','overlay'], 'ruído forte':['url(../img/grao.png) 0 0/220px 220px repeat','multiply'], papel:['url(../img/papel.png) center/cover','multiply'], 'meio-tom':['radial-gradient(rgba(0,0,0,.55) 1.3px, transparent 1.8px) 0 0/11px 11px','soft-light'], linho:['repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 1px, transparent 1px 4px)','overlay'], 'linhas de tv':['repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 2px, transparent 2px 6px)','multiply'], 'papel + ruído':['url(../img/grao.png) 0 0/320px 320px repeat, url(../img/papel.png) center/cover','multiply'] };
+const GRADS = { 'luz suave':['radial-gradient(120% 80% at 15% 0%, rgba(255,255,255,.45), transparent 62%)','soft-light'], profundidade:['linear-gradient(180deg, transparent 35%, rgba(0,0,0,.5))','multiply'], 'brilho dourado':['radial-gradient(90% 70% at 85% 8%, rgba(251,249,157,.6), transparent 65%)','screen'], 'mata para céu':['linear-gradient(160deg, rgba(21,232,136,.5), rgba(10,123,229,.5))','overlay'], aurora:['radial-gradient(60% 50% at 18% 82%, rgba(21,232,136,.55), transparent 70%), radial-gradient(60% 50% at 82% 18%, rgba(10,123,229,.55), transparent 70%)','screen'], noite:['linear-gradient(180deg, rgba(13,58,133,0) 20%, rgba(13,58,133,.75))','multiply'], vinheta:['radial-gradient(110% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.45))','multiply'] };
+const mkTx = (p) => { const t = TEXS[p.texturaExtra ?? p.textura ?? 'nenhuma']; return t ? { on: true, bg: t[0], bl: t[1], o: (p.texturaForca ?? 45) / 100 } : { on: false }; };
+const mkGr = (p) => { const g = GRADS[p.gradiente ?? 'nenhum']; return g ? { on: true, bg: g[0], bl: g[1], o: (p.gradienteForca ?? 100) / 100 } : { on: false }; };
+class Component extends DCLogic {
+  renderVals() { const r = this.__rvBase(); return r && typeof r === 'object' ? { ...r, tx2: mkTx(this.props), gr2: mkGr(this.props) } : r; }
+  __rvBase() {
+    const p = this.props;
+    const fmt = FMT[p.formato] ? p.formato : '4:5';
+    const [W, H] = FMT[fmt];
+    const dw = p.largura ?? 288, esc = dw / W, dh = Math.round(H * esc);
+    const pal = PAL[p.paleta] || PAL.verde;
+    const L = p.layout ?? 'capa';
+    const cx = p.caixa ?? 'alta';
+    const tr = (s) => cx === 'alta' ? s.toUpperCase() : cx === 'baixa' ? s.toLowerCase() : s;
+    const peso = p.peso ?? 800, larg = p.larguraFonte ?? 100, trk = (p.tracking ?? -3) / 100;
+    const wf = 0.78 + 0.22 * (larg - 75) / 25;
+    const E = EL[p.elemento ?? 'cobogo'];
+    const pt = fmt === '9:16', sq = fmt === '1:1';
+    const padX = Math.round(W * .075);
+    const nome = tr(p.nome ?? 'Lana Del Rey');
+    const sid = p.slotId ?? 'pal3';
+    const mold = p.moldura ?? 'arco';
+    const v = { W, H, dw, dh, esc, pal, peso, larg, trk, padX, nome, cargo: p.cargo ?? 'Organizadora da BC27', empresa: (p.empresa ?? 'EMPRESA').toUpperCase(),
+      bio: p.bio ?? 'Bianca lidera projetos de impacto social que conectam universidades, governo e comunidades. Já levou programas de educação a mais de 40 cidades do Norte e Nordeste e acredita que o Brasil cresce quando cada região conta a própria história.',
+      painel: p.painel ?? 'Identidade que impulsiona o Brasil', quando: p.quando ?? 'Sábado · 14h · Harvard Law School', citacao: p.citacao ?? 'Quem conta a história do Brasil é quem vive o Brasil todos os dias.',
+      kicker: (p.kicker ?? (L === 'lineup' ? 'Quem vem' : L === 'painel' ? 'PAINEL CONFIRMADO' : 'PALESTRANTE CONFIRMADA')), pagina: p.pagina ?? '2 / 3', slotId: sid,
+      lCapa: L === 'capa', lBio: L === 'bio', lCitacao: L === 'citacao', lPainel: L === 'painel', lLineup: L === 'lineup',
+      eMask: !!E, eUrl: E ? E[0] : '', eT: E ? Math.round(W * E[1]) : 0, patOp: L === 'capa' ? .6 : .35,
+      patH: L === 'capa' ? H : L === 'bio' ? Math.round(H * .045) : L === 'citacao' ? Math.round(H * .045) : Math.round(H * .045),
+      kfs: Math.round(W * .028), rfs: Math.round(W * .032), efs: Math.round(W * .026),
+      tx: { nenhuma: 0, sutil: .3, media: .6, forte: .95 }[p.textura ?? 'media'] ?? .6, assinatura: p.assinatura ?? true };
+    v.kY = Math.round(H * (pt ? .1 : .06));
+    v.phW = Math.round(W * (pt ? .74 : sq ? .5 : .6)); v.phH = Math.round(v.phW * (['circulo','losango','icone'].includes(mold) ? 1 : 1.16));
+    v.phX = Math.round((W - v.phW) / 2); v.phY = Math.round(H * (pt ? .15 : sq ? .12 : .11));
+    v.mSelo = mold === 'selo'; v.mIcone = mold === 'icone';
+    v.phIn = mold === 'selo' ? 24 : 0; v.phB = mold === 'selo' || mold === 'losango' ? 0 : Math.round(W * .014);
+    v.phR = mold === 'circulo' || mold === 'icone' ? '50%' : mold === 'arco' ? `${v.phW / 2}px ${v.phW / 2}px 0 0` : '0';
+    v.phClip = mold === 'losango' ? 'polygon(50% 0,100% 50%,50% 100%,0 50%)' : 'none';
+    v.icoOff = Math.round(v.phW * .32); v.icoRectW = Math.round(v.phW * .9); v.icoRectH = Math.round(v.phW * .56); v.icoRectY = Math.round((v.phH - v.icoRectH) / 2); v.icoDW = Math.round(v.phW * .62);
+    v.nfs = Math.round(Math.min(W * .11, (W * .86) / (nome.length * .64 * wf))); v.nY = Math.round(v.phY + v.phH - v.nfs * .45);
+    v.avS = Math.round(W * .2); v.hY = Math.round(H * (pt ? .12 : .1)); v.hGap = Math.round(W * .04);
+    v.bnfs = Math.round(Math.min(W * .075, (W * .6) / (nome.length * .6 * wf)));
+    v.bY = Math.round(v.hY + v.avS + H * .05); v.bfs = Math.round(W * (sq ? .036 : pt ? .046 : .041));
+    v.pBot = Math.round(H * (pt ? .14 : .1)); v.pPad = Math.round(W * .045); v.pfs = Math.round(W * .055);
+    v.qfs = Math.round(W * .45); v.qY = Math.round(H * .05); v.qtY = Math.round(H * (pt ? .28 : .24)); v.qtfs = Math.round(W * (pt ? .085 : .075));
+    v.avS2 = Math.round(W * .15); v.atB = Math.round(H * (pt ? .16 : .13)); v.bnfs2 = Math.round(W * .045);
+    v.ptY = Math.round(v.kY + W * .06); v.ptfs = Math.round(Math.min(W * .1, (W - padX * 2) / (8 * .64 * wf)));
+    v.rowY = Math.round(H * (pt ? .46 : sq ? .5 : .5)); v.triW = Math.round(W * .26); v.trfs = Math.round(W * .03);
+    v.trio = [0,1,2].map(i => ({ c: CO[i], id: `${sid}-${i + 1}`, n: ['Lana Del Rey','Rafael Souza','Ana Clara Lima'][i] }));
+    v.qdB = Math.round(H * (pt ? .14 : .1));
+    v.lufs = Math.round(W * .13); v.gY = Math.round(v.kY + W * .17); v.gB = Math.round(H * (pt ? .14 : .12)); v.gGap = Math.round(W * .025); v.lnfs = Math.round(W * .032);
+    v.quatro = [0,1,2,3].map(i => ({ c: CO[i], tc: CO[i] === '#0A7BE5' ? '#FFFFFF' : '#0D3A85', id: `${sid}-l${i + 1}`, n: ['Lana Del Rey','Rafael Souza','Ana Clara Lima','João Pedro'][i] }));
+    v.wmW = Math.round(W * .3); v.wmX = L === 'capa' ? Math.round((W - v.wmW) / 2) : padX; v.wmY = Math.round(H - W * .07 - v.wmW * .115);
+    if (L === 'bio' || L === 'painel' || L === 'lineup') { v.wmX = W - padX - v.wmW; v.wmY = Math.round(H - v.pBot / 2 - v.wmW * .06); }
+    if (L === 'citacao') { v.wmX = W - padX - v.wmW; v.wmY = Math.round(H - v.atB + v.avS2 / 2 - v.wmW * .06); }
+    return v;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+</helmet>
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px;width:{{ dw }}px">
+<div style="position:relative;width:{{ dw }}px;height:{{ dw }}px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #2A2A28,0 0 0 4px #555">
+<div style="position:absolute;left:0;top:0;width:1080px;height:1080px;transform:scale({{ esc }});transform-origin:0 0;background:{{ bg }};font-family:'Bricolage Grotesque',sans-serif">
+<sc-if value="{{ sPadrao }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ pal.pat }};mask:url(../img/f2/cobogo.svg) 0 0/180px auto repeat"></div><div style="position:absolute;left:190px;top:190px;width:700px;height:700px;border-radius:50%;background:{{ pal.fg }}"></div></sc-if>
+<sc-if value="{{ sContorno }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:60px;border-radius:50%;border:34px solid {{ pal.bg }}"></div></sc-if>
+<sc-if value="{{ gMask }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:{{ gi }}px;top:{{ gi }}px;right:{{ gi }}px;bottom:{{ gi }}px;background:{{ gc }};mask:url({{ gUrl }}) center/contain no-repeat"></div></sc-if>
+<sc-if value="{{ gPat }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:250px;top:250px;width:580px;height:580px;border-radius:50%;overflow:hidden"><div style="position:absolute;inset:0;background:{{ gc }};mask:url({{ gUrl }}) 0 0/190px auto repeat"></div></div></sc-if>
+<sc-if value="{{ gLinhas }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:260px;top:380px;width:560px;height:320px;background:{{ gc }};mask:url(../img/f/onda-linha.svg) 0 0/187px 107px repeat"></div></sc-if>
+<sc-if value="{{ gTxt }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-stretch:{{ larg }}%;font-size:{{ tfs }}px;line-height:1;letter-spacing:-.04em;color:{{ gc }}">{{ gT }}</div></sc-if>
+<sc-if value="{{ gImg }}" hint-placeholder-val="{{ false }}"><img src="{{ gSrc }}" style="position:absolute;left:50%;top:50%;width:620px;transform:translate(-50%,-50%)"></sc-if>
+<sc-if value="{{ gIcone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:254px;top:453px;width:572px;height:174px"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:#0B5E37"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:#15E888;clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:#0A7BE5"></div></div></sc-if>
+<sc-if value="{{ gFlag }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:220px;top:340px;width:640px;height:400px;background:{{ gc }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:425px;top:425px;width:230px;height:230px;border-radius:50%;background:{{ gc2 }}"></div></sc-if>
+<div style="position:absolute;inset:0;background:url(../img/grao.png) 0 0/300px;opacity:{{ tx }};pointer-events:none"></div>
+</div>
+</div>
+<sc-if value="{{ rotulo }}" hint-placeholder-val="{{ true }}"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:13px;color:#E8E7DD">{{ nomeR }}</span></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:110,&quot;height&quot;:136},&quot;icone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sobre&quot;,&quot;palestrantes&quot;,&quot;inscricoes&quot;,&quot;agenda&quot;,&quot;boston&quot;,&quot;bastidores&quot;,&quot;time&quot;,&quot;sponsors&quot;,&quot;imprensa&quot;,&quot;impacto&quot;,&quot;podcast&quot;,&quot;faq&quot;,&quot;carreiras&quot;,&quot;alumni&quot;,&quot;regioes&quot;,&quot;cultura&quot;],&quot;default&quot;:&quot;sobre&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;estilo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cheio&quot;,&quot;padrao&quot;,&quot;contorno&quot;],&quot;default&quot;:&quot;cheio&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verde&quot;,&quot;vivo&quot;,&quot;amarelo&quot;,&quot;azul&quot;,&quot;noite&quot;,&quot;papel&quot;],&quot;default&quot;:&quot;verde&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;texto&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;rotulo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;textura&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;nenhuma&quot;,&quot;sutil&quot;],&quot;default&quot;:&quot;sutil&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:110,&quot;tsType&quot;:&quot;number&quot;}}">
+const PAL = {
+  verde: { bg:'#0B5E37', fg:'#FBF99D', pat:'#1A8A52', alt:'#15E888' },
+  vivo: { bg:'#15E888', fg:'#0B5E37', pat:'#12D47B', alt:'#0D3A85' },
+  amarelo: { bg:'#FBF99D', fg:'#0D3A85', pat:'#EDE77E', alt:'#0A7BE5' },
+  azul: { bg:'#0A7BE5', fg:'#FFFFFF', pat:'#3A93EA', alt:'#FBF99D' },
+  noite: { bg:'#0D3A85', fg:'#FBF99D', pat:'#1A4A9E', alt:'#15E888' },
+  papel: { bg:'#F5F4EC', fg:'#0B5E37', pat:'#E4E2D6', alt:'#0A7BE5' },
+};
+const IC = {
+  sobre:['icone'], palestrantes:['mask','../img/f/estrela8.svg',290], inscricoes:['flag'], agenda:['txt','27'], boston:['img','../img/s/zakim.png'], bastidores:['mask','../img/f/asterisco.svg',320],
+  time:['mask','../img/f2/fuxico.svg',270], sponsors:['mask','../img/f/raios8.svg',230], imprensa:['mask','../img/f/burst.svg',290], impacto:['img','../img/s/cristo.png'], podcast:['linhas'], faq:['txt','?'],
+  carreiras:['pat','../img/f2/cobogo.svg'], alumni:['pat','../img/f2/azulejo.svg'], regioes:['img','../img/s/mapa.png'], cultura:['mask','../img/f/estrela5.svg',300],
+};
+const NOMES = { sobre:'Sobre', palestrantes:'Palestrantes', inscricoes:'Inscrições', agenda:'Agenda', boston:'Boston', bastidores:'Bastidores', time:'Time BC', sponsors:'Sponsors', imprensa:'Imprensa', impacto:'Impacto', podcast:'Podcast', faq:'FAQ', carreiras:'Carreiras', alumni:'Alumni', regioes:'Regiões', cultura:'Cultura' };
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const pal = PAL[p.paleta] || PAL.verde;
+    const est = p.estilo ?? 'cheio';
+    const key = IC[p.icone] ? p.icone : 'sobre';
+    const g = IC[key];
+    const dw = p.largura ?? 110;
+    const bg = est === 'contorno' ? '#F5F4EC' : pal.bg;
+    const gc = est === 'contorno' ? pal.bg : est === 'padrao' ? pal.bg : pal.fg;
+    return { dw, esc: dw / 1080, pal, bg, gc, gc2: est === 'cheio' ? pal.alt : pal.fg === gc ? pal.alt : pal.fg,
+      sPadrao: est === 'padrao', sContorno: est === 'contorno', larg: p.larguraFonte ?? 100,
+      gMask: g[0] === 'mask', gUrl: g[1], gi: g[2] ?? 300, gPat: g[0] === 'pat', gLinhas: g[0] === 'linhas', gTxt: g[0] === 'txt', gT: g[1], tfs: g[1] === '?' ? 560 : 460,
+      gImg: g[0] === 'img', gSrc: g[1], gIcone: g[0] === 'icone', gFlag: g[0] === 'flag',
+      rotulo: p.rotulo ?? true, nomeR: p.texto || NOMES[key], tx: p.textura === 'nenhuma' ? 0 : .4 };
+  }
+}
+</script>
+</body>
+</html>

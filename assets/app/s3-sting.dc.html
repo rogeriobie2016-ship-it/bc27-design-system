@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="../css/fonts.css" rel="stylesheet">
+<style>
+@keyframes s3Band{0%,8%{transform:translateY(60%)}50%{transform:translateY(-21%)}92%,100%{transform:translateY(-105%)}}
+@keyframes s3Drop{0%,5%{transform:translateY(-105%)}35%,62%{transform:translateY(0)}92%,100%{transform:translateY(-105%)}}
+@keyframes s3Rise{0%,5%{transform:translateY(105%)}35%,62%{transform:translateY(0)}92%,100%{transform:translateY(-105%)}}
+@keyframes s3Spin{0%,5%{transform:scale(0) rotate(-200deg)}40%,60%{transform:scale(1) rotate(0)}92%,100%{transform:scale(0) rotate(200deg)}}
+@keyframes s3Iris{0%,4%{clip-path:circle(0% at 50% 50%)}34%,64%{clip-path:circle(75% at 50% 50%)}94%,100%{clip-path:circle(0% at 50% 50%)}}
+@keyframes s3Tile{0%,4%{transform:scale(0) rotate(-90deg)}26%,66%{transform:scale(1) rotate(0)}90%,100%{transform:scale(0) rotate(90deg)}}
+@keyframes s3Panel{0%{transform:translateY(100%)}16%,74%{transform:translateY(0)}94%,100%{transform:translateY(-100%)}}
+@keyframes s3Slap{0%,16%{opacity:0;transform:scale(1.8)}22%{opacity:1;transform:scale(.95)}25%,100%{opacity:1;transform:scale(1)}}
+@keyframes s3Wipe{0%,2%{transform:translateX(-101%)}22%,72%{transform:translateX(0)}94%,100%{transform:translateX(101%)}}
+@keyframes s3Grow{0%,14%{transform:scale(0)}30%,62%{transform:scale(1)}76%,100%{transform:scale(6)}}
+@keyframes s3Pop{0%,34%{transform:scale(0) rotate(-20deg)}40%{transform:scale(1.1) rotate(3deg)}43%,60%{transform:scale(1) rotate(0)}66%,100%{transform:scale(0) rotate(0)}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;width:{{ dw }}px;height:{{ dh }}px;overflow:hidden;border-radius:6px">
+<div style="position:absolute;left:0;top:0;width:{{ W }}px;height:{{ H }}px;transform:scale({{ esc }});transform-origin:0 0;overflow:hidden;font-family:'Bricolage Grotesque',sans-serif">
+<sc-if value="{{ cena }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:#2A2A28;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:56px;letter-spacing:.3em;color:#4A4A46">CENA</div></sc-if>
+<sc-if value="{{ chroma }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ chromaCor }}"></div></sc-if>
+<sc-if value="{{ tOndas }}" hint-placeholder-val="{{ true }}"><sc-for list="{{ bands }}" as="b" hint-placeholder-count="0"><div style="position:absolute;left:0;top:0;width:100%;height:{{ bH }}px;background:{{ b.c }};mask:url(../img/f/onda-faixa.svg) {{ b.o }}px 0/{{ bW }}px 100% repeat-x;animation:s3Band {{ dur }} {{ b.d }} linear infinite both"></div></sc-for></sc-if>
+<sc-if value="{{ tFitas }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex"><sc-for list="{{ cols }}" as="f" hint-placeholder-count="0"><div style="flex:1;height:{{ fH }}px;background:{{ f.c }};clip-path:polygon(0 0,100% 0,100% 100%,50% 96%,0 100%);animation:s3Drop {{ dur }} {{ f.d }} cubic-bezier(.7,0,.25,1) infinite both;display:flex;justify-content:center;padding-top:{{ fPad }}px;box-sizing:border-box"><span style="writing-mode:vertical-rl;font-weight:700;font-size:{{ fFs }}px;letter-spacing:.16em;color:{{ f.tc }};white-space:nowrap">{{ f.t }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ tCasario }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex"><sc-for list="{{ cols }}" as="f" hint-placeholder-count="0"><div style="flex:1;height:{{ fH }}px;position:relative;animation:s3Rise {{ dur }} {{ f.d }} cubic-bezier(.7,0,.25,1) infinite both"><div style="position:absolute;inset:0;background:{{ f.c }};clip-path:{{ f.roof }}"></div><div style="position:absolute;left:22%;top:{{ f.w0 }}px;width:56%;height:100%;background:repeating-linear-gradient(180deg,{{ f.tc }} 0 {{ winH }}px,transparent {{ winH }}px {{ winStep }}px)"></div></div></sc-for></div></sc-if>
+<sc-if value="{{ tFrevo }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ uX }}px;top:{{ uY }}px;width:{{ uS }}px;height:{{ uS }}px;border-radius:50%;background:{{ conic }};animation:s3Spin {{ dur }} cubic-bezier(.6,0,.3,1) infinite both"></div></sc-if>
+<sc-if value="{{ tIris }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ c0 }};animation:s3Iris {{ dur }} cubic-bezier(.6,0,.3,1) infinite both"><div style="position:absolute;inset:0;background:{{ c1 }};mask:url({{ padUrl }}) 0 0/{{ padT }}px auto repeat"></div></div></sc-if>
+<sc-if value="{{ tMosaico }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ tiles }}" as="t" hint-placeholder-count="0"><div style="position:absolute;left:{{ t.x }}px;top:{{ t.y }}px;width:{{ t.s }}px;height:{{ t.s }}px;background:{{ t.bg }};animation:s3Tile {{ dur }} {{ t.d }} infinite both"><div style="position:absolute;inset:{{ t.in }}px;background:{{ t.fg }};mask:url({{ t.m }}) center/contain no-repeat"></div></div></sc-for></sc-if>
+<sc-if value="{{ tBandeira }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;overflow:hidden"><div style="position:absolute;inset:0;background:{{ c0 }};animation:s3Wipe {{ dur }} cubic-bezier(.7,0,.2,1) infinite both;overflow:hidden"><div style="position:absolute;left:{{ dX }}px;top:{{ dY }}px;width:{{ dW }}px;height:{{ dH }}px;background:{{ c1 }};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%);animation:s3Grow {{ dur }} cubic-bezier(.5,0,.3,1) infinite both"></div><div style="position:absolute;left:{{ cX }}px;top:{{ cY }}px;width:{{ cS }}px;height:{{ cS }}px;border-radius:50%;background:{{ c2 }};animation:s3Grow {{ dur }} .08s cubic-bezier(.5,0,.3,1) infinite both"></div></div></div></sc-if>
+<sc-if value="{{ tAdesivos }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ c0 }};animation:s3Panel {{ dur }} cubic-bezier(.7,0,.25,1) infinite both"><sc-for list="{{ stk }}" as="s" hint-placeholder-count="0"><div style="position:absolute;left:{{ s.x }}px;top:{{ s.y }}px;transform:rotate({{ s.r }}deg)"><div style="animation:s3Slap {{ dur }} {{ s.d }} infinite both;filter:drop-shadow(7px 0 0 #fff) drop-shadow(-7px 0 0 #fff) drop-shadow(0 7px 0 #fff) drop-shadow(0 -7px 0 #fff) {{ stkSh }}"><div style="background:{{ s.bg }};padding:{{ s.pad }};font-weight:800;font-size:{{ s.fs }}px;line-height:1;letter-spacing:-.02em;color:{{ s.c }};white-space:nowrap;border-radius:{{ s.br }}">{{ s.t }}</div></div></div></sc-for></div></sc-if>
+<sc-if value="{{ cIcone }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:{{ ctX }}px;top:{{ ctY }}px;width:{{ ctS }}px;height:{{ ctS }}px;animation:s3Pop {{ dur }} infinite both"><div style="position:absolute;inset:0;border-radius:50%;background:#FFFFFF;box-shadow:{{ icSh }}"></div><div style="position:absolute;left:{{ icL }}px;top:{{ icT }}px;width:572px;height:174px;transform:scale({{ icS }});transform-origin:0 0"><div style="position:absolute;left:65px;top:0;width:308px;height:174px;background:#0B5E37"></div><div style="position:absolute;left:268px;top:0;width:304px;height:174px;background:#15E888;clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)"></div><div style="position:absolute;left:0;top:41px;width:92px;height:92px;border-radius:50%;background:#0A7BE5"></div></div></div></sc-if>
+<sc-if value="{{ cTexto }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;top:{{ txY }}px;display:flex;justify-content:center;animation:s3Pop {{ dur }} infinite both"><div style="background:#0B5E37;border:{{ txB }}px solid #FFFFFF;padding:{{ txP }}px {{ txP2 }}px;font-weight:{{ peso }};font-stretch:{{ larg }}%;font-size:{{ txFs }}px;letter-spacing:-.03em;line-height:1;color:#FBF99D;white-space:nowrap">{{ texto }}</div></div></sc-if>
+<sc-if value="{{ cWm }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;top:{{ txY }}px;display:flex;justify-content:center;animation:s3Pop {{ dur }} infinite both"><div style="background:#0B5E37;border:{{ txB }}px solid #FFFFFF;padding:{{ txP }}px {{ txP2 }}px"><img src="../img/wm-amarelo.png" style="display:block;width:{{ wmW }}px"></div></div></sc-if>
+</div>
+<sc-if value="{{ dica }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:8px;right:8px;bottom:8px;display:flex;flex-direction:column;gap:6px;background:rgba(18,18,17,.92);border-radius:8px;padding:10px 12px;font-family:'Bricolage Grotesque',sans-serif;color:#F5F4EC"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#C9C8BE">MELHOR FUNDO PARA CHROMA</div><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ ranking }}" as="r" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:5px;padding:3px 7px 3px 3px;border-radius:99px;border:1px solid {{ r.bd }}"><span style="width:14px;height:14px;border-radius:50%;background:{{ r.cor }};box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)"></span><span style="font-size:11px;font-weight:700">{{ r.star }}{{ r.nome }}</span><span style="font-size:10px;color:{{ r.tc }}">{{ r.nota }}</span></div></sc-for></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:324,&quot;height&quot;:576},&quot;tipo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ondas&quot;,&quot;fitas&quot;,&quot;casario&quot;,&quot;frevo&quot;,&quot;iris&quot;,&quot;mosaico&quot;,&quot;bandeira&quot;,&quot;adesivos&quot;],&quot;default&quot;:&quot;ondas&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sting&quot;},&quot;cores&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;bandeira&quot;,&quot;mata&quot;,&quot;ceu&quot;,&quot;sol&quot;,&quot;festa&quot;],&quot;default&quot;:&quot;bandeira&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sting&quot;},&quot;padrao&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cobogo&quot;,&quot;azulejo&quot;,&quot;calcadao&quot;,&quot;fuxico&quot;,&quot;hachura&quot;],&quot;default&quot;:&quot;cobogo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sting&quot;},&quot;centro&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;icone&quot;,&quot;assinatura&quot;,&quot;texto&quot;,&quot;nada&quot;],&quot;default&quot;:&quot;icone&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Centro&quot;},&quot;texto&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;BRASIL&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Centro&quot;},&quot;peso&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:800,&quot;step&quot;:100,&quot;default&quot;:800,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Centro&quot;},&quot;larguraFonte&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:75,&quot;max&quot;:100,&quot;step&quot;:5,&quot;default&quot;:100,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Centro&quot;},&quot;velocidade&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;0.75&quot;,&quot;1&quot;,&quot;1.25&quot;,&quot;1.5&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;pausar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;tempo&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:3,&quot;step&quot;:0.05,&quot;default&quot;:1.5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Movimento&quot;},&quot;formato&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;9:16&quot;,&quot;16:9&quot;,&quot;1:1&quot;],&quot;default&quot;:&quot;9:16&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;fundo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cena&quot;,&quot;auto ★&quot;,&quot;magenta&quot;,&quot;verde&quot;,&quot;azul&quot;,&quot;vermelho&quot;,&quot;preto&quot;,&quot;transparente&quot;],&quot;default&quot;:&quot;cena&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;dica&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Saída&quot;},&quot;largura&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:324,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Saída&quot;}}">
+const FMT = { '9:16':[1080,1920], '16:9':[1920,1080], '1:1':[1080,1080] };
+const SEQ = {
+  bandeira: ['#15E888','#FBF99D','#0A7BE5','#0D3A85','#0B5E37','#FFFFFF'],
+  mata: ['#0B5E37','#15E888','#1A8A52','#FBF99D','#0B5E37','#15E888'],
+  ceu: ['#0D3A85','#0A7BE5','#FFFFFF','#FBF99D','#0D3A85','#0A7BE5'],
+  sol: ['#FBF99D','#FFFFFF','#15E888','#0B5E37','#FBF99D','#0A7BE5'],
+  festa: ['#FBF99D','#0A7BE5','#FFFFFF','#15E888','#0D3A85','#0B5E37'],
+};
+const PAD = { cobogo:'../img/f2/cobogo.svg', azulejo:'../img/f2/azulejo.svg', calcadao:'../img/f2/calcadao.svg', fuxico:'../img/f2/fuxico.svg', hachura:'../img/f2/hachura.svg' };
+const SHAPES = ['../img/f/estrela8.svg','../img/f/asterisco.svg','../img/f/raios8.svg','../img/f/estrela5.svg','../img/f2/fuxico.svg','../img/f/burst.svg','../img/f2/cobogo.svg','../img/f2/azulejo.svg'];
+const FITAS = ['LEMBRANÇA DA BC27','FEITO NO BRASIL','EU SOU TIME BC','BRASIL COM S','BC É MOVIMENTO','O BRASIL EM 1ª PESSOA','HARVARD & MIT','BC27'];
+const LIGHT = ['#FFFFFF','#FBF99D','#15E888'];
+const KEYS = { magenta:'#FF00FF', verde:'#00B140', azul:'#0047BB', vermelho:'#FF0000', preto:'#000000' };
+const hsv = (h) => { const n = parseInt(h.slice(1), 16), r = (n >> 16) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let H = 0; if (d) H = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return { h: (H * 60 + 360) % 360, s: mx ? d / mx : 0, v: mx, l: .2126 * r + .7152 * g + .0722 * b }; };
+function rankKeys(used) {
+  const U = used.map(hsv);
+  return Object.entries(KEYS).map(([nome, cor]) => {
+    let sc;
+    if (nome === 'preto') sc = Math.min(...U.map(u => u.l)) * 160;
+    else { const k = hsv(cor); sc = Math.min(...U.filter(u => u.s > .2).map(u => { const d = Math.abs(u.h - k.h); return Math.min(d, 360 - d); })) / 1.2; }
+    sc = Math.max(0, Math.min(100, Math.round(sc)));
+    return { nome, cor, sc };
+  }).sort((a, b) => b.sc - a.sc);
+}
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  componentDidMount() { this.sync(); }
+  componentDidUpdate() { this.sync(); }
+  sync() {
+    const el = this.rootRef.current; if (!el || !el.getAnimations) return;
+    const v = parseFloat(this.props.velocidade ?? '1') || 1;
+    const an = el.getAnimations({ subtree: true });
+    if (this.props.pausar) an.forEach(a => { a.pause(); a.currentTime = (this.props.tempo ?? 1.5) * 1000 / v; });
+    else an.forEach(a => { if (a.playState === 'paused') a.play(); });
+  }
+  renderVals() {
+    const p = this.props;
+    const fmt = FMT[p.formato] ? p.formato : '9:16';
+    const [W, H] = FMT[fmt]; const m = Math.min(W, H);
+    const dw = p.largura ?? 324, esc = dw / W, dh = Math.round(H * esc);
+    const vel = parseFloat(p.velocidade ?? '1') || 1, dur = (3 / vel).toFixed(2) + 's';
+    const seq = SEQ[p.cores] || SEQ.bandeira;
+    const t = p.tipo ?? 'ondas', f = p.fundo ?? 'cena', centro = p.centro ?? 'icone';
+    const dl = (s) => (s / vel).toFixed(3) + 's';
+    const tc = (c) => LIGHT.includes(c) ? '#0D3A85' : '#FFFFFF';
+    const v = { rootRef: this.rootRef, W, H, dw, dh, esc, dur, cena: f === 'cena',
+      tOndas: t === 'ondas', tFitas: t === 'fitas', tCasario: t === 'casario', tFrevo: t === 'frevo', tIris: t === 'iris', tMosaico: t === 'mosaico', tBandeira: t === 'bandeira', tAdesivos: t === 'adesivos',
+      cIcone: centro === 'icone', cTexto: centro === 'texto', cWm: centro === 'assinatura', texto: p.texto ?? 'BRASIL', peso: p.peso ?? 800, larg: p.larguraFonte ?? 100,
+      c0: seq[0], c1: seq[1], c2: seq[2] };
+    const used = [...seq.slice(0, 6), '#0D3A85', '#FFFFFF', '#FBF99D'];
+    if (centro === 'icone') used.push('#0B5E37', '#15E888', '#0A7BE5');
+    if (centro === 'texto' || centro === 'assinatura') used.push('#0B5E37');
+    if (t === 'adesivos') used.push('#15E888', '#0B5E37');
+    const rank = rankKeys(used);
+    const isKey = f === 'auto ★' || KEYS[f];
+    v.chroma = !!isKey; v.chromaCor = f === 'auto ★' ? rank[0].cor : KEYS[f];
+    v.stkSh = isKey ? '' : 'drop-shadow(0 14px 16px rgba(0,0,0,.35))';
+    v.icSh = isKey ? 'none' : '0 20px 30px rgba(0,0,0,.25)';
+    v.best = rank[0]; v.rankRaw = rank;
+    v.ranking = rank.map((r, i) => ({ ...r, star: i === 0 ? '★ ' : '', bd: i === 0 ? '#FBF99D' : '#333', nota: r.sc >= 40 ? 'seguro' : r.sc >= 20 ? 'ok' : 'evitar', tc: r.sc >= 40 ? '#15E888' : r.sc >= 20 ? '#FBF99D' : '#FF8A8A' }));
+    v.dica = (p.dica ?? true) && f !== 'transparente';
+    const n = fmt === '16:9' ? 10 : 6;
+    v.bH = Math.round(H * 1.72); v.bW = Math.round(m * .34);
+    v.bands = [0,1,2,3,4].map(i => ({ c: seq[i], o: Math.round(i * v.bW / 3), d: dl(i * .09) }));
+    v.fH = Math.round(H * 1.1); v.fPad = Math.round(m * .1); v.fFs = Math.round(W / n * .24);
+    v.winH = Math.round(m * .16); v.winStep = Math.round(m * .3); v.winR = Math.round(W / n * .28); v.winR2 = v.winR + 1;
+    v.cols = Array.from({ length: n }, (_, i) => { const c = seq[i % seq.length]; return { c, tc: tc(c), d: dl(i * .05), t: FITAS[i % FITAS.length], w0: Math.round(m * (.14 + (i % 3) * .04)), roof: i % 2 ? `polygon(0 ${Math.round(m*.06)}px,100% ${Math.round(m*.06)}px,100% 100%,0 100%)` : `polygon(0 ${Math.round(m*.11)}px,50% 0,100% ${Math.round(m*.11)}px,100% 100%,0 100%)` }; });
+    const big = Math.hypot(W, H) * 1.05;
+    v.uS = Math.round(big); v.uX = Math.round((W - big) / 2); v.uY = Math.round((H - big) / 2);
+    v.conic = 'conic-gradient(' + Array.from({ length: 12 }, (_, i) => `${seq[i % seq.length]} 0 ${((i + 1) / 12 * 100).toFixed(2)}%`).join(',') + ')';
+    v.padUrl = PAD[p.padrao] || PAD.cobogo; v.padT = Math.round(m * .16);
+    const ts = Math.round(fmt === '16:9' ? W / 5 : W / 3), cols = Math.ceil(W / ts), rows = Math.ceil(H / ts);
+    v.tiles = [];
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) { const k = x + y * cols; const bg = seq[k % seq.length]; v.tiles.push({ x: x * ts, y: y * ts, s: ts, bg, fg: tc(bg) === '#FFFFFF' ? '#FBF99D' : '#0D3A85', in: Math.round(ts * .2), m: SHAPES[(k * 3) % SHAPES.length], d: dl((x + y) * .06) }); }
+    v.dW = Math.round(W * .9); v.dH = Math.round(v.dW * .64); v.dX = Math.round((W - v.dW) / 2); v.dY = Math.round((H - v.dH) / 2);
+    v.cS = Math.round(v.dH * .62); v.cX = Math.round((W - v.cS) / 2); v.cY = Math.round((H - v.cS) / 2);
+    const sk = [['MADE IN BRASIL', seq[1]], ['BRASIL COM S', '#FFFFFF'], ['BC É MOVIMENTO', seq[2]], ['FEITO NO BRASIL', '#FBF99D'], ['EU SOU TIME BC', '#15E888']];
+    const pos = fmt === '16:9' ? [[.06,.1,-6],[.5,.18,8],[.12,.44,4],[.52,.56,-5],[.2,.76,3]] : [[.06,.1,-6],[.3,.26,8],[.04,.44,4],[.22,.62,-5],[.1,.8,3]];
+    const sfs = Math.round(m * .085);
+    v.stk = sk.map(([tt, bg], i) => ({ t: tt, bg, c: tc(bg) === '#FFFFFF' ? '#FFFFFF' : '#0B5E37', x: Math.round(W * pos[i][0]), y: Math.round(H * pos[i][1]), r: pos[i][2], fs: sfs, pad: `${Math.round(sfs*.3)}px ${Math.round(sfs*.45)}px`, br: i % 2 ? '999px' : '0', d: dl(i * .08) }));
+    v.ctS = Math.round(m * .38); v.ctX = Math.round((W - v.ctS) / 2); v.ctY = Math.round((H - v.ctS) / 2);
+    v.icS = v.ctS * .72 / 572; v.icL = Math.round(v.ctS * .14); v.icT = Math.round((v.ctS - 174 * v.icS) / 2);
+    v.txFs = Math.round(m * .1); v.txB = Math.round(m * .01); v.txP = Math.round(m * .022); v.txP2 = Math.round(m * .045); v.txY = Math.round(H / 2 - v.txFs * .75); v.wmW = Math.round(m * .5);
+    return v;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visão geral | BC Studio</title>
+<meta name="description" content="BC Studio, o design system da Brazil Conference 2027: cores, tipografia, logo, padrões, vinhetas e ferramentas para criar peças.">
+<meta name="theme-color" content="#0B5E37">
+<script>try{var t=localStorage.getItem("bc-tema")||(matchMedia("(prefers-color-scheme: light)").matches?"claro":"escuro");document.documentElement.setAttribute("data-tema",t);}catch(e){}</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="BC Studio · Brazil Conference Studio">
+<meta property="og:description" content="Cores, letras, vinhetas e ferramentas da Brazil Conference 2027 num só lugar.">
+<meta property="og:image" content="https://rogeriobie2016-ship-it.github.io/bc27-design-system/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" id="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="topbar">
+<button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+<a href="#/inicio" aria-label="BC Studio, visão geral"><img class="only-dark" src="assets/img/wm-amarelo.png" alt="" width="120" height="13"><img class="only-light" src="assets/img/wm-verde.png" alt="" width="120" height="13"></a>
+<button class="tema" type="button" data-tema-btn>☀ Claro</button>
+</header>
+<div class="overlay" id="overlay" hidden></div>
+<nav class="menu" id="menu" aria-label="Menu principal">
+<div class="menu-top"><a href="#/inicio" aria-label="BC Studio, visão geral"><img class="only-dark" src="assets/img/wm-amarelo.png" alt="" width="150" height="17"><img class="only-light" src="assets/img/wm-verde.png" alt="" width="150" height="17"><span>STUDIO</span></a></div>
+<div class="menu-scroll" id="menu-lista"></div>
+<div class="menu-foot" id="menu-versao"><span></span><button class="tema" type="button" data-tema-btn>☀ Claro</button></div>
+</nav>
+<main id="conteudo" tabindex="-1"><p style="color:#B5B4AA">Carregando…</p></main>
+<noscript><p style="padding:24px;margin-left:0;color:#F5F4EC;font-family:sans-serif">Este site precisa de JavaScript ligado.</p></noscript>
+<script src="assets/js/vinhetas-data.js"></script>
+<script src="assets/js/pecas-data.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
