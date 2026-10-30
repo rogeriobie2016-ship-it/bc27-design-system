@@ -45,9 +45,11 @@ class Component extends DCLogic {
     window.bcSetPeca = (c, p) => { document.getElementById('bcsnap')?.remove(); this.setState({ c, p: p || {}, poster: true }); };
     window.bcSnap = async () => { const root = this.boxRef.current; const cv = await window.BC27Export.snap({ root, W: root.offsetWidth, H: root.offsetHeight, k: 1 }); let im = document.getElementById('bcsnap'); if (!im) { im = document.createElement('img'); im.id = 'bcsnap'; im.style.cssText = 'position:fixed;left:0;top:0;z-index:9;display:block'; document.body.appendChild(im); } im.style.width = root.offsetWidth + 'px'; im.src = cv.toDataURL('image/png'); return [root.offsetWidth, root.offsetHeight]; };
     this.measure();
+    // the imported piece loads after first paint; re-measure when its real size arrives
+    if (window.ResizeObserver && this.boxRef.current) { this.ro = new ResizeObserver(() => this.measure()); this.ro.observe(this.boxRef.current); }
   }
   componentDidUpdate() { this.measure(); }
-  componentWillUnmount() { window.removeEventListener('resize', this.onR); window.removeEventListener('message', this.onM); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); window.removeEventListener('message', this.onM); this.ro?.disconnect(); }
   measure() { const r = this.boxRef.current; if (!r || !r.offsetWidth || !r.offsetHeight) { clearTimeout(this.mt); this.mt = setTimeout(() => this.measure(), 120); return; } const ar = Math.round(r.offsetWidth / r.offsetHeight * 1000) / 1000; if (Math.abs(ar - this.state.ar) > .01) this.setState({ ar }); if (window.parent !== window && this.lastAr !== ar) { this.lastAr = ar; window.parent.postMessage({ type: 'bcp-ready', ar }, '*'); } }
   post(o) { if (window.parent !== window) window.parent.postMessage(o, '*'); }
   async cmd(d) {
