@@ -89,6 +89,39 @@
     return save(await zip.generateAsync({ type: 'blob' }), zipName + '.zip');
   }
   const seek = (anims, ms) => anims.forEach(a => { a.pause(); a.currentTime = ms; });
+  // QuickTime .mov com codec PNG (32 bits, alpha reto): abre com transparência no Premiere, After Effects, DaVinci e Final Cut.
+  function movPNG(frames, W, H, fps) {
+    const TS = 600 % fps === 0 ? 600 : fps * 1000, delta = Math.round(TS / fps), n = frames.length, dur = n * delta;
+    const u32 = (v) => [(v >>> 24) & 255, (v >>> 16) & 255, (v >>> 8) & 255, v & 255], u16 = (v) => [(v >> 8) & 255, v & 255];
+    const u64 = (v) => [...u32(Math.floor(v / 4294967296)), ...u32(v >>> 0)];
+    const str = (t) => [...t].map(c => c.charCodeAt(0));
+    const box = (type, ...parts) => { const body = parts.flat(); return [...u32(body.length + 8), ...str(type), ...body]; };
+    const full = (type, vf, ...parts) => box(type, ...u32(vf), ...parts);
+    const matrix = [...u32(0x10000), ...u32(0), ...u32(0), ...u32(0), ...u32(0x10000), ...u32(0), ...u32(0), ...u32(0), ...u32(0x40000000)];
+    const pstr = (t, len) => { const a = new Array(len).fill(0); a[0] = t.length; str(t).forEach((c, i) => a[i + 1] = c); return a; };
+    const ftyp = box('ftyp', str('qt  '), u32(0x20050300), str('qt  '));
+    let size = 16; frames.forEach(f => size += f.size);
+    const mdatHead = [...u32(1), ...str('mdat'), ...u64(size)];
+    const offs = []; let o = ftyp.length + 16; frames.forEach(f => { offs.push(o); o += f.size; });
+    const mvhd = full('mvhd', 0, u32(0), u32(0), u32(TS), u32(dur), u32(0x10000), u16(0x100), new Array(10).fill(0), matrix, new Array(24).fill(0), u32(2));
+    const tkhd = full('tkhd', 0xF, u32(0), u32(0), u32(1), u32(0), u32(dur), new Array(8).fill(0), u16(0), u16(0), u16(0), u16(0), matrix, u32(W * 65536), u32(H * 65536));
+    const mdhd = full('mdhd', 0, u32(0), u32(0), u32(TS), u32(dur), u16(0), u16(0));
+    const hdlr = (ct, st, name) => full('hdlr', 0, str(ct), str(st), u32(0), u32(0), u32(0), pstr(name, name.length + 1));
+    const vmhd = full('vmhd', 1, u16(0x40), u16(0x8000), u16(0x8000), u16(0x8000));
+    const dinf = box('dinf', full('dref', 0, u32(1), full('alis', 1)));
+    const png = box('png ', new Array(6).fill(0), u16(1), u16(0), u16(0), str('appl'), u32(0), u32(512), u16(W), u16(H), u32(0x480000), u32(0x480000), u32(0), u16(1), pstr('PNG', 32), u16(32), u16(0xFFFF));
+    const stsd = full('stsd', 0, u32(1), png);
+    const stts = full('stts', 0, u32(1), u32(n), u32(delta));
+    const stsc = full('stsc', 0, u32(1), u32(1), u32(1), u32(1));
+    const stsz = full('stsz', 0, u32(0), u32(n), ...frames.map(f => u32(f.size)));
+    const co64 = full('co64', 0, u32(n), ...offs.map(u64));
+    const stbl = box('stbl', stsd, stts, stsc, stsz, co64);
+    const minf = box('minf', vmhd, hdlr('dhlr', 'alis', 'Apple Alias Data Handler'), dinf, stbl);
+    const mdia = box('mdia', mdhd, hdlr('mhlr', 'vide', 'Apple Video Media Handler'), minf);
+    const trak = box('trak', tkhd, mdia);
+    const moov = box('moov', mvhd, trak);
+    return new Blob([new Uint8Array(ftyp), new Uint8Array(mdatHead), ...frames, new Uint8Array(moov)], { type: 'video/quicktime' });
+  }
   async function render({ root, W, H, fps = 30, dur = 3, mode = 'mp4', name = 'bc27', onProgress = () => {}, matte, k = 1 }) {
     const OW = Math.round(W * k / 2) * 2, OH = Math.round(H * k / 2) * 2; k = OW / W;
     const n = Math.round(dur * fps);
@@ -123,6 +156,16 @@
         }
         await enc.flush(); muxer.finalize();
         out = { blob: new Blob([muxer.target.buffer], { type: 'video/mp4' }), file: name + '.mp4' };
+      } else if (mode === 'mov') {
+        const frames = [];
+        for (let i = 0; i < n; i++) {
+          seek(anims, i * 1000 / fps);
+          await draw(root, W, H, map, css, ctx, k);
+          frames.push(await new Promise(r => cv.toBlob(r, 'image/png')));
+          onProgress(i + 1, n, `Quadro ${i + 1}/${n}`);
+        }
+        onProgress(n, n, 'Montando o vídeo…');
+        out = { blob: movPNG(frames, OW, OH, fps), file: name + '_alpha.mov' };
       } else {
         if (!window.JSZip) throw new Error('Não carregou o compactador. Recarregue a página.');
         const zip = new JSZip();
@@ -142,5 +185,5 @@
     return out;
   }
   async function snap({ root, W, H, k = 1 }) { const css = await fonts(); const map = {}; await collect(root, map); const cv = document.createElement('canvas'); cv.width = Math.round(W * k); cv.height = Math.round(H * k); await draw(root, W, H, map, css, cv.getContext('2d'), k); return cv; }
-  window.BC27Export = { render, stills, snap, save };
+  window.BC27Export = { render, stills, snap, save, movPNG };
 })();

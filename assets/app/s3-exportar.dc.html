@@ -42,6 +42,7 @@
 <div ref="{{ stageRef }}" style="display:flex;line-height:0;max-width:100%;max-height:82vh;overflow:auto;border-radius:8px;background:{{ stageBg }}">
 <sc-if value="{{ v.logo }}" hint-placeholder-val="{{ true }}"><dc-import name="s3-logo" animacao="{{ m.lAnim }}" versao="{{ m.lVer }}" paleta="{{ m.lPal }}" fundo="{{ m.fundo }}" formato="{{ m.formato }}" velocidade="{{ m.vel }}" largura="{{ pw }}" hint-size="480px,270px"></dc-import></sc-if>
 <sc-if value="{{ v.sting }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-sting" tipo="{{ m.sTipo }}" cores="{{ m.sCores }}" centro="{{ m.sCentro }}" formato="{{ m.formato }}" fundo="{{ m.fundo }}" velocidade="{{ m.vel }}" dica="{{ false }}" largura="{{ pw }}" hint-size="480px,270px"></dc-import></sc-if>
+<sc-if value="{{ v.gcm }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-gc" dc-props="{{ gprops }}" hint-size="480px,270px"></dc-import></sc-if>
 <sc-if value="{{ v.vinheta }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-vinheta" elemento="{{ m.vEl }}" paleta="{{ m.vPal }}" entrada="{{ m.vEnt }}" titulo="{{ m.vTit }}" formato="{{ m.formato }}" velocidade="{{ m.vel }}" largura="{{ pw }}" hint-size="270px,480px"></dc-import></sc-if>
 <sc-if value="{{ v.post }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-post" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
 <sc-if value="{{ v.palestrante }}" hint-placeholder-val="{{ false }}"><dc-import name="s3-palestrante" dc-props="{{ dprops }}" hint-size="400px,500px"></dc-import></sc-if>
@@ -75,9 +76,10 @@ const BRAND = ['#0B5E37','#15E888','#FBF99D','#0A7BE5','#0D3A85','#FFFFFF'];
 const DESIGNS = [['post','s3-post','Post'],['palestrante','s3-palestrante','Palestrante'],['sponsor','s3-sponsor','Sponsor'],['redes','s3-redes','Redes'],['time','s3-time','Time'],['destaque','s3-destaque','Destaque'],['adesivo','s3-adesivo','Adesivo'],['padrao','s3-padrao','Padrão'],['slide','s3-slide','Slide'],['merch','s3-merch','Merch'],['gc','s3-gc','GC (quadro)'],['fundos','s3-fundos-reuniao','Fundos de reunião'],['paineis','s3-paineis','Painéis (posts e slides)'],['linkedin','s3-linkedin-time','LinkedIn do time'],['colecao','s3-colecao','Coleção (crachás, merch, camisas…)']];
 const SKIP = new Set(['largura','slotId','guia','dica','animar','pausar']);
 const FIGSETS = [['todas','Todas (66)'],['operacional','Operacional'],['beijos','Beijos das áreas'],['beijos-regioes','Beijos das regiões'],['humor','Humor'],['sotaques','Sotaques'],['institucional','Institucional']];
+const ALPHA = new Set(['mov', 'png']);
 const slug = (s) => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 class Component extends DCLogic {
-  state = { cat: 'movimento', peca: 'logo', lAnim: 'bandeira', lVer: 'bc', lPal: 'classico', sTipo: 'ondas', sCores: 'bandeira', sCentro: 'icone', vEl: 'frevo', vPal: 'azul', vEnt: 'letras', vTit: 'O Brasil em/primeira/pessoa', formato: '16:9', fundo: 'transparente', saida: 'png', fps: 30, vel: '1',
+  state = { cat: 'movimento', peca: 'logo', lAnim: 'bandeira', lVer: 'bc', lPal: 'classico', sTipo: 'ondas', sCores: 'bandeira', sCentro: 'icone', vEl: 'frevo', vPal: 'azul', vEnt: 'letras', vTit: 'O Brasil em/primeira/pessoa', gEst: 'faixa', gPal: 'verde', gAnim: 'barra', gLat: 'bandeira', gPos: 'esquerda', gNome: 'Fernanda Torres', gCargo: 'Organizadora da BC27', gRot: 'PAINEL · IMPACTO SOCIAL', formato: '16:9', fundo: 'transparente', saida: 'mov', fps: 30, vel: '1',
     design: 'post', dv: {}, escala: 1, img: 'png', figSet: 'todas', figOut: 'webp', figPalha: true, busy: false, msg: '', err: false, link: null, linkName: '' };
   sch = {};
   stageRef = React.createRef(); colRef = React.createRef(); barRef = React.createRef(); msgRef = React.createRef();
@@ -114,8 +116,8 @@ class Component extends DCLogic {
       } else {
         const root = this.findRoot(); if (!root) throw new Error('Não achei a peça na prévia. Recarregue a página.');
         const W = parseInt(root.style.width), H = parseInt(root.style.height);
-        const base = { logo: 4, sting: 3, vinheta: 8 }[s.peca], dur = base / (parseFloat(s.vel) || 1);
-        const nome = `BC27_${s.peca}_${s.peca === 'logo' ? s.lAnim : s.peca === 'sting' ? s.sTipo : s.vEl}_${s.formato.replace(':', 'x')}_${s.fundo}`;
+        const base = { logo: 4, sting: 3, vinheta: 8, gc: 6 }[s.peca], dur = s.peca === 'gc' ? base : base / (parseFloat(s.vel) || 1);
+        const nome = `BC27_${s.peca}_${s.peca === 'logo' ? s.lAnim : s.peca === 'sting' ? s.sTipo : s.peca === 'gc' ? s.gEst + '_' + s.gAnim : s.vEl}_${s.formato.replace(':', 'x')}_${s.fundo}`;
         out = await window.BC27Export.render({ root, W, H, fps: s.fps, dur, mode: s.saida, name: nome, matte: s.saida === 'mp4' && s.fundo === 'transparente' ? '#000000' : null, onProgress: (i, n, t) => this.prog(i, n, t) });
         info = `${W}×${H}, ${s.fps} fps, ${dur.toFixed(2)}s`;
       }
@@ -133,17 +135,18 @@ class Component extends DCLogic {
     const op = (k, l, val, sw) => chip(s[k] === val, l, set({ [k]: val }), sw);
     const ops = (k, arr) => arr.map(x => Array.isArray(x) ? op(k, x[1], x[0]) : op(k, x, x));
     const G = (t, o) => ({ t, chips: true, text: false, ops: o });
-    const cats = [['movimento', 'Movimento', 'Logo, sting, vinheta · MP4 ou PNG'], ['design', 'Peças', 'Posts, slides, redes, merch · PNG ou JPG'], ['figurinhas', 'Figurinhas', 'WhatsApp · WebP 512 ou PNG']].map(([k, l, sub]) => ({ ...chip(s.cat === k, l, set({ cat: k })), sub }));
-    const grupos = []; let dica = '', resumo = '', btnLabel = 'Baixar', pw = 360, dprops = {}, warn = '', stageBg = 'transparent';
-    const v = { logo: false, sting: false, vinheta: false, fig: false }; DESIGNS.forEach(d => v[d[0]] = false);
+    const cats = [['movimento', 'Movimento', 'Logo, sting, GC, vinheta · MP4 ou alpha'], ['design', 'Peças', 'Posts, slides, redes, merch · PNG ou JPG'], ['figurinhas', 'Figurinhas', 'WhatsApp · WebP 512 ou PNG']].map(([k, l, sub]) => ({ ...chip(s.cat === k, l, set({ cat: k })), sub }));
+    const grupos = []; let dica = '', resumo = '', btnLabel = 'Baixar', pw = 360, dprops = {}, gprops = {}, warn = '', stageBg = 'transparent';
+    const v = { logo: false, sting: false, vinheta: false, gcm: false, fig: false }; DESIGNS.forEach(d => v[d[0]] = false);
     const m = { lAnim: s.lAnim, lVer: s.lVer, lPal: s.lPal, sTipo: s.sTipo, sCores: s.sCores, sCentro: s.sCentro, vEl: s.vEl, vPal: s.vPal, vEnt: s.vEnt, vTit: s.vTit, formato: s.formato, vel: s.vel, fundo: s.fundo };
     if (s.cat === 'movimento') {
-      const isLogo = s.peca === 'logo', isSting = s.peca === 'sting', isVinheta = s.peca === 'vinheta';
-      v[s.peca] = true;
+      const isLogo = s.peca === 'logo', isSting = s.peca === 'sting', isVinheta = s.peca === 'vinheta', isGc = s.peca === 'gc';
+      v[isGc ? 'gcm' : s.peca] = true;
       const used = isSting ? [...SEQ[s.sCores], ...BRAND] : BRAND;
-      const keyOpts = isLogo ? ['magenta'] : isSting ? Object.keys(KEYS) : [];
+      const keyOpts = isLogo || isGc ? ['magenta'] : isSting ? Object.keys(KEYS) : [];
       const ranked = keyOpts.map(n => ({ n, sc: score(n, used) })).sort((a, b) => b.sc - a.sc);
-      const best = s.saida === 'png' ? 'transparente' : (ranked[0]?.n || null);
+      const alpha = ALPHA.has(s.saida);
+      const best = alpha ? 'transparente' : (ranked[0]?.n || null);
       const star = (n) => (n === best ? '★ ' : '');
       const fundoOps = [];
       if (!isVinheta) {
@@ -151,21 +154,27 @@ class Component extends DCLogic {
         ranked.forEach(r => fundoOps.push(op('fundo', star(r.n) + r.n + (r.sc < 20 ? ' · evitar' : ''), r.n, KEYS[r.n])));
         if (isLogo) ['branco', 'papel', 'verde', 'noite', 'preto'].forEach(n => fundoOps.push(op('fundo', n, n)));
         if (isSting) fundoOps.push(op('fundo', 'cena (teste)', 'cena'));
+        if (isGc) fundoOps.push(op('fundo', 'foto (teste)', 'foto'));
       }
-      grupos.push(G('PEÇA', [['logo', 'Logo'], ['sting', 'Sting'], ['vinheta', 'Vinheta']].map(([k, l], i) => chip(s.peca === k, l, set({ peca: k, fundo: i === 2 ? 'cena' : 'transparente' })))));
+      grupos.push(G('PEÇA', [['logo', 'Logo'], ['sting', 'Sting'], ['gc', 'GC'], ['vinheta', 'Vinheta']].map(([k, l], i) => chip(s.peca === k, l, set(i === 3 ? { peca: k, fundo: 'cena', saida: s.saida === 'png' ? 'png' : 'mp4' } : { peca: k, fundo: 'transparente', saida: s.peca === 'vinheta' && s.saida === 'mp4' ? 'mov' : s.saida, ...(k === 'gc' && s.formato === '4:5' ? { formato: '16:9' } : {}) })))));
       if (isLogo) grupos.push(G('ANIMAÇÃO', ops('lAnim', ['montagem','bandeira','explosao','rolagem','quique','giro','deslize','mascara','orbita','eco','padrao','maquina','pulso','zoom','losangos','bolinhas','faixas','mosaico','recorte'])), G('VERSÃO', ops('lVer', [['icone', 'ícone'], ['bc', 'ícone + BC'], ['completa', 'completa']])), G('PALETA', ops('lPal', ['classico','verde','vivo','amarelo','branco'])));
       if (isSting) grupos.push(G('STING', ops('sTipo', ['ondas','fitas','casario','frevo','iris','mosaico','bandeira','adesivos'])), G('CORES', ops('sCores', Object.keys(SEQ))), G('CENTRO', ops('sCentro', ['icone','assinatura','texto','nada'])));
       if (isVinheta) grupos.push(G('ELEMENTO', ops('vEl', ['frevo','bandeirinhas','fitas','cobogo','azulejo','calcadao','fuxico','alvorada','cordel','athos','ondas','bandeira','estrelas','adesivos','panorama','boston','monumentos','concreta','confete','asteriscos','listras','floreio'])), G('PALETA', ops('vPal', ['verde','vivo','amarelo','azul','noite','branco','papel','mata','ceu'])), G('ENTRADA', ops('vEnt', ['letras','linhas','escala','maquina','desfoque','queda'])));
-      grupos.push(G('FORMATO', ops('formato', Object.keys(FMT))));
-      grupos.push(G('ARQUIVO', [op('saida', (isVinheta ? '' : '★ ') + 'PNG transparente (sequência)', 'png'), op('saida', 'MP4 com fundo', 'mp4')]));
-      if (fundoOps.length) grupos.push(G(s.saida === 'png' ? 'FUNDO · ★ transparente dispensa chroma' : 'FUNDO CHROMA · ★ = cor que não aparece na arte', fundoOps));
-      grupos.push(G('QUADROS', [op('fps', '30 fps', 30), op('fps', '60 fps', 60)]), G('VELOCIDADE', ops('vel', [['0.75', '0.75×'], ['1', '1×'], ['1.25', '1.25×'], ['1.5', '1.5×']])));
+      if (isGc) { const tx = (k, t) => ({ t, chips: false, text: true, v: s[k], set: (e) => this.setState({ [k]: e.target.value, link: null, msg: '' }) });
+        grupos.push(tx('gNome', 'NOME'), tx('gCargo', 'CARGO'), tx('gRot', 'RÓTULO'), G('ESTILO', ops('gEst', ['faixa','selo','adesivo','editorial','fita','cordel','letreiro','minimal'])), G('PALETA', ops('gPal', ['verde','folha','vivo','azul','noite','amarelo','branco'])), G('ANIMAÇÃO', ops('gAnim', ['barra','fade','slap'])), G('LATERAL', ops('gLat', ['bandeira','cobogo','azulejo','calcadao','frevo','icone','nenhum'])), G('POSIÇÃO', ops('gPos', ['esquerda','centro','direita'])));
+        gprops = { nome: s.gNome, cargo: s.gCargo, rotulo: s.gRot, estilo: s.gEst, paleta: s.gPal, animacao: s.gAnim, lateral: s.gLat, posicao: s.gPos, formato: s.formato, fundo: ['transparente', 'magenta', 'foto'].includes(s.fundo) ? s.fundo : 'transparente', guia: false }; }
+      grupos.push(G('FORMATO', ops('formato', Object.keys(FMT).filter(f => !(isGc && f === '4:5')))));
+      const sai = (val, l) => chip(s.saida === val, l, set(ALPHA.has(val) && !isVinheta ? { saida: val, fundo: 'transparente' } : { saida: val }));
+      grupos.push(G('ARQUIVO', isVinheta ? [sai('mp4', 'MP4'), sai('png', 'PNG (sequência)')] : [sai('mov', '★ Vídeo alpha · MOV (Premiere, AE, DaVinci)'), sai('mp4', 'MP4 com fundo'), sai('png', 'PNG transparente (sequência)')]));
+      if (fundoOps.length) grupos.push(G(alpha ? 'FUNDO · ★ transparente dispensa chroma' : 'FUNDO CHROMA · ★ = cor que não aparece na arte', fundoOps));
+      grupos.push(G('QUADROS', [op('fps', '30 fps', 30), op('fps', '60 fps', 60)]));
+      if (!isGc) grupos.push(G('VELOCIDADE', ops('vel', [['0.75', '0.75×'], ['1', '1×'], ['1.25', '1.25×'], ['1.5', '1.5×']])));
       m.fundo = isSting && s.fundo === 'cena' ? 'cena' : s.fundo;
-      pw = Math.max(200, Math.min(s.formato === '16:9' ? 720 : s.formato === '9:16' ? 360 : 480, s.cw || 360));
-      warn = s.saida === 'mp4' && s.fundo === 'transparente' ? 'MP4 não guarda transparência: vai sair com fundo preto. Use PNG transparente ou um fundo chroma.' : s.saida === 'mp4' && ranked.length && s.fundo !== best && keyOpts.includes(s.fundo) && score(s.fundo, used) < 20 ? `Atenção: ${s.fundo} aparece na arte e o recorte vai comer partes. Prefira ★ ${best}.` : '';
-      dica = s.saida === 'png' ? 'No Premiere: descompacte o ZIP → Arquivo › Importar → selecione o primeiro PNG → marque “Sequência de imagens”. Entra como um clipe com transparência, pronto para pôr acima do vídeo.' : 'No Premiere: importe o MP4 numa trilha acima do vídeo → Efeitos › Ultra Key → conta-gotas no fundo. Use “Agressivo” se sobrar borda.';
+      pw = Math.max(200, Math.min(s.formato === '16:9' ? 720 : s.formato === '9:16' ? 360 : 480, s.cw || 360)); gprops.largura = pw;
+      warn = alpha && !isVinheta && s.fundo !== 'transparente' ? `Com fundo ${s.fundo} o vídeo sai opaco. Para pôr em cima do vídeo sem chroma, escolha fundo transparente.` : s.saida === 'mp4' && s.fundo === 'transparente' ? 'MP4 não guarda transparência: vai sair com fundo preto. Para transparência use “Vídeo alpha · MOV”.' : s.saida === 'mp4' && ranked.length && s.fundo !== best && keyOpts.includes(s.fundo) && score(s.fundo, used) < 20 ? `Atenção: ${s.fundo} aparece na arte e o recorte vai comer partes. Prefira ★ ${best}.` : '';
+      dica = s.saida === 'mov' ? 'No Premiere: Arquivo › Importar o .mov e solte numa trilha acima do vídeo. A transparência já vem pronta, sem Ultra Key e sem chroma. Abre igual no After Effects, DaVinci Resolve e Final Cut. O arquivo é pesado (um PNG por quadro), é normal.' : s.saida === 'png' ? 'No Premiere: descompacte o ZIP → Arquivo › Importar → selecione o primeiro PNG → marque “Sequência de imagens”. Entra como um clipe com transparência, pronto para pôr acima do vídeo.' : 'No Premiere: importe o MP4 numa trilha acima do vídeo → Efeitos › Ultra Key → conta-gotas no fundo. Use “Agressivo” se sobrar borda.';
       const [W, H] = FMT[s.formato]; resumo = `${W}×${H} · ${s.peca} · ${s.saida.toUpperCase()} · fundo ${s.fundo}`;
-      btnLabel = s.saida === 'png' ? 'Baixar PNG (ZIP)' : 'Baixar MP4';
+      btnLabel = { png: 'Baixar PNG (ZIP)', mp4: 'Baixar MP4', mov: 'Baixar vídeo alpha (MOV)' }[s.saida];
     } else if (s.cat === 'design') {
       v[s.design] = true;
       const d = DESIGNS.find(x => x[0] === s.design), sc = this.sch[d[1]], vals = this.designVals();
@@ -195,7 +204,7 @@ class Component extends DCLogic {
       resumo = `512×512 · ${s.figOut.toUpperCase()} · fundo transparente`;
       btnLabel = 'Baixar figurinhas (ZIP)';
     }
-    return { cats, grupos, v, m, f: { set: s.figSet, palha: s.figPalha }, dprops, pw, stageBg, stageRef: this.stageRef, colRef: this.colRef, barRef: this.barRef, msgRef: this.msgRef,
+    return { cats, grupos, v, m, gprops, f: { set: s.figSet, palha: s.figPalha }, dprops, pw, stageBg, stageRef: this.stageRef, colRef: this.colRef, barRef: this.barRef, msgRef: this.msgRef,
       exportar: () => this.exportar(), btnLabel: s.busy ? 'Gerando…' : btnLabel, btnBg: s.busy ? '#8C8B82' : '#15E888',
       link: s.link, linkName: s.linkName, msg: s.msg || warn || 'Clique em baixar. Não troque de aba enquanto gera.', msgC: s.err || warn ? '#FF8A8A' : '#C9C8BE',
       busy: s.busy, idle: !s.busy, dica, resumo };

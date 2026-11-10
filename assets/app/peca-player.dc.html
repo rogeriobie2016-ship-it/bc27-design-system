@@ -55,6 +55,21 @@ class Component extends DCLogic {
   async cmd(d) {
     if (!d || d.type !== 'bcp') return;
     if (d.cmd === 'props') this.setState({ p: d.props || {} });
+    if (d.cmd === 'video') {
+      const box = this.boxRef.current; if (!window.BC27Export || !box) return this.post({ type: 'bcp-export', status: 'erro', msg: 'Exportador carregando. Tente de novo.' });
+      const prev = this.state.p, alpha = d.mode !== 'mp4', f0 = prev.fundo;
+      const fundo = alpha ? 'transparente' : f0 === 'cena' ? 'auto ★' : f0 === 'foto' ? 'magenta' : f0;
+      this.setState({ p: { ...prev, pausar: false, ...(fundo !== undefined ? { fundo } : {}) } });
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; await new Promise(r => setTimeout(r, 700));
+        const inner = [...box.querySelectorAll('div')].find(x => x.style.transform.startsWith('scale(') && /^\d+px$/.test(x.style.width) && /^\d+px$/.test(x.style.height));
+        let root = box, W = box.offsetWidth, H = box.offsetHeight, k = (W / H >= 1.5 ? 1920 : 1080) / W;
+        if (inner) { root = inner; W = parseInt(inner.style.width); H = parseInt(inner.style.height); k = 1; }
+        this.post({ type: 'bcp-export', status: 'inicio', video: true });
+        const out = await window.BC27Export.render({ root, W, H, k, fps: d.fps || 30, dur: d.dur || 3, mode: d.mode, name: d.name || 'bc27-peca', matte: d.mode === 'mp4' && (!fundo || fundo === 'transparente') ? '#000000' : null, onProgress: (i, n) => { if (i % 3 === 0 || i === n) this.post({ type: 'bcp-export', status: 'progresso', pct: Math.round(i / n * 100) }); } });
+        this.post({ type: 'bcp-export', status: 'ok', video: true, file: out.file, mb: (out.blob.size / 1048576).toFixed(1), w: Math.round(W * k), h: Math.round(H * k) });
+      } catch (e) { console.error(e); this.post({ type: 'bcp-export', status: 'erro', msg: e.message || 'Falha ao gerar o vídeo.' }); }
+      this.setState({ p: prev });
+    }
     if (d.cmd === 'export') {
       const root = this.boxRef.current; if (!window.BC27Export || !root) return this.post({ type: 'bcp-export', status: 'erro', msg: 'Exportador carregando. Tente de novo.' });
       try { if (document.fonts && document.fonts.ready) await document.fonts.ready; const W = root.offsetWidth, H = root.offsetHeight, ar = W / H; const outW = ar > 2.5 ? 1584 : ar >= 1.5 ? 1920 : 1080; const k = outW / W * (d.scale || 1);
