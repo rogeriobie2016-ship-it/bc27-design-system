@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jovens Repórteres BC 2027 | Apresentação para parceiros</title>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<style>
+:root{
+  --verde:#03633B;--verde-esc:#024D2E;--vivo:#15E888;--azul:#007EE5;--amarelo:#FBF99D;--fundo:#F3F6F1;--ink:#0E2A1D;
+  --muted:#4A5D53;--linha:#D6DED8;--noite:#121211;--card-escuro:#1F1F1C;
+  --f:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --k:1;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:#0B0B0A;color:var(--ink);font-family:var(--f)}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--amarelo);outline-offset:3px}
+svg{display:block}
+
+/* moldura */
+.tela{height:100vh;width:100%;display:grid;place-items:center;scroll-snap-align:start;position:relative;overflow:hidden}
+.box{width:calc(1920px * var(--k));height:calc(1080px * var(--k));position:relative;overflow:hidden;border-radius:calc(14px * var(--k));box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+.palco{width:1920px;height:1080px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--k));transform-origin:center;overflow:hidden}
+
+/* fundos */
+.bg-verde{background:var(--verde);color:#fff}
+.bg-claro{background:var(--fundo);color:var(--ink)}
+.bg-amarelo{background:var(--amarelo);color:var(--verde)}
+.bg-noite{background:var(--noite);color:#F5F4EC}
+.grao::after{content:"";position:absolute;inset:0;background:url(assets/img/grao.png) 0 0/420px;opacity:.16;mix-blend-mode:overlay;pointer-events:none;z-index:5}
+.bolinhas{background-color:var(--verde);background-image:radial-gradient(circle,var(--vivo) 0 34%,transparent 35%);background-size:96px 96px}
+.faixa{position:absolute;left:0;right:0;bottom:0;height:16px;display:flex;z-index:6}
+.faixa i{flex:1}.faixa i:nth-child(1){background:var(--vivo)}.faixa i:nth-child(2){background:var(--amarelo)}.faixa i:nth-child(3){background:var(--azul)}
+
+/* rodapé */
+.rodape{position:absolute;left:112px;right:112px;bottom:44px;display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;z-index:6}
+.rodape img{height:19px;width:auto}
+.bg-verde .rodape,.bg-noite .rodape{color:var(--vivo)}
+.bg-claro .rodape,.bg-amarelo .rodape{color:var(--verde)}
+
+/* tipografia */
+.pad{position:absolute;inset:0;padding:104px 112px 130px}
+.kicker{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin:0 0 30px}
+.kicker::before{content:"";width:34px;height:4px;border-radius:4px;background:currentColor}
+.bg-verde .kicker,.bg-noite .kicker{color:var(--vivo)}
+.bg-claro .kicker,.bg-amarelo .kicker{color:var(--verde)}
+.titulo{font-weight:800;font-stretch:78%;font-size:124px;line-height:.9;letter-spacing:-.005em;text-transform:uppercase;margin:0}
+.titulo.m{font-size:104px}.titulo.s{font-size:88px}
+.bg-verde .titulo{color:#fff}
+.bg-claro .titulo,.bg-amarelo .titulo{color:var(--verde)}
+.amarelo{color:var(--amarelo)}.vivo{color:var(--vivo)}.azul{color:var(--azul)}
+.lead{font-size:32px;line-height:1.32;font-weight:500;max-width:980px;margin:30px 0 0}
+.bg-verde .lead{color:#DCEDE2}
+.bg-claro .lead{color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:12px;border-radius:999px;padding:12px 24px;font-size:21px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+
+/* entrada das telas */
+.anim{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.tela.on .anim{opacity:1;transform:none}
+
+/* adesivo: contorno branco das ilustrações */
+.adesivo{filter:drop-shadow(0 10px 0 rgba(0,0,0,.14))}
+
+/* 1 capa */
+.capa-esq{position:absolute;left:0;top:0;bottom:0;width:1160px;padding:0 112px;display:flex;flex-direction:column;justify-content:center}
+.capa-dir{position:absolute;right:0;top:0;bottom:0;width:760px}
+.capa-dir .selo{position:absolute;left:50%;top:50%;width:500px;transform:translate(-50%,-52%) rotate(-8deg);filter:drop-shadow(0 18px 0 rgba(0,0,0,.18))}
+.capa .titulo{font-size:176px;line-height:.86}
+.capa .ano{display:inline-block;background:var(--vivo);color:var(--verde);padding:8px 24px 0;border-radius:14px;margin-top:14px;font-size:120px}
+.missao{margin-top:54px;padding-left:28px;border-left:8px solid var(--amarelo);font-size:34px;line-height:1.3;font-weight:600;color:#fff;max-width:880px}
+.missao b{color:var(--amarelo);font-weight:800}
+.capa .topo{position:absolute;left:112px;top:80px;display:flex;align-items:center;gap:24px;font-size:18px;font-weight:800;letter-spacing:.18em;color:var(--vivo);text-transform:uppercase}
+.capa .topo img{height:24px;width:auto}
+
+/* 2 a BC */
+.bc-grid{display:grid;grid-template-columns:1fr 780px;gap:72px;align-items:stretch;height:720px}
+.numero{font-weight:800;font-stretch:78%;font-size:300px;line-height:.78;letter-spacing:-.02em;color:var(--verde);margin:22px 0 0}
+.tema{background:var(--verde);border-radius:14px;padding:64px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.tema .rot{font-size:20px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--vivo)}
+.tema q{quotes:none;font-size:96px;font-stretch:78%;line-height:.92;font-weight:800;color:var(--amarelo);text-transform:uppercase}
+.tema small{font-size:32px;line-height:1.3;color:#DCEDE2;font-weight:500;max-width:560px}
+.tema .diamante{position:absolute;right:-70px;top:-70px;width:230px;height:230px;background:var(--vivo);transform:rotate(45deg)}
+.tema .ponto{position:absolute;right:150px;top:52px;width:44px;height:44px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 7px #fff}
+
+/* quem apresenta */
+.ro-grid{display:grid;grid-template-columns:1fr 860px;gap:80px;align-items:center;height:740px}
+.ro-nome{font-size:190px;font-stretch:78%;line-height:.84;font-weight:800;text-transform:uppercase;color:var(--verde);margin:0}
+.ro-cargo{margin:30px 0 0;font-size:32px;line-height:1.3;font-weight:700;color:var(--azul)}
+.ro-lista{list-style:none;margin:0;padding:0;border-top:3px solid var(--verde)}
+.ro-lista li{font-size:31px;line-height:1.3;font-weight:600;color:var(--ink);padding:26px 0 26px 40px;border-bottom:2px solid var(--linha);position:relative}
+.ro-lista li::before{content:"";position:absolute;left:0;top:38px;width:16px;height:16px;background:var(--vivo);transform:rotate(45deg)}
+.ro-lista li.campo-vazio{color:#8A9A90;font-style:italic;font-weight:500}
+.ro-lista li.campo-vazio::before{background:var(--linha)}
+/* parte institucional BC */
+.video-box{margin-top:10px;width:1440px;height:810px;max-width:100%;border-radius:14px;overflow:hidden;background:#000;margin-left:auto;margin-right:auto}
+.video-box iframe,.video-box video{width:100%;height:100%;border:0;display:block}
+.missao-bc{margin-top:40px;max-width:1300px;font-size:38px;line-height:1.25;font-weight:700;color:#fff;padding-left:28px;border-left:8px solid var(--amarelo)}
+.missao-bc span{display:block;font-size:18px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--vivo);margin-bottom:8px}
+.pilares-bc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border-top:2px solid rgba(255,255,255,.2)}
+.pilares-bc div{padding:30px 40px 0 0;margin-right:40px;border-right:2px solid rgba(255,255,255,.14)}
+.pilares-bc div:last-child{border-right:0;margin-right:0}
+.pilares-bc h4{margin:0;font-size:56px;font-stretch:80%;font-weight:800;text-transform:uppercase;color:var(--amarelo)}
+.pilares-bc p{margin:12px 0 0;font-size:26px;line-height:1.3;color:#DCEDE2;font-weight:500}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;border-top:3px solid var(--verde)}
+.nums div{padding:40px 40px 40px 0;border-bottom:2px solid var(--linha)}
+.nums div:nth-child(3n+2),.nums div:nth-child(3n){padding-left:40px;border-left:2px solid var(--linha)}
+.nums b{display:block;font-size:150px;font-stretch:76%;line-height:.85;font-weight:800;color:var(--verde)}
+.nums span{display:block;margin-top:14px;font-size:27px;line-height:1.3;color:var(--ink);font-weight:600}
+.fonte-bc{position:absolute;left:112px;bottom:92px;margin:0;font-size:18px;color:var(--muted)}
+.palco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;border-top:2px solid rgba(255,255,255,.2)}
+.palco-grid>div{padding:34px 40px 0 0;margin-right:40px;border-right:2px solid rgba(255,255,255,.14)}
+.palco-grid>div:last-child{border-right:0;margin-right:0}
+.palco-grid h4{margin:0 0 18px;font-size:20px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--vivo)}
+.palco-grid ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.palco-grid li{font-size:40px;font-stretch:82%;line-height:1.05;font-weight:800;text-transform:uppercase;color:#fff}
+.progs{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.prog{display:block;text-decoration:none;background:#fff;border:2px solid var(--linha);border-radius:14px;padding:28px 28px 24px;transition:transform .2s,border-color .2s}
+a.prog:hover{transform:translateY(-4px);border-color:var(--verde)}
+.prog h4{margin:0;font-size:38px;font-stretch:80%;line-height:1;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.prog p{margin:10px 0 0;font-size:22px;line-height:1.3;color:var(--ink);font-weight:500;min-height:58px}
+.prog small{display:block;margin-top:14px;font-size:15px;font-weight:700;color:var(--azul);word-break:break-all}
+.prog.novo{background:var(--amarelo);border-color:var(--verde);border-style:dashed}
+.lk{text-decoration:none}
+.redes-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:50px}
+.sub-h{margin:0 0 18px;font-size:20px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--vivo)}
+.rede{display:grid;grid-template-columns:220px 1fr 40px;align-items:center;gap:20px;text-decoration:none;color:#fff;padding:22px 26px;border:2px solid rgba(255,255,255,.18);border-radius:14px;margin-bottom:14px;background:rgba(255,255,255,.06);transition:background .2s,border-color .2s}
+.rede:hover{background:rgba(255,255,255,.14);border-color:var(--vivo)}
+.rede small{font-size:18px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amarelo)}
+.rede b{font-size:32px;font-weight:700}
+.rede i{font-style:normal;font-size:30px;color:var(--vivo);text-align:right}
+/* 3 programa */
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:84px;border-top:2px solid rgba(255,255,255,.2)}
+.pilar3{padding:40px 44px 0 0;margin-right:44px;border-right:2px solid rgba(255,255,255,.14)}
+.pilar3:last-child{border-right:0;margin-right:0}
+.pilar3 .n{font-size:20px;font-weight:800;letter-spacing:.16em;color:var(--vivo)}
+.pilar3 h3{margin:18px 0 0;font-size:64px;font-stretch:80%;line-height:.95;font-weight:800;text-transform:uppercase;color:var(--amarelo)}
+.pilar3 p{margin:16px 0 0;font-size:28px;line-height:1.32;color:#DCEDE2;font-weight:500}
+.g20{position:absolute;left:112px;right:112px;bottom:118px;display:flex;align-items:center;gap:22px;font-size:26px;font-weight:600;color:#fff}
+.g20 .ponto{width:26px;height:26px;border-radius:50%;background:var(--azul);flex:none;box-shadow:0 0 0 6px #fff}
+
+/* 4 marca */
+.marca-grid{display:grid;grid-template-columns:1fr 1000px;gap:48px;margin-top:8px;height:720px}
+.logos{background:var(--card-escuro);border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
+.logo-vitrine{flex:1;display:grid;place-items:center;padding:40px;position:relative}
+.logos-grande{margin-top:40px;height:780px}
+.logos-grande .logo-vitrine img{max-height:520px;max-width:80%}
+.logo-vitrine img{max-height:380px;max-width:92%;width:auto;object-fit:contain;transition:opacity .25s}
+.logo-tabs{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid #33332F}
+.logo-tabs button{background:none;border:0;border-right:2px solid #33332F;color:#B5B4AA;padding:22px 10px;font-size:19px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.logo-tabs button:last-child{border-right:0}
+.logo-tabs button[aria-pressed="true"]{background:#17301F;color:var(--vivo)}
+.logo-tabs button:hover{color:#fff}
+.vinheta{display:flex;flex-direction:column;gap:18px}
+.player{width:1000px;height:562px;border-radius:14px;overflow:hidden;background:#1A1A18;position:relative}
+.player iframe,.player img{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player img{display:none;object-fit:cover}
+.ctrl{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.ctrl button{border:2px solid #33332F;background:#1F1F1C;color:#F5F4EC;border-radius:999px;padding:12px 24px;font-size:19px;font-weight:700;cursor:pointer}
+.ctrl button[aria-pressed="true"]{background:var(--vivo);border-color:var(--vivo);color:var(--verde)}
+.ctrl button:hover{border-color:var(--vivo)}
+.ctrl .sep{flex:1}
+.nota{font-size:19px;color:#B5B4AA;margin:0}
+.logos-print{display:none;grid-template-columns:1fr 1fr;gap:16px;padding:24px;flex:1}
+.logos-print div{background:#2A2A27;border-radius:12px;display:grid;place-items:center;padding:18px}
+.logos-print img{max-height:200px;width:auto;max-width:100%}
+
+/* 5 edital */
+.ed-grid{display:grid;grid-template-columns:600px 1fr;gap:40px;margin-top:44px}
+.ed-stats{display:grid;gap:22px}
+.stat{background:var(--verde);color:#fff;border-radius:14px;padding:28px 34px;display:flex;align-items:center;gap:28px}
+.stat b{font-size:96px;font-stretch:78%;line-height:.85;font-weight:800;color:var(--amarelo);min-width:130px;flex:none}
+.stat b.peq{font-size:70px}
+.stat span{font-size:25px;line-height:1.28;font-weight:600}
+.stat span strong{display:block;font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--vivo);margin-bottom:4px}
+.perfis{background:#fff;border:2px solid var(--linha);border-radius:14px;padding:40px 48px;display:flex;flex-direction:column}
+.perfis h3{margin:0 0 6px;font-size:44px;font-stretch:80%;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.perfis .sub{font-size:24px;color:var(--muted);margin:0 0 22px;font-weight:500}
+.foco{background:var(--verde);border-radius:14px;padding:30px 34px;color:#fff;margin-bottom:22px}
+.foco-tit{display:flex;align-items:center;gap:18px;font-size:42px;font-stretch:80%;line-height:1;font-weight:800;text-transform:uppercase;color:var(--amarelo)}
+.ponto-az{width:26px;height:26px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 6px #fff;flex:none}
+.crit{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.crit span{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.28);border-radius:999px;padding:10px 20px;font-size:21px;font-weight:700}
+.tambem{font-size:23px;line-height:1.35;color:var(--muted);margin-bottom:22px}
+.tambem b{color:var(--ink)}
+.perfil{display:flex;gap:24px;align-items:center;padding:20px 0;border-top:2px solid var(--linha)}
+.perfil i{font-style:normal;flex:none;width:60px;height:60px;border-radius:50%;background:var(--azul);color:#fff;font-size:28px;font-weight:800;display:grid;place-items:center}
+.perfil:nth-of-type(2) i{background:var(--verde)}
+.perfil:nth-of-type(3) i{background:var(--ink)}
+.perfil b{display:block;font-size:31px;font-weight:800;color:var(--ink);line-height:1.1}
+.perfil span{display:block;font-size:23px;color:var(--muted);margin-top:5px;line-height:1.3}
+.aberto{margin-top:auto;display:flex;gap:14px;flex-wrap:wrap}
+.aberto .chip{background:var(--amarelo);color:var(--verde);border:2px solid var(--verde);font-size:19px}
+
+/* 6 jornada */
+.linha-tempo{position:absolute;left:112px;right:112px;top:452px;display:grid;grid-template-columns:repeat(5,1fr)}
+.linha-tempo::before{content:"";position:absolute;left:70px;right:180px;top:68px;border-top:6px dashed rgba(255,255,255,.28)}
+.etapa{position:relative;padding-right:30px}
+.etapa .marco{width:140px;height:140px;border-radius:50%;background:var(--verde-esc);border:6px solid rgba(255,255,255,.18);position:relative;z-index:1;display:grid;place-items:center}
+.etapa .marco svg{width:82px;height:82px}
+.etapa:nth-child(4) .marco{background:var(--amarelo);border-color:#fff}
+.etapa .num{position:absolute;right:-8px;top:-6px;width:44px;height:44px;border-radius:50%;background:var(--vivo);color:var(--verde);font-weight:800;font-size:22px;display:grid;place-items:center;z-index:2}
+.etapa h4{margin:34px 0 0;font-size:50px;font-stretch:80%;line-height:.95;font-weight:800;text-transform:uppercase;color:#fff}
+.etapa .quando{margin-top:12px;font-size:27px;font-weight:800;color:var(--amarelo)}
+.etapa p{margin:10px 0 0;font-size:23px;line-height:1.32;color:#DCEDE2;font-weight:500}
+
+.contagem{position:absolute;right:112px;top:104px;display:flex;align-items:center;gap:22px;background:var(--amarelo);color:var(--verde);border-radius:14px;padding:22px 34px}
+.contagem b{font-size:110px;font-stretch:76%;line-height:.85;font-weight:800;font-variant-numeric:tabular-nums}
+.contagem span{font-size:22px;line-height:1.15;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+/* 7 formação */
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
+.mod{display:flex;gap:26px;align-items:flex-start;background:#fff;border:2px solid var(--linha);border-radius:14px;padding:30px 30px 32px}
+.mod .ic{flex:none;width:96px;height:96px;border-radius:24px;background:var(--verde);display:grid;place-items:center}
+.mod:nth-child(2) .ic{background:var(--azul)}.mod:nth-child(3) .ic{background:var(--ink)}
+.mod:nth-child(4) .ic{background:var(--azul)}.mod:nth-child(5) .ic{background:var(--ink)}.mod:nth-child(6) .ic{background:var(--verde)}
+.mod .ic svg{width:64px;height:64px}
+.mod .q{font-size:18px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--azul)}
+.mod h4{margin:8px 0 0;font-size:36px;font-stretch:82%;line-height:1;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.mod p{margin:10px 0 0;font-size:22px;line-height:1.32;color:var(--muted);font-weight:500}
+.form-rod{position:absolute;left:112px;right:112px;bottom:118px;display:flex;gap:16px;flex-wrap:wrap}
+.form-rod .chip{background:var(--verde);color:#fff;font-size:19px}
+
+/* 8 benefícios */
+.ben{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:70px;border-top:3px solid var(--verde)}
+.ben .item{padding:34px 40px 34px 0;border-bottom:2px solid rgba(3,99,59,.25);display:flex;gap:24px;align-items:flex-start}
+.ben .item:nth-child(3n+2),.ben .item:nth-child(3n){padding-left:40px;border-left:2px solid rgba(3,99,59,.25)}
+.ben .item svg{width:40px;height:40px;flex:none;margin-top:4px}
+.ben h3{margin:0;font-size:44px;font-stretch:80%;line-height:1;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.ben p{margin:10px 0 0;font-size:24px;line-height:1.3;color:var(--ink);font-weight:500}
+
+/* 9 buscamos */
+.busca{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:70px}
+.bcard{background:var(--verde);color:#fff;border-radius:14px;padding:44px;min-height:440px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.bcard .n{font-size:20px;font-weight:800;letter-spacing:.16em;color:var(--vivo)}
+.bcard .ill{height:170px;display:flex;align-items:center;margin:26px 0}
+.bcard .ill svg{height:150px;width:auto}
+.bcard h3{margin:auto 0 0;font-size:58px;font-stretch:80%;line-height:.95;font-weight:800;text-transform:uppercase;color:var(--amarelo)}
+.bcard p{margin:14px 0 0;font-size:25px;line-height:1.3;color:#DCEDE2;font-weight:500}
+
+/* 10 viagem */
+.ceu{position:absolute;inset:0;background:radial-gradient(1200px 700px at 85% 10%,rgba(21,232,136,.18),transparent 60%),radial-gradient(900px 600px at 10% 100%,rgba(0,126,229,.22),transparent 60%)}
+.nuvem{position:absolute;background:#fff;opacity:.08;border-radius:999px}
+.nuvem::before,.nuvem::after{content:"";position:absolute;background:inherit;border-radius:50%}
+.nuvem::before{width:60%;height:160%;left:16%;bottom:20%}
+.nuvem::after{width:40%;height:120%;right:12%;bottom:30%}
+.n1{width:300px;height:70px;left:1180px;top:780px;animation:deriva 26s linear infinite}
+.n2{width:220px;height:52px;left:520px;top:220px;animation:deriva 34s linear infinite reverse}
+.n3{width:360px;height:80px;left:1500px;top:520px;animation:deriva 40s linear infinite}
+@keyframes deriva{from{transform:translateX(-60px)}to{transform:translateX(60px)}}
+.rota{position:absolute;inset:0;width:1920px;height:1080px;overflow:visible}
+.rota path.volta{stroke:var(--vivo);opacity:.45;stroke-dasharray:2 16}
+.volta-tag{position:absolute;left:1180px;top:930px;z-index:3;font-size:20px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--vivo)}
+.rota path{fill:none;stroke:var(--amarelo);stroke-width:5;stroke-dasharray:4 18;stroke-linecap:round}
+.pino{position:absolute;display:flex;align-items:center;gap:16px;z-index:3}
+.pt-solto{position:absolute;width:30px;height:30px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 7px #fff;z-index:3}
+.pino b{display:block;font-size:30px;font-weight:800;color:#fff;text-transform:uppercase;font-stretch:85%}
+.pino small{display:block;font-size:20px;font-weight:600;color:var(--amarelo);letter-spacing:.06em}
+.aviao{position:absolute;left:0;top:0;width:170px;height:102px;offset-path:path('M 300 870 C 700 990, 1020 820, 1250 600 S 1600 300, 1700 228');offset-rotate:auto;offset-anchor:50% 50%;offset-distance:0%;z-index:4;filter:drop-shadow(0 16px 10px rgba(0,0,0,.22))}
+.tela.on .aviao{animation:voo 6.5s cubic-bezier(.45,.05,.4,1) .4s infinite both}
+@keyframes voo{0%{offset-distance:0%;opacity:0}6%{opacity:1}82%{offset-distance:100%;opacity:1}92%,100%{offset-distance:100%;opacity:0}}
+.tela.on .rota path{animation:tracejado 1.2s linear infinite}
+@keyframes tracejado{to{stroke-dashoffset:-44}}
+.cobre{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px;max-width:900px}
+.cobre .chip{background:rgba(255,255,255,.1);color:#fff;border:2px solid rgba(255,255,255,.22);font-size:20px}
+
+.ceu-click{position:absolute;inset:0;z-index:2;cursor:crosshair}
+.dica-ceu{position:absolute;right:112px;bottom:112px;z-index:3;font-size:19px;font-weight:700;letter-spacing:.06em;color:var(--amarelo);background:rgba(0,0,0,.18);border-radius:999px;padding:10px 20px}
+.mini-aviao{position:absolute;width:110px;height:66px;z-index:4;pointer-events:none;filter:drop-shadow(0 12px 8px rgba(0,0,0,.2))}
+/* 11 kit */
+.kit{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:64px}
+.kitem{display:flex;flex-direction:column;align-items:center;text-align:center}
+.kitem .disco{width:340px;height:340px;border-radius:50%;display:grid;place-items:center;position:relative}
+.kitem:nth-child(1) .disco{background:var(--vivo)}
+.kitem:nth-child(2) .disco{background:var(--amarelo)}
+.kitem:nth-child(3) .disco{background:var(--azul)}
+.kitem:nth-child(4) .disco{background:var(--verde)}
+.kitem .disco svg{width:250px;height:250px}
+.tela.on .kitem .disco svg{animation:flutua 4s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes flutua{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+.kitem h4{margin:30px 0 0;font-size:46px;font-stretch:80%;line-height:1;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.kitem p{margin:10px 0 0;font-size:23px;line-height:1.3;color:var(--muted);font-weight:500;max-width:330px}
+
+.kit8{grid-template-columns:repeat(4,1fr);gap:26px 28px;margin-top:34px}
+.kit8 .kitem{flex-direction:column;text-align:center;align-items:center;gap:0}
+.kit8 .kitem .disco{width:170px;height:170px;flex:none}
+.kit8 .kitem .disco svg{width:128px;height:128px}
+.kit8 .kitem:nth-child(5) .disco{background:var(--vivo)}.kit8 .kitem:nth-child(6) .disco{background:var(--amarelo)}
+.kit8 .kitem:nth-child(7) .disco{background:var(--azul)}.kit8 .kitem:nth-child(8) .disco{background:var(--verde)}
+.kit8 .kitem h4{margin:14px 0 0;font-size:32px}
+.kit8 .kitem p{font-size:19px;margin-top:6px;max-width:360px}
+/* 12 impacto */
+.fluxo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative}
+.passo{padding-right:36px;position:relative}
+.passo .ic{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.1);border:3px solid rgba(255,255,255,.22);display:grid;place-items:center;position:relative;z-index:1}
+.passo .ic svg{width:70px;height:70px}
+.passo:not(:last-child)::after{content:"";position:absolute;left:136px;right:20px;top:58px;border-top:5px dashed rgba(251,249,157,.55)}
+.passo h4{margin:26px 0 0;font-size:42px;font-stretch:80%;line-height:.98;font-weight:800;text-transform:uppercase;color:var(--amarelo)}
+.passo p{margin:10px 0 0;font-size:23px;line-height:1.32;color:#DCEDE2;font-weight:500}
+.exemplo{position:absolute;left:112px;right:112px;bottom:112px;background:var(--amarelo);color:var(--verde);border-radius:14px;padding:30px 40px;display:flex;align-items:center;gap:30px}
+.exemplo .tag{flex:none;background:var(--verde);color:var(--amarelo);border-radius:999px;padding:10px 22px;font-size:18px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.exemplo p{margin:0;font-size:27px;line-height:1.32;font-weight:600}
+.exemplo b{font-weight:800}
+.depois{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+.depois .chip{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);font-size:19px}
+.depois .chip b{color:var(--vivo)}
+
+/* 13 apoio */
+.apoio-grid{display:grid;grid-template-columns:560px 1fr;gap:80px;height:740px}
+.formas{display:flex;flex-direction:column}
+.forma{display:grid;grid-template-columns:76px 1fr;gap:26px;align-items:center;padding:22px 0;border-top:2px solid var(--linha)}
+.forma:last-child{border-bottom:2px solid var(--linha)}
+.forma .ic{width:76px;height:76px;border-radius:20px;background:var(--verde);display:grid;place-items:center}
+.forma:nth-child(even) .ic{background:var(--azul)}
+.forma .ic svg{width:46px;height:46px}
+.forma h4{margin:0;font-size:38px;font-stretch:82%;line-height:1;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.forma p{margin:6px 0 0;font-size:22px;line-height:1.3;color:var(--muted);font-weight:500}
+.troca{margin-top:40px;background:var(--verde);color:#fff;border-radius:14px;padding:34px 38px}
+.troca .rot{font-size:18px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--vivo)}
+.troca ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.troca li{font-size:24px;line-height:1.3;font-weight:600;padding-left:30px;position:relative}
+.troca li::before{content:"";position:absolute;left:0;top:10px;width:14px;height:14px;background:var(--amarelo);transform:rotate(45deg)}
+
+/* simulador */
+.sim-grid{display:grid;grid-template-columns:820px 1fr;gap:60px;height:800px;align-items:center}
+.campo{display:block;margin-top:44px}
+.campo span{display:block;font-size:18px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--vivo);margin-bottom:12px}
+.campo input{width:100%;font-family:var(--f);font-size:40px;font-weight:700;color:#fff;background:#1F1F1C;border:3px solid #33332F;border-radius:14px;padding:20px 26px;outline:none}
+.campo input:focus{border-color:var(--vivo)}
+.campo input::placeholder{color:#6B6B64}
+.frentes{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.fr{border:3px solid #33332F;background:#1F1F1C;color:#F5F4EC;border-radius:999px;padding:14px 26px;font-size:22px;font-weight:800;cursor:pointer;transition:all .2s}
+.fr[aria-pressed="true"]{background:var(--vivo);border-color:var(--vivo);color:var(--verde)}
+.resumo{margin-top:30px;background:#1F1F1C;border-radius:14px;padding:28px 32px;min-height:236px}
+.resumo .rot{font-size:18px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#B5B4AA}
+.resumo .rot b{color:var(--amarelo)}
+.resumo ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.resumo li{font-size:24px;line-height:1.3;font-weight:600;color:#F5F4EC;padding-left:30px;position:relative;animation:entra .35s ease both}
+.resumo li::before{content:"";position:absolute;left:0;top:9px;width:14px;height:14px;background:var(--vivo);transform:rotate(45deg)}
+@keyframes entra{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.vitrine{position:relative;height:800px}
+.cordao{position:absolute;left:150px;top:-104px;width:120px;height:250px;overflow:hidden}
+.fita{position:absolute;left:30px;top:0;width:60px;height:250px;background:var(--verde);color:var(--amarelo);font-size:14px;font-weight:800;letter-spacing:.14em;writing-mode:vertical-rl;text-transform:uppercase;white-space:nowrap;overflow:hidden;display:flex;align-items:center;padding:8px 0;border-left:4px solid var(--vivo);border-right:4px solid var(--vivo)}
+.cracha{position:absolute;left:20px;top:140px;width:380px;height:560px;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);transform-origin:50% -150px;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.tela.on .cracha{animation:balanca 5s ease-in-out infinite}
+@keyframes balanca{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.cracha::before{content:"";position:absolute;top:16px;left:50%;width:70px;height:12px;margin-left:-35px;border-radius:6px;background:#D6DED8}
+.cr-topo{width:100%;background:var(--verde);padding:44px 28px 18px;display:flex;justify-content:space-between;align-items:center}
+.cr-topo img{height:18px;width:auto}
+.cr-topo span{font-size:20px;font-weight:800;color:var(--vivo)}
+.cr-imp{width:100%;background:var(--vivo);color:var(--verde);text-align:center;font-size:44px;font-stretch:76%;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:6px 0 2px}
+.cr-foto{width:170px;height:170px;margin-top:26px}
+.cr-nome{margin-top:16px;font-size:40px;font-stretch:78%;font-weight:800;text-transform:uppercase;color:var(--verde)}
+.cr-reg{font-size:22px;font-weight:700;color:var(--azul);letter-spacing:.06em;text-transform:uppercase}
+.cr-apoio{margin-top:auto;width:100%;border-top:2px dashed #D6DED8;padding:16px 24px 22px;text-align:center}
+.cr-apoio small{display:block;font-size:14px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#4A5D53}
+.cr-apoio b{display:block;font-size:30px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.camisa{position:absolute;left:440px;top:250px;width:380px}
+.camisa svg{width:380px;height:380px}
+.camisa-parc{position:absolute;left:112px;right:112px;top:290px;text-align:center;background:var(--verde);padding:4px 0}
+.camisa-parc small{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--vivo);text-transform:uppercase}
+.camisa-parc b{display:block;font-size:19px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dica-cr{position:absolute;left:20px;top:720px;width:380px;text-align:center;font-size:18px;color:#B5B4AA;margin:0}
+.nota-ex{margin:18px 0 0;font-size:21px;color:#B5B4AA;font-weight:500}
+/* 14 quem conduz */
+.quem-grid{display:grid;grid-template-columns:1fr 860px;gap:80px;height:760px;align-items:center}
+.quem .nome{font-size:150px;font-stretch:78%;line-height:.86;font-weight:800;text-transform:uppercase;color:var(--amarelo);margin:0}
+.quem .papeis{margin:30px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.quem .papeis li{font-size:27px;line-height:1.3;font-weight:600;color:#fff;padding-left:30px;position:relative}
+.quem .papeis li::before{content:"";position:absolute;left:0;top:11px;width:14px;height:14px;border-radius:50%;background:var(--vivo)}
+.projetos{display:grid;gap:22px}
+.proj{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.16);border-radius:14px;padding:30px 34px;display:grid;grid-template-columns:96px 1fr;gap:28px;align-items:center}
+.proj .ic{width:96px;height:96px;border-radius:24px;background:var(--amarelo);display:grid;place-items:center}
+.proj:nth-child(2) .ic{background:var(--vivo)}.proj:nth-child(3) .ic{background:#fff}
+.proj .ic svg{width:62px;height:62px}
+.proj .rot{font-size:17px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--vivo)}
+.proj h4{margin:6px 0 0;font-size:38px;font-stretch:82%;line-height:1;font-weight:800;text-transform:uppercase;color:#fff}
+.proj p{margin:8px 0 0;font-size:22px;line-height:1.3;color:#DCEDE2;font-weight:500}
+
+/* 15 contato */
+.contato .pad{display:flex;flex-direction:column;justify-content:center}
+.contato .nome{font-size:176px;font-stretch:78%;line-height:.86;font-weight:800;text-transform:uppercase;color:var(--amarelo);margin:0}
+.contato .cargos{margin:34px 0 0;font-size:34px;line-height:1.35;font-weight:600;color:#fff}
+.contato .cargos span{color:var(--vivo)}
+.canais{display:flex;gap:24px;margin-top:52px}
+.canal{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);border-radius:14px;padding:24px 32px;min-width:420px}
+.canal small{display:block;font-size:18px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--vivo)}
+.canal b{display:block;font-size:36px;color:#fff;margin-top:8px}
+.contato .selo{position:absolute;right:120px;top:50%;width:440px;transform:translateY(-50%) rotate(8deg);filter:drop-shadow(0 18px 0 rgba(0,0,0,.18))}
+
+/* navegação */
+.nav{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:20}
+.nav a{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.28);display:block}
+.nav a[aria-current="true"]{background:var(--vivo);transform:scale(1.35)}
+.dica{position:fixed;left:18px;bottom:14px;font-size:12px;color:rgba(255,255,255,.5);z-index:20;letter-spacing:.04em}
+@media (max-width:700px){.nav{right:6px}.nav a{width:8px;height:8px}.dica{display:none}}
+
+/* impressão e PDF */
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html{scroll-snap-type:none}
+  html,body{background:#fff}
+  .nav,.dica,.logo-tabs,.ctrl{display:none!important}
+  .tela{height:1080px;width:1920px;display:block;break-after:page;page-break-after:always}
+  .box{width:1920px;height:1080px;border-radius:0;box-shadow:none}
+  .palco{transform:none;left:0;top:0}
+  .anim{opacity:1!important;transform:none!important;transition:none!important}
+  .aviao{animation:none!important;offset-distance:64%!important;opacity:1!important}
+  .player iframe{display:none}
+  .player img{display:block}
+  .logos-print{display:grid!important}
+  .logo-vitrine{display:none!important}
+  *{animation-play-state:paused!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ilustrações (desenho próprio, cores da marca) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <symbol id="i-aviao" viewBox="0 0 170 102">
+    <path d="M4 26 L166 48 L60 60 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M60 60 L166 48 L80 98 Z" fill="#FBF99D" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M60 60 L80 98 L70 66 Z" fill="#D7D46C"/>
+    <path d="M60 60 L166 48" stroke="#D6DED8" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-form" viewBox="0 0 64 64">
+    <rect x="11" y="5" width="38" height="50" rx="6" fill="#FFFFFF"/>
+    <rect x="18" y="15" width="24" height="4" rx="2" fill="#03633B"/>
+    <rect x="18" y="24" width="24" height="4" rx="2" fill="#03633B"/>
+    <rect x="18" y="33" width="15" height="4" rx="2" fill="#03633B"/>
+    <circle cx="46" cy="47" r="12" fill="#007EE5" stroke="#FFFFFF" stroke-width="3"/>
+    <path d="M40.5 47 l4 4 l7 -8" stroke="#FFFFFF" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="i-estrela" viewBox="0 0 64 64">
+    <polygon points="32,5 39.6,22.5 58.5,23.6 44.2,35.2 48.9,53.6 32,43.5 15.1,53.6 19.8,35.2 5.5,23.6 24.4,22.5" fill="#FBF99D" stroke="#FFFFFF" stroke-width="3.5" stroke-linejoin="round"/>
+    <circle cx="32" cy="31" r="6" fill="#007EE5"/>
+  </symbol>
+  <symbol id="i-livro" viewBox="0 0 64 64">
+    <path d="M5 16 Q18 9 32 16 V55 Q18 48 5 55 Z" fill="#FFFFFF"/>
+    <path d="M59 16 Q46 9 32 16 V55 Q46 48 59 55 Z" fill="#FBF99D"/>
+    <path d="M11 24 Q18 21 26 24 M11 32 Q18 29 26 32 M11 40 Q18 37 26 40" stroke="#03633B" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <circle cx="46" cy="32" r="7" fill="#007EE5"/>
+  </symbol>
+  <symbol id="i-predio" viewBox="0 0 64 64">
+    <path d="M6 24 L32 8 L58 24 Z" fill="#03633B" stroke="#03633B" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="8" y="24" width="48" height="5" fill="#03633B"/>
+    <rect x="12" y="31" width="6" height="18" rx="1" fill="#03633B"/><rect x="23" y="31" width="6" height="18" rx="1" fill="#03633B"/>
+    <rect x="35" y="31" width="6" height="18" rx="1" fill="#03633B"/><rect x="46" y="31" width="6" height="18" rx="1" fill="#03633B"/>
+    <rect x="6" y="50" width="52" height="7" rx="1" fill="#03633B"/>
+    <circle cx="32" cy="18" r="3.5" fill="#007EE5"/>
+  </symbol>
+  <symbol id="i-mega" viewBox="0 0 64 64">
+    <path d="M8 25 h10 l24 -13 v40 l-24 -13 h-10 z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="12" y="38" width="9" height="15" rx="3" fill="#FBF99D"/>
+    <path d="M49 24 q6 8 0 16" stroke="#15E888" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M54 17 q11 15 0 30" stroke="#15E888" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="m-voz" viewBox="0 0 64 64">
+    <circle cx="22" cy="24" r="10" fill="#FBF99D"/>
+    <path d="M5 57 q17 -26 34 0 z" fill="#FBF99D"/>
+    <rect x="34" y="6" width="26" height="19" rx="7" fill="#FFFFFF"/>
+    <path d="M40 25 l-4 8 l11 -8z" fill="#FFFFFF"/>
+    <circle cx="41" cy="15.5" r="2.4" fill="#03633B"/><circle cx="47" cy="15.5" r="2.4" fill="#03633B"/><circle cx="53" cy="15.5" r="2.4" fill="#03633B"/>
+  </symbol>
+  <symbol id="m-lupa" viewBox="0 0 64 64">
+    <circle cx="26" cy="26" r="16" fill="#FFFFFF"/>
+    <circle cx="26" cy="26" r="10" fill="#FBF99D"/>
+    <rect x="37" y="36" width="24" height="10" rx="5" transform="rotate(45 37 36)" fill="#FFFFFF"/>
+  </symbol>
+  <symbol id="m-camera" viewBox="0 0 64 64">
+    <rect x="5" y="17" width="40" height="30" rx="7" fill="#FFFFFF"/>
+    <path d="M45 27 l14 -8 v26 l-14 -8z" fill="#FBF99D"/>
+    <circle cx="16" cy="27" r="4.5" fill="#15E888"/>
+    <rect x="12" y="49" width="26" height="5" rx="2.5" fill="#FFFFFF" opacity=".55"/>
+  </symbol>
+  <symbol id="m-edicao" viewBox="0 0 64 64">
+    <rect x="5" y="12" width="30" height="10" rx="4" fill="#FBF99D"/>
+    <rect x="18" y="27" width="40" height="10" rx="4" fill="#FFFFFF"/>
+    <rect x="5" y="42" width="22" height="10" rx="4" fill="#15E888"/>
+    <rect x="40" y="5" width="5" height="54" rx="2.5" fill="#FFFFFF"/>
+    <path d="M36 5 h13 l-6.5 7z" fill="#FFFFFF"/>
+  </symbol>
+  <symbol id="m-carreira" viewBox="0 0 64 64">
+    <rect x="7" y="38" width="12" height="18" rx="3" fill="#FFFFFF"/>
+    <rect x="25" y="27" width="12" height="29" rx="3" fill="#FFFFFF"/>
+    <rect x="43" y="15" width="12" height="41" rx="3" fill="#FBF99D"/>
+    <path d="M8 28 L26 14 L36 20 L54 5" stroke="#15E888" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="m-vivo" viewBox="0 0 64 64">
+    <rect x="4" y="21" width="56" height="24" rx="12" fill="#FFFFFF"/>
+    <circle cx="17" cy="33" r="5.5" fill="#007EE5"/>
+    <rect x="27" y="29" width="24" height="8" rx="4" fill="#03633B"/>
+    <path d="M14 14 q18 -10 36 0 M20 8 q12 -6 24 0" stroke="#FBF99D" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="k-celular" viewBox="0 0 200 200">
+    <rect x="58" y="10" width="84" height="180" rx="18" fill="#0E2A1D" stroke="#FFFFFF" stroke-width="8"/>
+    <rect x="68" y="30" width="64" height="140" rx="7" fill="#03633B"/>
+    <rect x="88" y="18" width="24" height="5" rx="2.5" fill="#33473D"/>
+    <rect x="76" y="40" width="40" height="15" rx="7.5" fill="#0E2A1D"/>
+    <circle cx="85" cy="47.5" r="4" fill="#15E888"/>
+    <rect x="93" y="45" width="17" height="5" rx="2.5" fill="#FFFFFF"/>
+    <circle cx="100" cy="92" r="13" fill="#007EE5" stroke="#FFFFFF" stroke-width="3.5"/>
+    <path d="M88 108 h24 v16 l-12 -5 l-12 5z" fill="#15E888"/>
+    <path d="M90 126 L100 148 L110 126Z" fill="#FBF99D"/>
+    <circle cx="100" cy="178" r="5" fill="#33473D"/>
+  </symbol>
+  <symbol id="k-mochila" viewBox="0 0 200 200">
+    <path d="M76 44 Q100 6 124 44" stroke="#FFFFFF" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <path d="M76 44 Q100 6 124 44" stroke="#0E2A1D" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <rect x="40" y="36" width="120" height="156" rx="34" fill="#03633B" stroke="#FFFFFF" stroke-width="8"/>
+    <path d="M44 84 Q100 108 156 84" stroke="#024D2E" stroke-width="6" fill="none"/>
+    <rect x="62" y="114" width="76" height="64" rx="16" fill="#024D2E"/>
+    <rect x="72" y="124" width="56" height="4" rx="2" fill="#15E888"/>
+    <circle cx="100" cy="156" r="17" fill="#FBF99D" stroke="#FFFFFF" stroke-width="4"/>
+    <text x="100" y="162.5" font-family="Bricolage Grotesque, sans-serif" font-size="17" font-weight="800" fill="#03633B" text-anchor="middle">JR</text>
+    <circle cx="140" cy="62" r="6" fill="#007EE5"/>
+  </symbol>
+  <symbol id="k-ring" viewBox="0 0 200 200">
+    <path d="M100 140 L68 194 M100 140 L132 194 M100 140 L100 194" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round"/>
+    <path d="M100 140 L68 194 M100 140 L132 194 M100 140 L100 194" stroke="#0E2A1D" stroke-width="6" stroke-linecap="round"/>
+    <rect x="94" y="100" width="12" height="44" rx="3" fill="#0E2A1D" stroke="#FFFFFF" stroke-width="4"/>
+    <circle cx="100" cy="62" r="50" fill="none" stroke="#FFFFFF" stroke-width="32"/>
+    <circle cx="100" cy="62" r="50" fill="none" stroke="#FBF99D" stroke-width="21"/>
+    <circle cx="100" cy="62" r="50" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="2 9" opacity=".9"/>
+    <rect x="87" y="40" width="26" height="44" rx="6" fill="#0E2A1D" stroke="#FFFFFF" stroke-width="3.5"/>
+    <circle cx="100" cy="50" r="3.5" fill="#15E888"/>
+  </symbol>
+  <symbol id="k-camiseta" viewBox="0 0 200 200">
+    <path d="M62 22 L84 14 Q100 30 116 14 L138 22 L180 52 L160 84 L144 74 L144 186 L56 186 L56 74 L40 84 L20 52 Z" fill="#03633B" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M84 14 Q100 34 116 14" stroke="#FBF99D" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="74" r="8" fill="#007EE5" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="100" y="112" font-family="Bricolage Grotesque, sans-serif" font-size="21" font-weight="800" fill="#FBF99D" text-anchor="middle" textLength="54" lengthAdjust="spacingAndGlyphs">JOVENS</text>
+    <text x="100" y="133" font-family="Bricolage Grotesque, sans-serif" font-size="21" font-weight="800" fill="#FFFFFF" text-anchor="middle" textLength="78" lengthAdjust="spacingAndGlyphs">REPÓRTERES</text>
+    <rect x="80" y="150" width="40" height="5" rx="2.5" fill="#15E888"/>
+  </symbol>
+  <symbol id="k-grav" viewBox="0 0 200 200">
+    <path d="M100 118 L58 192 M100 118 L142 192 M100 118 L100 192" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round"/>
+    <path d="M100 118 L58 192 M100 118 L142 192 M100 118 L100 192" stroke="#0E2A1D" stroke-width="6" stroke-linecap="round"/>
+    <rect x="86" y="96" width="28" height="26" rx="6" fill="#0E2A1D" stroke="#FFFFFF" stroke-width="5"/>
+    <path d="M100 96 V70" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round"/><path d="M100 96 V70" stroke="#0E2A1D" stroke-width="7" stroke-linecap="round"/>
+    <rect x="62" y="22" width="76" height="50" rx="10" fill="#03633B" stroke="#FFFFFF" stroke-width="6"/>
+    <circle cx="100" cy="47" r="14" fill="#0E2A1D" stroke="#FBF99D" stroke-width="5"/>
+    <circle cx="126" cy="32" r="4" fill="#15E888"/>
+  </symbol>
+  <symbol id="k-mic" viewBox="0 0 200 200">
+    <rect x="88" y="104" width="24" height="88" rx="10" fill="#0E2A1D" stroke="#FFFFFF" stroke-width="6"/>
+    <path d="M62 86 h76 v34 l-38 -14 l-38 14z" fill="#03633B" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/>
+    <text x="100" y="111" font-family="Bricolage Grotesque, sans-serif" font-size="20" font-weight="800" fill="#FBF99D" text-anchor="middle">JR</text>
+    <circle cx="100" cy="52" r="38" fill="#007EE5" stroke="#FFFFFF" stroke-width="7"/>
+    <path d="M80 44 h40 M78 56 h44 M82 68 h36" stroke="#FFFFFF" stroke-width="3" opacity=".5"/>
+  </symbol>
+  <symbol id="k-dados" viewBox="0 0 200 200">
+    <rect x="34" y="128" width="26" height="46" rx="6" fill="#FFFFFF"/>
+    <rect x="72" y="100" width="26" height="74" rx="6" fill="#FFFFFF"/>
+    <rect x="110" y="70" width="26" height="104" rx="6" fill="#FBF99D" stroke="#FFFFFF" stroke-width="4"/>
+    <rect x="148" y="38" width="26" height="136" rx="6" fill="#FBF99D" stroke="#FFFFFF" stroke-width="4"/>
+    <text x="60" y="78" font-family="Bricolage Grotesque, sans-serif" font-size="40" font-weight="800" fill="#FFFFFF" text-anchor="middle">5G</text>
+  </symbol>
+  <symbol id="k-pin" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="78" fill="#FBF99D" stroke="#FFFFFF" stroke-width="9"/>
+    <circle cx="100" cy="100" r="58" fill="#03633B"/>
+    <circle cx="100" cy="74" r="15" fill="#007EE5" stroke="#FFFFFF" stroke-width="4"/>
+    <path d="M86 92 h28 v18 l-14 -6 l-14 6z" fill="#15E888"/>
+    <path d="M88 112 L100 138 L112 112Z" fill="#FBF99D"/>
+  </symbol>
+  <symbol id="c-casas" viewBox="0 0 64 64">
+    <path d="M4 33 L22 18 L40 33 V56 H4Z" fill="#FFFFFF"/>
+    <path d="M30 37 L45 25 L60 37 V56 H30Z" fill="#FBF99D"/>
+    <rect x="15" y="40" width="9" height="16" fill="#03633B"/>
+    <rect x="40" y="42" width="9" height="8" fill="#03633B"/>
+    <circle cx="50" cy="12" r="6" fill="#15E888"/>
+  </symbol>
+  <symbol id="c-mentoria" viewBox="0 0 64 64">
+    <circle cx="20" cy="20" r="9" fill="#FFFFFF"/>
+    <path d="M4 54 q16 -26 32 0z" fill="#FFFFFF"/>
+    <circle cx="46" cy="26" r="7" fill="#FBF99D"/>
+    <path d="M33 56 q13 -20 26 0z" fill="#FBF99D"/>
+    <path d="M28 12 q10 -8 20 2" stroke="#15E888" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="c-serie" viewBox="0 0 64 64">
+    <rect x="17" y="4" width="30" height="56" rx="7" fill="#FFFFFF"/>
+    <rect x="21" y="11" width="22" height="40" rx="3" fill="#03633B"/>
+    <path d="M28 23 l11 8 l-11 8z" fill="#FBF99D"/>
+    <rect x="49" y="18" width="10" height="7" rx="2" fill="#15E888"/><rect x="49" y="29" width="10" height="7" rx="2" fill="#15E888"/><rect x="49" y="40" width="10" height="7" rx="2" fill="#15E888"/>
+  </symbol>
+  <symbol id="a-patrocinio" viewBox="0 0 64 64">
+    <path d="M10 26 L32 8 L54 26 Z" fill="#FFFFFF"/>
+    <rect x="12" y="28" width="40" height="28" rx="4" fill="#FBF99D"/>
+    <circle cx="32" cy="42" r="7" fill="#03633B"/>
+  </symbol>
+  <symbol id="a-conselho" viewBox="0 0 64 64">
+    <circle cx="16" cy="20" r="7" fill="#FFFFFF"/><circle cx="32" cy="14" r="7" fill="#FBF99D"/><circle cx="48" cy="20" r="7" fill="#FFFFFF"/>
+    <rect x="6" y="36" width="52" height="16" rx="8" fill="#FFFFFF"/>
+    <rect x="14" y="41" width="36" height="6" rx="3" fill="#03633B"/>
+  </symbol>
+  <symbol id="a-ponte" viewBox="0 0 64 64">
+    <circle cx="14" cy="32" r="10" fill="#FFFFFF"/><circle cx="50" cy="32" r="10" fill="#FBF99D"/>
+    <path d="M24 32 h16" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 8"/>
+    <circle cx="32" cy="12" r="6" fill="#15E888"/><circle cx="32" cy="52" r="6" fill="#15E888"/>
+    <path d="M18 24 L28 15 M46 24 L36 15 M18 40 L28 49 M46 40 L36 49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="p-vr" viewBox="0 0 64 64">
+    <path d="M4 24 q28 -16 56 0" stroke="#03633B" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="4" y="22" width="56" height="28" rx="11" fill="#03633B"/>
+    <circle cx="21" cy="36" r="7" fill="#15E888"/><circle cx="43" cy="36" r="7" fill="#15E888"/>
+    <path d="M28 50 q4 -6 8 0" fill="#FBF99D"/>
+  </symbol>
+  <symbol id="p-jogo" viewBox="0 0 64 64">
+    <path d="M12 20 h40 a10 10 0 0 1 10 11 l-3 17 a7 7 0 0 1 -12 3 l-6 -7 h-18 l-6 7 a7 7 0 0 1 -12 -3 l-3 -17 a10 10 0 0 1 10 -11z" fill="#03633B"/>
+    <rect x="15" y="30" width="14" height="4.5" rx="2" fill="#FFFFFF"/><rect x="19.75" y="25.25" width="4.5" height="14" rx="2" fill="#FFFFFF"/>
+    <circle cx="44" cy="29" r="3.5" fill="#FBF99D"/><circle cx="50" cy="35" r="3.5" fill="#007EE5"/>
+  </symbol>
+  <symbol id="p-museu" viewBox="0 0 64 64">
+    <path d="M6 22 L32 7 L58 22 Z" fill="#03633B"/>
+    <rect x="9" y="24" width="46" height="5" fill="#03633B"/>
+    <rect x="13" y="31" width="7" height="18" fill="#007EE5"/><rect x="28.5" y="31" width="7" height="18" fill="#007EE5"/><rect x="44" y="31" width="7" height="18" fill="#007EE5"/>
+    <rect x="6" y="50" width="52" height="7" fill="#03633B"/>
+  </symbol>
+  <symbol id="b-check" viewBox="0 0 40 40">
+    <rect x="6" y="6" width="28" height="28" rx="6" transform="rotate(45 20 20)" fill="#03633B"/>
+    <path d="M13 20.5 l5 5 l9 -10" stroke="#FBF99D" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</defs>
+</svg>
+
+<!-- 1 CAPA -->
+<section class="tela" id="capa" aria-label="Capa">
+<div class="box"><div class="palco bg-verde grao capa">
+  <div class="topo anim"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span>Proposta para parceiros · 2027</span></div>
+  <div class="capa-esq">
+    <h1 class="titulo anim" style="--d:.1s">Jovens<br><span class="amarelo">Repórteres</span><br><span class="ano">BC 2027</span></h1>
+    <p class="missao anim" style="--d:.25s"><b>Missão:</b> formar, conectar e amplificar a voz de jovens comunicadores da rede pública.</p>
+  </div>
+  <div class="capa-dir"><div class="anim" style="--d:.35s;position:absolute;inset:0"><img class="selo" src="assets/img/jr/5c-selo-a.png" alt="Selo Jovens Repórteres, Brazil Conference"></div></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- QUEM APRESENTA -->
+<section class="tela" id="rogerio" aria-label="Quem apresenta">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <p class="kicker anim">Quem apresenta</p>
+    <div class="ro-grid">
+      <div class="anim" style="--d:.1s">
+        <h2 class="ro-nome">Rogério<br>Bié</h2>
+        <p class="ro-cargo">VP de Social Media &amp; Growth<br>Brazil Conference at Harvard &amp; MIT</p>
+      </div>
+      <ul class="ro-lista anim" style="--d:.2s">
+        <li>Coordenou o time de jovens comunicadores do G20 no Brasil</li>
+        <li>Jovem Embaixador do Ceará</li>
+        <li>Mestrando em mídia imersiva e narrativas emergentes (Arizona State University)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 2 A BC -->
+<section class="tela" id="a-bc" aria-label="A Brazil Conference">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <p class="kicker anim">A Brazil Conference</p>
+    <div class="bc-grid">
+      <div class="anim" style="--d:.1s">
+        <h2 class="titulo m">Harvard e MIT,<br>desde</h2>
+        <p class="numero">2015</p>
+        <p class="lead">Organizada por estudantes brasileiros em Boston. Lideranças, pesquisadores e jovens pensando o Brasil juntos.</p>
+      </div>
+      <div class="tema anim" style="--d:.25s">
+        <span class="diamante" aria-hidden="true"></span><span class="ponto" aria-hidden="true"></span>
+        <span class="rot">Tema 2027 · 13ª edição</span>
+        <q>O Brasil em primeira pessoa</q>
+        <small>A força da nossa identidade para impulsionar o país.</small>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- BC: VÍDEO (aparece só se CONFIG.video estiver preenchido) -->
+<section class="tela" id="video" aria-label="Vídeo institucional" data-condicional="video">
+<div class="box"><div class="palco bg-noite">
+  <div class="pad">
+    <p class="kicker anim">Brazil Conference</p>
+    <div class="video-box anim" style="--d:.1s" id="video-box"></div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-vivo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- BC: QUEM SOMOS -->
+<section class="tela" id="quem-somos" aria-label="Quem somos">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad">
+    <p class="kicker anim">Quem somos</p>
+    <h2 class="titulo m anim" style="--d:.1s">Feita por estudantes,<br><span class="amarelo">para o Brasil</span></h2>
+    <p class="lead anim" style="--d:.2s">A maior conferência sobre o Brasil organizada por estudantes, pesquisadores e professores brasileiros nos EUA. Desde 2015, uma equipe voluntária reúne lideranças em Harvard e MIT.</p>
+    <div class="missao-bc anim" style="--d:.3s"><span>Missão</span>Impulsionar líderes do presente e do futuro, para que juntos transformem o Brasil.</div>
+    <div class="pilares-bc">
+      <div class="anim" style="--d:.35s"><h4>Conexão</h4><p>Ideias viram planos e pessoas se conectam para transformar o Brasil.</p></div>
+      <div class="anim" style="--d:.4s"><h4>Geração</h4><p>Quem fez história e quem escreve a próxima, lado a lado.</p></div>
+      <div class="anim" style="--d:.45s"><h4>Líderes</h4><p>Pessoas reconhecidas pelo talento e pelo impacto.</p></div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- BC: EM NÚMEROS -->
+<section class="tela" id="numeros" aria-label="A Brazil Conference em números">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <p class="kicker anim">Em números</p>
+    <h2 class="titulo s anim" style="--d:.1s">A Brazil Conference em números</h2>
+    <div class="nums">
+      <div class="anim" style="--d:.15s"><b>+1.200</b><span>participantes presenciais</span></div>
+      <div class="anim" style="--d:.2s"><b>50+</b><span>palestrantes na edição de 2026</span></div>
+      <div class="anim" style="--d:.25s"><b>160+</b><span>estudantes voluntários na organização</span></div>
+      <div class="anim" style="--d:.3s"><b>7</b><span>programas de impacto social</span></div>
+      <div class="anim" style="--d:.35s"><b>+2.000</b><span>inscritos nos programas em 2026</span></div>
+      <div class="anim" style="--d:.4s"><b>+6.000</b><span>estudantes de escola pública no Diálogos</span></div>
+    </div>
+  </div>
+  <p class="fonte-bc">Fonte: brazilconference.org e imprensa, edição 2026.</p>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- BC: NO PALCO -->
+<section class="tela" id="palco" aria-label="Quem já esteve no palco">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad">
+    <p class="kicker anim">No palco</p>
+    <h2 class="titulo s anim" style="--d:.1s">Quem já esteve<br>em <span class="amarelo">Cambridge</span></h2>
+    <div class="palco-grid">
+      <div class="anim" style="--d:.2s"><h4>Negócios e impacto</h4><ul><li>Jorge Paulo Lemann</li><li>Warren Buffett</li><li>Francisco Gomes Neto</li><li>Ana Fontes</li><li>Bianca Andrade</li></ul></div>
+      <div class="anim" style="--d:.3s"><h4>Ciência e saúde</h4><ul><li>Drauzio Varella</li><li>Sônia Guimarães</li><li>Silvia Massruhá</li><li>Jarbas Barbosa</li><li>Michael Sandel</li></ul></div>
+      <div class="anim" style="--d:.4s"><h4>Cultura e esporte</h4><ul><li>Ivete Sangalo</li><li>Seu Jorge</li><li>Vanessa da Mata</li><li>Cafu</li><li>Luciano Huck</li></ul></div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- BC: PROGRAMAS DE IMPACTO SOCIAL -->
+<section class="tela" id="programas" aria-label="Programas de impacto social">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><p class="kicker anim">Impacto social</p>
+      <h2 class="titulo s anim" style="--d:.1s">Sete programas, um Brasil</h2></div>
+      <a class="chip anim lk" style="--d:.2s;background:var(--verde);color:#fff" href="https://www.brazilconference.org/programas" target="_blank" rel="noopener">Editais em brazilconference.org/programas ↗</a>
+    </div>
+    <p class="lead anim" style="--d:.15s;margin-top:18px">Talentos de todas as regiões com viagem, mentoria e palco em Harvard e MIT.</p>
+    <div class="progs">
+      <a class="prog anim" style="--d:.2s" href="mailto:embaixadores@brazilconference.org"><h4>Embaixadores</h4><p>Líderes do terceiro setor ampliam seu impacto.</p><small>embaixadores@brazilconference.org</small></a>
+      <a class="prog anim" style="--d:.24s" href="mailto:ai4good@brazilconference.org"><h4>AI4Good</h4><p>Equipes criam IA para desafios sociais.</p><small>ai4good@brazilconference.org</small></a>
+      <a class="prog anim" style="--d:.28s" href="mailto:culturaemacao@brazilconference.org"><h4>Cultura em Ação</h4><p>Artistas que transformam pela arte.</p><small>culturaemacao@brazilconference.org</small></a>
+      <a class="prog anim" style="--d:.32s" href="mailto:hackbrazil@brazilconference.org"><h4>HackBrazil</h4><p>Startups com soluções para o país.</p><small>hackbrazil@brazilconference.org</small></a>
+      <a class="prog anim" style="--d:.36s" href="mailto:pesquisadores@brazilconference.org"><h4>Pesquisadores</h4><p>Ciência que pode transformar o Brasil.</p><small>pesquisadores@brazilconference.org</small></a>
+      <a class="prog anim" style="--d:.4s" href="mailto:servindoobrasil@brazilconference.org"><h4>Servindo o Brasil</h4><p>Servidores públicos que fazem a diferença.</p><small>servindoobrasil@brazilconference.org</small></a>
+      <a class="prog anim" style="--d:.44s" href="mailto:dialogos@brazilconference.org"><h4>Diálogos</h4><p>Alunos de escola pública propõem soluções.</p><small>dialogos@brazilconference.org</small></a>
+      <div class="prog novo anim" style="--d:.48s"><h4>Jovens Repórteres</h4><p>A proposta nova, apresentada a seguir.</p><small>Em construção</small></div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- BC: REDES E MATERIAIS -->
+<section class="tela" id="redes" aria-label="Redes sociais e materiais">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad">
+    <p class="kicker anim">Acompanhe</p>
+    <h2 class="titulo s anim" style="--d:.1s">Redes e <span class="amarelo">materiais</span></h2>
+    <div class="redes-grid">
+      <div class="anim" style="--d:.2s">
+        <h4 class="sub-h">Redes sociais</h4>
+        <a class="rede" href="https://www.instagram.com/brazil_conference/" target="_blank" rel="noopener"><small>Instagram</small><b>@brazil_conference</b><i>↗</i></a>
+        <a class="rede" href="https://www.linkedin.com/company/brazilconference" target="_blank" rel="noopener"><small>LinkedIn</small><b>Brazil Conference</b><i>↗</i></a>
+        <a class="rede" href="https://www.youtube.com/@BrazilConference" target="_blank" rel="noopener"><small>YouTube</small><b>@BrazilConference</b><i>↗</i></a>
+        <a class="rede" href="https://www.brazilconference.org/" target="_blank" rel="noopener"><small>Site</small><b>brazilconference.org</b><i>↗</i></a>
+      </div>
+      <div class="anim" style="--d:.3s">
+        <h4 class="sub-h">Apresentações e materiais</h4>
+        <a class="rede" href="https://docs.google.com/presentation/d/1IWvkRKJVyuVC_DhH5iFQ_TWOeHWDT1xY/edit" target="_blank" rel="noopener"><small>Apresentação</small><b>Institucional BC 2027</b><i>↗</i></a>
+        <a class="rede" href="https://rogeriobie2016-ship-it.github.io/bc27-design-system/" target="_blank" rel="noopener"><small>Identidade visual</small><b>BC Studio</b><i>↗</i></a>
+        <a class="rede" href="https://www.brazilconference.org/programas" target="_blank" rel="noopener"><small>Programas</small><b>Editais e inscrições</b><i>↗</i></a>
+        <a class="rede" href="https://www.brazilconference.org/patrocinadores" target="_blank" rel="noopener"><small>Parcerias</small><b>Patrocinadores</b><i>↗</i></a>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 3 O PROGRAMA -->
+<section class="tela" id="programa" aria-label="O programa">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad">
+    <p class="kicker anim">O programa</p>
+    <h2 class="titulo m anim" style="--d:.1s">Jovens que já usam a comunicação<br>para <span class="amarelo">transformar o seu território</span></h2>
+    <div class="prog-grid">
+      <div class="pilar3 anim" style="--d:.2s"><span class="n">01</span><h3>Formação</h3><p>Jornalismo, criação de conteúdo e comunicação digital, com profissionais da área.</p></div>
+      <div class="pilar3 anim" style="--d:.3s"><span class="n">02</span><h3>Conexão</h3><p>Com parceiros, mentores, palestrantes e a rede da Brazil Conference.</p></div>
+      <div class="pilar3 anim" style="--d:.4s"><span class="n">03</span><h3>Cobertura</h3><p>Da conferência, contando o Brasil em primeira pessoa, a partir de cada região.</p></div>
+    </div>
+  </div>
+  <p class="g20 anim" style="--d:.5s"><span class="ponto" aria-hidden="true"></span>Inspirado no time de jovens comunicadores do G20 no Brasil.</p>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- TRANSIÇÃO G20 -->
+<section class="tela" id="g20" aria-label="De onde vem a ideia">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+    <p class="kicker anim">De onde vem a ideia</p>
+    <h2 class="titulo anim" style="--d:.1s;font-size:150px">A experiência<br>no <span class="amarelo">G20</span></h2>
+    <p class="lead anim" style="--d:.2s">O time de jovens comunicadores na cobertura do G20 no Brasil.</p>
+  </div>
+  <div class="anim" style="--d:.3s;position:absolute;right:180px;top:50%;width:300px;height:300px;margin-top:-150px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 22px #fff"></div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 4 MARCA -->
+<section class="tela" id="marca" aria-label="Identidade do programa">
+<div class="box"><div class="palco bg-noite">
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <p class="kicker anim" style="margin:0">Identidade</p>
+      <span class="chip anim" style="--d:.1s;background:var(--amarelo);color:var(--verde)">Em construção</span>
+    </div>
+    <div class="logos logos-grande anim" style="--d:.2s">
+      <div class="logo-vitrine"><img id="logo-atual" src="assets/img/jr/5a-microfone-a.png" alt="Logo Jovens Repórteres, caminho Microfone bandeira"></div>
+      <div class="logos-print" aria-hidden="true">
+        <div><img src="assets/img/jr/5a-microfone-a.png" alt=""></div>
+        <div><img src="assets/img/jr/5b-tarja-a.png" alt=""></div>
+        <div><img src="assets/img/jr/5c-selo-a.png" alt=""></div>
+        <div><img src="assets/img/jr/5d-balao-a.png" alt=""></div>
+      </div>
+      <div class="logo-tabs" role="group" aria-label="Caminhos de logo">
+        <button type="button" aria-pressed="true" data-logo="5a-microfone" data-nome="Microfone bandeira">Microfone</button>
+        <button type="button" aria-pressed="false" data-logo="5b-tarja" data-nome="Tarja">Tarja</button>
+        <button type="button" aria-pressed="false" data-logo="5c-selo" data-nome="Selo de imprensa">Selo</button>
+        <button type="button" aria-pressed="false" data-logo="5d-balao" data-nome="Balão JR">Balão JR</button>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-vivo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 5 EDITAL -->
+<section class="tela" id="edital" aria-label="Proposta de edital">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <p class="kicker anim">Proposta de edital</p>
+    <h2 class="titulo s anim" style="--d:.1s">Jovens de todas as regiões</h2>
+    <div class="ed-grid">
+      <div class="ed-stats">
+        <div class="stat anim" style="--d:.2s"><b>5</b><span><strong>Regiões</strong>Jovens por região. Número de vagas a definir.</span></div>
+        <div class="stat anim" style="--d:.3s"><b>3</b><span><strong>Fases</strong>Formulário, vídeo de 3 minutos e entrevista.</span></div>
+        <div class="stat anim" style="--d:.4s"><b class="peq">R$ 0</b><span><strong>Inscrição gratuita</strong>Não precisa de passaporte para se inscrever.</span></div>
+      </div>
+      <div class="perfis anim" style="--d:.3s">
+        <h3>Público principal</h3>
+        <p class="sub">O recorte final ainda está em definição. O foco desta proposta:</p>
+        <div class="foco">
+          <div class="foco-tit"><span class="ponto-az" aria-hidden="true"></span>Jovens comunicadores que falam do Brasil em primeira pessoa</div>
+          <div class="crit"><span>Estudantes do ensino médio</span><span>Jovens de baixa renda</span></div>
+        </div>
+        <div class="tambem"><b>Em discussão (a confirmar):</b> desempenho acadêmico e compromisso social como critérios.<br><b>Também em estudo:</b> jovens nem-nem, que não estudam nem trabalham.</div>
+        <div class="aberto"><span class="chip">Faixa etária: em aberto</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 6 JORNADA -->
+<section class="tela" id="jornada" aria-label="A jornada">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad">
+    <p class="kicker anim">A jornada</p>
+    <h2 class="titulo m anim" style="--d:.1s">Nove meses,<br><span class="amarelo">cinco etapas</span></h2>
+  </div>
+  <span class="chip anim" style="--d:.3s;position:absolute;right:112px;top:112px;background:var(--amarelo);color:var(--verde)">Datas a confirmar</span>
+  <div class="linha-tempo">
+    <div class="etapa anim" style="--d:.15s"><div class="marco"><svg><use href="#i-form"/></svg><span class="num">1</span></div><h4>Inscrições</h4><p>Edital nas escolas, redes e parceiros.</p></div>
+    <div class="etapa anim" style="--d:.25s"><div class="marco"><svg><use href="#i-estrela"/></svg><span class="num">2</span></div><h4>Resultado</h4><p>Jovens selecionados por região.</p></div>
+    <div class="etapa anim" style="--d:.35s"><div class="marco"><svg><use href="#i-livro"/></svg><span class="num">3</span></div><h4>Formação</h4><p>Dois encontros por mês, on-line.</p></div>
+    <div class="etapa anim" style="--d:.45s"><div class="marco"><svg><use href="#i-predio"/></svg><span class="num">4</span></div><h4>Conferência</h4><p>Cobertura em Harvard e MIT, com a comunidade.</p></div>
+    <div class="etapa anim" style="--d:.55s"><div class="marco"><svg><use href="#i-mega"/></svg><span class="num">5</span></div><h4>Impacto</h4><p>Conteúdo e devolutiva na comunidade.</p></div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 7 FORMAÇÃO -->
+<section class="tela" id="formacao" aria-label="A formação">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <p class="kicker anim">A formação</p>
+    <h2 class="titulo s anim" style="--d:.1s">Seis módulos, do território à cobertura ao vivo</h2>
+    <div class="mods">
+      <div class="mod anim" style="--d:.15s"><div class="ic"><svg><use href="#m-voz"/></svg></div><div><span class="q">Módulo 1</span><h4>Quem eu sou como comunicador</h4><p>Nicho, público, plataforma e voz própria.</p></div></div>
+      <div class="mod anim" style="--d:.2s"><div class="ic"><svg><use href="#m-lupa"/></svg></div><div><span class="q">Módulo 2</span><h4>Apuração, ética e checagem</h4><p>Pauta, fontes, entrevista e cuidado com quem é retratado.</p></div></div>
+      <div class="mod anim" style="--d:.25s"><div class="ic"><svg><use href="#m-camera"/></svg></div><div><span class="q">Módulo 3</span><h4>Roteiro, câmera e áudio</h4><p>Gancho, presença em vídeo e captação com celular.</p></div></div>
+      <div class="mod anim" style="--d:.3s"><div class="ic"><svg><use href="#m-edicao"/></svg></div><div><span class="q">Módulo 4</span><h4>Edição, acessibilidade e IA</h4><p>Vídeo vertical, legendas e IA usada com responsabilidade.</p></div></div>
+      <div class="mod anim" style="--d:.35s"><div class="ic"><svg><use href="#m-carreira"/></svg></div><div><span class="q">Módulo 5</span><h4>Marca, carreira e negócio</h4><p>Portfólio, métricas, renda e saúde mental.</p></div></div>
+      <div class="mod anim" style="--d:.4s"><div class="ic"><svg><use href="#m-vivo"/></svg></div><div><span class="q">Módulo 6</span><h4>Cobertura ao vivo</h4><p>Trabalho em equipe, prazo curto e publicação no dia.</p></div></div>
+    </div>
+  </div>
+  <div class="form-rod anim" style="--d:.5s"><span class="chip">On-line</span><span class="chip">2 encontros por mês</span><span class="chip">Uma entrega publicada por módulo</span></div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 8 O QUE RECEBEM -->
+<section class="tela" id="beneficios" aria-label="O que os jovens recebem">
+<div class="box"><div class="palco bg-amarelo">
+  <div class="pad">
+    <p class="kicker anim">O que cada jovem recebe</p>
+    <h2 class="titulo s anim" style="--d:.1s">Da formação à credencial de imprensa</h2>
+    <div class="ben">
+      <div class="item anim" style="--d:.15s"><svg><use href="#b-check"/></svg><div><h3>Formação</h3><p>Seis módulos com profissionais da comunicação.</p></div></div>
+      <div class="item anim" style="--d:.2s"><svg><use href="#b-check"/></svg><div><h3>Mentoria</h3><p>Um mentor da área de interesse de cada jovem.</p></div></div>
+      <div class="item anim" style="--d:.25s"><svg><use href="#b-check"/></svg><div><h3>Kit de reportagem</h3><p>Itens previstos, com composição a confirmar.</p></div></div>
+      <div class="item anim" style="--d:.3s"><svg><use href="#b-check"/></svg><div><h3>Credencial de imprensa</h3><p>Acesso à conferência como parte da equipe.</p></div></div>
+      <div class="item anim" style="--d:.35s"><svg><use href="#b-check"/></svg><div><h3>Cobertura</h3><p>Presencial em Boston ou remota, conforme os apoios.</p></div></div>
+      <div class="item anim" style="--d:.4s"><svg><use href="#b-check"/></svg><div><h3>Certificado</h3><p>E portfólio publicado para as próximas oportunidades.</p></div></div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 9 O QUE BUSCAMOS -->
+<section class="tela" id="buscamos" aria-label="O que estamos buscando">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <p class="kicker anim">O que estamos buscando</p>
+    <h2 class="titulo m anim" style="--d:.1s">Três frentes<br>para <span class="azul">patrocinar</span></h2>
+    <div class="busca">
+      <div class="bcard anim" style="--d:.2s"><span class="n">01</span><div class="ill"><svg viewBox="0 0 170 102" style="height:110px"><use href="#i-aviao"/></svg></div><h3>Viagem para a cobertura</h3><p>Levar os jovens até Harvard e MIT, e de volta ao Brasil.</p></div>
+      <div class="bcard anim" style="--d:.3s"><span class="n">02</span><div class="ill"><svg viewBox="0 0 200 200"><use href="#k-mochila"/></svg></div><h3>Kit do jovem repórter</h3><p>O equipamento que fica com eles. Itens a confirmar.</p></div>
+      <div class="bcard anim" style="--d:.4s"><span class="n">03</span><div class="ill"><svg viewBox="0 0 64 64"><use href="#c-casas"/></svg></div><h3>Plano de impacto social</h3><p>Conteúdo sobre a comunidade, com mentoria dos parceiros.</p></div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 10 VIAGEM -->
+<section class="tela" id="viagem" aria-label="Patrocínio: viagem para a cobertura">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="ceu" aria-hidden="true"></div>
+  <span class="nuvem n1" aria-hidden="true"></span><span class="nuvem n2" aria-hidden="true"></span><span class="nuvem n3" aria-hidden="true"></span>
+  <svg class="rota" viewBox="0 0 1920 1080" aria-hidden="true"><path class="volta" d="M 1700 228 C 1640 520, 1300 960, 300 870"/><path d="M 300 870 C 700 990, 1020 820, 1250 600 S 1600 300, 1700 228"/></svg>
+  <div class="volta-tag anim" style="--d:.5s">e de volta ao Brasil ↩</div>
+  <svg class="aviao" viewBox="0 0 170 102" aria-hidden="true"><use href="#i-aviao"/></svg>
+  <span class="pt-solto" style="left:285px;top:855px" aria-hidden="true"></span>
+  <span class="pt-solto" style="left:1685px;top:213px" aria-hidden="true"></span>
+  <div class="pino anim" style="left:258px;top:760px;--d:.3s"><div><b>Brasil</b><small>Todas as regiões</small></div></div>
+  <div class="pino anim" style="right:180px;top:110px;text-align:right;--d:.4s"><div><b>Boston</b><small>Harvard e MIT</small></div></div>
+  <div class="pad">
+    <p class="kicker anim">Patrocínio 01 · Viagem</p>
+    <h2 class="titulo m anim" style="--d:.1s">Levar os jovens<br>até <span class="amarelo">Harvard e MIT</span></h2>
+    <p class="lead anim" style="--d:.2s">Para cobrir a conferência de dentro, junto com a comunidade, e voltar ao Brasil com a história contada por eles.</p>
+    <div class="cobre anim" style="--d:.3s"><span class="chip">Passagens</span><span class="chip">Vistos e documentos</span><span class="chip">Hospedagem</span><span class="chip">Alimentação</span><span class="chip">Seguro-viagem</span></div>
+  </div>
+  <div class="dica-ceu anim" style="--d:.6s">✈ Clique no céu para lançar um avião</div>
+  <div class="ceu-click" aria-hidden="true"></div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 11 KIT -->
+<section class="tela" id="kit" aria-label="Patrocínio: kit do jovem repórter">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><p class="kicker anim">Patrocínio 02 · Kit</p>
+      <h2 class="titulo s anim" style="--d:.1s">Kit do jovem repórter</h2></div>
+      <span class="chip anim" style="--d:.2s;background:var(--amarelo);color:var(--verde);border:2px solid var(--verde)">Itens previstos · a confirmar</span>
+    </div>
+    <div class="kit kit8">
+      <div class="kitem anim" style="--d:.1s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-celular"/></svg></div><h4>Celular</h4><p>Para gravar, editar e publicar.</p></div>
+      <div class="kitem anim" style="--d:.15s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-grav"/></svg></div><h4>Equipamentos de gravação</h4><p>Tripé e estabilizador.</p></div>
+      <div class="kitem anim" style="--d:.2s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-mic"/></svg></div><h4>Microfone com canopla</h4><p>Para a produção de conteúdo.</p></div>
+      <div class="kitem anim" style="--d:.25s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-ring"/></svg></div><h4>Ring light</h4><p>Luz para gravar em qualquer lugar.</p></div>
+      <div class="kitem anim" style="--d:.3s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-dados"/></svg></div><h4>Dados móveis</h4><p>Para publicar da rua.</p></div>
+      <div class="kitem anim" style="--d:.35s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-mochila"/></svg></div><h4>Mochila</h4><p>Para levar o equipamento.</p></div>
+      <div class="kitem anim" style="--d:.4s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-camiseta"/></svg></div><h4>Camiseta</h4><p>A identidade do programa.</p></div>
+      <div class="kitem anim" style="--d:.45s"><div class="disco"><svg viewBox="0 0 200 200" class="adesivo"><use href="#k-pin"/></svg></div><h4>Pin</h4><p>O selo do jovem repórter.</p></div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 12 IMPACTO -->
+<section class="tela" id="impacto" aria-label="Patrocínio: plano de impacto social">
+<div class="box"><div class="palco bg-verde grao">
+  <div class="pad">
+    <p class="kicker anim">Patrocínio 03 · Impacto social</p>
+    <h2 class="titulo s anim" style="--d:.1s">Da conferência de volta<br>para a <span class="amarelo">comunidade</span></h2>
+    <div class="fluxo">
+      <div class="passo anim" style="--d:.15s"><div class="ic"><svg><use href="#c-casas"/></svg></div><h4>Um problema real</h4><p>Cada jovem escolhe uma questão da própria comunidade.</p></div>
+      <div class="passo anim" style="--d:.25s"><div class="ic"><svg><use href="#c-mentoria"/></svg></div><h4>Um mentor da causa</h4><p>Alguém da rede da Brazil Conference que atua no tema.</p></div>
+      <div class="passo anim" style="--d:.35s"><div class="ic"><svg><use href="#c-serie"/></svg></div><h4>Uma série de conteúdo</h4><p>Reportagens publicadas nas redes do jovem e da BC.</p></div>
+      <div class="passo anim" style="--d:.45s"><div class="ic"><svg><use href="#i-mega"/></svg></div><h4>Devolutiva</h4><p>Oficina na escola ou na comunidade de origem.</p></div>
+    </div>
+    <div class="depois anim" style="--d:.5s"><span class="chip">Mostra final</span><span class="chip">Devolutivas nas escolas</span><span class="chip">Relatório para parceiros</span></div>
+  </div>
+  <div class="exemplo anim" style="--d:.6s"><span class="tag">Exemplo</span><p>O <b>Jovem Repórter do Meio Ambiente</b> (participante a definir) pode ser mentorado por pessoas da rede da Brazil Conference que atuam no tema: <b>palestrantes, patrocinadores ou organizadores</b>. Mentores a confirmar.</p></div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 13 COMO APOIAR -->
+<section class="tela" id="apoio" aria-label="Como sua instituição pode apoiar">
+<div class="box"><div class="palco bg-claro">
+  <div class="pad">
+    <div class="apoio-grid">
+      <div>
+        <p class="kicker anim">Como apoiar</p>
+        <h2 class="titulo m anim" style="--d:.1s">Cinco jeitos de entrar no programa</h2>
+        <div class="troca anim" style="--d:.3s">
+          <span class="rot">O que o parceiro recebe</span>
+          <ul><li>Marca no kit, na camiseta e nas vinhetas</li><li>Conteúdo produzido pelos jovens</li><li>Presença na cobertura da conferência</li><li>Relatório de impacto ao final</li></ul>
+        </div>
+      </div>
+      <div class="formas">
+        <div class="forma anim" style="--d:.15s"><div class="ic"><svg><use href="#a-patrocinio"/></svg></div><div><h4>Patrocinar</h4><p>Viagem, kit ou plano de impacto. Uma frente ou o programa inteiro.</p></div></div>
+        <div class="forma anim" style="--d:.2s"><div class="ic"><svg><use href="#c-mentoria"/></svg></div><div><h4>Mentorar</h4><p>Acompanhar um jovem na causa em que sua instituição atua.</p></div></div>
+        <div class="forma anim" style="--d:.25s"><div class="ic"><svg><use href="#a-conselho"/></svg></div><div><h4>Integrar o conselho</h4><p>Ajudar a desenhar o edital, a seleção e o plano de impacto.</p></div></div>
+        <div class="forma anim" style="--d:.3s"><div class="ic"><svg><use href="#a-ponte"/></svg></div><div><h4>Conectar instituições</h4><p>Secretarias de educação, escolas, redações, museus e ONGs.</p></div></div>
+        <div class="forma anim" style="--d:.35s"><div class="ic"><svg><use href="#i-mega"/></svg></div><div><h4>Divulgar o edital</h4><p>Levar a chamada até os jovens que mais precisam dela.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-verde.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 14 MONTE O SEU APOIO -->
+<section class="tela" id="simulador" aria-label="Monte o seu apoio">
+<div class="box"><div class="palco bg-noite">
+  <div class="pad">
+    <div class="sim-grid">
+      <div>
+        <p class="kicker anim">Experimente</p>
+        <h2 class="titulo s anim" style="--d:.1s;color:#F5F4EC">Veja a sua marca<br><span class="vivo">na cobertura</span></h2>
+        <p class="nota-ex anim" style="--d:.15s">Aplicação ilustrativa: um exemplo de como a marca pode aparecer.</p>
+        <label class="campo anim" style="--d:.2s"><span>Nome da instituição</span><input id="parc" type="text" maxlength="28" placeholder="Sua instituição" autocomplete="off"></label>
+        <div class="frentes anim" style="--d:.3s" role="group" aria-label="Frentes de apoio">
+          <button type="button" class="fr" aria-pressed="true" data-fr="viagem">✈ Viagem</button>
+          <button type="button" class="fr" aria-pressed="true" data-fr="kit">Kit</button>
+          <button type="button" class="fr" aria-pressed="false" data-fr="impacto">Impacto</button>
+          <button type="button" class="fr" aria-pressed="false" data-fr="mentoria">Mentoria</button>
+          <button type="button" class="fr" aria-pressed="false" data-fr="conselho">Conselho</button>
+        </div>
+        <div class="resumo anim" style="--d:.4s"><span class="rot">O que a <b id="parc-r">sua instituição</b> recebe</span><ul id="contra"></ul></div>
+      </div>
+      <div class="vitrine anim" style="--d:.25s">
+        <div class="cordao"><div class="fita" id="fita"></div></div>
+        <div class="cracha" id="cracha">
+          <div class="cr-topo"><img src="assets/img/wm-amarelo.png" alt=""><span>2027</span></div>
+          <div class="cr-imp">Imprensa</div>
+          <div class="cr-foto"><img src="assets/img/jr/5c-selo-a.png" alt=""></div>
+          <div class="cr-nome">Jovem Repórter</div>
+          <div class="cr-reg" id="cr-reg">Nordeste</div>
+          <div class="cr-apoio"><small>Apoio</small><b id="cr-parc">Sua instituição</b></div>
+        </div>
+        <div class="camisa">
+          <svg viewBox="0 0 200 200" class="adesivo"><use href="#k-camiseta"/></svg>
+          <div class="camisa-parc"><small>Apoio</small><b id="cam-parc">Sua instituição</b></div>
+        </div>
+        <p class="dica-cr">Clique na credencial para trocar a região</p>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-vivo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 15 QUEM CONDUZ -->
+<section class="tela" id="quem" aria-label="Quem conduz o programa">
+<div class="box"><div class="palco bg-verde grao quem">
+  <div class="pad">
+    <p class="kicker anim">Além da BC</p>
+    <div class="quem-grid">
+      <div class="anim" style="--d:.1s">
+        <h2 class="nome">Rogério<br>Bié</h2>
+        <p class="lead" style="color:#DCEDE2;max-width:640px">Além da Brazil Conference, trabalha na interseção entre comunicação, educação e tecnologia imersiva.</p>
+      </div>
+      <div class="projetos">
+        <div class="proj anim" style="--d:.2s"><div class="ic"><svg><use href="#p-vr"/></svg></div><div><span class="rot">Hoje</span><h4>Materiais imersivos para educação</h4><p>Realidade virtual, realidade aumentada e vídeo 360° a serviço do aprendizado.</p></div></div>
+        <div class="proj anim" style="--d:.3s"><div class="ic"><svg><use href="#p-jogo"/></svg></div><div><span class="rot">Em desenvolvimento · SEDUC</span><h4>Radar Olímpico</h4><p>Plataforma com jogos que aproxima estudantes das olimpíadas do conhecimento.</p></div></div>
+        <div class="proj anim" style="--d:.4s"><div class="ic"><svg><use href="#p-museu"/></svg></div><div><span class="rot">Próximos passos</span><h4>Museus e escolas</h4><p>Experiências imersivas sob medida para exposições e salas de aula.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<!-- 15 CONTATO -->
+<section class="tela" id="contato" aria-label="Contato">
+<div class="box"><div class="palco bg-verde grao contato">
+  <div class="pad">
+    <p class="kicker anim">Vamos conversar</p>
+    <h2 class="nome anim" style="--d:.1s">Brazil<br>Conference</h2>
+    <p class="cargos anim" style="--d:.2s">Harvard &amp; MIT<br><span>Jovens Repórteres BC 2027</span></p>
+    <div class="canais anim" style="--d:.3s">
+      <div class="canal"><small>Site</small><b>brazilconference.org</b></div>
+      <div class="canal"><small>Instagram</small><b>@brazil_conference</b></div>
+    </div>
+  </div>
+  <div class="anim" style="--d:.35s;position:absolute;inset:0;pointer-events:none"><img class="selo" src="assets/img/jr/5c-selo-a.png" alt=""></div>
+  <div class="rodape"><img src="assets/img/wm-amarelo.png" alt="Brazil Conference"><span class="pg"></span></div>
+  <div class="faixa"><i></i><i></i><i></i></div>
+</div></div>
+</section>
+
+<nav class="nav" aria-label="Telas"></nav>
+<div class="dica">← → ou role para navegar</div>
+
+<script>
+/* ====== CONFIGURAÇÃO (edite aqui) ======
+   video: link do YouTube (ex.: https://www.youtube.com/watch?v=XXXXXXXXXXX)
+          ou um arquivo dentro do site (ex.: assets/video/bc-institucional.mp4).
+          Vazio = a tela do vídeo não aparece. */
+var CONFIG = {
+  video: ''
+};
+</script>
+<script>
+(function(){
+  var root=document.documentElement;
+  (function(){var v=(CONFIG.video||'').trim(),sec=document.getElementById('video');if(!sec)return;
+    if(!v){sec.parentNode.removeChild(sec);return;}
+    var box=document.getElementById('video-box'),m=v.match(/(?:youtu\.be\/|v=|embed\/|live\/|shorts\/)([A-Za-z0-9_-]{11})/);
+    if(m){box.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0" title="Vídeo institucional da Brazil Conference" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';}
+    else{box.innerHTML='<video src="'+v+'" controls playsinline preload="metadata"></video>';}
+  })();
+  function fit(){var k=Math.min(innerWidth/1920,innerHeight/1080)*0.96;root.style.setProperty('--k',k);}
+  fit();addEventListener('resize',fit);
+
+  var telas=[].slice.call(document.querySelectorAll('.tela'));
+  if(matchMedia('print').matches)telas.forEach(function(t){t.classList.add('on');});
+  addEventListener('beforeprint',function(){telas.forEach(function(t){t.classList.add('on');});});
+  var nav=document.querySelector('.nav');
+  telas.forEach(function(t){var a=document.createElement('a');a.href='#'+t.id;a.setAttribute('aria-label',t.getAttribute('aria-label'));nav.appendChild(a);});
+  var dots=[].slice.call(nav.children);
+  var atual=0;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting&&e.intersectionRatio>.55){
+      e.target.classList.add('on');
+      atual=telas.indexOf(e.target);
+      dots.forEach(function(d,i){d.setAttribute('aria-current',i===atual?'true':'false');});
+      try{history.replaceState(null,'','#'+e.target.id);}catch(_){}
+    }});},{threshold:[.55]});
+  telas.forEach(function(t){io.observe(t);});
+  function ir(i){i=Math.max(0,Math.min(telas.length-1,i));telas[i].scrollIntoView({behavior:'smooth'});}
+  addEventListener('keydown',function(e){
+    if(e.target.closest&&e.target.closest('button,input'))return;
+    if(['ArrowDown','ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();ir(atual+1);}
+    if(['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();ir(atual-1);}
+    if(e.key==='Home'){e.preventDefault();ir(0);} if(e.key==='End'){e.preventDefault();ir(telas.length-1);}
+    if(e.key==='f'||e.key==='F'){try{if(!document.fullscreenElement)root.requestFullscreen();else document.exitFullscreen();}catch(_){}}
+  });
+  function abrirHash(){var id=location.hash.slice(1);var el=id&&document.getElementById(id);if(el&&el.classList.contains('tela'))el.scrollIntoView();}
+  addEventListener('hashchange',abrirHash);setTimeout(abrirHash,50);
+
+  // aviões de papel na tela da viagem
+  (function(){var ceu=document.querySelector('.ceu-click');if(!ceu)return;var palco=ceu.parentNode;
+    ceu.addEventListener('click',function(ev){var r=palco.getBoundingClientRect(),k=r.width/1920;
+      var x=(ev.clientX-r.left)/k,y=(ev.clientY-r.top)/k;
+      var ns='http://www.w3.org/2000/svg',sv=document.createElementNS(ns,'svg');sv.setAttribute('viewBox','0 0 170 102');sv.setAttribute('class','mini-aviao');
+      var u=document.createElementNS(ns,'use');u.setAttribute('href','#i-aviao');sv.appendChild(u);
+      sv.style.left=(x-55)+'px';sv.style.top=(y-33)+'px';palco.appendChild(sv);
+      var dx=900+Math.random()*500,dy=-(500+Math.random()*300),rot=-28-Math.random()*10;
+      var an=sv.animate([{transform:'translate(0,0) rotate(0deg) scale(.6)',opacity:0},{transform:'translate(40px,-20px) rotate('+(rot/2)+'deg) scale(1)',opacity:1,offset:.12},
+        {transform:'translate('+dx*.55+'px,'+(dy*.35)+'px) rotate('+rot+'deg) scale(1)',opacity:1,offset:.6},{transform:'translate('+dx+'px,'+dy+'px) rotate('+(rot-8)+'deg) scale(.8)',opacity:0}],
+        {duration:2600+Math.random()*800,easing:'cubic-bezier(.3,.1,.4,1)'});
+      an.onfinish=function(){sv.remove();};});})();
+
+  // monte o seu apoio
+  (function(){var inp=document.getElementById('parc');if(!inp)return;
+    var CONTRA={viagem:['Marca na viagem e na cobertura em Harvard e MIT','Conteúdos dos jovens direto da conferência'],
+      kit:['Marca no kit, na mochila e na camiseta','Presença nos vídeos gravados com o kit'],
+      impacto:['Séries de conteúdo sobre as comunidades','Relatório de impacto com os resultados'],
+      mentoria:['Um jovem acompanhado na causa da instituição'],
+      conselho:['Assento no conselho do programa','Voz no desenho do edital e da seleção']};
+    var REG=['Norte','Nordeste','Centro-Oeste','Sudeste','Sul'],ri=1;
+    function nome(){return inp.value.trim()||'Sua instituição';}
+    function render(){var n=nome();
+      ['cr-parc','cam-parc'].forEach(function(id){document.getElementById(id).textContent=n;});
+      document.getElementById('parc-r').textContent=inp.value.trim()||'sua instituição';
+      document.getElementById('fita').textContent=(' '+n+' · Jovens Repórteres BC ·').repeat(6);
+      var ul=document.getElementById('contra'),itens=[];
+      document.querySelectorAll('.fr').forEach(function(b){if(b.getAttribute('aria-pressed')==='true')itens=itens.concat(CONTRA[b.dataset.fr]);});
+      if(!itens.length)itens=['Escolha uma ou mais frentes ao lado'];
+      ul.innerHTML='';itens.slice(0,5).forEach(function(t,i){var li=document.createElement('li');li.textContent=t;li.style.animationDelay=(i*.05)+'s';ul.appendChild(li);});}
+    inp.addEventListener('input',render);
+    document.querySelectorAll('.fr').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');render();});});
+    document.getElementById('cracha').addEventListener('click',function(){ri=(ri+1)%REG.length;document.getElementById('cr-reg').textContent=REG[ri];});
+    render();})();
+
+  // logos
+  var img=document.getElementById('logo-atual');
+  document.querySelectorAll('[data-logo]').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('[data-logo]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    img.style.opacity=0;setTimeout(function(){img.src='assets/img/jr/'+b.dataset.logo+'-a.png';img.alt='Logo Jovens Repórteres, caminho '+b.dataset.nome;img.style.opacity=1;},180);
+  });});
+
+})();
+</script>
+</body>
+</html>
